@@ -15,9 +15,7 @@
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": [
-          "apps/services/oauth-agent-service-e2e/**/*.{js,ts}"
-        ]
+        "lintFilePatterns": ["apps/services/oauth-agent-service-e2e/**/*.{js,ts}"]
       }
     }
   }
