@@ -3175,6 +3175,19 @@
   resolved "https://registry.yarnpkg.com/@nrwl/nx-win32-x64-msvc/-/nx-win32-x64-msvc-15.7.2.tgz#cb622a96c0f85c37973420c4817e383783237a84"
   integrity sha512-ARE4qGPgk+e+pSm0uPhHan5UCRtwNYc5ddVNS88NFrVoDTPm5MxYLGdvLnshWWio/Bx526FcwUMSCBWSW8HIFw==
 
+"@nrwl/storybook@15.7.2":
+  version "15.7.2"
+  resolved "https://registry.yarnpkg.com/@nrwl/storybook/-/storybook-15.7.2.tgz#98a3569500e2d5c5e5adfe918691887b227e1388"
+  integrity sha512-eCPU8jgUhJpB+l5ROPlsWmp6uTakl4rcQTEuH7oP35Irk2wfc7BjlviAVi79No36Gt81MP+hyY4L6GC8KliMAg==
+  dependencies:
+    "@nrwl/cypress" "15.7.2"
+    "@nrwl/devkit" "15.7.2"
+    "@nrwl/linter" "15.7.2"
+    "@nrwl/workspace" "15.7.2"
+    "@phenomnomnominal/tsquery" "4.1.1"
+    dotenv "~10.0.0"
+    semver "7.3.4"
+
 "@nrwl/tao@15.6.3":
   version "15.6.3"
   resolved "https://registry.yarnpkg.com/@nrwl/tao/-/tao-15.6.3.tgz#b24e11345375dea96bc386c60b9b1102a7584932"
