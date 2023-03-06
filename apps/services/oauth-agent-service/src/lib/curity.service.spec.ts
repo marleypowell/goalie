@@ -109,4 +109,16 @@ describe(CurityService.name, () => {
     jest.spyOn(configService, 'get').mockReturnValueOnce(undefined);
     await expect(firstValueFrom(service.getUserInfo('accessToken'))).rejects.toThrow();
   });
+
+  it('should create authorization request url', () => {
+    jest.spyOn(configService, 'get').mockReturnValueOnce('https://localhost:8443/oauth2/authorize');
+    jest.spyOn(configService, 'get').mockReturnValueOnce('clientId');
+    jest.spyOn(configService, 'get').mockReturnValueOnce('clientSecret');
+    jest.spyOn(configService, 'get').mockReturnValueOnce('scope');
+    const url = service.createAuthorizationRequestUrl('state', 'codeVerifier');
+    expect(url).toContain(
+      'https://localhost:8443/oauth2/authorize?client_id=clientId&redirect_uri=clientSecret&response_type=code&state=state&code_challenge='
+    );
+    expect(url).toContain('&code_challenge_method=S256&scope=scope');
+  });
 });

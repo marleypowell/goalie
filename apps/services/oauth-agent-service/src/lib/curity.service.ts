@@ -5,6 +5,7 @@ import { catchError, map, Observable } from 'rxjs';
 import AuthorizationClientException from './exceptions/AuthorizationClientException';
 import AuthorizationServerException from './exceptions/AuthorizationServerException';
 import { OAuthAgentException } from './exceptions/OAuthAgentException';
+import { generateHash } from './generate-hash';
 import { Grant } from './grant';
 import { TokenResponse } from './token-response';
 import { UserInfo } from './user-info';
@@ -147,5 +148,30 @@ export class CurityService {
           }
         })
       );
+  }
+
+  public createAuthorizationRequestUrl(state: string, codeVerifier: string): string {
+    const authorizeEndpoint = this.configService.get<string>('authorizeEndpoint');
+    let authorizationRequestUrl =
+      authorizeEndpoint +
+      '?' +
+      'client_id=' +
+      encodeURIComponent(this.configService.get<string>('clientID')) +
+      '&redirect_uri=' +
+      encodeURIComponent(this.configService.get<string>('redirectUri')) +
+      '&response_type=code' +
+      '&state=' +
+      encodeURIComponent(state) +
+      '&code_challenge=' +
+      generateHash(codeVerifier) +
+      '&code_challenge_method=S256';
+
+    const scope = this.configService.get<string>('scope');
+
+    if (scope) {
+      authorizationRequestUrl += '&scope=' + encodeURIComponent(scope);
+    }
+
+    return authorizationRequestUrl;
   }
 }

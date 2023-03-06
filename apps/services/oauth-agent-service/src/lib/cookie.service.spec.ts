@@ -5,7 +5,6 @@ import { CookieService } from './cookie.service';
 
 describe(CookieService.name, () => {
   let service: CookieService;
-  let configService: ConfigService;
   let cookieEncryptionService: CookieEncryptionService;
 
   beforeEach(async () => {
@@ -14,7 +13,6 @@ describe(CookieService.name, () => {
     }).compile();
 
     service = module.get<CookieService>(CookieService);
-    configService = module.get<ConfigService>(ConfigService);
     cookieEncryptionService = module.get<CookieEncryptionService>(CookieEncryptionService);
   });
 
