@@ -12,7 +12,7 @@ import { LoginEndResponse, LoginStartResponse } from './login.controller';
 export class LoginService {
   public constructor(private readonly curityService: CurityService, private readonly cookieService: CookieService) {}
 
-  public async loginStart(): Promise<LoginStartResponse & { tempLoginDataCookie: string }> {
+  public loginStart(): LoginStartResponse & { tempLoginDataCookie: string } {
     const state = generateRandomString();
     const codeVerifier = generateRandomString();
     return {
