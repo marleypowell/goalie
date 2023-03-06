@@ -1,2 +1,12 @@
-<sea-project-nx-welcome></sea-project-nx-welcome>
+<goalie-header
+  *ngIf="authState$ | async as authState"
+  title="Goalie"
+  [showLoginButton]="authState.isLoggedIn !== true"
+  [showLogoutButton]="authState.isLoggedIn === true"
+  (login)="login()"
+  (logout)="logout()"
+></goalie-header>
+
 <router-outlet></router-outlet>
+
+<pre>{{ { authState: (authState$ | async), userInfo: (userInfo$ | async) } | json }}</pre>
