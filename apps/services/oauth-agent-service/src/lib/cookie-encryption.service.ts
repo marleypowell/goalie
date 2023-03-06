@@ -11,11 +11,21 @@ const GCM_IV_SIZE = 12;
 const GCM_TAG_SIZE = 16;
 const CURRENT_VERSION = 1;
 
+/**
+ * A service that encrypts and decrypts cookies.
+ */
 @Injectable()
 export class CookieEncryptionService {
   public constructor(private readonly configService: ConfigService) {}
 
-  public getEncryptedCookie(
+  /**
+   * Decrypts a cookie value and returns the decrypted value.
+   * @param name the name of the cookie.
+   * @param value the encrypted value of the cookie.
+   * @param additionalOptions additional options to be used when serializing the cookie.
+   * @returns the decrypted value of the cookie.
+   */
+  public createEncryptedCookie(
     name: string,
     value: string,
     additionalOptions: Partial<CookieSerializeOptions> = {}
@@ -25,6 +35,11 @@ export class CookieEncryptionService {
     return serialize(name, this.encrypt(value), cookieOptions);
   }
 
+  /**
+   * Encrypts a cookie value and returns the encrypted value.
+   * @param plaintext the plaintext value of the cookie.
+   * @returns the encrypted value of the cookie.
+   */
   public encrypt(plaintext: string): string {
     const encKeyHex = this.configService.get<string>('encKey');
     const ivBytes = crypto.randomBytes(GCM_IV_SIZE);
@@ -44,6 +59,11 @@ export class CookieEncryptionService {
     return base64url.encode(allBytes);
   }
 
+  /**
+   * Decrypts a cookie value and returns the plaintext value.
+   * @param encryptedbase64value the encrypted value of the cookie.
+   * @returns the decrypted value of the cookie.
+   */
   public decrypt(encryptedbase64value: string): string {
     const encKeyHex = this.configService.get<string>('encKey');
     const allBytes = base64url.toBuffer(encryptedbase64value);

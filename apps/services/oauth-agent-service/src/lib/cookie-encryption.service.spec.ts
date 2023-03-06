@@ -9,7 +9,7 @@ describe(CookieEncryptionService.name, () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [ConfigService, CookieEncryptionService],
+      providers: [CookieEncryptionService, ConfigService],
     }).compile();
 
     service = module.get<CookieEncryptionService>(CookieEncryptionService);
@@ -40,19 +40,19 @@ describe(CookieEncryptionService.name, () => {
     expect(() => service.decrypt(encryptedCookie)).toThrowError('Access denied due to invalid request details');
   });
 
-  it('should get an encrypted cookie', () => {
+  it('should create an encrypted cookie', () => {
     jest.spyOn(configService, 'get').mockReturnValueOnce({ httpOnly: true, sameSite: true, path: '/' });
     jest.spyOn(configService, 'get').mockReturnValue(crypto.randomBytes(32));
-    const encryptedCookie = service.getEncryptedCookie('test', 'test');
+    const encryptedCookie = service.createEncryptedCookie('test', 'test');
     expect(encryptedCookie).not.toEqual('test');
     expect(encryptedCookie).toContain('test=');
     expect(encryptedCookie).toContain('; Path=/; HttpOnly; SameSite=Strict');
   });
 
-  it('should get an encrypted cookie with additional options', () => {
+  it('should create an encrypted cookie with additional options', () => {
     jest.spyOn(configService, 'get').mockReturnValueOnce({ httpOnly: true, sameSite: true, path: '/' });
     jest.spyOn(configService, 'get').mockReturnValue(crypto.randomBytes(32));
-    const encryptedCookie = service.getEncryptedCookie('test', 'test', { path: '/test' });
+    const encryptedCookie = service.createEncryptedCookie('test', 'test', { path: '/test' });
     expect(encryptedCookie).not.toEqual('test');
     expect(encryptedCookie).toContain('test=');
     expect(encryptedCookie).toContain('; Path=/test; HttpOnly; SameSite=Strict');
