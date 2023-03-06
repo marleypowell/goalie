@@ -16,6 +16,8 @@
     "@angular/platform-browser-dynamic": "15.1.0",
     "@angular/router": "15.1.0",
     "@eventstore/db-client": "5.0.1",
+    "@fontsource/material-icons": "4.5.4",
+    "@fontsource/roboto": "4.5.8",
     "@nestjs/axios": "2.0.0",
     "@nestjs/common": "9.3.9",
     "@nestjs/config": "2.3.1",

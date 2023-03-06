@@ -3,7 +3,7 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/ui/src",
-  "prefix": "sea-project",
+  "prefix": "goalie",
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
@@ -32,7 +32,8 @@
         "port": 4400,
         "configDir": "libs/ui/.storybook",
         "browserTarget": "ui:build-storybook",
-        "compodoc": false
+        "compodoc": false,
+        "styles": ["@angular/material/prebuilt-themes/indigo-pink.css", "apps/app1/src/styles.scss"]
       },
       "configurations": {
         "ci": {
@@ -47,7 +48,8 @@
         "outputDir": "dist/storybook/ui",
         "configDir": "libs/ui/.storybook",
         "browserTarget": "ui:build-storybook",
-        "compodoc": false
+        "compodoc": false,
+        "styles": ["@angular/material/prebuilt-themes/indigo-pink.css", "apps/app1/src/styles.scss"]
       },
       "configurations": {
         "ci": {

@@ -1,0 +1,7 @@
+<mat-toolbar>
+  <span>{{ title }}</span>
+  <span class="spacer"></span>
+
+  <button *ngIf="showLoginButton" mat-flat-button color="primary" (click)="login.emit()">Login</button>
+  <button *ngIf="showLogoutButton" mat-button color="accent" (click)="logout.emit()">Logout</button>
+</mat-toolbar>
