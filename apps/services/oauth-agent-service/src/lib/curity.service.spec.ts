@@ -121,4 +121,14 @@ describe(CurityService.name, () => {
     );
     expect(url).toContain('&code_challenge_method=S256&scope=scope');
   });
+
+  it('should create logout request url', () => {
+    jest.spyOn(configService, 'get').mockReturnValueOnce('https://localhost:8443/oauth2/logout');
+    jest.spyOn(configService, 'get').mockReturnValueOnce('http://localhost:4200');
+    jest.spyOn(configService, 'get').mockReturnValueOnce('clientId');
+    const url = service.createLogoutRequestUrl();
+    expect(url).toEqual(
+      'https://localhost:8443/oauth2/logout?client_id=clientId&post_logout_redirect_uri=http%3A%2F%2Flocalhost%3A4200'
+    );
+  });
 });

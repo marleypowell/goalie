@@ -152,13 +152,15 @@ export class CurityService {
 
   public createAuthorizationRequestUrl(state: string, codeVerifier: string): string {
     const authorizeEndpoint = this.configService.get<string>('authorizeEndpoint');
+    const clientId = this.configService.get<string>('clientID');
+    const redirectUri = this.configService.get<string>('redirectUri');
+
     let authorizationRequestUrl =
       authorizeEndpoint +
-      '?' +
-      'client_id=' +
-      encodeURIComponent(this.configService.get<string>('clientID')) +
+      '?client_id=' +
+      encodeURIComponent(clientId) +
       '&redirect_uri=' +
-      encodeURIComponent(this.configService.get<string>('redirectUri')) +
+      encodeURIComponent(redirectUri) +
       '&response_type=code' +
       '&state=' +
       encodeURIComponent(state) +
@@ -173,5 +175,17 @@ export class CurityService {
     }
 
     return authorizationRequestUrl;
+  }
+
+  public createLogoutRequestUrl(): string {
+    const logoutEndpoint = this.configService.get<string>('logoutEndpoint');
+    const postLogoutRedirectUri = this.configService.get<string>('postLogoutRedirectURI');
+    const clientId = this.configService.get<string>('clientID');
+
+    const postLogoutRedirectUriParam = postLogoutRedirectUri
+      ? '&post_logout_redirect_uri=' + encodeURIComponent(postLogoutRedirectUri)
+      : '';
+
+    return logoutEndpoint + '?client_id=' + encodeURIComponent(clientId) + postLogoutRedirectUriParam;
   }
 }

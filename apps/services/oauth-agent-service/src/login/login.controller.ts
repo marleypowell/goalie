@@ -1,19 +1,9 @@
 import { Body, Controller, Post, Req, Res } from '@nestjs/common';
 import { Request, Response } from 'express';
+import { LoginEndDto } from './dto/login-end.dto';
 import { LoginService } from './login.service';
-
-export interface LoginStartRequest {
-  extraParams?: Array<{ key: string; value: string }>;
-}
-
-export interface LoginStartResponse {
-  authorizationRequestUrl: string;
-}
-
-export interface LoginEndResponse {
-  isLoggedIn: boolean;
-  handled: boolean;
-}
+import { LoginEndResponse } from './models/login-end-response';
+import { LoginStartResponse } from './models/login-start-response';
 
 @Controller('login')
 export class LoginController {
@@ -30,10 +20,10 @@ export class LoginController {
   public async loginEnd(
     @Req() req: Request,
     @Res({ passthrough: true }) res: Response,
-    @Body() payload: { pageUrl: string }
+    @Body() payload: LoginEndDto
   ): Promise<LoginEndResponse> {
     const { cookiesToSet, ...response } = await this.loginService.loginEnd(payload.pageUrl, req.cookies);
-    res.set('Set-Cookie', cookiesToSet as string[]);
+    res.set('Set-Cookie', cookiesToSet);
     return response;
   }
 }
