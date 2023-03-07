@@ -42,6 +42,10 @@ describe(UserInfoService.name, () => {
   it('should return user info', async () => {
     const userInfo = await service.getUserInfo({});
     expect(userInfo).toEqual({ sub: '123', name: 'John Doe', email: 'john.doe@gmail.com' });
+    expect(cookieServiceSpy.getAccessTokenCookie).toHaveBeenCalledTimes(1);
+    expect(cookieServiceSpy.getAccessTokenCookie).toHaveBeenCalledWith({});
+    expect(curityServiceSpy.getUserInfo).toHaveBeenCalledTimes(1);
+    expect(curityServiceSpy.getUserInfo).toHaveBeenCalledWith('accessTokenCookie');
   });
 
   it('should throw unauthorized exception when no access token cookie', async () => {
@@ -49,5 +53,8 @@ describe(UserInfoService.name, () => {
     await expect(service.getUserInfo({})).rejects.toThrowError(
       new UnauthorizedException('No access token cookie was supplied in a call to get user info')
     );
+    expect(cookieServiceSpy.getAccessTokenCookie).toHaveBeenCalledTimes(1);
+    expect(cookieServiceSpy.getAccessTokenCookie).toHaveBeenCalledWith({});
+    expect(curityServiceSpy.getUserInfo).toHaveBeenCalledTimes(0);
   });
 });
