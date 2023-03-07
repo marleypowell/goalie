@@ -1,4 +1,4 @@
-import { Body, Controller, Post, Req, Res } from '@nestjs/common';
+import { Body, Controller, HttpCode, HttpStatus, Post, Req, Res } from '@nestjs/common';
 import { Request, Response } from 'express';
 import { LoginEndDto } from './dto/login-end.dto';
 import { LoginService } from './login.service';
@@ -10,6 +10,7 @@ export class LoginController {
   public constructor(private readonly loginService: LoginService) {}
 
   @Post('/start')
+  @HttpCode(HttpStatus.OK)
   public loginStart(@Res({ passthrough: true }) res: Response): LoginStartResponse {
     const { tempLoginDataCookie, ...response } = this.loginService.loginStart();
     res.set('Set-Cookie', tempLoginDataCookie);
@@ -17,6 +18,7 @@ export class LoginController {
   }
 
   @Post('/end')
+  @HttpCode(HttpStatus.OK)
   public async loginEnd(
     @Req() req: Request,
     @Res({ passthrough: true }) res: Response,
