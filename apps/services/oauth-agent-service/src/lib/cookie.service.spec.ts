@@ -40,12 +40,12 @@ describe(CookieService.name, () => {
     expect(cookies).toEqual([
       'undefined-access-token=accessToken',
       expect.stringContaining('undefined-login=; Expires='),
-      'undefined-auth=refreshToken',
+      'undefined-refresh-token=refreshToken',
       'undefined-id=idToken',
     ]);
     expect(createEncryptedCookieSpy).toHaveBeenCalledTimes(3);
     expect(createEncryptedCookieSpy).toHaveBeenCalledWith('undefined-access-token', 'accessToken');
-    expect(createEncryptedCookieSpy).toHaveBeenCalledWith('undefined-auth', 'refreshToken', {
+    expect(createEncryptedCookieSpy).toHaveBeenCalledWith('undefined-refresh-token', 'refreshToken', {
       path: 'undefined/refresh',
     });
     expect(createEncryptedCookieSpy).toHaveBeenCalledWith('undefined-id', 'idToken', { path: 'undefined/claims' });
@@ -70,7 +70,7 @@ describe(CookieService.name, () => {
 
     expect(cookies).toEqual([
       'undefined-access-token=accessToken',
-      'undefined-auth=refreshToken',
+      'undefined-refresh-token=refreshToken',
       'undefined-id=idToken',
     ]);
   });
@@ -108,11 +108,20 @@ describe(CookieService.name, () => {
     expect(decryptSpy).toHaveBeenCalledWith('encryptedCookie');
   });
 
+  it('should get refresh token cookie', () => {
+    const decryptSpy = jest.spyOn(cookieEncryptionService, 'decrypt').mockReturnValueOnce('refreshToken');
+    const cookies = { 'undefined-refresh-token': 'encryptedCookie' };
+    const cookie = service.getRefreshTokenCookie(cookies);
+    expect(cookie).toEqual('refreshToken');
+    expect(decryptSpy).toHaveBeenCalledTimes(1);
+    expect(decryptSpy).toHaveBeenCalledWith('encryptedCookie');
+  });
+
   it('should get logout cookies', () => {
     const cookies = service.getLogoutCookies();
 
     expect(cookies).toEqual([
-      expect.stringContaining('undefined-auth=; Expires='),
+      expect.stringContaining('undefined-refresh-token=; Expires='),
       expect.stringContaining('undefined-access-token=; Expires='),
       expect.stringContaining('undefined-id=; Expires='),
     ]);

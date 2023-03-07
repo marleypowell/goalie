@@ -1,5 +1,5 @@
-import { Injectable } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
+import { Injectable, Module } from '@nestjs/common';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { CookieSerializeOptions, serialize } from 'cookie';
 import { CookieEncryptionService } from './cookie-encryption.service';
 import { TempLoginData } from './temp-login-data';
@@ -18,7 +18,7 @@ export class CookieService {
 
   private readonly cookieNames = {
     tempLogin: `${this.cookieNamePrefix}-login`,
-    auth: `${this.cookieNamePrefix}-auth`,
+    refreshToken: `${this.cookieNamePrefix}-refresh-token`,
     accessToken: `${this.cookieNamePrefix}-access-token`,
     id: `${this.cookieNamePrefix}-id`,
   };
@@ -45,7 +45,7 @@ export class CookieService {
 
     if (tokenResponse.refresh_token) {
       cookies.push(
-        this.cookieEncryptionService.createEncryptedCookie(this.cookieNames.auth, tokenResponse.refresh_token, {
+        this.cookieEncryptionService.createEncryptedCookie(this.cookieNames.refreshToken, tokenResponse.refresh_token, {
           path: this.endpointsPrefix + '/refresh',
         })
       );
@@ -98,11 +98,20 @@ export class CookieService {
   }
 
   /**
+   * Gets the refresh token from the cookies.
+   * @param cookies The cookies.
+   * @returns The refresh token.
+   */
+  public getRefreshTokenCookie(cookies: Record<string, string>): string | undefined {
+    return this.getCookie(cookies, this.cookieNames.refreshToken);
+  }
+
+  /**
    * Gets the cookies for unsetting the auth, access token and id cookies.
    */
   public getLogoutCookies(): string[] {
     return [
-      this.createExpiredCookie(this.cookieNames.auth),
+      this.createExpiredCookie(this.cookieNames.refreshToken),
       this.createExpiredCookie(this.cookieNames.accessToken),
       this.createExpiredCookie(this.cookieNames.id),
     ];
@@ -122,3 +131,10 @@ export class CookieService {
     return this.cookieEncryptionService.decrypt(encryptedCookie);
   }
 }
+
+@Module({
+  imports: [ConfigModule],
+  providers: [CookieService, CookieEncryptionService],
+  exports: [CookieService, CookieEncryptionService],
+})
+export class CookieModule {}

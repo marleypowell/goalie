@@ -1,6 +1,6 @@
-import { HttpService } from '@nestjs/axios';
-import { HttpException, Injectable } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
+import { HttpModule, HttpService } from '@nestjs/axios';
+import { HttpException, Injectable, Module } from '@nestjs/common';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { isAxiosError } from 'axios';
 import { catchError, map, Observable } from 'rxjs';
 import AuthorizationClientException from './exceptions/AuthorizationClientException';
@@ -190,3 +190,10 @@ export class CurityService {
     return logoutEndpoint + '?client_id=' + encodeURIComponent(clientId) + postLogoutRedirectUriParam;
   }
 }
+
+@Module({
+  imports: [HttpModule, ConfigModule],
+  providers: [CurityService],
+  exports: [CurityService],
+})
+export class CurityModule {}
