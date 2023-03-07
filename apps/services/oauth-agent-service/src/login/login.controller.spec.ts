@@ -42,11 +42,13 @@ describe('LoginController', () => {
   });
 
   it('should call loginEnd', async () => {
-    loginServiceSpy.loginEnd.mockReturnValue({
-      cookiesToSet: ['cookie1', 'cookie2'],
-      handled: true,
-      isLoggedIn: true,
-    });
+    loginServiceSpy.loginEnd.mockReturnValue(
+      Promise.resolve({
+        cookiesToSet: ['cookie1', 'cookie2'],
+        handled: true,
+        isLoggedIn: true,
+      })
+    );
     const req = { cookies: { cookie1: 'cookie1' } } as unknown as Request;
     const res = { set: jest.fn() } as unknown as Response;
     await expect(controller.loginEnd(req, res, { pageUrl: '' })).resolves.toEqual({
