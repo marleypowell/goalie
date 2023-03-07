@@ -1,6 +1,7 @@
-import { HttpService } from '@nestjs/axios';
-import { Injectable } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
+import { HttpModule, HttpService } from '@nestjs/axios';
+import { HttpException, Injectable, Module } from '@nestjs/common';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { isAxiosError } from 'axios';
 import { catchError, map, Observable } from 'rxjs';
 import AuthorizationClientException from './exceptions/AuthorizationClientException';
 import AuthorizationServerException from './exceptions/AuthorizationServerException';
@@ -55,13 +56,13 @@ export class CurityService {
           return res.data;
         }),
         catchError((err) => {
-          if (!(err instanceof OAuthAgentException)) {
-            const error = new AuthorizationServerException(err);
-            error.logInfo = 'Connectivity problem during an Authorization Code Grant';
-            throw error;
-          } else {
-            throw err;
+          if (isAxiosError(err)) {
+            throw new HttpException(err.response.data, err.response.status, {
+              cause: err.cause,
+              description: err.message,
+            });
           }
+          throw err;
         })
       );
   }
@@ -98,13 +99,13 @@ export class CurityService {
           return res.data;
         }),
         catchError((err) => {
-          if (!(err instanceof OAuthAgentException)) {
-            const error = new AuthorizationServerException(err);
-            error.logInfo = 'Connectivity problem during an Authorization Code Grant';
-            throw error;
-          } else {
-            throw err;
+          if (isAxiosError(err)) {
+            throw new HttpException(err.response.data, err.response.status, {
+              cause: err.cause,
+              description: err.message,
+            });
           }
+          throw err;
         })
       );
   }
@@ -139,13 +140,13 @@ export class CurityService {
           return res.data;
         }),
         catchError((err) => {
-          if (!(err instanceof OAuthAgentException)) {
-            const error = new AuthorizationServerException(err);
-            error.logInfo = 'Connectivity problem during a User Info request';
-            throw error;
-          } else {
-            throw err;
+          if (isAxiosError(err)) {
+            throw new HttpException(err.response.data, err.response.status, {
+              cause: err.cause,
+              description: err.message,
+            });
           }
+          throw err;
         })
       );
   }
@@ -189,3 +190,10 @@ export class CurityService {
     return logoutEndpoint + '?client_id=' + encodeURIComponent(clientId) + postLogoutRedirectUriParam;
   }
 }
+
+@Module({
+  imports: [HttpModule, ConfigModule],
+  providers: [CurityService],
+  exports: [CurityService],
+})
+export class CurityModule {}
