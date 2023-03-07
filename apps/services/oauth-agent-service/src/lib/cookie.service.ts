@@ -5,6 +5,8 @@ import { CookieEncryptionService } from './cookie-encryption.service';
 import { TempLoginData } from './temp-login-data';
 import { TokenResponse } from './token-response';
 
+const DAY_MILLISECONDS = 1000 * 60 * 60 * 24;
+
 /**
  * Service for handling cookies.
  */
@@ -95,8 +97,18 @@ export class CookieService {
     return this.getCookie(cookies, this.cookieNames.accessToken);
   }
 
+  /**
+   * Gets the cookies for unsetting the auth, access token and id cookies.
+   */
+  public getLogoutCookies(): string[] {
+    return [
+      this.createExpiredCookie(this.cookieNames.auth),
+      this.createExpiredCookie(this.cookieNames.accessToken),
+      this.createExpiredCookie(this.cookieNames.id),
+    ];
+  }
+
   private createExpiredCookie(name: string): string {
-    const DAY_MILLISECONDS = 1000 * 60 * 60 * 24;
     const defaultCookieOptions = this.configService.get<CookieSerializeOptions>('cookieOptions');
     const cookieOptions = { ...defaultCookieOptions, expires: new Date(Date.now() - DAY_MILLISECONDS) };
     return serialize(name, '', cookieOptions);

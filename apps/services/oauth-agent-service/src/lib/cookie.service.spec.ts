@@ -107,4 +107,14 @@ describe(CookieService.name, () => {
     expect(decryptSpy).toHaveBeenCalledTimes(1);
     expect(decryptSpy).toHaveBeenCalledWith('encryptedCookie');
   });
+
+  it('should get logout cookies', () => {
+    const cookies = service.getLogoutCookies();
+
+    expect(cookies).toEqual([
+      expect.stringContaining('undefined-auth=; Expires='),
+      expect.stringContaining('undefined-access-token=; Expires='),
+      expect.stringContaining('undefined-id=; Expires='),
+    ]);
+  });
 });
