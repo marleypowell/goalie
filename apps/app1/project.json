@@ -3,7 +3,7 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "sourceRoot": "apps/app1/src",
-  "prefix": "sea-project",
+  "prefix": "goalie",
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
