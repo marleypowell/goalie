@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { BehaviorSubject, map, Observable, tap } from 'rxjs';
 import { WINDOW } from './injection-tokens';
 
 export interface CheckAuthResponse {
@@ -25,7 +25,9 @@ export class AuthService {
   }
 
   public logout(): void {
-    console.log('logout');
+    this.getLogoutUrl().subscribe((url) => {
+      this.window.location.href = url;
+    });
   }
 
   public updateAuthState(): Observable<CheckAuthResponse> {
@@ -63,8 +65,16 @@ export class AuthService {
   private checkAuth(): Observable<CheckAuthResponse> {
     return this.http.post<CheckAuthResponse>(
       'http://localhost:3334/api/login/end',
-      { pageUrl: location.href },
+      { pageUrl: this.window.location.href },
       { withCredentials: true }
     );
+  }
+
+  private getLogoutUrl(): Observable<string> {
+    return this.http
+      .post('http://localhost:3334/api/logout', null, {
+        withCredentials: true,
+      })
+      .pipe(map((res: any) => String(res.url)));
   }
 }

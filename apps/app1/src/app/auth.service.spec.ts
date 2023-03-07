@@ -61,6 +61,7 @@ describe(AuthService.name, () => {
   });
 
   it('should call login end endpoint', async () => {
+    (windowSpy.location as any).setHrefSpy = 'http://localhost/';
     service.updateAuthState().pipe(take(1)).subscribe();
 
     const checkAuthReq = httpTestingController.expectOne('http://localhost:3334/api/login/end');
@@ -70,6 +71,7 @@ describe(AuthService.name, () => {
     });
 
     expect(checkAuthReq.request.method).toBe('POST');
+    expect(checkAuthReq.request.body).toEqual({ pageUrl: 'http://localhost/' });
     expect(checkAuthReq.request.withCredentials).toBe(true);
 
     const authState = await firstValueFrom(service.authState$);
@@ -92,5 +94,17 @@ describe(AuthService.name, () => {
     expect(userInfo).toEqual({
       name: 'John Doe',
     });
+  });
+
+  it('should call logout endpoint', () => {
+    service.logout();
+
+    const getLogoutUrlReq = httpTestingController.expectOne('http://localhost:3334/api/logout');
+    getLogoutUrlReq.flush({ url: 'https://localhost:8443/oauth/v2/oauth-logout' });
+
+    expect(getLogoutUrlReq.request.method).toBe('POST');
+    expect(getLogoutUrlReq.request.withCredentials).toBe(true);
+    expect(windowSpy.location.href).toHaveBeenCalledTimes(1);
+    expect(windowSpy.location.href).toHaveBeenCalledWith('https://localhost:8443/oauth/v2/oauth-logout');
   });
 });
