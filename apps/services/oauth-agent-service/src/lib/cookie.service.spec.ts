@@ -41,14 +41,16 @@ describe(CookieService.name, () => {
       'undefined-access-token=accessToken',
       expect.stringContaining('undefined-login=; Expires='),
       'undefined-refresh-token=refreshToken',
-      'undefined-id=idToken',
+      'undefined-id-token=idToken',
     ]);
     expect(createEncryptedCookieSpy).toHaveBeenCalledTimes(3);
     expect(createEncryptedCookieSpy).toHaveBeenCalledWith('undefined-access-token', 'accessToken');
     expect(createEncryptedCookieSpy).toHaveBeenCalledWith('undefined-refresh-token', 'refreshToken', {
-      path: 'undefined/refresh',
+      path: 'undefined/refresh-token',
     });
-    expect(createEncryptedCookieSpy).toHaveBeenCalledWith('undefined-id', 'idToken', { path: 'undefined/claims' });
+    expect(createEncryptedCookieSpy).toHaveBeenCalledWith('undefined-id-token', 'idToken', {
+      path: 'undefined/claims',
+    });
   });
 
   it('should get cookies from token response without the temp login cookie', () => {
@@ -71,7 +73,7 @@ describe(CookieService.name, () => {
     expect(cookies).toEqual([
       'undefined-access-token=accessToken',
       'undefined-refresh-token=refreshToken',
-      'undefined-id=idToken',
+      'undefined-id-token=idToken',
     ]);
   });
 
@@ -123,7 +125,7 @@ describe(CookieService.name, () => {
     expect(cookies).toEqual([
       expect.stringContaining('undefined-refresh-token=; Expires='),
       expect.stringContaining('undefined-access-token=; Expires='),
-      expect.stringContaining('undefined-id=; Expires='),
+      expect.stringContaining('undefined-id-token=; Expires='),
     ]);
   });
 });
