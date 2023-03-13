@@ -7,12 +7,9 @@ import { Logger, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app/app.module';
-import { connectToEventStore } from './app/event-store';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-
-  await connectToEventStore();
 
   const globalPrefix = 'api';
   app.setGlobalPrefix(globalPrefix);
