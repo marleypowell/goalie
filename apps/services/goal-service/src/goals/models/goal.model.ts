@@ -49,6 +49,11 @@ export class GoalAggregate extends AggregateRoot {
 
   public completeGoal(): void {
     this.logger.log(`completeGoal`);
+
+    if (this.completed) {
+      throw new Error('Goal already completed');
+    }
+
     const event = new GoalCompletedEvent();
     this.apply(event);
   }
