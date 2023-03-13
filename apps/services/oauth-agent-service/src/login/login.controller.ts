@@ -1,4 +1,4 @@
-import { Body, Controller, HttpCode, HttpStatus, Post, Req, Res } from '@nestjs/common';
+import { Body, Controller, HttpCode, HttpStatus, Logger, Post, Req, Res } from '@nestjs/common';
 import { Request, Response } from 'express';
 import { LoginEndDto } from './dto/login-end.dto';
 import { LoginService } from './login.service';
@@ -7,6 +7,8 @@ import { LoginStartResponse } from './models/login-start-response';
 
 @Controller('login')
 export class LoginController {
+  private readonly logger = new Logger(LoginController.name);
+
   public constructor(private readonly loginService: LoginService) {}
 
   @Post('/start')
@@ -25,7 +27,10 @@ export class LoginController {
     @Body() payload: LoginEndDto
   ): Promise<LoginEndResponse> {
     const { cookiesToSet, ...response } = await this.loginService.loginEnd(payload.pageUrl, req.cookies);
-    res.set('Set-Cookie', cookiesToSet);
+    if (cookiesToSet) {
+      this.logger.debug('cookiesToSet', cookiesToSet);
+      res.set('Set-Cookie', cookiesToSet);
+    }
     return response;
   }
 }

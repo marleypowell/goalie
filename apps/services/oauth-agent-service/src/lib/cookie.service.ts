@@ -1,4 +1,4 @@
-import { Injectable, Module } from '@nestjs/common';
+import { Injectable, Logger, Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { CookieSerializeOptions, serialize } from 'cookie';
 import { CookieEncryptionService } from './cookie-encryption.service';
@@ -12,6 +12,8 @@ const DAY_MILLISECONDS = 1000 * 60 * 60 * 24;
  */
 @Injectable()
 export class CookieService {
+  private readonly logger = new Logger(CookieService.name);
+
   private readonly cookieNamePrefix = this.configService.get<string>('cookieNamePrefix');
 
   private readonly endpointsPrefix = this.configService.get<string>('endpointsPrefix');
@@ -20,7 +22,7 @@ export class CookieService {
     tempLogin: `${this.cookieNamePrefix}-login`,
     refreshToken: `${this.cookieNamePrefix}-refresh-token`,
     accessToken: `${this.cookieNamePrefix}-access-token`,
-    id: `${this.cookieNamePrefix}-id`,
+    idToken: `${this.cookieNamePrefix}-id-token`,
   };
 
   public constructor(
@@ -40,23 +42,30 @@ export class CookieService {
     ];
 
     if (unsetTempLoginDataCookie) {
+      this.logger.debug('Unsetting temp login data cookie');
       cookies.push(this.createExpiredCookie(this.cookieNames.tempLogin));
     }
 
     if (tokenResponse.refresh_token) {
+      this.logger.debug('Setting refresh token cookie');
       cookies.push(
         this.cookieEncryptionService.createEncryptedCookie(this.cookieNames.refreshToken, tokenResponse.refresh_token, {
-          path: this.endpointsPrefix + '/refresh',
+          path: this.endpointsPrefix + '/refresh-token',
         })
       );
+    } else {
+      this.logger.debug('No refresh token in response');
     }
 
     if (tokenResponse.id_token) {
+      this.logger.debug('Setting id token cookie');
       cookies.push(
-        this.cookieEncryptionService.createEncryptedCookie(this.cookieNames.id, tokenResponse.id_token, {
+        this.cookieEncryptionService.createEncryptedCookie(this.cookieNames.idToken, tokenResponse.id_token, {
           path: this.endpointsPrefix + '/claims',
         })
       );
+    } else {
+      this.logger.debug('No id token in response');
     }
 
     return cookies;
@@ -113,7 +122,7 @@ export class CookieService {
     return [
       this.createExpiredCookie(this.cookieNames.refreshToken),
       this.createExpiredCookie(this.cookieNames.accessToken),
-      this.createExpiredCookie(this.cookieNames.id),
+      this.createExpiredCookie(this.cookieNames.idToken),
     ];
   }
 
