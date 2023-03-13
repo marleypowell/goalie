@@ -1,8 +1,7 @@
 import { BACKWARDS, END, FORWARDS, jsonEvent, START, StreamNotFoundError } from '@eventstore/db-client';
+import { Goal, GoalActivity } from '@goalie/shared/goals';
 import { Injectable, Logger } from '@nestjs/common';
 import { eventStore } from '../common/event-store';
-import { GoalActivity } from './entities/goal-activity.entity';
-import { Goal } from './entities/goal.entity';
 import { goalReducer } from './entities/goal.reducer';
 import { GoalJsonEvent } from './events';
 import { GoalAggregate } from './models/goal.model';

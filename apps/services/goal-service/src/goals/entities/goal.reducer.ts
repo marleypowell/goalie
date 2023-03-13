@@ -1,5 +1,5 @@
+import { Goal } from '@goalie/shared/goals';
 import { GoalJsonEvent } from '../events';
-import { Goal } from './goal.entity';
 
 export const goalReducer = (goal: Goal, event: GoalJsonEvent): Goal => {
   switch (event.type) {

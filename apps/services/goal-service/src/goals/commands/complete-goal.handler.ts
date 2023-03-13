@@ -1,7 +1,7 @@
+import { CompleteGoalCommand } from '@goalie/shared/goals';
 import { Logger } from '@nestjs/common';
 import { CommandHandler, EventPublisher, ICommandHandler } from '@nestjs/cqrs';
 import { GoalRepository } from '../goal.repository';
-import { CompleteGoalCommand } from './complete-goal.command';
 
 @CommandHandler(CompleteGoalCommand)
 export class CompleteGoalHandler implements ICommandHandler<CompleteGoalCommand> {

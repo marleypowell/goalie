@@ -1,6 +1,6 @@
+import { Goal } from '@goalie/shared/goals';
 import { Logger } from '@nestjs/common';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { Goal } from '../entities/goal.entity';
 import { GoalRepository } from '../goal.repository';
 import { GetGoalsQuery } from './get-goals.query';
 

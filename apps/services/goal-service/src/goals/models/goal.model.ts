@@ -1,8 +1,6 @@
+import { CreateGoalCommand, GoalCompletedEvent, GoalCreatedEvent } from '@goalie/shared/goals';
 import { Logger } from '@nestjs/common';
 import { AggregateRoot, IEvent } from '@nestjs/cqrs';
-import { CreateGoalCommand } from '../commands/create-goal.command';
-import { GoalCompletedEvent } from '../events/goal-completed.event';
-import { GoalCreatedEvent } from '../events/goal-created.event';
 
 export class GoalAggregate extends AggregateRoot {
   private id: string;

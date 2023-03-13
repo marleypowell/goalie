@@ -1,6 +1,6 @@
+import { GoalCompletedEvent } from '@goalie/shared/goals';
 import { Logger } from '@nestjs/common';
 import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
-import { GoalCompletedEvent } from './goal-completed.event';
 
 @EventsHandler(GoalCompletedEvent)
 export class GoalCompletedHandler implements IEventHandler<GoalCompletedEvent> {

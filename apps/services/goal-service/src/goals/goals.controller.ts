@@ -1,14 +1,16 @@
+import {
+  CompleteGoalCommand,
+  CompleteGoalDto,
+  CreateGoalCommand,
+  CreateGoalDto,
+  GetGoalActivityDto,
+  GetGoalDto,
+  Goal,
+  GoalActivity,
+} from '@goalie/shared/goals';
 import { Controller, HttpStatus, Logger } from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { MessagePattern, Payload } from '@nestjs/microservices';
-import { CompleteGoalCommand } from './commands/complete-goal.command';
-import { CreateGoalCommand } from './commands/create-goal.command';
-import { CompleteGoalDto } from './dto/complete-goal.dto';
-import { CreateGoalDto } from './dto/create-goal.dto';
-import { GetGoalActivityDto } from './dto/get-goal-activity.dto';
-import { GetGoalDto } from './dto/get-goal.dto';
-import { GoalActivity } from './entities/goal-activity.entity';
-import { Goal } from './entities/goal.entity';
 import { GetGoalActivityQuery } from './queries/get-goal-activity.query';
 import { GetGoalQuery } from './queries/get-goal.query';
 import { GetGoalsQuery } from './queries/get-goals.query';
