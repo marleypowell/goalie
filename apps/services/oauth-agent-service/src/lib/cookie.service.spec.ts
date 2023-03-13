@@ -119,6 +119,15 @@ describe(CookieService.name, () => {
     expect(decryptSpy).toHaveBeenCalledWith('encryptedCookie');
   });
 
+  it('should get id token cookie', () => {
+    const decryptSpy = jest.spyOn(cookieEncryptionService, 'decrypt').mockReturnValueOnce('idToken');
+    const cookies = { 'undefined-id-token': 'encryptedCookie' };
+    const cookie = service.getIdTokenCookie(cookies);
+    expect(cookie).toEqual('idToken');
+    expect(decryptSpy).toHaveBeenCalledTimes(1);
+    expect(decryptSpy).toHaveBeenCalledWith('encryptedCookie');
+  });
+
   it('should get logout cookies', () => {
     const cookies = service.getLogoutCookies();
 

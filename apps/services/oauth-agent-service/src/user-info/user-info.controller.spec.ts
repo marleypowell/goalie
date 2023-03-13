@@ -37,5 +37,7 @@ describe(UserInfoController.name, () => {
       name: 'John Doe',
       email: 'john.doe@gmail.com',
     });
+    expect(userInfoServiceSpy.getUserInfo).toHaveBeenCalledTimes(1);
+    expect(userInfoServiceSpy.getUserInfo).toHaveBeenCalledWith(req.cookies);
   });
 });

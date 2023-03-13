@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import { ClaimsModule } from './claims/claims.module';
 import config from './config/config';
 import { LoginModule } from './login/login.module';
 import { LogoutModule } from './logout/logout.module';
@@ -13,6 +14,7 @@ import { UserInfoModule } from './user-info/user-info.module';
     LogoutModule,
     UserInfoModule,
     RefreshTokenModule,
+    ClaimsModule
   ],
   controllers: [],
   providers: [],

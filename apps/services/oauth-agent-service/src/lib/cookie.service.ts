@@ -116,6 +116,15 @@ export class CookieService {
   }
 
   /**
+   * Gets the id token from the cookies.
+   * @param cookies The cookies.
+   * @returns The id token.
+   */
+  public getIdTokenCookie(cookies: Record<string, string>): string | undefined {
+    return this.getCookie(cookies, this.cookieNames.idToken);
+  }
+
+  /**
    * Gets the cookies for unsetting the auth, access token and id cookies.
    */
   public getLogoutCookies(): string[] {
