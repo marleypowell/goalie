@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpStatusCode } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { BehaviorSubject, map, Observable, tap } from 'rxjs';
+import { BehaviorSubject, catchError, concat, map, Observable, of, tap, throwError } from 'rxjs';
 import { WINDOW } from './injection-tokens';
 
 export interface CheckAuthResponse {
@@ -32,6 +32,16 @@ export class AuthService {
 
   public updateAuthState(): Observable<CheckAuthResponse> {
     return this.checkAuth().pipe(
+      catchError((err) => {
+        if (err.status === HttpStatusCode.Unauthorized) {
+          return of({
+            handled: false,
+            isLoggedIn: false,
+          });
+        }
+
+        return throwError(() => err);
+      }),
       tap((res) => {
         this.authState.next(res);
 
@@ -45,9 +55,21 @@ export class AuthService {
   }
 
   private updateUserInfo(): void {
-    this.getUserInfo().subscribe((res: any) => {
-      this.userInfo.next(res);
-    });
+    this.getUserInfo()
+      .pipe(
+        catchError((err, source) => {
+          console.log(err);
+
+          if (err.status === HttpStatusCode.Unauthorized) {
+            return concat(this.refreshAccessToken(), source);
+          }
+
+          return throwError(() => err);
+        })
+      )
+      .subscribe((res: any) => {
+        this.userInfo.next(res);
+      });
   }
 
   private loginStart(): Observable<any> {
@@ -76,5 +98,24 @@ export class AuthService {
         withCredentials: true,
       })
       .pipe(map((res: any) => String(res.url)));
+  }
+
+  private refreshAccessToken(): Observable<unknown> {
+    return this.http
+      .post('http://localhost:3334/api/refresh-token', null, {
+        withCredentials: true,
+      })
+      .pipe(
+        catchError((err) => {
+          console.log(err);
+
+          this.authState.next({
+            handled: false,
+            isLoggedIn: false,
+          });
+
+          return throwError(() => err);
+        })
+      );
   }
 }

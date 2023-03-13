@@ -1,0 +1,18 @@
+:host {
+  ::ng-deep {
+    .p-timeline.p-timeline-vertical .p-timeline-event-opposite {
+      flex: 0 0 auto;
+    }
+
+    .p-timeline-event-separator {
+      position: inherit;
+      top: 4px;
+    }
+
+    .p-timeline-event-content {
+      h4 {
+        margin: 0;
+      }
+    }
+  }
+}

@@ -1,0 +1,12 @@
+.sidebar {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+
+  p-menu {
+    height: 100%;
+  }
+
+  ::ng-deep .p-menuitem-link-active {
+    background-color: #e0e0e0;
+  }
+}

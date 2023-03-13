@@ -1,9 +1,8 @@
 import { NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatToolbarModule } from '@angular/material/toolbar';
+import { ButtonModule } from 'primeng/button';
+import { MenubarModule } from 'primeng/menubar';
+import { ToolbarModule } from 'primeng/toolbar';
 
 @Component({
   selector: 'goalie-header',
@@ -11,7 +10,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
   styleUrls: ['./header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [MatToolbarModule, MatIconModule, MatButtonModule, MatMenuModule, NgIf],
+  imports: [ToolbarModule, ButtonModule, NgIf, MenubarModule],
 })
 export class HeaderComponent {
   @Input() public title: string | null = null;
@@ -20,7 +19,9 @@ export class HeaderComponent {
 
   @Input() public showLogoutButton: boolean | null = false;
 
-  @Output() public readonly login: EventEmitter<void> = new EventEmitter();
+  @Output() public readonly login: EventEmitter<void> = new EventEmitter<void>();
 
-  @Output() public readonly logout: EventEmitter<void> = new EventEmitter();
+  @Output() public readonly logout: EventEmitter<void> = new EventEmitter<void>();
+
+  @Output() public readonly profile: EventEmitter<void> = new EventEmitter<void>();
 }

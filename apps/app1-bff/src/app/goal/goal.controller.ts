@@ -1,4 +1,11 @@
-import { CompleteGoalDto, CreateGoalDto, Goal, GoalActivity } from '@goalie/shared/goals';
+import {
+  CompleteGoalDto,
+  CreateGoalDto,
+  GetGoalActivityDto,
+  GetGoalDto,
+  Goal,
+  GoalActivity,
+} from '@goalie/shared/goals';
 import { Body, Controller, Get, NotFoundException, Param, Post } from '@nestjs/common';
 import { Client, ClientProxy, Transport } from '@nestjs/microservices';
 import { map, Observable } from 'rxjs';
@@ -35,7 +42,7 @@ export class GoalController {
 
   @Get(':id')
   public findOne(@Param('id') id: string): Observable<Goal> {
-    return this.client.send('getGoal', { goalId: id }).pipe(
+    return this.client.send('getGoal', new GetGoalDto(id)).pipe(
       map((res) => {
         if (!res.data) {
           throw new NotFoundException(`Goal with id ${id} not found`);
@@ -48,7 +55,7 @@ export class GoalController {
 
   @Get(':id/activity')
   public findOneActivity(@Param('id') id: string): Observable<GoalActivity[]> {
-    return this.client.send('getGoalActivity', { goalId: id }).pipe(
+    return this.client.send('getGoalActivity', new GetGoalActivityDto(id)).pipe(
       map((res) => {
         if (!res.data?.length) {
           throw new NotFoundException(`Goal activity with id ${id} not found`);
@@ -61,8 +68,6 @@ export class GoalController {
 
   @Post(':id/complete')
   public complete(@Param('id') id: string): Observable<unknown> {
-    const dto = new CompleteGoalDto();
-    dto.goalId = id;
-    return this.client.send('completeGoal', dto);
+    return this.client.send('completeGoal', new CompleteGoalDto(id));
   }
 }

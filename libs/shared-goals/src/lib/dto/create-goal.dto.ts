@@ -7,4 +7,9 @@ export class CreateGoalDto {
 
   @IsNumber()
   public target: number;
+
+  public constructor(name: string, target: number) {
+    this.name = name;
+    this.target = target;
+  }
 }

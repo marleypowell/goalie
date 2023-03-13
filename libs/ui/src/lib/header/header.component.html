@@ -1,7 +1,6 @@
-<mat-toolbar>
-  <span>{{ title }}</span>
-  <span class="spacer"></span>
+<p-menubar>
+  <p-button icon="pi pi-user" styleClass="p-button-rounded" (click)="profile.emit()"></p-button>
 
-  <button *ngIf="showLoginButton" mat-flat-button color="primary" (click)="login.emit()">Login</button>
-  <button *ngIf="showLogoutButton" mat-button color="accent" (click)="logout.emit()">Logout</button>
-</mat-toolbar>
+  <p-button *ngIf="showLoginButton" label="Login" styleClass="p-button-primary" (click)="login.emit()"></p-button>
+  <p-button *ngIf="showLogoutButton" label="Logout" styleClass="p-button-secondary" (click)="logout.emit()"></p-button>
+</p-menubar>

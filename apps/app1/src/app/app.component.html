@@ -1,12 +1,14 @@
-<goalie-header
-  *ngIf="authState$ | async as authState"
-  title="Goalie"
-  [showLoginButton]="authState.isLoggedIn !== true"
-  [showLogoutButton]="authState.isLoggedIn === true"
-  (login)="login()"
-  (logout)="logout()"
-></goalie-header>
+<goalie-sidebar>
+  <ng-container>
+    <goalie-header
+      *ngIf="authState$ | async as authState"
+      [showLoginButton]="authState.isLoggedIn !== true"
+      [showLogoutButton]="authState.isLoggedIn === true"
+      (login)="login()"
+      (logout)="logout()"
+      (profile)="navigateToProfile()"
+    ></goalie-header>
 
-<router-outlet></router-outlet>
-
-<pre>{{ { authState: (authState$ | async), userInfo: (userInfo$ | async) } | json }}</pre>
+    <main><router-outlet></router-outlet></main>
+  </ng-container>
+</goalie-sidebar>

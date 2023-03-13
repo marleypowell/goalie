@@ -1,0 +1,16 @@
+<p-card *ngIf="goal$ | async as goal" [header]="goal.name" subheader="{{ goal.target }}">
+  <pre>{{ goal | json }}</pre>
+</p-card>
+
+<h2>Activity</h2>
+
+<p-timeline *ngIf="goalActivity$ | async as events" [value]="events">
+  <ng-template pTemplate="content" let-event>
+    <h4>{{ event.type }}</h4>
+    <p>{{ event.data | json }}</p>
+  </ng-template>
+
+  <ng-template pTemplate="opposite" let-event>
+    {{ event.created | date: 'short' }}
+  </ng-template>
+</p-timeline>

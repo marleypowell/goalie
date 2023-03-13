@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@goalie/shared/goals": ["libs/shared-goals/src/index.ts"],
       "@goalie/ui": ["libs/ui/src/index.ts"]
     }
   },
