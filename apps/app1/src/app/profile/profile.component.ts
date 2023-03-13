@@ -15,5 +15,7 @@ export class ProfileComponent {
 
   public readonly userInfo$ = this.authService.userInfo$;
 
+  public readonly claims$ = this.authService.claims$;
+
   public constructor(private readonly authService: AuthService) {}
 }

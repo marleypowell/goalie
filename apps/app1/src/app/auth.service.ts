@@ -16,6 +16,9 @@ export class AuthService {
   private readonly userInfo = new BehaviorSubject<any | null>(null);
   public readonly userInfo$ = this.userInfo.asObservable();
 
+  private readonly claims = new BehaviorSubject<any | null>(null);
+  public readonly claims$ = this.claims.asObservable();
+
   public constructor(@Inject(WINDOW) private readonly window: Window, private readonly http: HttpClient) {}
 
   public login(): void {
@@ -70,6 +73,10 @@ export class AuthService {
       .subscribe((res: any) => {
         this.userInfo.next(res);
       });
+
+    this.getClaims().subscribe((res: any) => {
+      this.claims.next(res);
+    });
   }
 
   private loginStart(): Observable<any> {
@@ -80,6 +87,12 @@ export class AuthService {
 
   private getUserInfo(): Observable<any> {
     return this.http.get('http://localhost:3334/api/user-info', {
+      withCredentials: true,
+    });
+  }
+
+  private getClaims(): Observable<any> {
+    return this.http.get('http://localhost:3334/api/claims', {
       withCredentials: true,
     });
   }
