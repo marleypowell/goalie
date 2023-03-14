@@ -3,34 +3,28 @@ import {
   CreateGoalDto,
   GetGoalActivityDto,
   GetGoalDto,
+  GetGoalsDto,
   Goal,
   GoalActivity,
 } from '@goalie/shared/goals';
-import { Body, Controller, Get, NotFoundException, Param, Post } from '@nestjs/common';
-import { Client, ClientProxy, Transport } from '@nestjs/microservices';
+import { Body, Controller, Get, Inject, NotFoundException, Param, Post, Req } from '@nestjs/common';
+import { ClientProxy } from '@nestjs/microservices';
 import { map, Observable } from 'rxjs';
+import { ApiRequest } from '../common/api-request';
 
 @Controller('goals')
 export class GoalController {
-  @Client({
-    transport: Transport.NATS,
-    options: {
-      url: 'nats://localhost:4222',
-    },
-  })
-  private client: ClientProxy;
+  public constructor(@Inject('GOALS_SERVICE') private readonly client: ClientProxy) {}
 
   @Post()
-  public create(@Body() createGoalDto: CreateGoalDto): Observable<unknown> {
-    return this.client.send('createGoal', createGoalDto);
+  public create(@Req() req: ApiRequest, @Body() createGoalDto: CreateGoalDto): Observable<unknown> {
+    return this.client.send('createGoal', createGoalDto.withUserId(req.user.userId));
   }
 
   @Get('list')
-  public findAll(): Observable<Goal[]> {
-    return this.client.send('getGoals', {}).pipe(
+  public findAll(@Req() req: ApiRequest): Observable<Goal[]> {
+    return this.client.send('getGoals', new GetGoalsDto(req.user.userId)).pipe(
       map((res) => {
-        console.log(res);
-
         if (!res.data?.length) {
           throw new NotFoundException('No goals found');
         }
@@ -41,8 +35,8 @@ export class GoalController {
   }
 
   @Get(':id')
-  public findOne(@Param('id') id: string): Observable<Goal> {
-    return this.client.send('getGoal', new GetGoalDto(id)).pipe(
+  public findOne(@Req() req: ApiRequest, @Param('id') id: string): Observable<Goal> {
+    return this.client.send('getGoal', new GetGoalDto(req.user.userId, id)).pipe(
       map((res) => {
         if (!res.data) {
           throw new NotFoundException(`Goal with id ${id} not found`);
@@ -54,8 +48,8 @@ export class GoalController {
   }
 
   @Get(':id/activity')
-  public findOneActivity(@Param('id') id: string): Observable<GoalActivity[]> {
-    return this.client.send('getGoalActivity', new GetGoalActivityDto(id)).pipe(
+  public findOneActivity(@Req() req: ApiRequest, @Param('id') id: string): Observable<GoalActivity[]> {
+    return this.client.send('getGoalActivity', new GetGoalActivityDto(req.user.userId, id)).pipe(
       map((res) => {
         if (!res.data?.length) {
           throw new NotFoundException(`Goal activity with id ${id} not found`);
@@ -67,7 +61,7 @@ export class GoalController {
   }
 
   @Post(':id/complete')
-  public complete(@Param('id') id: string): Observable<unknown> {
-    return this.client.send('completeGoal', new CompleteGoalDto(id));
+  public complete(@Req() req: ApiRequest, @Param('id') id: string): Observable<unknown> {
+    return this.client.send('completeGoal', new CompleteGoalDto(req.user.userId, id));
   }
 }
