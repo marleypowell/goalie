@@ -13,7 +13,7 @@
         "outputPath": "dist/apps/app1-bff",
         "main": "apps/app1-bff/src/main.ts",
         "tsConfig": "apps/app1-bff/tsconfig.app.json",
-        "assets": ["apps/app1-bff/src/assets"],
+        "assets": [],
         "isolatedConfig": true,
         "webpackConfig": "apps/app1-bff/webpack.config.js"
       },
