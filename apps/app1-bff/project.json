@@ -15,7 +15,16 @@
         "tsConfig": "apps/app1-bff/tsconfig.app.json",
         "assets": [],
         "isolatedConfig": true,
-        "webpackConfig": "apps/app1-bff/webpack.config.js"
+        "webpackConfig": "apps/app1-bff/webpack.config.js",
+        "transformers": [
+          {
+            "name": "@nestjs/swagger/plugin",
+            "options": {
+              "classValidatorShim": true,
+              "introspectComments": true
+            }
+          }
+        ]
       },
       "configurations": {
         "production": {

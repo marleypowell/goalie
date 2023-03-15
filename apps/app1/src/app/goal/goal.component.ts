@@ -30,10 +30,10 @@ export class GoalComponent {
   public constructor(private readonly route: ActivatedRoute, private readonly http: HttpClient) {}
 
   private getGoal(goalId: string): Observable<Goal> {
-    return this.http.get<Goal>(`http://localhost:3333/api/goals/${goalId}`);
+    return this.http.get<Goal>(`/api/goals/${goalId}`);
   }
 
   private getGoalActivity(goalId: string): Observable<GoalActivity[]> {
-    return this.http.get<GoalActivity[]>(`http://localhost:3333/api/goals/${goalId}/activity`);
+    return this.http.get<GoalActivity[]>(`/api/goals/${goalId}/activity`);
   }
 }

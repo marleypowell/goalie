@@ -3,6 +3,7 @@ import { HttpException, Injectable, Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { isAxiosError } from 'axios';
 import { catchError, map, Observable } from 'rxjs';
+import { Config } from '../config/config.interface';
 import AuthorizationClientException from './exceptions/AuthorizationClientException';
 import AuthorizationServerException from './exceptions/AuthorizationServerException';
 import { generateHash } from './generate-hash';
@@ -15,7 +16,7 @@ import { UserInfo } from './user-info';
  */
 @Injectable()
 export class CurityService {
-  public constructor(private readonly configService: ConfigService, private readonly http: HttpService) {}
+  public constructor(private readonly configService: ConfigService<Config>, private readonly http: HttpService) {}
 
   /**
    * Get a token from the token endpoint using the Authorization Code Grant.
@@ -24,10 +25,10 @@ export class CurityService {
    * @returns the token response.
    */
   public getToken(code: string, codeVerifier: string): Observable<TokenResponse> {
-    const tokenEndpoint = this.configService.get<string>('tokenEndpoint');
-    const clientID = this.configService.get<string>('clientID');
-    const clientSecret = this.configService.get<string>('clientSecret');
-    const redirectUri = this.configService.get<string>('redirectUri');
+    const tokenEndpoint = this.configService.get('tokenEndpoint', { infer: true });
+    const clientID = this.configService.get('clientID', { infer: true });
+    const clientSecret = this.configService.get('clientSecret', { infer: true });
+    const redirectUri = this.configService.get('redirectUri', { infer: true });
 
     return this.http
       .post<TokenResponse>(
@@ -72,9 +73,9 @@ export class CurityService {
    * @returns the token response.
    */
   public getRefreshToken(refreshToken: string): Observable<TokenResponse> {
-    const tokenEndpoint = this.configService.get<string>('tokenEndpoint');
-    const clientID = this.configService.get<string>('clientID');
-    const clientSecret = this.configService.get<string>('clientSecret');
+    const tokenEndpoint = this.configService.get('tokenEndpoint', { infer: true });
+    const clientID = this.configService.get('clientID', { infer: true });
+    const clientSecret = this.configService.get('clientSecret', { infer: true });
 
     return this.http
       .post<TokenResponse>(tokenEndpoint, `grant_type=refresh_token&refresh_token=${refreshToken}`, {
@@ -115,7 +116,7 @@ export class CurityService {
    * @returns the user info.
    */
   public getUserInfo(accessToken: string): Observable<UserInfo> {
-    const userInfoEndpoint = this.configService.get<string>('userInfoEndpoint');
+    const userInfoEndpoint = this.configService.get('userInfoEndpoint', { infer: true });
 
     return this.http
       .post<UserInfo>(userInfoEndpoint, null, {
@@ -151,9 +152,9 @@ export class CurityService {
   }
 
   public createAuthorizationRequestUrl(state: string, codeVerifier: string): string {
-    const authorizeEndpoint = this.configService.get<string>('authorizeEndpoint');
-    const clientId = this.configService.get<string>('clientID');
-    const redirectUri = this.configService.get<string>('redirectUri');
+    const authorizeEndpoint = this.configService.get('authorizeEndpoint', { infer: true });
+    const clientId = this.configService.get('clientID', { infer: true });
+    const redirectUri = this.configService.get('redirectUri', { infer: true });
 
     let authorizationRequestUrl =
       authorizeEndpoint +
@@ -168,7 +169,7 @@ export class CurityService {
       generateHash(codeVerifier) +
       '&code_challenge_method=S256';
 
-    const scope = this.configService.get<string>('scope');
+    const scope = this.configService.get('scope', { infer: true });
 
     if (scope) {
       authorizationRequestUrl += '&scope=' + encodeURIComponent(scope);
@@ -178,9 +179,9 @@ export class CurityService {
   }
 
   public createLogoutRequestUrl(): string {
-    const logoutEndpoint = this.configService.get<string>('logoutEndpoint');
-    const postLogoutRedirectUri = this.configService.get<string>('postLogoutRedirectURI');
-    const clientId = this.configService.get<string>('clientID');
+    const logoutEndpoint = this.configService.get('logoutEndpoint', { infer: true });
+    const postLogoutRedirectUri = this.configService.get('postLogoutRedirectURI', { infer: true });
+    const clientId = this.configService.get('clientID', { infer: true });
 
     const postLogoutRedirectUriParam = postLogoutRedirectUri
       ? '&post_logout_redirect_uri=' + encodeURIComponent(postLogoutRedirectUri)

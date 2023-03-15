@@ -1,67 +1,72 @@
-import {
-  CompleteGoalDto,
-  CreateGoalDto,
-  GetGoalActivityDto,
-  GetGoalDto,
-  GetGoalsDto,
-  Goal,
-  GoalActivity,
-} from '@goalie/shared/goals';
-import { Body, Controller, Get, Inject, NotFoundException, Param, Post, Req } from '@nestjs/common';
-import { ClientProxy } from '@nestjs/microservices';
-import { map, Observable } from 'rxjs';
-import { ApiRequest } from '../common/api-request';
+import { CreateGoalDto, Goal, GoalActivity } from '@goalie/shared/goals';
+import { Body, Controller, Get, HttpStatus, Param, Post } from '@nestjs/common';
+import { ApiResponse } from '@nestjs/swagger';
+import { Observable } from 'rxjs';
+import { UseDtoUserId } from '../auth/dto-user-id.interceptor';
+import { ReqUser } from '../auth/request-user.decorator';
+import { User } from '../auth/user.model';
+import { GoalsService } from './goals.service';
 
 @Controller('goals')
 export class GoalController {
-  public constructor(@Inject('GOALS_SERVICE') private readonly client: ClientProxy) {}
+  public constructor(private readonly service: GoalsService) {}
 
+  /**
+   * Create a new goal.
+   * @param createGoalDto the goal to create.
+   * @returns nothing.
+   */
   @Post()
-  public create(@Req() req: ApiRequest, @Body() createGoalDto: CreateGoalDto): Observable<unknown> {
-    return this.client.send('createGoal', createGoalDto.withUserId(req.user.userId));
+  @UseDtoUserId()
+  @ApiResponse({ status: HttpStatus.CREATED, description: 'The goal has been successfully created.' })
+  public create(@Body() createGoalDto: CreateGoalDto): Observable<unknown> {
+    return this.service.create(createGoalDto);
   }
 
+  /**
+   * Get all goals for a user.
+   * @param user the user.
+   * @returns the list of goals.
+   */
   @Get('list')
-  public findAll(@Req() req: ApiRequest): Observable<Goal[]> {
-    return this.client.send('getGoals', new GetGoalsDto(req.user.userId)).pipe(
-      map((res) => {
-        if (!res.data?.length) {
-          throw new NotFoundException('No goals found');
-        }
-
-        return res.data;
-      })
-    );
+  @ApiResponse({ status: HttpStatus.OK, description: 'The list of goals has been successfully retrieved.' })
+  public findAll(@ReqUser() user: User): Observable<Goal[]> {
+    return this.service.findAll(user.userId);
   }
 
+  /**
+   * Get a goal for a user.
+   * @param user the user.
+   * @param id the goal id.
+   * @returns the goal.
+   */
   @Get(':id')
-  public findOne(@Req() req: ApiRequest, @Param('id') id: string): Observable<Goal> {
-    return this.client.send('getGoal', new GetGoalDto(req.user.userId, id)).pipe(
-      map((res) => {
-        if (!res.data) {
-          throw new NotFoundException(`Goal with id ${id} not found`);
-        }
-
-        return res.data;
-      })
-    );
+  @ApiResponse({ status: HttpStatus.OK, description: 'The goal has been successfully retrieved.' })
+  public findOne(@ReqUser() user: User, @Param('id') id: string): Observable<Goal> {
+    return this.service.findOne(user.userId, id);
   }
 
+  /**
+   * Get a goal activity for a user.
+   * @param user the user.
+   * @param id the goal id.
+   * @returns the goal activity.
+   */
   @Get(':id/activity')
-  public findOneActivity(@Req() req: ApiRequest, @Param('id') id: string): Observable<GoalActivity[]> {
-    return this.client.send('getGoalActivity', new GetGoalActivityDto(req.user.userId, id)).pipe(
-      map((res) => {
-        if (!res.data?.length) {
-          throw new NotFoundException(`Goal activity with id ${id} not found`);
-        }
-
-        return res.data;
-      })
-    );
+  @ApiResponse({ status: HttpStatus.OK, description: 'The goal activity has been successfully retrieved.' })
+  public findOneActivity(@ReqUser() user: User, @Param('id') id: string): Observable<GoalActivity[]> {
+    return this.service.findOneActivity(user.userId, id);
   }
 
+  /**
+   * Complete a goal for a user.
+   * @param user the user.
+   * @param id the goal id.
+   * @returns nothing.
+   */
   @Post(':id/complete')
-  public complete(@Req() req: ApiRequest, @Param('id') id: string): Observable<unknown> {
-    return this.client.send('completeGoal', new CompleteGoalDto(req.user.userId, id));
+  @ApiResponse({ status: HttpStatus.OK, description: 'The goal has been successfully completed.' })
+  public complete(@ReqUser() user: User, @Param('id') id: string): Observable<unknown> {
+    return this.service.complete(user.userId, id);
   }
 }

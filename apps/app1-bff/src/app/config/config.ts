@@ -2,6 +2,7 @@ import { Transport } from '@nestjs/microservices';
 import type { Config } from './config.interface';
 
 export default (): Config => ({
+  port: parseInt(process.env.PORT, 10) || 3333,
   jwtConfig: {
     jwksUri: process.env.JWKS_ENDPOINT || 'http://login.mp.exclaimertest.net/oauth/v2/oauth-anonymous/jwks',
     audience: process.env.AUDIENCE || '',

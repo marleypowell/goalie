@@ -15,7 +15,16 @@
         "tsConfig": "apps/services/oauth-agent-service/tsconfig.app.json",
         "assets": [],
         "isolatedConfig": true,
-        "webpackConfig": "apps/services/oauth-agent-service/webpack.config.js"
+        "webpackConfig": "apps/services/oauth-agent-service/webpack.config.js",
+        "transformers": [
+          {
+            "name": "@nestjs/swagger/plugin",
+            "options": {
+              "classValidatorShim": true,
+              "introspectComments": true
+            }
+          }
+        ]
       },
       "configurations": {
         "production": {

@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CreateGoalDto, Goal } from '@goalie/shared/goals';
+import { Goal } from '@goalie/shared/goals';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { ToolbarModule } from 'primeng/toolbar';
@@ -65,20 +65,16 @@ export class GoalListComponent implements OnInit {
     const goals = this.goals$.getValue();
     const name = `My goal ${goals.length + 1}`;
 
-    this.http
-      .post('http://localhost:3333/api/goals', new CreateGoalDto(name, 100), { withCredentials: true })
-      .subscribe(() => {
-        this.loadGoals();
-      });
+    this.http.post('/api/goals', { name, target: 100 }, { withCredentials: true }).subscribe(() => {
+      this.loadGoals();
+    });
   }
 
   public completeGoal(event: Event, goalId: string): void {
     event.stopPropagation();
-    this.http
-      .post(`http://localhost:3333/api/goals/${goalId}/complete`, null, { withCredentials: true })
-      .subscribe(() => {
-        this.loadGoals();
-      });
+    this.http.post(`/api/goals/${goalId}/complete`, null, { withCredentials: true }).subscribe(() => {
+      this.loadGoals();
+    });
   }
 
   public navigateToGoal(goalId: string): void {
@@ -91,7 +87,7 @@ export class GoalListComponent implements OnInit {
 
   private loadGoals(): void {
     this.http
-      .get<Goal[]>('http://localhost:3333/api/goals/list', {
+      .get<Goal[]>('/api/goals/list', {
         withCredentials: true,
       })
       .subscribe((res: Goal[]) => {

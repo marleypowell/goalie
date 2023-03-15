@@ -10,8 +10,8 @@ export class GetGoalsHandler implements IQueryHandler<GetGoalsQuery> {
 
   public constructor(private readonly goalRepository: GoalRepository) {}
 
-  public async execute(): Promise<Goal[]> {
+  public async execute(query: GetGoalsQuery): Promise<Goal[]> {
     this.logger.log('received getGoals query');
-    return this.goalRepository.findAll();
+    return this.goalRepository.findAll(query.userId);
   }
 }

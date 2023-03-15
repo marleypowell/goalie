@@ -1,6 +1,7 @@
 import { Injectable, Logger, Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { CookieSerializeOptions, serialize } from 'cookie';
+import { Config } from '../config/config.interface';
 import { CookieEncryptionService } from './cookie-encryption.service';
 import { TempLoginData } from './temp-login-data';
 import { TokenResponse } from './token-response';
@@ -14,9 +15,9 @@ const DAY_MILLISECONDS = 1000 * 60 * 60 * 24;
 export class CookieService {
   private readonly logger = new Logger(CookieService.name);
 
-  private readonly cookieNamePrefix = this.configService.get<string>('cookieNamePrefix');
+  private readonly cookieNamePrefix = this.configService.get('cookieNamePrefix', { infer: true });
 
-  private readonly endpointsPrefix = this.configService.get<string>('endpointsPrefix');
+  private readonly endpointsPrefix = this.configService.get('endpointsPrefix', { infer: true });
 
   private readonly cookieNames = {
     tempLogin: `${this.cookieNamePrefix}-login`,
@@ -26,7 +27,7 @@ export class CookieService {
   };
 
   public constructor(
-    private readonly configService: ConfigService,
+    private readonly configService: ConfigService<Config>,
     private readonly cookieEncryptionService: CookieEncryptionService
   ) {}
 
@@ -136,8 +137,11 @@ export class CookieService {
   }
 
   private createExpiredCookie(name: string): string {
-    const defaultCookieOptions = this.configService.get<CookieSerializeOptions>('cookieOptions');
-    const cookieOptions = { ...defaultCookieOptions, expires: new Date(Date.now() - DAY_MILLISECONDS) };
+    const defaultCookieOptions = this.configService.get('cookieOptions', { infer: true });
+    const cookieOptions: CookieSerializeOptions = {
+      ...defaultCookieOptions,
+      expires: new Date(Date.now() - DAY_MILLISECONDS),
+    };
     return serialize(name, '', cookieOptions);
   }
 

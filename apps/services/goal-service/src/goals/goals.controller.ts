@@ -5,6 +5,7 @@ import {
   CreateGoalDto,
   GetGoalActivityDto,
   GetGoalDto,
+  GetGoalsDto,
   Goal,
   GoalActivity,
 } from '@goalie/shared/goals';
@@ -24,7 +25,7 @@ export class GoalsController {
   @MessagePattern('createGoal')
   public async create(@Payload() payload: CreateGoalDto) {
     this.logger.log(`Received createGoal command: ${JSON.stringify(payload)}`);
-    const command = new CreateGoalCommand(this.getUserId(), payload);
+    const command = new CreateGoalCommand(payload);
     await this.commandBus.execute(command);
     return { status: HttpStatus.CREATED, data: command.goalId, error: null };
   }
@@ -38,9 +39,9 @@ export class GoalsController {
   }
 
   @MessagePattern('getGoals')
-  public async getGoals() {
+  public async getGoals(@Payload() payload: GetGoalsDto) {
     this.logger.log('Received getGoals query');
-    const query = new GetGoalsQuery();
+    const query = new GetGoalsQuery(payload);
     const goals = await this.queryBus.execute<GetGoalsQuery, Goal[] | null>(query);
     return { status: HttpStatus.OK, data: goals, error: null };
   }
@@ -59,9 +60,5 @@ export class GoalsController {
     const query = new GetGoalActivityQuery(payload);
     const goalActivity = await this.queryBus.execute<GetGoalActivityQuery, GoalActivity[] | null>(query);
     return { status: HttpStatus.OK, data: goalActivity, error: null };
-  }
-
-  private getUserId(): string {
-    return 'user1';
   }
 }

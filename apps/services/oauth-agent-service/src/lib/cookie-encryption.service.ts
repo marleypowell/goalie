@@ -3,6 +3,7 @@ import { ConfigService } from '@nestjs/config';
 import base64url from 'base64url';
 import { CookieSerializeOptions, serialize } from 'cookie';
 import * as crypto from 'crypto';
+import { Config } from '../config/config.interface';
 import CookieDecryptionException from './exceptions/CookieDecryptionException';
 import InvalidCookieException from './exceptions/InvalidCookieException';
 
@@ -16,7 +17,7 @@ const CURRENT_VERSION = 1;
  */
 @Injectable()
 export class CookieEncryptionService {
-  public constructor(private readonly configService: ConfigService) {}
+  public constructor(private readonly configService: ConfigService<Config>) {}
 
   /**
    * Decrypts a cookie value and returns the decrypted value.
@@ -30,8 +31,8 @@ export class CookieEncryptionService {
     value: string,
     additionalOptions: Partial<CookieSerializeOptions> = {}
   ): string {
-    const defaultCookieOptions = this.configService.get<CookieSerializeOptions>('cookieOptions');
-    const cookieOptions = { ...defaultCookieOptions, ...additionalOptions };
+    const defaultCookieOptions = this.configService.get('cookieOptions', { infer: true });
+    const cookieOptions: CookieSerializeOptions = { ...defaultCookieOptions, ...additionalOptions };
     return serialize(name, this.encrypt(value), cookieOptions);
   }
 
@@ -41,7 +42,7 @@ export class CookieEncryptionService {
    * @returns the encrypted value of the cookie.
    */
   public encrypt(plaintext: string): string {
-    const encKeyHex = this.configService.get<string>('encKey');
+    const encKeyHex = this.configService.get('encKey', { infer: true });
     const ivBytes = crypto.randomBytes(GCM_IV_SIZE);
     const encKeyBytes = Buffer.from(encKeyHex, 'hex');
 
@@ -65,7 +66,7 @@ export class CookieEncryptionService {
    * @returns the decrypted value of the cookie.
    */
   public decrypt(encryptedbase64value: string): string {
-    const encKeyHex = this.configService.get<string>('encKey');
+    const encKeyHex = this.configService.get('encKey', { infer: true });
     const allBytes = base64url.toBuffer(encryptedbase64value);
 
     const minSize = VERSION_SIZE + GCM_IV_SIZE + 1 + GCM_TAG_SIZE;

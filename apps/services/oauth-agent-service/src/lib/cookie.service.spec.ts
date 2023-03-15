@@ -38,13 +38,13 @@ describe(CookieService.name, () => {
     );
 
     expect(cookies).toEqual([
-      'undefined-access-token=accessToken',
+      'undefined-at=accessToken',
       expect.stringContaining('undefined-login=; Expires='),
       'undefined-refresh-token=refreshToken',
       'undefined-id-token=idToken',
     ]);
     expect(createEncryptedCookieSpy).toHaveBeenCalledTimes(3);
-    expect(createEncryptedCookieSpy).toHaveBeenCalledWith('undefined-access-token', 'accessToken');
+    expect(createEncryptedCookieSpy).toHaveBeenCalledWith('undefined-at', 'accessToken');
     expect(createEncryptedCookieSpy).toHaveBeenCalledWith('undefined-refresh-token', 'refreshToken', {
       path: 'undefined/refresh-token',
     });
@@ -71,7 +71,7 @@ describe(CookieService.name, () => {
     );
 
     expect(cookies).toEqual([
-      'undefined-access-token=accessToken',
+      'undefined-at=accessToken',
       'undefined-refresh-token=refreshToken',
       'undefined-id-token=idToken',
     ]);
@@ -103,7 +103,7 @@ describe(CookieService.name, () => {
 
   it('should get access token cookie', () => {
     const decryptSpy = jest.spyOn(cookieEncryptionService, 'decrypt').mockReturnValueOnce('accessToken');
-    const cookies = { 'undefined-access-token': 'encryptedCookie' };
+    const cookies = { 'undefined-at': 'encryptedCookie' };
     const cookie = service.getAccessTokenCookie(cookies);
     expect(cookie).toEqual('accessToken');
     expect(decryptSpy).toHaveBeenCalledTimes(1);
@@ -133,7 +133,7 @@ describe(CookieService.name, () => {
 
     expect(cookies).toEqual([
       expect.stringContaining('undefined-refresh-token=; Expires='),
-      expect.stringContaining('undefined-access-token=; Expires='),
+      expect.stringContaining('undefined-at=; Expires='),
       expect.stringContaining('undefined-id-token=; Expires='),
     ]);
   });

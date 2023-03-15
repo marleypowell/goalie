@@ -3,15 +3,15 @@ import { ConfigService } from '@nestjs/config';
 import { PassportStrategy } from '@nestjs/passport';
 import { passportJwtSecret } from 'jwks-rsa';
 import { ExtractJwt, Strategy, StrategyOptions } from 'passport-jwt';
-import { JwtConfig } from '../config/config.interface';
+import { Config } from '../config/config.interface';
 import { User } from './user.model';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
   private readonly logger = new Logger(JwtStrategy.name);
 
-  public constructor(readonly config: ConfigService) {
-    const jwtConfig = config.getOrThrow<JwtConfig>('jwtConfig');
+  public constructor(readonly config: ConfigService<Config>) {
+    const jwtConfig = config.getOrThrow('jwtConfig', { infer: true });
 
     const options: StrategyOptions = {
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),

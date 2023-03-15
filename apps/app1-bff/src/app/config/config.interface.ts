@@ -9,6 +9,7 @@ export interface JwtConfig {
 export type GoalsServiceOptions = NatsOptions & { transport: Transport.NATS };
 
 export interface Config {
+  port: number;
   jwtConfig: JwtConfig;
   goalsServiceOptions: GoalsServiceOptions;
 }

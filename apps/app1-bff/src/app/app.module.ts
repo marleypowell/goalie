@@ -5,6 +5,10 @@ import config from './config/config';
 import { GoalModule } from './goal/goal.module';
 
 @Module({
-  imports: [ConfigModule.forRoot({ isGlobal: true, load: [config] }), AuthModule, GoalModule],
+  imports: [
+    ConfigModule.forRoot({ isGlobal: true, envFilePath: ['.env.local', '.env'], load: [config] }),
+    AuthModule,
+    GoalModule,
+  ],
 })
 export class AppModule {}

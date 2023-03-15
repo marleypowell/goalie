@@ -9,12 +9,12 @@ import { UserInfoModule } from './user-info/user-info.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ isGlobal: true, load: [config] }),
+    ConfigModule.forRoot({ isGlobal: true, envFilePath: ['.env.local', '.env'], load: [config] }),
     LoginModule,
     LogoutModule,
     UserInfoModule,
     RefreshTokenModule,
-    ClaimsModule
+    ClaimsModule,
   ],
   controllers: [],
   providers: [],

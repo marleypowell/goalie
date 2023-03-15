@@ -1,25 +1,32 @@
 import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
+/**
+ * DTO for creating a goal.
+ */
 export class CreateGoalDto {
-  public userId: string | undefined;
+  /**
+   * The user ID.
+   */
+  @IsString()
+  @IsNotEmpty()
+  public userId: string;
 
+  /**
+   * The name of the goal.
+   */
   @IsString()
   @IsNotEmpty()
   public name: string;
 
+  /**
+   * The target number of times to complete the goal.
+   */
   @IsNumber()
   public target: number;
 
-  public constructor(name: string, target: number, userId?: string) {
+  public constructor(userId: string, name: string, target: number) {
+    this.userId = userId;
     this.name = name;
     this.target = target;
-
-    if (userId) {
-      this.userId = userId;
-    }
-  }
-
-  public withUserId(userId: string): CreateGoalDto {
-    return new CreateGoalDto(this.name, this.target, userId);
   }
 }
