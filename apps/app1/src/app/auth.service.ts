@@ -1,6 +1,12 @@
+import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { LoginEndResponse, LoginService, LogoutService } from '@goalie/shared/api-client-oauth-agent';
-import { BehaviorSubject, catchError, map, Observable, of, tap } from 'rxjs';
+import {
+  LoginEndResponse,
+  LoginService,
+  LogoutService,
+  RefreshTokenService,
+} from '@goalie/shared/api-client-oauth-agent';
+import { BehaviorSubject, catchError, EMPTY, map, Observable, of, tap } from 'rxjs';
 import { WINDOW } from './injection-tokens';
 
 interface AuthState {
@@ -23,7 +29,8 @@ export class AuthService {
   public constructor(
     @Inject(WINDOW) private readonly window: Window,
     private readonly loginService: LoginService,
-    private readonly logoutService: LogoutService
+    private readonly logoutService: LogoutService,
+    private readonly refreshTokenService: RefreshTokenService
   ) {}
 
   public login(): void {
@@ -51,6 +58,26 @@ export class AuthService {
         })
       ),
       map((res: LoginEndResponse) => res.isLoggedIn)
+    );
+  }
+
+  public refreshToken(): Observable<unknown> {
+    return this.refreshTokenService.refreshToken().pipe(
+      catchError((error: Error) => {
+        if (
+          error instanceof HttpErrorResponse &&
+          error.status === HttpStatusCode.BadRequest &&
+          error.error.error === 'invalid_grant'
+        ) {
+          this.authState.next({
+            handled: false,
+            isLoggedIn: false,
+          });
+          this.login();
+        }
+
+        return EMPTY;
+      })
     );
   }
 }

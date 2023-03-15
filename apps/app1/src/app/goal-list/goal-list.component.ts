@@ -87,9 +87,8 @@ export class GoalListComponent implements OnInit {
   }
 
   private loadGoals(): void {
-    this.goalsService.getAll().subscribe((res: Goal[]) => {
-      this.goals$.next(res.filter((goal) => !!goal.goalId));
-      console.log(res);
+    this.goalsService.getAll().subscribe((goals: Goal[]) => {
+      this.goals$.next(goals);
     });
   }
 }
