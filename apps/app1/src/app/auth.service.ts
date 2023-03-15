@@ -1,6 +1,6 @@
-import { HttpClient, HttpStatusCode } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, concat, map, Observable, of, tap, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, map, Observable, of, tap } from 'rxjs';
 import { WINDOW } from './injection-tokens';
 
 export interface CheckAuthResponse {
@@ -49,48 +49,12 @@ export class AuthService {
     );
   }
 
-  private updateUserInfo(): void {
-    this.getUserInfo()
-      .pipe(
-        catchError((err, source) => {
-          console.log(err);
-
-          if (err.status === HttpStatusCode.Unauthorized) {
-            return concat(this.refreshAccessToken(), source);
-          }
-
-          return throwError(() => err);
-        })
-      )
-      .subscribe((res: any) => {
-        this.userInfo.next(res);
-      });
-
-    // this.getClaims().subscribe((res: any) => {
-    //   this.claims.next(res);
-    // });
+  public refreshAccessToken(): Observable<unknown> {
+    return this.http.post('/oauth-agent/refresh-token', null, { withCredentials: true });
   }
 
   private loginStart(path: string): Observable<any> {
-    return this.http.post(
-      '/oauth-agent/login/start',
-      { path },
-      {
-        withCredentials: true,
-      }
-    );
-  }
-
-  private getUserInfo(): Observable<any> {
-    return this.http.get('/oauth-agent/user-info', {
-      withCredentials: true,
-    });
-  }
-
-  private getClaims(): Observable<any> {
-    return this.http.get('/oauth-agent/claims', {
-      withCredentials: true,
-    });
+    return this.http.post('/oauth-agent/login/start', { path }, { withCredentials: true });
   }
 
   private checkAuthApi(): Observable<CheckAuthResponse> {
@@ -103,28 +67,7 @@ export class AuthService {
 
   private getLogoutUrl(): Observable<string> {
     return this.http
-      .post('/oauth-agent/logout', null, {
-        withCredentials: true,
-      })
+      .post('/oauth-agent/logout', null, { withCredentials: true })
       .pipe(map((res: any) => String(res.url)));
-  }
-
-  private refreshAccessToken(): Observable<unknown> {
-    return this.http
-      .post('/oauth-agent/refresh-token', null, {
-        withCredentials: true,
-      })
-      .pipe(
-        catchError((err) => {
-          console.log(err);
-
-          this.authState.next({
-            handled: false,
-            isLoggedIn: false,
-          });
-
-          return throwError(() => err);
-        })
-      );
   }
 }

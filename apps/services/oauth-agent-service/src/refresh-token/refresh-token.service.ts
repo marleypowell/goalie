@@ -1,4 +1,4 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { firstValueFrom } from 'rxjs';
 import { CookieService } from '../lib/cookie.service';
 import { CurityService } from '../lib/curity.service';
@@ -11,7 +11,7 @@ export class RefreshTokenService {
     const refreshToken = this.cookieService.getRefreshTokenCookie(cookies);
 
     if (!refreshToken) {
-      throw new UnauthorizedException('No refresh token cookie was supplied in a call to refresh token');
+      throw new BadRequestException('No refresh token cookie was supplied in a call to refresh token');
     }
 
     const tokenResponse = await firstValueFrom(this.curityService.getRefreshToken(refreshToken));

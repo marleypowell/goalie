@@ -6,7 +6,7 @@ const useSsl = !!process.env.SERVER_CERT_P12_PATH;
 export default (): Config => ({
   // Host settings
   port: parseInt(process.env.PORT, 10) || 3334,
-  endpointsPrefix: '/api',
+  endpointsPrefix: '/oauth-agent',
   serverCertPath: process.env.SERVER_CERT_P12_PATH || '',
   serverCertPassword: process.env.SERVER_CERT_P12_PASSWORD || '',
 

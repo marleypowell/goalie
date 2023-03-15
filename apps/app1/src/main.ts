@@ -5,13 +5,14 @@ import { provideRouter, withEnabledBlockingInitialNavigation } from '@angular/ro
 import { AppComponent } from './app/app.component';
 import { appRoutes } from './app/app.routes';
 import { CHECK_AUTH_PROVIDER } from './app/check-auth';
-import { xsrfInterceptorFn } from './app/xsrf.interceptor';
+import { refreshTokenInterceptorFn } from './app/interceptors/refresh-token.interceptor';
+import { xsrfInterceptorFn } from './app/interceptors/xsrf.interceptor';
 
 bootstrapApplication(AppComponent, {
   providers: [
     provideHttpClient(
       withXsrfConfiguration({ cookieName: 'goalie-csrf', headerName: 'x-goalie-csrf' }),
-      withInterceptors([xsrfInterceptorFn])
+      withInterceptors([xsrfInterceptorFn, refreshTokenInterceptorFn])
     ),
     provideRouter(appRoutes, withEnabledBlockingInitialNavigation()),
     provideAnimations(),
