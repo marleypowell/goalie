@@ -25,7 +25,11 @@ import { Observable } from 'rxjs';
 import { CustomHttpParameterCodec } from '../encoder';
 
 // @ts-ignore
+import { LoginEndDto } from '../model/login-end-dto';
+// @ts-ignore
 import { LoginEndResponse } from '../model/login-end-response';
+// @ts-ignore
+import { LoginStartDto } from '../model/login-start-dto';
 // @ts-ignore
 import { LoginStartResponse } from '../model/login-start-response';
 
@@ -154,7 +158,7 @@ export class LoginService implements LoginServiceInterface {
       }
     }
 
-    let localVarPath = `/api/login/token`;
+    let localVarPath = `/oauth-agent/login/token`;
     return this.httpClient.request<string>('get', `${this.configuration.basePath}${localVarPath}`, {
       context: localVarHttpContext,
       responseType: <any>responseType_,
@@ -167,29 +171,38 @@ export class LoginService implements LoginServiceInterface {
 
   /**
    * End the login process.
+   * @param loginEndDto
    * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
    * @param reportProgress flag to report request and response progress.
    */
   public loginEnd(
+    loginEndDto: LoginEndDto,
     observe?: 'body',
     reportProgress?: boolean,
     options?: { httpHeaderAccept?: 'application/json'; context?: HttpContext }
   ): Observable<LoginEndResponse>;
   public loginEnd(
+    loginEndDto: LoginEndDto,
     observe?: 'response',
     reportProgress?: boolean,
     options?: { httpHeaderAccept?: 'application/json'; context?: HttpContext }
   ): Observable<HttpResponse<LoginEndResponse>>;
   public loginEnd(
+    loginEndDto: LoginEndDto,
     observe?: 'events',
     reportProgress?: boolean,
     options?: { httpHeaderAccept?: 'application/json'; context?: HttpContext }
   ): Observable<HttpEvent<LoginEndResponse>>;
   public loginEnd(
+    loginEndDto: LoginEndDto,
     observe: any = 'body',
     reportProgress: boolean = false,
     options?: { httpHeaderAccept?: 'application/json'; context?: HttpContext }
   ): Observable<any> {
+    if (loginEndDto === null || loginEndDto === undefined) {
+      throw new Error('Required parameter loginEndDto was null or undefined when calling loginEnd.');
+    }
+
     let localVarHeaders = this.defaultHeaders;
 
     let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
@@ -207,6 +220,13 @@ export class LoginService implements LoginServiceInterface {
       localVarHttpContext = new HttpContext();
     }
 
+    // to determine the Content-Type header
+    const consumes: string[] = ['application/json'];
+    const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+    if (httpContentTypeSelected !== undefined) {
+      localVarHeaders = localVarHeaders.set('Content-Type', httpContentTypeSelected);
+    }
+
     let responseType_: 'text' | 'json' | 'blob' = 'json';
     if (localVarHttpHeaderAcceptSelected) {
       if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
@@ -218,9 +238,10 @@ export class LoginService implements LoginServiceInterface {
       }
     }
 
-    let localVarPath = `/api/login/end`;
+    let localVarPath = `/oauth-agent/login/end`;
     return this.httpClient.request<LoginEndResponse>('post', `${this.configuration.basePath}${localVarPath}`, {
       context: localVarHttpContext,
+      body: loginEndDto,
       responseType: <any>responseType_,
       withCredentials: this.configuration.withCredentials,
       headers: localVarHeaders,
@@ -231,29 +252,38 @@ export class LoginService implements LoginServiceInterface {
 
   /**
    * Start the login process.
+   * @param loginStartDto
    * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
    * @param reportProgress flag to report request and response progress.
    */
   public loginStart(
+    loginStartDto: LoginStartDto,
     observe?: 'body',
     reportProgress?: boolean,
     options?: { httpHeaderAccept?: 'application/json'; context?: HttpContext }
   ): Observable<LoginStartResponse>;
   public loginStart(
+    loginStartDto: LoginStartDto,
     observe?: 'response',
     reportProgress?: boolean,
     options?: { httpHeaderAccept?: 'application/json'; context?: HttpContext }
   ): Observable<HttpResponse<LoginStartResponse>>;
   public loginStart(
+    loginStartDto: LoginStartDto,
     observe?: 'events',
     reportProgress?: boolean,
     options?: { httpHeaderAccept?: 'application/json'; context?: HttpContext }
   ): Observable<HttpEvent<LoginStartResponse>>;
   public loginStart(
+    loginStartDto: LoginStartDto,
     observe: any = 'body',
     reportProgress: boolean = false,
     options?: { httpHeaderAccept?: 'application/json'; context?: HttpContext }
   ): Observable<any> {
+    if (loginStartDto === null || loginStartDto === undefined) {
+      throw new Error('Required parameter loginStartDto was null or undefined when calling loginStart.');
+    }
+
     let localVarHeaders = this.defaultHeaders;
 
     let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
@@ -271,6 +301,13 @@ export class LoginService implements LoginServiceInterface {
       localVarHttpContext = new HttpContext();
     }
 
+    // to determine the Content-Type header
+    const consumes: string[] = ['application/json'];
+    const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+    if (httpContentTypeSelected !== undefined) {
+      localVarHeaders = localVarHeaders.set('Content-Type', httpContentTypeSelected);
+    }
+
     let responseType_: 'text' | 'json' | 'blob' = 'json';
     if (localVarHttpHeaderAcceptSelected) {
       if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
@@ -282,9 +319,10 @@ export class LoginService implements LoginServiceInterface {
       }
     }
 
-    let localVarPath = `/api/login/start`;
+    let localVarPath = `/oauth-agent/login/start`;
     return this.httpClient.request<LoginStartResponse>('post', `${this.configuration.basePath}${localVarPath}`, {
       context: localVarHttpContext,
+      body: loginStartDto,
       responseType: <any>responseType_,
       withCredentials: this.configuration.withCredentials,
       headers: localVarHeaders,

@@ -13,7 +13,7 @@ import { HttpHeaders } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
 
-import { LoginEndResponse, LoginStartResponse } from '../model/models';
+import { LoginEndDto, LoginEndResponse, LoginStartDto, LoginStartResponse } from '../model/models';
 
 import { Configuration } from '../configuration';
 
@@ -30,12 +30,14 @@ export interface LoginServiceInterface {
   /**
    * End the login process.
    *
+   * @param loginEndDto
    */
-  loginEnd(extraHttpRequestParams?: any): Observable<LoginEndResponse>;
+  loginEnd(loginEndDto: LoginEndDto, extraHttpRequestParams?: any): Observable<LoginEndResponse>;
 
   /**
    * Start the login process.
    *
+   * @param loginStartDto
    */
-  loginStart(extraHttpRequestParams?: any): Observable<LoginStartResponse>;
+  loginStart(loginStartDto: LoginStartDto, extraHttpRequestParams?: any): Observable<LoginStartResponse>;
 }

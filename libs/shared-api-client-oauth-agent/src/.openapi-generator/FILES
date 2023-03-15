@@ -17,7 +17,9 @@ configuration.ts
 encoder.ts
 git_push.sh
 index.ts
+model/login-end-dto.ts
 model/login-end-response.ts
+model/login-start-dto.ts
 model/login-start-response.ts
 model/logout-response.ts
 model/models.ts

@@ -55,12 +55,12 @@ In your Angular project:
 
 ```
 // without configuring providers
-import { GoalieApiModule } from '';
+import { ApiGatewayApiModule } from '';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
     imports: [
-        GoalieApiModule,
+        ApiGatewayApiModule,
         // make sure to import the HttpClientModule in the AppModule only,
         // see https://github.com/angular/angular/issues/20575
         HttpClientModule
@@ -74,7 +74,7 @@ export class AppModule {}
 
 ```
 // configuring providers
-import { GoalieApiModule, Configuration, ConfigurationParameters } from '';
+import { ApiGatewayApiModule, Configuration, ConfigurationParameters } from '';
 
 export function apiConfigFactory (): Configuration {
   const params: ConfigurationParameters = {
@@ -84,7 +84,7 @@ export function apiConfigFactory (): Configuration {
 }
 
 @NgModule({
-    imports: [ GoalieApiModule.forRoot(apiConfigFactory) ],
+    imports: [ ApiGatewayApiModule.forRoot(apiConfigFactory) ],
     declarations: [ AppComponent ],
     providers: [],
     bootstrap: [ AppComponent ]
@@ -94,10 +94,10 @@ export class AppModule {}
 
 ```
 // configuring providers with an authentication service that manages your access tokens
-import { GoalieApiModule, Configuration } from '';
+import { ApiGatewayApiModule, Configuration } from '';
 
 @NgModule({
-    imports: [ GoalieApiModule ],
+    imports: [ ApiGatewayApiModule ],
     declarations: [ AppComponent ],
     providers: [
       {
@@ -125,23 +125,23 @@ export class AppComponent {
 }
 ```
 
-Note: The GoalieApiModule is restricted to being instantiated once app wide.
+Note: The ApiGatewayApiModule is restricted to being instantiated once app wide.
 This is to ensure that all services are treated as singletons.
 
-#### Using multiple OpenAPI files / APIs / GoalieApiModules
+#### Using multiple OpenAPI files / APIs / ApiGatewayApiModules
 
-In order to use multiple `GoalieApiModules` generated from different OpenAPI files,
+In order to use multiple `ApiGatewayApiModules` generated from different OpenAPI files,
 you can create an alias name when importing the modules
 in order to avoid naming conflicts:
 
 ```
-import { GoalieApiModule } from 'my-api-path';
-import { GoalieApiModule as OtherApiModule } from 'my-other-api-path';
+import { ApiGatewayApiModule } from 'my-api-path';
+import { ApiGatewayApiModule as OtherApiModule } from 'my-other-api-path';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   imports: [
-    GoalieApiModule,
+    ApiGatewayApiModule,
     OtherApiModule,
     // make sure to import the HttpClientModule in the AppModule only,
     // see https://github.com/angular/angular/issues/20575

@@ -12,7 +12,8 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const config = app.get(ConfigService<Config>);
 
-  app.setGlobalPrefix('/api');
+  const endpointsPrefix = config.get('endpointsPrefix', { infer: true });
+  app.setGlobalPrefix(endpointsPrefix);
 
   app.enableCors({
     origin: 'http://localhost:4200',
@@ -28,7 +29,7 @@ async function bootstrap() {
 
   const port = config.get('port', { infer: true });
   await app.listen(port);
-  Logger.log(`🚀 Application is running on: http://localhost:${port}/api`);
+  Logger.log(`🚀 Application is running on: http://localhost:${port}${endpointsPrefix}`);
 }
 
 bootstrap();

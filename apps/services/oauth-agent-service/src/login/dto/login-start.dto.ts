@@ -1,3 +1,3 @@
-export interface LoginStartDto {
-  path: string;
+export class LoginStartDto {
+  public path: string;
 }

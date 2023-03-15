@@ -152,7 +152,7 @@ export class LogoutService implements LogoutServiceInterface {
       }
     }
 
-    let localVarPath = `/api/logout`;
+    let localVarPath = `/oauth-agent/logout`;
     return this.httpClient.request<LogoutResponse>('post', `${this.configuration.basePath}${localVarPath}`, {
       context: localVarHttpContext,
       responseType: <any>responseType_,

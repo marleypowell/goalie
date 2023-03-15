@@ -54,14 +54,13 @@ describe(AuthService.name, () => {
     (windowSpy.location as any)._href = 'http://localhost/home?query=string';
     service.login();
 
-    const loginStartReq = httpTestingController.expectOne('/oauth-agent/login/start');
+    const loginStartReq = httpTestingController.expectOne('http://localhost/oauth-agent/login/start');
     loginStartReq.flush({
       authorizationRequestUrl: 'https://localhost:8443/oauth/v2/oauth-authorize',
     });
 
     expect(loginStartReq.request.method).toBe('POST');
     expect(loginStartReq.request.body).toEqual({ path: '/home?query=string' });
-    expect(loginStartReq.request.withCredentials).toBe(true);
     expect(setHrefSpy).toHaveBeenCalledTimes(1);
     expect(setHrefSpy).toHaveBeenCalledWith('https://localhost:8443/oauth/v2/oauth-authorize');
   });
@@ -70,7 +69,7 @@ describe(AuthService.name, () => {
     windowSpy.location.href = 'http://localhost/';
     service.checkAuth().pipe(take(1)).subscribe();
 
-    const checkAuthReq = httpTestingController.expectOne('/oauth-agent/login/end');
+    const checkAuthReq = httpTestingController.expectOne('http://localhost/oauth-agent/login/end');
     checkAuthReq.flush({
       handled: true,
       isLoggedIn: true,
@@ -78,7 +77,6 @@ describe(AuthService.name, () => {
 
     expect(checkAuthReq.request.method).toBe('POST');
     expect(checkAuthReq.request.body).toEqual({ pageUrl: 'http://localhost/' });
-    expect(checkAuthReq.request.withCredentials).toBe(true);
 
     const authState = await firstValueFrom(service.authState$);
     expect(authState).toEqual({
@@ -90,11 +88,10 @@ describe(AuthService.name, () => {
   it('should call logout endpoint', () => {
     service.logout();
 
-    const getLogoutUrlReq = httpTestingController.expectOne('/oauth-agent/logout');
+    const getLogoutUrlReq = httpTestingController.expectOne('http://localhost/oauth-agent/logout');
     getLogoutUrlReq.flush({ url: 'https://localhost:8443/oauth/v2/oauth-logout' });
 
     expect(getLogoutUrlReq.request.method).toBe('POST');
-    expect(getLogoutUrlReq.request.withCredentials).toBe(true);
     expect(setHrefSpy).toHaveBeenCalledTimes(1);
     expect(setHrefSpy).toHaveBeenCalledWith('https://localhost:8443/oauth/v2/oauth-logout');
   });

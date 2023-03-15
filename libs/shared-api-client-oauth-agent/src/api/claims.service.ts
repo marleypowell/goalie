@@ -149,7 +149,7 @@ export class ClaimsService implements ClaimsServiceInterface {
       }
     }
 
-    let localVarPath = `/api/claims`;
+    let localVarPath = `/oauth-agent/claims`;
     return this.httpClient.request<{ [key: string]: any }>('get', `${this.configuration.basePath}${localVarPath}`, {
       context: localVarHttpContext,
       responseType: <any>responseType_,

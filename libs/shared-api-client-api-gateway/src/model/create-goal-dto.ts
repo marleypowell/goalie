@@ -14,7 +14,7 @@ export interface CreateGoalDto {
   /**
    * The user ID.
    */
-  userId: string;
+  userId?: string;
   /**
    * The name of the goal.
    */

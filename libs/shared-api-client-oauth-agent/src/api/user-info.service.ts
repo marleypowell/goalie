@@ -149,7 +149,7 @@ export class UserInfoService implements UserInfoServiceInterface {
       }
     }
 
-    let localVarPath = `/api/user-info`;
+    let localVarPath = `/oauth-agent/user-info`;
     return this.httpClient.request<{ [key: string]: any }>('get', `${this.configuration.basePath}${localVarPath}`, {
       context: localVarHttpContext,
       responseType: <any>responseType_,

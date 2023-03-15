@@ -1,3 +1,3 @@
-export interface LoginEndDto {
-  pageUrl: string;
+export class LoginEndDto {
+  public pageUrl: string;
 }

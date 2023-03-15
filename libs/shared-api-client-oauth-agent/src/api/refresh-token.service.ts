@@ -149,7 +149,7 @@ export class RefreshTokenService implements RefreshTokenServiceInterface {
       }
     }
 
-    let localVarPath = `/api/refresh-token`;
+    let localVarPath = `/oauth-agent/refresh-token`;
     return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`, {
       context: localVarHttpContext,
       responseType: <any>responseType_,

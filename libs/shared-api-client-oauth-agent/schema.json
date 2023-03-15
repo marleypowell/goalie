@@ -1,11 +1,21 @@
 {
   "openapi": "3.0.0",
   "paths": {
-    "/api/login/start": {
+    "/oauth-agent/login/start": {
       "post": {
         "operationId": "loginStart",
         "summary": "Start the login process.",
         "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginStartDto"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "The login has been successfully started.",
@@ -23,11 +33,21 @@
         ]
       }
     },
-    "/api/login/end": {
+    "/oauth-agent/login/end": {
       "post": {
         "operationId": "loginEnd",
         "summary": "End the login process.",
         "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginEndDto"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "The login has been successfully ended.",
@@ -45,7 +65,7 @@
         ]
       }
     },
-    "/api/login/token": {
+    "/oauth-agent/login/token": {
       "get": {
         "operationId": "getCsrfToken",
         "summary": "Get the CSRF token.",
@@ -67,7 +87,7 @@
         ]
       }
     },
-    "/api/logout": {
+    "/oauth-agent/logout": {
       "post": {
         "operationId": "logout",
         "summary": "Logout.",
@@ -89,7 +109,7 @@
         ]
       }
     },
-    "/api/user-info": {
+    "/oauth-agent/user-info": {
       "get": {
         "operationId": "getUserInfo",
         "summary": "Get the user info.",
@@ -112,7 +132,7 @@
         ]
       }
     },
-    "/api/refresh-token": {
+    "/oauth-agent/refresh-token": {
       "post": {
         "operationId": "refreshToken",
         "summary": "Refresh the refresh token.",
@@ -127,7 +147,7 @@
         ]
       }
     },
-    "/api/claims": {
+    "/oauth-agent/claims": {
       "get": {
         "operationId": "getClaims",
         "summary": "Get claims from the access token.",
@@ -166,6 +186,17 @@
   "servers": [],
   "components": {
     "schemas": {
+      "LoginStartDto": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "path"
+        ]
+      },
       "LoginStartResponse": {
         "type": "object",
         "properties": {
@@ -175,6 +206,17 @@
         },
         "required": [
           "authorizationRequestUrl"
+        ]
+      },
+      "LoginEndDto": {
+        "type": "object",
+        "properties": {
+          "pageUrl": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "pageUrl"
         ]
       },
       "LoginEndResponse": {

@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Goal } from '@goalie/shared/api-client-api-gateway';
+import { Goal, GoalsService } from '@goalie/shared/api-client-api-gateway';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { ToolbarModule } from 'primeng/toolbar';
@@ -54,7 +54,8 @@ export class GoalListComponent implements OnInit {
   public constructor(
     private readonly http: HttpClient,
     private readonly router: Router,
-    private readonly route: ActivatedRoute
+    private readonly route: ActivatedRoute,
+    private readonly goalsService: GoalsService
   ) {}
 
   public ngOnInit(): void {
@@ -65,7 +66,7 @@ export class GoalListComponent implements OnInit {
     const goals = this.goals$.getValue();
     const name = `My goal ${goals.length + 1}`;
 
-    this.http.post('/api/goals', { name, target: 100 }, { withCredentials: true }).subscribe(() => {
+    this.goalsService.create({ name, target: 100 }).subscribe(() => {
       this.loadGoals();
     });
   }
@@ -86,13 +87,9 @@ export class GoalListComponent implements OnInit {
   }
 
   private loadGoals(): void {
-    this.http
-      .get<Goal[]>('/api/goals/list', {
-        withCredentials: true,
-      })
-      .subscribe((res: Goal[]) => {
-        this.goals$.next(res.filter((goal) => !!goal.goalId));
-        console.log(res);
-      });
+    this.goalsService.getAll().subscribe((res: Goal[]) => {
+      this.goals$.next(res.filter((goal) => !!goal.goalId));
+      console.log(res);
+    });
   }
 }

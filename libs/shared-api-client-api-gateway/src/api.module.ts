@@ -8,17 +8,17 @@ import { Configuration } from './configuration';
   exports: [],
   providers: [],
 })
-export class GoalieApiModule {
-  public static forRoot(configurationFactory: () => Configuration): ModuleWithProviders<GoalieApiModule> {
+export class ApiGatewayApiModule {
+  public static forRoot(configurationFactory: () => Configuration): ModuleWithProviders<ApiGatewayApiModule> {
     return {
-      ngModule: GoalieApiModule,
+      ngModule: ApiGatewayApiModule,
       providers: [{ provide: Configuration, useFactory: configurationFactory }],
     };
   }
 
-  constructor(@Optional() @SkipSelf() parentModule: GoalieApiModule, @Optional() http: HttpClient) {
+  constructor(@Optional() @SkipSelf() parentModule: ApiGatewayApiModule, @Optional() http: HttpClient) {
     if (parentModule) {
-      throw new Error('GoalieApiModule is already loaded. Import in your base AppModule only.');
+      throw new Error('ApiGatewayApiModule is already loaded. Import in your base AppModule only.');
     }
     if (!http) {
       throw new Error(
