@@ -1,6 +1,6 @@
 .sidebar {
   display: grid;
-  grid-template-columns: 200px 1fr;
+  grid-template-columns: 200px minmax(500px, 1fr);
 
   p-menu {
     height: 100%;

@@ -1,6 +1,7 @@
 import { Body, Controller, Get, HttpCode, HttpStatus, Logger, Post, Req, Res } from '@nestjs/common';
 import { Request, Response } from 'express';
 import { LoginEndDto } from './dto/login-end.dto';
+import { LoginStartDto } from './dto/login-start.dto';
 import { LoginService } from './login.service';
 import { LoginEndResponse } from './models/login-end-response';
 import { LoginStartResponse } from './models/login-start-response';
@@ -13,8 +14,8 @@ export class LoginController {
 
   @Post('/start')
   @HttpCode(HttpStatus.OK)
-  public loginStart(@Res({ passthrough: true }) res: Response): LoginStartResponse {
-    const { tempLoginDataCookie, ...response } = this.loginService.loginStart();
+  public loginStart(@Res({ passthrough: true }) res: Response, @Body() payload: LoginStartDto): LoginStartResponse {
+    const { tempLoginDataCookie, ...response } = this.loginService.loginStart(payload.path);
     res.set('Set-Cookie', tempLoginDataCookie);
     return response;
   }

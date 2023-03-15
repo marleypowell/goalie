@@ -6,11 +6,18 @@ import { WINDOW } from './injection-tokens';
 export interface CheckAuthResponse {
   handled: boolean;
   isLoggedIn: boolean;
+  path?: string;
+}
+
+interface AuthState {
+  handled: boolean;
+  isLoggedIn: boolean;
+  path?: string;
 }
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private readonly authState = new BehaviorSubject<CheckAuthResponse | null>(null);
+  private readonly authState = new BehaviorSubject<AuthState>({ handled: false, isLoggedIn: false });
   public readonly authState$ = this.authState.asObservable();
 
   private readonly userInfo = new BehaviorSubject<any | null>(null);
@@ -22,7 +29,8 @@ export class AuthService {
   public constructor(@Inject(WINDOW) private readonly window: Window, private readonly http: HttpClient) {}
 
   public login(): void {
-    this.loginStart().subscribe((res: any) => {
+    const path = this.window.location.href.replace(this.window.location.origin, '');
+    this.loginStart(path).subscribe((res: any) => {
       this.window.location.href = res.authorizationRequestUrl;
     });
   }
@@ -33,27 +41,11 @@ export class AuthService {
     });
   }
 
-  public updateAuthState(): Observable<CheckAuthResponse> {
-    return this.checkAuth().pipe(
-      catchError((err) => {
-        if (err.status === HttpStatusCode.Unauthorized) {
-          return of({
-            handled: false,
-            isLoggedIn: false,
-          });
-        }
-
-        return throwError(() => err);
-      }),
-      tap((res) => {
-        this.authState.next(res);
-
-        if (res.handled) {
-          this.window.history.replaceState({}, this.window.document.title, '/');
-        }
-
-        this.updateUserInfo();
-      })
+  public checkAuth(): Observable<boolean> {
+    return this.checkAuthApi().pipe(
+      catchError(() => of({ handled: false, isLoggedIn: false })),
+      tap((res: CheckAuthResponse) => this.authState.next(res)),
+      map((res: CheckAuthResponse) => res.isLoggedIn)
     );
   }
 
@@ -79,10 +71,14 @@ export class AuthService {
     // });
   }
 
-  private loginStart(): Observable<any> {
-    return this.http.post('/oauth-agent/login/start', null, {
-      withCredentials: true,
-    });
+  private loginStart(path: string): Observable<any> {
+    return this.http.post(
+      '/oauth-agent/login/start',
+      { path },
+      {
+        withCredentials: true,
+      }
+    );
   }
 
   private getUserInfo(): Observable<any> {
@@ -97,7 +93,7 @@ export class AuthService {
     });
   }
 
-  private checkAuth(): Observable<CheckAuthResponse> {
+  private checkAuthApi(): Observable<CheckAuthResponse> {
     return this.http.post<CheckAuthResponse>(
       '/oauth-agent/login/end',
       { pageUrl: this.window.location.href },

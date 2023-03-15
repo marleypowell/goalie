@@ -6,6 +6,7 @@ import AuthorizationResponseException from '../lib/exceptions/AuthorizationRespo
 import InvalidStateException from '../lib/exceptions/InvalidStateException';
 import MissingTempLoginDataException from '../lib/exceptions/MissingTempLoginDataException';
 import { generateRandomString } from '../lib/generate-random-string';
+import { AuthState } from './models/auth-state';
 import { LoginEndResponse } from './models/login-end-response';
 import { LoginStartResponse } from './models/login-start-response';
 
@@ -13,8 +14,8 @@ import { LoginStartResponse } from './models/login-start-response';
 export class LoginService {
   public constructor(private readonly curityService: CurityService, private readonly cookieService: CookieService) {}
 
-  public loginStart(): LoginStartResponse & { tempLoginDataCookie: string } {
-    const state = generateRandomString();
+  public loginStart(path: string): LoginStartResponse & { tempLoginDataCookie: string } {
+    const state = new AuthState(path).toString();
     const codeVerifier = generateRandomString();
     return {
       authorizationRequestUrl: this.curityService.createAuthorizationRequestUrl(state, codeVerifier),
@@ -45,6 +46,8 @@ export class LoginService {
       return Promise.reject(new InvalidStateException());
     }
 
+    const authState = AuthState.fromString(data.state);
+
     const tokenResponse = await firstValueFrom(this.curityService.getToken(data.code, tempLoginData.codeVerifier));
 
     // TODO: Implement ID token validation
@@ -57,6 +60,7 @@ export class LoginService {
     return {
       isLoggedIn: true,
       handled: true,
+      path: authState.path,
       cookiesToSet,
     };
   }

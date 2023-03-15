@@ -13,17 +13,21 @@ describe(AuthService.name, () => {
     history: Partial<History>;
     document: Partial<Document>;
   };
+  let setHrefSpy: jest.Mock;
 
   beforeEach(() => {
+    setHrefSpy = jest.fn();
     windowSpy = {
       location: {
-        setHrefSpy: jest.fn(),
+        _href: '',
         set href(value: string) {
-          this.setHrefSpy(value);
+          setHrefSpy(value);
+          this._href = value;
         },
         get href() {
-          return this.setHrefSpy;
+          return this._href;
         },
+        origin: 'http://localhost',
       } as any as Location,
       history: {
         replaceState: jest.fn(),
@@ -47,6 +51,7 @@ describe(AuthService.name, () => {
   });
 
   it('should call login start endpoint', () => {
+    (windowSpy.location as any)._href = 'http://localhost/home?query=string';
     service.login();
 
     const loginStartReq = httpTestingController.expectOne('/oauth-agent/login/start');
@@ -55,14 +60,15 @@ describe(AuthService.name, () => {
     });
 
     expect(loginStartReq.request.method).toBe('POST');
+    expect(loginStartReq.request.body).toEqual({ path: '/home?query=string' });
     expect(loginStartReq.request.withCredentials).toBe(true);
-    expect(windowSpy.location.href).toHaveBeenCalledTimes(1);
-    expect(windowSpy.location.href).toHaveBeenCalledWith('https://localhost:8443/oauth/v2/oauth-authorize');
+    expect(setHrefSpy).toHaveBeenCalledTimes(1);
+    expect(setHrefSpy).toHaveBeenCalledWith('https://localhost:8443/oauth/v2/oauth-authorize');
   });
 
   it('should call login end endpoint', async () => {
-    (windowSpy.location as any).setHrefSpy = 'http://localhost/';
-    service.updateAuthState().pipe(take(1)).subscribe();
+    windowSpy.location.href = 'http://localhost/';
+    service.checkAuth().pipe(take(1)).subscribe();
 
     const checkAuthReq = httpTestingController.expectOne('/oauth-agent/login/end');
     checkAuthReq.flush({
@@ -79,21 +85,6 @@ describe(AuthService.name, () => {
       handled: true,
       isLoggedIn: true,
     });
-    expect(windowSpy.history.replaceState).toHaveBeenCalledTimes(1);
-    expect(windowSpy.history.replaceState).toHaveBeenCalledWith({}, 'Title!', '/');
-
-    const getUserInfoReq = httpTestingController.expectOne('/oauth-agent/user-info');
-    getUserInfoReq.flush({
-      name: 'John Doe',
-    });
-
-    expect(getUserInfoReq.request.method).toBe('GET');
-    expect(getUserInfoReq.request.withCredentials).toBe(true);
-
-    const userInfo = await firstValueFrom(service.userInfo$);
-    expect(userInfo).toEqual({
-      name: 'John Doe',
-    });
   });
 
   it('should call logout endpoint', () => {
@@ -104,7 +95,7 @@ describe(AuthService.name, () => {
 
     expect(getLogoutUrlReq.request.method).toBe('POST');
     expect(getLogoutUrlReq.request.withCredentials).toBe(true);
-    expect(windowSpy.location.href).toHaveBeenCalledTimes(1);
-    expect(windowSpy.location.href).toHaveBeenCalledWith('https://localhost:8443/oauth/v2/oauth-logout');
+    expect(setHrefSpy).toHaveBeenCalledTimes(1);
+    expect(setHrefSpy).toHaveBeenCalledWith('https://localhost:8443/oauth/v2/oauth-logout');
   });
 });

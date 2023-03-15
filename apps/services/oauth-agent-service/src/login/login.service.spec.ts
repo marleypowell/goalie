@@ -24,7 +24,7 @@ describe(LoginService.name, () => {
       createTempLoginDataCookie: jest.fn(() => 'tempLoginDataCookie'),
       getTempLoginData: jest.fn(() => ({
         codeVerifier: 'codeVerifier',
-        state: 'state',
+        state: 'eyJwYXRoIjoiL2hvbWUifQ',
       })),
       getTokenResponseCookies: jest.fn(() => ['accessTokenCookie', 'refreshTokenCookie']),
       getAccessTokenCookie: jest.fn(() => 'accessTokenCookie'),
@@ -61,21 +61,30 @@ describe(LoginService.name, () => {
   });
 
   it('should start the login flow', async () => {
-    const result = await service.loginStart();
+    const result = await service.loginStart('/home');
     expect(result).toEqual({
       authorizationRequestUrl: 'https://localhost:8443/oauth2/authorize',
       tempLoginDataCookie: 'tempLoginDataCookie',
     });
-    expect(cookieServiceSpy.createTempLoginDataCookie).toHaveBeenCalledTimes(1);
     expect(curityServiceSpy.createAuthorizationRequestUrl).toHaveBeenCalledTimes(1);
+    expect(curityServiceSpy.createAuthorizationRequestUrl).toHaveBeenCalledWith(
+      'eyJwYXRoIjoiL2hvbWUifQ',
+      expect.any(String)
+    );
+    expect(cookieServiceSpy.createTempLoginDataCookie).toHaveBeenCalledTimes(1);
+    expect(cookieServiceSpy.createTempLoginDataCookie).toHaveBeenCalledWith(
+      expect.any(String),
+      'eyJwYXRoIjoiL2hvbWUifQ'
+    );
   });
 
   it('should finish the login flow', async () => {
-    const pageUrl = 'http://localhost:4200/login?code=code&state=state';
+    const pageUrl = 'http://localhost:4200/login?code=code&state=eyJwYXRoIjoiL2hvbWUifQ';
     const result = await service.loginEnd(pageUrl, {});
     expect(result).toEqual({
       isLoggedIn: true,
       handled: true,
+      path: '/home',
       cookiesToSet: ['accessTokenCookie', 'refreshTokenCookie'],
     });
     expect(cookieServiceSpy.getTempLoginData).toHaveBeenCalledTimes(1);

@@ -35,9 +35,11 @@ describe('LoginController', () => {
       tempLoginDataCookie: 'tempLoginDataCookie',
     });
     const res = { set: jest.fn() } as unknown as Response;
-    expect(controller.loginStart(res)).toEqual({
+    expect(controller.loginStart(res, { path: '/home' })).toEqual({
       authorizationRequestUrl: 'authorizationRequestUrl',
     });
+    expect(loginServiceSpy.loginStart).toHaveBeenCalledTimes(1);
+    expect(loginServiceSpy.loginStart).toHaveBeenCalledWith('/home');
     expect(res.set).toHaveBeenCalledWith('Set-Cookie', 'tempLoginDataCookie');
   });
 
@@ -55,6 +57,8 @@ describe('LoginController', () => {
       handled: true,
       isLoggedIn: true,
     });
+    expect(loginServiceSpy.loginEnd).toHaveBeenCalledTimes(1);
+    expect(loginServiceSpy.loginEnd).toHaveBeenCalledWith('', { cookie1: 'cookie1' });
     expect(res.set).toHaveBeenCalledWith('Set-Cookie', ['cookie1', 'cookie2']);
   });
 });
