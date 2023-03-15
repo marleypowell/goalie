@@ -1,7 +1,7 @@
 import { GoalJsonEvent } from '../events';
 
-export interface GoalActivity {
-  created: Date;
-  type: GoalJsonEvent['type'];
-  data: GoalJsonEvent['data'];
+export class GoalActivity {
+  public created: Date;
+  public type: GoalJsonEvent['type'];
+  public data: GoalJsonEvent['data'];
 }

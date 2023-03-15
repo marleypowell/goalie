@@ -1,0 +1,17 @@
+.gitignore
+.openapi-generator-ignore
+README.md
+api.module.ts
+api/api.ts
+api/goals.service.ts
+api/goals.serviceInterface.ts
+configuration.ts
+encoder.ts
+git_push.sh
+index.ts
+model/create-goal-dto.ts
+model/goal-activity.ts
+model/goal.ts
+model/models.ts
+param.ts
+variables.ts

@@ -1,7 +1,7 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { CookieService } from '../lib/cookie.service';
 import { CurityService } from '../lib/curity.service';
-import { LogoutResponse } from './models/logout-response';
+import { LogoutResponse } from './models/logout-response.model';
 
 @Injectable()
 export class LogoutService {

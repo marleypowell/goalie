@@ -4,14 +4,15 @@
     "/api/login/start": {
       "post": {
         "operationId": "loginStart",
+        "summary": "Start the login process.",
         "parameters": [],
         "responses": {
           "200": {
-            "description": "",
+            "description": "The login has been successfully started.",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object"
+                  "$ref": "#/components/schemas/LoginStartResponse"
                 }
               }
             }
@@ -25,14 +26,15 @@
     "/api/login/end": {
       "post": {
         "operationId": "loginEnd",
+        "summary": "End the login process.",
         "parameters": [],
         "responses": {
           "200": {
-            "description": "",
+            "description": "The login has been successfully ended.",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object"
+                  "$ref": "#/components/schemas/LoginEndResponse"
                 }
               }
             }
@@ -46,10 +48,11 @@
     "/api/login/token": {
       "get": {
         "operationId": "getCsrfToken",
+        "summary": "Get the CSRF token.",
         "parameters": [],
         "responses": {
           "200": {
-            "description": "",
+            "description": "The CSRF token has been successfully retrieved.",
             "content": {
               "application/json": {
                 "schema": {
@@ -67,14 +70,15 @@
     "/api/logout": {
       "post": {
         "operationId": "logout",
+        "summary": "Logout.",
         "parameters": [],
         "responses": {
           "200": {
-            "description": "",
+            "description": "The logout response has been successfully retrieved.",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object"
+                  "$ref": "#/components/schemas/LogoutResponse"
                 }
               }
             }
@@ -88,14 +92,16 @@
     "/api/user-info": {
       "get": {
         "operationId": "getUserInfo",
+        "summary": "Get the user info.",
         "parameters": [],
         "responses": {
           "200": {
-            "description": "",
+            "description": "The user info has been successfully retrieved.",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object"
+                  "type": "object",
+                  "additionalProperties": true
                 }
               }
             }
@@ -109,10 +115,11 @@
     "/api/refresh-token": {
       "post": {
         "operationId": "refreshToken",
+        "summary": "Refresh the refresh token.",
         "parameters": [],
         "responses": {
           "204": {
-            "description": ""
+            "description": "The refresh token has been successfully refreshed."
           }
         },
         "tags": [
@@ -123,14 +130,16 @@
     "/api/claims": {
       "get": {
         "operationId": "getClaims",
+        "summary": "Get claims from the access token.",
         "parameters": [],
         "responses": {
           "200": {
-            "description": "",
+            "description": "The claims have been successfully retrieved.",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object"
+                  "type": "object",
+                  "additionalProperties": true
                 }
               }
             }
@@ -156,6 +165,47 @@
   ],
   "servers": [],
   "components": {
-    "schemas": {}
+    "schemas": {
+      "LoginStartResponse": {
+        "type": "object",
+        "properties": {
+          "authorizationRequestUrl": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "authorizationRequestUrl"
+        ]
+      },
+      "LoginEndResponse": {
+        "type": "object",
+        "properties": {
+          "isLoggedIn": {
+            "type": "boolean"
+          },
+          "handled": {
+            "type": "boolean"
+          },
+          "path": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "isLoggedIn",
+          "handled"
+        ]
+      },
+      "LogoutResponse": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "url"
+        ]
+      }
+    }
   }
 }

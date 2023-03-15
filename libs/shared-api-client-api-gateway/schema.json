@@ -33,7 +33,17 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "The list of goals has been successfully retrieved."
+            "description": "The list of goals has been successfully retrieved.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Goal"
+                  }
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -57,7 +67,14 @@
         ],
         "responses": {
           "200": {
-            "description": "The goal has been successfully retrieved."
+            "description": "The goal has been successfully retrieved.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Goal"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -81,7 +98,17 @@
         ],
         "responses": {
           "200": {
-            "description": "The goal activity has been successfully retrieved."
+            "description": "The goal activity has been successfully retrieved.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GoalActivity"
+                  }
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -169,6 +196,53 @@
           "userId",
           "name",
           "target"
+        ]
+      },
+      "Goal": {
+        "type": "object",
+        "properties": {
+          "goalId": {
+            "type": "string"
+          },
+          "userId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "target": {
+            "type": "number"
+          },
+          "goalCompleted": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "goalId",
+          "userId",
+          "name",
+          "target",
+          "goalCompleted"
+        ]
+      },
+      "GoalActivity": {
+        "type": "object",
+        "properties": {
+          "created": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "type": {
+            "type": "object"
+          },
+          "data": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "created",
+          "type",
+          "data"
         ]
       }
     }

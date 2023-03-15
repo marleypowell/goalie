@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Goal, GoalActivity } from '@goalie/shared/goals';
+import { Goal, GoalActivity } from '@goalie/shared/api-client-api-gateway';
 import { CardModule } from 'primeng/card';
 import { TimelineModule } from 'primeng/timeline';
 import { iif, map, mergeMap, Observable, of, shareReplay } from 'rxjs';

@@ -19,7 +19,10 @@ export class GoalController {
    */
   @Post()
   @UseDtoUserId()
-  @ApiResponse({ status: HttpStatus.CREATED, description: 'The goal has been successfully created.' })
+  @ApiResponse({
+    status: HttpStatus.CREATED,
+    description: 'The goal has been successfully created.',
+  })
   public create(@Body() createGoalDto: CreateGoalDto): Observable<unknown> {
     return this.service.create(createGoalDto);
   }
@@ -30,7 +33,11 @@ export class GoalController {
    * @returns the list of goals.
    */
   @Get('list')
-  @ApiResponse({ status: HttpStatus.OK, description: 'The list of goals has been successfully retrieved.' })
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'The list of goals has been successfully retrieved.',
+    type: [Goal],
+  })
   public getAll(@ReqUser() user: User): Observable<Goal[]> {
     return this.service.getAll(user.userId);
   }
@@ -42,7 +49,11 @@ export class GoalController {
    * @returns the goal.
    */
   @Get(':id')
-  @ApiResponse({ status: HttpStatus.OK, description: 'The goal has been successfully retrieved.' })
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'The goal has been successfully retrieved.',
+    type: Goal,
+  })
   public get(@ReqUser() user: User, @Param('id') id: string): Observable<Goal> {
     return this.service.get(user.userId, id);
   }
@@ -54,7 +65,11 @@ export class GoalController {
    * @returns the goal activity.
    */
   @Get(':id/activity')
-  @ApiResponse({ status: HttpStatus.OK, description: 'The goal activity has been successfully retrieved.' })
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'The goal activity has been successfully retrieved.',
+    type: [GoalActivity],
+  })
   public getActivity(@ReqUser() user: User, @Param('id') id: string): Observable<GoalActivity[]> {
     return this.service.getActivity(user.userId, id);
   }
@@ -66,7 +81,10 @@ export class GoalController {
    * @returns nothing.
    */
   @Post(':id/complete')
-  @ApiResponse({ status: HttpStatus.OK, description: 'The goal has been successfully completed.' })
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'The goal has been successfully completed.',
+  })
   public complete(@ReqUser() user: User, @Param('id') id: string): Observable<unknown> {
     return this.service.complete(user.userId, id);
   }
