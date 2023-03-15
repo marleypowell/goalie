@@ -1,4 +1,4 @@
-import { Body, Controller, HttpCode, HttpStatus, Logger, Post, Req, Res } from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, HttpStatus, Logger, Post, Req, Res } from '@nestjs/common';
 import { Request, Response } from 'express';
 import { LoginEndDto } from './dto/login-end.dto';
 import { LoginService } from './login.service';
@@ -32,5 +32,10 @@ export class LoginController {
       res.set('Set-Cookie', cookiesToSet);
     }
     return response;
+  }
+
+  @Get('/token')
+  public getCsrfToken(@Req() req): string {
+    return req.csrfToken();
   }
 }

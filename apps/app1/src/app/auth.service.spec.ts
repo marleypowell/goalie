@@ -49,7 +49,7 @@ describe(AuthService.name, () => {
   it('should call login start endpoint', () => {
     service.login();
 
-    const loginStartReq = httpTestingController.expectOne('http://localhost:3334/api/login/start');
+    const loginStartReq = httpTestingController.expectOne('/oauth-agent/login/start');
     loginStartReq.flush({
       authorizationRequestUrl: 'https://localhost:8443/oauth/v2/oauth-authorize',
     });
@@ -64,7 +64,7 @@ describe(AuthService.name, () => {
     (windowSpy.location as any).setHrefSpy = 'http://localhost/';
     service.updateAuthState().pipe(take(1)).subscribe();
 
-    const checkAuthReq = httpTestingController.expectOne('http://localhost:3334/api/login/end');
+    const checkAuthReq = httpTestingController.expectOne('/oauth-agent/login/end');
     checkAuthReq.flush({
       handled: true,
       isLoggedIn: true,
@@ -82,7 +82,7 @@ describe(AuthService.name, () => {
     expect(windowSpy.history.replaceState).toHaveBeenCalledTimes(1);
     expect(windowSpy.history.replaceState).toHaveBeenCalledWith({}, 'Title!', '/');
 
-    const getUserInfoReq = httpTestingController.expectOne('http://localhost:3334/api/user-info');
+    const getUserInfoReq = httpTestingController.expectOne('/oauth-agent/user-info');
     getUserInfoReq.flush({
       name: 'John Doe',
     });
@@ -99,7 +99,7 @@ describe(AuthService.name, () => {
   it('should call logout endpoint', () => {
     service.logout();
 
-    const getLogoutUrlReq = httpTestingController.expectOne('http://localhost:3334/api/logout');
+    const getLogoutUrlReq = httpTestingController.expectOne('/oauth-agent/logout');
     getLogoutUrlReq.flush({ url: 'https://localhost:8443/oauth/v2/oauth-logout' });
 
     expect(getLogoutUrlReq.request.method).toBe('POST');

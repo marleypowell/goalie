@@ -2,7 +2,7 @@ import { CookieSerializeOptions } from 'cookie';
 
 export interface Config {
   // Host settings
-  port: string;
+  port: number;
   endpointsPrefix: string;
   serverCertPath: string;
   serverCertPassword: string;

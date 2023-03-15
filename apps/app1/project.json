@@ -58,13 +58,14 @@
           "browserTarget": "app1:build:production"
         },
         "development": {
-          "browserTarget": "app1:build:development"
+          "browserTarget": "app1:build:development",
+          "disableHostCheck": true,
+          "port": 4200,
+          "publicHost": "http://localhost:3200"
         }
       },
       "defaultConfiguration": "development",
-      "options": {
-        "proxyConfig": "apps/app1/proxy.conf.json"
-      }
+      "options": {}
     },
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",

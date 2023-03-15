@@ -5,7 +5,6 @@ import { isAxiosError } from 'axios';
 import { catchError, map, Observable } from 'rxjs';
 import AuthorizationClientException from './exceptions/AuthorizationClientException';
 import AuthorizationServerException from './exceptions/AuthorizationServerException';
-import { OAuthAgentException } from './exceptions/OAuthAgentException';
 import { generateHash } from './generate-hash';
 import { Grant } from './grant';
 import { TokenResponse } from './token-response';

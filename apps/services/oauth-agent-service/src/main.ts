@@ -1,23 +1,20 @@
 import { Logger } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import cookieParser from 'cookie-parser';
 import { AppModule } from './app.module';
+import { Config } from './config/config.interface';
+import { CookieEncryptionService } from './lib/cookie-encryption.service';
+import { nestCsrf } from './lib/csrf.middleware';
+import { setupSwagger } from './swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  const config = app.get(ConfigService<Config>);
 
-  const globalPrefix = 'api';
-  app.setGlobalPrefix(globalPrefix);
+  const endpointsPrefix = config.get('endpointsPrefix', { infer: true });
+  app.setGlobalPrefix(endpointsPrefix);
 
-  const config = new DocumentBuilder()
-    .setTitle('oauth-agent-service')
-    .setDescription('oauth-agent-service')
-    .setVersion('1.0')
-    .addTag('oauth')
-    .build();
-  const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, document);
 
   app.enableCors({
     origin: 'http://localhost:4200',
@@ -25,9 +22,15 @@ async function bootstrap() {
   });
   app.use(cookieParser());
 
-  const port = process.env.PORT || 3334;
+  const cookieEncryptionService = app.get(CookieEncryptionService);
+  const cookieNamePrefix = config.get('cookieNamePrefix', { infer: true });
+  app.use(nestCsrf({ cookieEncryptionService, cookieName: `${cookieNamePrefix}-csrf` }));
+
+  setupSwagger(app);
+
+  const port = config.get('port', { infer: true });
   await app.listen(port);
-  Logger.log(`🚀 Application is running on: http://localhost:${port}/${globalPrefix}`);
+  Logger.log(`🚀 Application is running on: http://localhost:${port}/${endpointsPrefix.replace(/^\//, '')}`);
 }
 
 bootstrap();

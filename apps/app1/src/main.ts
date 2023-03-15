@@ -1,16 +1,20 @@
-import { HttpClientModule } from '@angular/common/http';
-import { importProvidersFrom } from '@angular/core';
+import { provideHttpClient, withInterceptors, withXsrfConfiguration } from '@angular/common/http';
 import { bootstrapApplication } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter, withEnabledBlockingInitialNavigation } from '@angular/router';
 import { AppComponent } from './app/app.component';
 import { appRoutes } from './app/app.routes';
 import { CHECK_AUTH_PROVIDER } from './app/check-auth';
+import { xsrfInterceptorFn } from './app/xsrf.interceptor';
 
 bootstrapApplication(AppComponent, {
   providers: [
+    provideHttpClient(
+      withXsrfConfiguration({ cookieName: 'goalie-csrf', headerName: 'x-goalie-csrf' }),
+      withInterceptors([xsrfInterceptorFn])
+    ),
     provideRouter(appRoutes, withEnabledBlockingInitialNavigation()),
-    importProvidersFrom(HttpClientModule, BrowserAnimationsModule),
+    provideAnimations(),
     CHECK_AUTH_PROVIDER,
   ],
 }).catch((err) => console.error(err));

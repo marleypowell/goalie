@@ -74,32 +74,32 @@ export class AuthService {
         this.userInfo.next(res);
       });
 
-    this.getClaims().subscribe((res: any) => {
-      this.claims.next(res);
-    });
+    // this.getClaims().subscribe((res: any) => {
+    //   this.claims.next(res);
+    // });
   }
 
   private loginStart(): Observable<any> {
-    return this.http.post('http://localhost:3334/api/login/start', null, {
+    return this.http.post('/oauth-agent/login/start', null, {
       withCredentials: true,
     });
   }
 
   private getUserInfo(): Observable<any> {
-    return this.http.get('http://localhost:3334/api/user-info', {
+    return this.http.get('/oauth-agent/user-info', {
       withCredentials: true,
     });
   }
 
   private getClaims(): Observable<any> {
-    return this.http.get('http://localhost:3334/api/claims', {
+    return this.http.get('/oauth-agent/claims', {
       withCredentials: true,
     });
   }
 
   private checkAuth(): Observable<CheckAuthResponse> {
     return this.http.post<CheckAuthResponse>(
-      'http://localhost:3334/api/login/end',
+      '/oauth-agent/login/end',
       { pageUrl: this.window.location.href },
       { withCredentials: true }
     );
@@ -107,7 +107,7 @@ export class AuthService {
 
   private getLogoutUrl(): Observable<string> {
     return this.http
-      .post('http://localhost:3334/api/logout', null, {
+      .post('/oauth-agent/logout', null, {
         withCredentials: true,
       })
       .pipe(map((res: any) => String(res.url)));
@@ -115,7 +115,7 @@ export class AuthService {
 
   private refreshAccessToken(): Observable<unknown> {
     return this.http
-      .post('http://localhost:3334/api/refresh-token', null, {
+      .post('/oauth-agent/refresh-token', null, {
         withCredentials: true,
       })
       .pipe(

@@ -21,7 +21,7 @@ export class CookieService {
   private readonly cookieNames = {
     tempLogin: `${this.cookieNamePrefix}-login`,
     refreshToken: `${this.cookieNamePrefix}-refresh-token`,
-    accessToken: `${this.cookieNamePrefix}-access-token`,
+    accessToken: `${this.cookieNamePrefix}-at`,
     idToken: `${this.cookieNamePrefix}-id-token`,
   };
 
