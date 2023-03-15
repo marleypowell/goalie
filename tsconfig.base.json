@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@goalie/shared/api-client-api-gateway": ["libs/shared-api-client-api-gateway/src/index.ts"],
       "@goalie/shared/goals": ["libs/shared-goals/src/index.ts"],
       "@goalie/ui": ["libs/ui/src/index.ts"]
     }

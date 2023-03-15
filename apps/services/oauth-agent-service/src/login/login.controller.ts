@@ -1,11 +1,13 @@
 import { Body, Controller, Get, HttpCode, HttpStatus, Logger, Post, Req, Res } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { Request, Response } from 'express';
 import { LoginEndDto } from './dto/login-end.dto';
 import { LoginStartDto } from './dto/login-start.dto';
 import { LoginService } from './login.service';
-import { LoginEndResponse } from './models/login-end-response';
-import { LoginStartResponse } from './models/login-start-response';
+import { LoginEndResponse } from './models/login-end-response.model';
+import { LoginStartResponse } from './models/login-start-response.model';
 
+@ApiTags('login')
 @Controller('login')
 export class LoginController {
   private readonly logger = new Logger(LoginController.name);

@@ -1,8 +1,10 @@
 import { Controller, Get, HttpCode, HttpStatus, Req } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { Request } from 'express';
 import { UserInfo } from '../lib/user-info';
 import { UserInfoService } from './user-info.service';
 
+@ApiTags('user-info')
 @Controller('user-info')
 export class UserInfoController {
   public constructor(private readonly userInfoService: UserInfoService) {}

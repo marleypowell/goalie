@@ -18,7 +18,7 @@ export class GoalsService {
     return this.client.send('createGoal', createGoalDto);
   }
 
-  public findAll(userId: string): Observable<Goal[]> {
+  public getAll(userId: string): Observable<Goal[]> {
     return this.client.send('getGoals', new GetGoalsDto(userId)).pipe(
       map((res) => {
         if (!res.data?.length) {
@@ -30,7 +30,7 @@ export class GoalsService {
     );
   }
 
-  public findOne(userId: string, id: string): Observable<Goal> {
+  public get(userId: string, id: string): Observable<Goal> {
     return this.client.send('getGoal', new GetGoalDto(userId, id)).pipe(
       map((res) => {
         if (!res.data) {
@@ -42,7 +42,7 @@ export class GoalsService {
     );
   }
 
-  public findOneActivity(userId: string, id: string): Observable<GoalActivity[]> {
+  public getActivity(userId: string, id: string): Observable<GoalActivity[]> {
     return this.client.send('getGoalActivity', new GetGoalActivityDto(userId, id)).pipe(
       map((res) => {
         if (!res.data?.length) {

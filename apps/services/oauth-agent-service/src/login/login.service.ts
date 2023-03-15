@@ -7,8 +7,8 @@ import InvalidStateException from '../lib/exceptions/InvalidStateException';
 import MissingTempLoginDataException from '../lib/exceptions/MissingTempLoginDataException';
 import { generateRandomString } from '../lib/generate-random-string';
 import { AuthState } from './models/auth-state';
-import { LoginEndResponse } from './models/login-end-response';
-import { LoginStartResponse } from './models/login-start-response';
+import { LoginEndResponse } from './models/login-end-response.model';
+import { LoginStartResponse } from './models/login-start-response.model';
 
 @Injectable()
 export class LoginService {

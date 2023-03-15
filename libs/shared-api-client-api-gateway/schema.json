@@ -1,0 +1,176 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/api/goals": {
+      "post": {
+        "operationId": "create",
+        "summary": "Create a new goal.",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateGoalDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The goal has been successfully created."
+          }
+        },
+        "tags": [
+          "goals"
+        ]
+      }
+    },
+    "/api/goals/list": {
+      "get": {
+        "operationId": "getAll",
+        "summary": "Get all goals for a user.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The list of goals has been successfully retrieved."
+          }
+        },
+        "tags": [
+          "goals"
+        ]
+      }
+    },
+    "/api/goals/{id}": {
+      "get": {
+        "operationId": "get",
+        "summary": "Get a goal for a user.",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The goal has been successfully retrieved."
+          }
+        },
+        "tags": [
+          "goals"
+        ]
+      }
+    },
+    "/api/goals/{id}/activity": {
+      "get": {
+        "operationId": "getActivity",
+        "summary": "Get a goal activity for a user.",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The goal activity has been successfully retrieved."
+          }
+        },
+        "tags": [
+          "goals"
+        ]
+      }
+    },
+    "/api/goals/{id}/complete": {
+      "post": {
+        "operationId": "complete",
+        "summary": "Complete a goal for a user.",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The goal has been successfully completed."
+          },
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "goals"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "api-gateway",
+    "description": "",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [
+    {
+      "name": "api-gateway",
+      "description": ""
+    }
+  ],
+  "servers": [],
+  "components": {
+    "securitySchemes": {
+      "token": {
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "type": "http",
+        "name": "JWT",
+        "description": "Enter JWT token",
+        "in": "header"
+      }
+    },
+    "schemas": {
+      "CreateGoalDto": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string",
+            "description": "The user ID."
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the goal."
+          },
+          "target": {
+            "type": "number",
+            "description": "The target number of times to complete the goal."
+          }
+        },
+        "required": [
+          "userId",
+          "name",
+          "target"
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "name": "shared-api-client-api-gateway",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/shared-api-client-api-gateway/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:ng-packagr-lite",
+      "outputs": ["{workspaceRoot}/dist/libs/shared-api-client-api-gateway"],
+      "options": {
+        "project": "libs/shared-api-client-api-gateway/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/shared-api-client-api-gateway/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/shared-api-client-api-gateway/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "generate-sources": {
+      "executor": "@trumbitta/nx-plugin-openapi:generate-api-lib-sources",
+      "options": {
+        "generator": "typescript-angular",
+        "sourceSpecPathOrUrl": "libs/shared-api-client-api-gateway/schema.json",
+        "additionalProperties": "packageVersion=1 --config libs/shared-api-client-api-gateway/openapi-config.yml",
+        "globalProperties": ""
+      }
+    },
+    "generate": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "nx run shared-api-client-api-gateway:generate-sources",
+          "npx prettier --write libs/shared-api-client-api-gateway/src"
+        ],
+        "parallel": false
+      }
+    }
+  },
+  "tags": ["scope:shared", "type:api-client"]
+}

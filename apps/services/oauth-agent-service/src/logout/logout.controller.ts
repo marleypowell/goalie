@@ -1,8 +1,10 @@
 import { Controller, HttpCode, HttpStatus, Post, Req, Res } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { Request, Response } from 'express';
 import { LogoutService } from './logout.service';
 import { LogoutResponse } from './models/logout-response';
 
+@ApiTags('logout')
 @Controller('logout')
 export class LogoutController {
   public constructor(private readonly logoutService: LogoutService) {}

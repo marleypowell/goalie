@@ -1,0 +1,44 @@
+{
+  "name": "shared-api-client-oauth-agent",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/shared-api-client-oauth-agent/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:ng-packagr-lite",
+      "outputs": ["{workspaceRoot}/dist/libs/shared-api-client-oauth-agent"],
+      "options": {
+        "project": "libs/shared-api-client-oauth-agent/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/shared-api-client-oauth-agent/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/shared-api-client-oauth-agent/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "generate-sources": {
+      "executor": "@trumbitta/nx-plugin-openapi:generate-api-lib-sources",
+      "options": {
+        "generator": "typescript-angular",
+        "sourceSpecPathOrUrl": "libs/shared-api-client-oauth-agent/schema.json",
+        "additionalProperties": "packageVersion=1 --config libs/shared-api-client-oauth-agent/openapi-config.yml",
+        "globalProperties": ""
+      }
+    },
+    "generate": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "nx run shared-api-client-oauth-agent:generate-sources",
+          "npx prettier --write libs/shared-api-client-oauth-agent/src"
+        ],
+        "parallel": false
+      }
+    }
+  },
+  "tags": ["scope:shared", "type:api-client"]
+}

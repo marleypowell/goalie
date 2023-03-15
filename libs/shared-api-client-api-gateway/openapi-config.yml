@@ -1,0 +1,14 @@
+# https://openapi-generator.tech/docs/usage#configuration-file
+# https://openapi-generator.tech/docs/generators/typescript-angular
+
+generatorName: typescript-angular
+
+additionalProperties:
+  apiModulePrefix: 'Goalie'
+  fileNaming: 'kebab-case'
+  supportsES6: true
+  stringEnums: false
+  enumPropertyNaming: 'camelCase'
+  withInterfaces: true
+  providedIn: 'root'
+  useSingleRequestParameter: false

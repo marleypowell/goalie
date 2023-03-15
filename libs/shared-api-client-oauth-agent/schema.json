@@ -1,0 +1,161 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/api/login/start": {
+      "post": {
+        "operationId": "loginStart",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "login"
+        ]
+      }
+    },
+    "/api/login/end": {
+      "post": {
+        "operationId": "loginEnd",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "login"
+        ]
+      }
+    },
+    "/api/login/token": {
+      "get": {
+        "operationId": "getCsrfToken",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "login"
+        ]
+      }
+    },
+    "/api/logout": {
+      "post": {
+        "operationId": "logout",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "logout"
+        ]
+      }
+    },
+    "/api/user-info": {
+      "get": {
+        "operationId": "getUserInfo",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "user-info"
+        ]
+      }
+    },
+    "/api/refresh-token": {
+      "post": {
+        "operationId": "refreshToken",
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "refresh-token"
+        ]
+      }
+    },
+    "/api/claims": {
+      "get": {
+        "operationId": "getClaims",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "claims"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "oauth-agent-service",
+    "description": "oauth-agent-service",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [
+    {
+      "name": "oauth",
+      "description": ""
+    }
+  ],
+  "servers": [],
+  "components": {
+    "schemas": {}
+  }
+}

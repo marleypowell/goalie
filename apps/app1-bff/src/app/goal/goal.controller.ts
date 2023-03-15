@@ -1,12 +1,13 @@
 import { CreateGoalDto, Goal, GoalActivity } from '@goalie/shared/goals';
 import { Body, Controller, Get, HttpStatus, Param, Post } from '@nestjs/common';
-import { ApiResponse } from '@nestjs/swagger';
+import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Observable } from 'rxjs';
 import { UseDtoUserId } from '../auth/dto-user-id.interceptor';
 import { ReqUser } from '../auth/request-user.decorator';
 import { User } from '../auth/user.model';
 import { GoalsService } from './goals.service';
 
+@ApiTags('goals')
 @Controller('goals')
 export class GoalController {
   public constructor(private readonly service: GoalsService) {}
@@ -30,8 +31,8 @@ export class GoalController {
    */
   @Get('list')
   @ApiResponse({ status: HttpStatus.OK, description: 'The list of goals has been successfully retrieved.' })
-  public findAll(@ReqUser() user: User): Observable<Goal[]> {
-    return this.service.findAll(user.userId);
+  public getAll(@ReqUser() user: User): Observable<Goal[]> {
+    return this.service.getAll(user.userId);
   }
 
   /**
@@ -42,8 +43,8 @@ export class GoalController {
    */
   @Get(':id')
   @ApiResponse({ status: HttpStatus.OK, description: 'The goal has been successfully retrieved.' })
-  public findOne(@ReqUser() user: User, @Param('id') id: string): Observable<Goal> {
-    return this.service.findOne(user.userId, id);
+  public get(@ReqUser() user: User, @Param('id') id: string): Observable<Goal> {
+    return this.service.get(user.userId, id);
   }
 
   /**
@@ -54,8 +55,8 @@ export class GoalController {
    */
   @Get(':id/activity')
   @ApiResponse({ status: HttpStatus.OK, description: 'The goal activity has been successfully retrieved.' })
-  public findOneActivity(@ReqUser() user: User, @Param('id') id: string): Observable<GoalActivity[]> {
-    return this.service.findOneActivity(user.userId, id);
+  public getActivity(@ReqUser() user: User, @Param('id') id: string): Observable<GoalActivity[]> {
+    return this.service.getActivity(user.userId, id);
   }
 
   /**
