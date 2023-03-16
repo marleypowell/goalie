@@ -77,10 +77,10 @@
     "@nrwl/linter": "15.7.2",
     "@nrwl/nest": "15.7.2",
     "@nrwl/node": "15.7.2",
-    "@nrwl/nx-cloud": "latest",
+    "@nrwl/nx-cloud": "15.2.1",
     "@nrwl/storybook": "15.7.2",
     "@nrwl/webpack": "15.7.2",
-    "@nrwl/workspace": "15.6.3",
+    "@nrwl/workspace": "15.7.2",
     "@nx-tools/nx-prisma": "4.0.3",
     "@openapitools/openapi-generator-cli": "2.5.2",
     "@schematics/angular": "15.1.0",
@@ -107,7 +107,7 @@
     "jest-environment-jsdom": "28.1.1",
     "jest-preset-angular": "12.2.3",
     "ng-packagr": "15.2.2",
-    "nx": "15.6.3",
+    "nx": "15.7.2",
     "postcss-preset-env": "8.0.1",
     "prettier": "2.6.2",
     "prettier-plugin-organize-imports": "3.2.2",
@@ -118,3 +118,4 @@
     "webpack": "^5.64.0"
   }
 }
+
