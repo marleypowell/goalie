@@ -15,7 +15,7 @@
         "polyfills": ["zone.js"],
         "tsConfig": "apps/app1/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
-        "assets": ["apps/app1/src/favicon.ico", "apps/app1/src/assets"],
+        "assets": ["apps/app1/src/favicon.ico", "apps/app1/src/assets", "apps/app1/src/staticwebapp.config.json"],
         "styles": [
           "node_modules/primeicons/primeicons.css",
           "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
