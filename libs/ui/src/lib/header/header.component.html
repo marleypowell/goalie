@@ -1,6 +1,5 @@
 <p-menubar>
   <p-button icon="pi pi-user" styleClass="p-button-rounded" (click)="profile.emit()"></p-button>
 
-  <p-button *ngIf="showLoginButton" label="Login" styleClass="p-button-primary" (click)="login.emit()"></p-button>
   <p-button *ngIf="showLogoutButton" label="Logout" styleClass="p-button-secondary" (click)="logout.emit()"></p-button>
 </p-menubar>

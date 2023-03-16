@@ -54,7 +54,7 @@ export class LoginController {
   ): Promise<LoginEndResponse> {
     const { cookiesToSet, ...response } = await this.loginService.loginEnd(payload.pageUrl, req.cookies);
     if (cookiesToSet) {
-      this.logger.debug('cookiesToSet', cookiesToSet);
+      this.logger.debug(`cookiesToSet: ${JSON.stringify(cookiesToSet)}`);
       res.set('Set-Cookie', cookiesToSet);
     }
     return response;

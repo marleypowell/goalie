@@ -6,7 +6,7 @@ import {
   LogoutService,
   RefreshTokenService,
 } from '@goalie/shared/api-client-oauth-agent';
-import { BehaviorSubject, catchError, EMPTY, map, Observable, of, tap } from 'rxjs';
+import { BehaviorSubject, catchError, EMPTY, Observable, of, tap } from 'rxjs';
 import { WINDOW } from './injection-tokens';
 
 interface AuthState {
@@ -33,8 +33,8 @@ export class AuthService {
     private readonly refreshTokenService: RefreshTokenService
   ) {}
 
-  public login(): void {
-    const path = this.window.location.href.replace(this.window.location.origin, '');
+  public login(path: string): void {
+    // const path = this.window.location.href.replace(this.window.location.origin, '');
 
     this.loginService.loginStart({ path }).subscribe((res) => {
       this.window.location.href = res.authorizationRequestUrl;
@@ -43,12 +43,14 @@ export class AuthService {
 
   public logout(): void {
     this.logoutService.logout().subscribe((res) => {
+      console.log('logout', res);
       this.window.location.href = res.url;
     });
   }
 
-  public checkAuth(): Observable<boolean> {
-    return this.loginService.loginEnd({ pageUrl: this.window.location.href }).pipe(
+  public checkAuth(pageUrl: string): Observable<LoginEndResponse> {
+    // console.log('checkAuth', this.window.location.href);
+    return this.loginService.loginEnd({ pageUrl }).pipe(
       catchError(() => of({ handled: false, isLoggedIn: false })),
       tap((res: LoginEndResponse) =>
         this.authState.next({
@@ -56,8 +58,7 @@ export class AuthService {
           isLoggedIn: res.isLoggedIn,
           path: res.path,
         })
-      ),
-      map((res: LoginEndResponse) => res.isLoggedIn)
+      )
     );
   }
 
@@ -73,7 +74,7 @@ export class AuthService {
             handled: false,
             isLoggedIn: false,
           });
-          this.login();
+          this.login('/');
         }
 
         return EMPTY;

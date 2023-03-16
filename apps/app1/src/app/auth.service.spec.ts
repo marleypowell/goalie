@@ -51,8 +51,7 @@ describe(AuthService.name, () => {
   });
 
   it('should call login start endpoint', () => {
-    (windowSpy.location as any)._href = 'http://localhost/home?query=string';
-    service.login();
+    service.login('/home?query=string');
 
     const loginStartReq = httpTestingController.expectOne('http://localhost/oauth-agent/login/start');
     loginStartReq.flush({
@@ -66,8 +65,7 @@ describe(AuthService.name, () => {
   });
 
   it('should call login end endpoint', async () => {
-    windowSpy.location.href = 'http://localhost/';
-    service.checkAuth().pipe(take(1)).subscribe();
+    service.checkAuth('http://localhost/home').pipe(take(1)).subscribe();
 
     const checkAuthReq = httpTestingController.expectOne('http://localhost/oauth-agent/login/end');
     checkAuthReq.flush({
@@ -76,7 +74,7 @@ describe(AuthService.name, () => {
     });
 
     expect(checkAuthReq.request.method).toBe('POST');
-    expect(checkAuthReq.request.body).toEqual({ pageUrl: 'http://localhost/' });
+    expect(checkAuthReq.request.body).toEqual({ pageUrl: 'http://localhost/home' });
 
     const authState = await firstValueFrom(service.authState$);
     expect(authState).toEqual({

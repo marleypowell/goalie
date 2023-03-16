@@ -15,11 +15,7 @@ import { ToolbarModule } from 'primeng/toolbar';
 export class HeaderComponent {
   @Input() public title: string | null = null;
 
-  @Input() public showLoginButton: boolean | null = false;
-
   @Input() public showLogoutButton: boolean | null = false;
-
-  @Output() public readonly login: EventEmitter<void> = new EventEmitter<void>();
 
   @Output() public readonly logout: EventEmitter<void> = new EventEmitter<void>();
 

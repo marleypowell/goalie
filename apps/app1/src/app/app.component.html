@@ -2,9 +2,7 @@
   <ng-container>
     <goalie-header
       *ngIf="authState$ | async as authState"
-      [showLoginButton]="authState.isLoggedIn !== true"
       [showLogoutButton]="authState.isLoggedIn === true"
-      (login)="login()"
       (logout)="logout()"
       (profile)="navigateToProfile()"
     ></goalie-header>
