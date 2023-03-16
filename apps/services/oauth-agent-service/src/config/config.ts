@@ -20,8 +20,8 @@ export default (): Config => ({
   // Cookie related settings
   cookieNamePrefix: process.env.COOKIE_NAME_PREFIX || 'goalie',
   encKey: process.env.COOKIE_ENCRYPTION_KEY || '',
-  trustedWebOrigins: [process.env.TRUSTED_WEB_ORIGIN || 'http://localhost:3200'],
   corsEnabled: process.env.CORS_ENABLED ? process.env.CORS_ENABLED === 'true' : true,
+  trustedWebOrigins: [process.env.TRUSTED_WEB_ORIGIN || 'http://localhost:3200'],
   cookieOptions: {
     httpOnly: true,
     sameSite: true,

@@ -12,4 +12,6 @@ export interface Config {
   port: number;
   jwtConfig: JwtConfig;
   goalsServiceOptions: GoalsServiceOptions;
+  corsEnabled: boolean;
+  trustedWebOrigins: string[];
 }

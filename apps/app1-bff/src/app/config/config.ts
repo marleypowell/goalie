@@ -14,4 +14,6 @@ export default (): Config => ({
       url: process.env.NATS_URL || 'nats://localhost:4222',
     },
   },
+  corsEnabled: process.env.CORS_ENABLED ? process.env.CORS_ENABLED === 'true' : true,
+  trustedWebOrigins: [process.env.TRUSTED_WEB_ORIGIN || 'http://localhost:3200'],
 });

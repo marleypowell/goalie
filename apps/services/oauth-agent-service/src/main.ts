@@ -14,10 +14,13 @@ async function bootstrap() {
   const endpointsPrefix = config.get<string>('endpointsPrefix', { infer: true });
   app.setGlobalPrefix(endpointsPrefix);
 
-  app.enableCors({
-    origin: 'http://localhost:4200',
-    credentials: true,
-  });
+  if (config.get<boolean>('corsEnabled', { infer: true })) {
+    app.enableCors({
+      origin: config.get<string[]>('trustedWebOrigins', { infer: true }),
+      credentials: true,
+    });
+  }
+
   app.use(cookieParser());
 
   const cookieEncryptionService = app.get(CookieEncryptionService);

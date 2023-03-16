@@ -24,7 +24,7 @@ export interface Config {
   // Secure cookie and CORS configuration
   cookieNamePrefix: string;
   encKey: string;
-  trustedWebOrigins: string[];
   corsEnabled: boolean;
+  trustedWebOrigins: string[];
   cookieOptions: CookieSerializeOptions;
 }
