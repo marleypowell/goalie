@@ -10,8 +10,21 @@ export class GetGoalActivityHandler implements IQueryHandler<GetGoalActivityQuer
 
   public constructor(private readonly goalRepository: GoalRepository) {}
 
-  public async execute(query: GetGoalActivityQuery): Promise<GoalActivity[]> {
+  public async execute(query: GetGoalActivityQuery): Promise<GoalActivity[] | null> {
     this.logger.log('received getGoalActivity query');
-    return this.goalRepository.findOneActivity(query.goalId);
+
+    const goal = await this.goalRepository.findOne(query.goalId);
+
+    if (!goal) {
+      return null;
+    }
+
+    const activity = await this.goalRepository.getGoalActivity(query.goalId);
+
+    if (!activity) {
+      return null;
+    }
+
+    return activity;
   }
 }

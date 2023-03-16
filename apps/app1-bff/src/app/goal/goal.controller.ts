@@ -22,8 +22,9 @@ export class GoalController {
   @ApiResponse({
     status: HttpStatus.CREATED,
     description: 'The goal has been successfully created.',
+    type: String,
   })
-  public create(@Body() createGoalDto: CreateGoalDto): Observable<unknown> {
+  public create(@Body() createGoalDto: CreateGoalDto): Observable<string> {
     return this.service.create(createGoalDto);
   }
 
@@ -54,8 +55,8 @@ export class GoalController {
     description: 'The goal has been successfully retrieved.',
     type: Goal,
   })
-  public get(@ReqUser() user: User, @Param('id') id: string): Observable<Goal> {
-    return this.service.get(user.userId, id);
+  public get(@ReqUser() _user: User, @Param('id') id: string): Observable<Goal> {
+    return this.service.get(id);
   }
 
   /**
@@ -70,8 +71,8 @@ export class GoalController {
     description: 'The goal activity has been successfully retrieved.',
     type: [GoalActivity],
   })
-  public getActivity(@ReqUser() user: User, @Param('id') id: string): Observable<GoalActivity[]> {
-    return this.service.getActivity(user.userId, id);
+  public getActivity(@ReqUser() _user: User, @Param('id') id: string): Observable<GoalActivity[]> {
+    return this.service.getActivity(id);
   }
 
   /**
@@ -85,7 +86,7 @@ export class GoalController {
     status: HttpStatus.OK,
     description: 'The goal has been successfully completed.',
   })
-  public complete(@ReqUser() user: User, @Param('id') id: string): Observable<unknown> {
-    return this.service.complete(user.userId, id);
+  public complete(@ReqUser() _user: User, @Param('id') id: string): Observable<unknown> {
+    return this.service.complete(id);
   }
 }

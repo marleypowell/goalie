@@ -1,15 +1,10 @@
-import { IsNotEmpty, IsString, IsUUID } from 'class-validator';
+import { IsUUID } from 'class-validator';
 
 export class GetGoalDto {
-  @IsString()
-  @IsNotEmpty()
-  public userId: string;
-
   @IsUUID()
   public goalId: string;
 
-  public constructor(userId: string, goalId: string) {
-    this.userId = userId;
+  public constructor(goalId: string) {
     this.goalId = goalId;
   }
 }

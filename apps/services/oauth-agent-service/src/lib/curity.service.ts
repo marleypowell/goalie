@@ -93,7 +93,7 @@ export class CurityService {
           }
 
           if (res.status >= 400) {
-            throw new AuthorizationClientException(Grant.AuthorizationCode, res.status, String(res.data));
+            throw new AuthorizationClientException(Grant.RefreshToken, res.status, String(res.data));
           }
 
           return res.data;

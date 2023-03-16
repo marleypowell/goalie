@@ -6,55 +6,71 @@ import {
   GetGoalsDto,
   Goal,
   GoalActivity,
+  MessageResponse,
 } from '@goalie/shared/goals';
-import { Inject, NotFoundException } from '@nestjs/common';
+import { HttpException, HttpStatus, Inject, NotFoundException } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
-import { map, Observable } from 'rxjs';
+import { map, Observable, of, tap } from 'rxjs';
 
 export class GoalsService {
   public constructor(@Inject('GOALS_SERVICE') private readonly client: ClientProxy) {}
 
-  public create(createGoalDto: CreateGoalDto): Observable<unknown> {
-    return this.client.send('createGoal', createGoalDto);
+  public create(createGoalDto: CreateGoalDto): Observable<string> {
+    return this.client.send<MessageResponse<string>>('createGoal', createGoalDto).pipe(
+      tap((res) => {
+        if (res.status !== HttpStatus.CREATED) {
+          throw new HttpException(`Error creating goal`, res.status);
+        }
+      }),
+      map((res) => res.data)
+    );
   }
 
   public getAll(userId: string): Observable<Goal[]> {
-    return this.client.send('getGoals', new GetGoalsDto(userId)).pipe(
-      map((res) => {
-        if (!res.data?.length) {
-          throw new NotFoundException('No goals found');
+    return this.client.send<MessageResponse<Goal[]>>('getGoals', new GetGoalsDto(userId)).pipe(
+      tap((res) => {
+        if (res.status !== HttpStatus.OK) {
+          throw new HttpException(`Error getting goals for user ${userId}`, res.status);
         }
-
-        return res.data;
-      })
+      }),
+      map((res) => res.data)
     );
   }
 
-  public get(userId: string, id: string): Observable<Goal> {
-    return this.client.send('getGoal', new GetGoalDto(userId, id)).pipe(
-      map((res) => {
-        if (!res.data) {
+  public get(id: string): Observable<Goal> {
+    return this.client.send<MessageResponse<Goal>>('getGoal', new GetGoalDto(id)).pipe(
+      tap((res) => {
+        if (res.status === HttpStatus.NOT_FOUND) {
           throw new NotFoundException(`Goal with id ${id} not found`);
+        } else if (res.status !== HttpStatus.OK) {
+          throw new HttpException(`Error getting goal with id ${id}`, res.status);
         }
-
-        return res.data;
-      })
+      }),
+      map((res) => res.data)
     );
   }
 
-  public getActivity(userId: string, id: string): Observable<GoalActivity[]> {
-    return this.client.send('getGoalActivity', new GetGoalActivityDto(userId, id)).pipe(
-      map((res) => {
-        if (!res.data?.length) {
+  public getActivity(id: string): Observable<GoalActivity[]> {
+    return this.client.send<MessageResponse<GoalActivity[]>>('getGoalActivity', new GetGoalActivityDto(id)).pipe(
+      tap((res) => {
+        if (res.status === HttpStatus.NOT_FOUND) {
           throw new NotFoundException(`Goal activity with id ${id} not found`);
+        } else if (res.status !== HttpStatus.OK) {
+          throw new HttpException(`Error getting goal activity with id ${id}`, res.status);
         }
-
-        return res.data;
-      })
+      }),
+      map((res) => res.data)
     );
   }
 
-  public complete(userId: string, id: string): Observable<unknown> {
-    return this.client.send('completeGoal', new CompleteGoalDto(userId, id));
+  public complete(id: string): Observable<unknown> {
+    return this.client.send<MessageResponse<string>>('completeGoal', new CompleteGoalDto(id)).pipe(
+      tap((res) => {
+        if (res.status !== HttpStatus.OK) {
+          throw new HttpException(`Error completing goal with id ${id}`, res.status);
+        }
+      }),
+      map(() => of())
+    );
   }
 }

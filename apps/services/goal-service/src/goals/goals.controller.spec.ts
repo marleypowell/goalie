@@ -1,3 +1,4 @@
+import { CqrsModule } from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
 import { GoalsController } from './goals.controller';
 
@@ -6,6 +7,7 @@ describe('GoalsController', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
+      imports: [CqrsModule],
       controllers: [GoalsController],
     }).compile();
 

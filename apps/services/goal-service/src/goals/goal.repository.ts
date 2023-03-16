@@ -85,8 +85,6 @@ export class GoalRepository {
         }
       }
 
-      console.log(goals);
-
       return goals;
     } catch (error) {
       if (error instanceof StreamNotFoundError) {
@@ -127,7 +125,7 @@ export class GoalRepository {
     }
   }
 
-  public async findOneActivity(goalId: string): Promise<GoalActivity[] | null> {
+  public async getGoalActivity(goalId: string): Promise<GoalActivity[] | null> {
     const events = eventStore.readStream<GoalJsonEvent>(goalId, {
       direction: BACKWARDS,
       fromRevision: END,
