@@ -1,8 +1,10 @@
 {
-  "name": "sea-project",
+  "name": "goalie",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "build:frontend": "nx build app1"
+  },
   "private": true,
   "dependencies": {
     "@angular/animations": "15.1.0",
@@ -104,7 +106,9 @@
     "jest": "28.1.1",
     "jest-environment-jsdom": "28.1.1",
     "jest-preset-angular": "12.2.3",
+    "ng-packagr": "15.2.2",
     "nx": "15.6.3",
+    "postcss-preset-env": "8.0.1",
     "prettier": "2.6.2",
     "prettier-plugin-organize-imports": "3.2.2",
     "prisma": "4.10.1",
