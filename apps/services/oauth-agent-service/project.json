@@ -26,7 +26,8 @@
               "dtoFileNameSuffix": [".dto.ts", ".entity.ts", ".model.ts"]
             }
           }
-        ]
+        ],
+        "generatePackageJson": true
       },
       "configurations": {
         "production": {
@@ -66,6 +67,13 @@
           "ci": true,
           "codeCoverage": true
         }
+      }
+    },
+    "docker-build": {
+      "dependsOn": ["build"],
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": ["docker build -f apps/services/oauth-agent-service/Dockerfile . -t oauth-agent-service"]
       }
     }
   },

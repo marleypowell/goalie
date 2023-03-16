@@ -15,7 +15,8 @@
         "tsConfig": "apps/services/goal-service/tsconfig.app.json",
         "assets": [],
         "isolatedConfig": true,
-        "webpackConfig": "apps/services/goal-service/webpack.config.js"
+        "webpackConfig": "apps/services/goal-service/webpack.config.js",
+        "generatePackageJson": true
       },
       "configurations": {
         "production": {
@@ -55,6 +56,13 @@
           "ci": true,
           "codeCoverage": true
         }
+      }
+    },
+    "docker-build": {
+      "dependsOn": ["build"],
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": ["docker build -f apps/services/goal-service/Dockerfile . -t goals-service"]
       }
     }
   },
