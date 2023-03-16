@@ -9,7 +9,7 @@ import { AppComponent } from './app/app.component';
 import { appRoutes } from './app/app.routes';
 import { refreshTokenInterceptorFn } from './app/interceptors/refresh-token.interceptor';
 import { xsrfInterceptorFn } from './app/interceptors/xsrf.interceptor';
-import { environment } from './environments/environments';
+import { environment } from './environments/environment';
 
 bootstrapApplication(AppComponent, {
   providers: [
