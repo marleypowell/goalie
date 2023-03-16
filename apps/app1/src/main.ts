@@ -9,6 +9,7 @@ import { AppComponent } from './app/app.component';
 import { appRoutes } from './app/app.routes';
 import { refreshTokenInterceptorFn } from './app/interceptors/refresh-token.interceptor';
 import { xsrfInterceptorFn } from './app/interceptors/xsrf.interceptor';
+import { environment } from './environments/environments';
 
 bootstrapApplication(AppComponent, {
   providers: [
@@ -19,8 +20,12 @@ bootstrapApplication(AppComponent, {
     provideRouter(appRoutes, withEnabledBlockingInitialNavigation()),
     provideAnimations(),
     importProvidersFrom(
-      ApiGatewayApiModule.forRoot(() => new ApiGatewayConfiguration({ basePath: '', withCredentials: true })),
-      OAuthAgentApiModule.forRoot(() => new OAuthAgentConfiguration({ basePath: '', withCredentials: true }))
+      ApiGatewayApiModule.forRoot(
+        () => new ApiGatewayConfiguration({ basePath: environment.basePath, withCredentials: true })
+      ),
+      OAuthAgentApiModule.forRoot(
+        () => new OAuthAgentConfiguration({ basePath: environment.basePath, withCredentials: true })
+      )
     ),
   ],
 }).catch((err) => console.error(err));
