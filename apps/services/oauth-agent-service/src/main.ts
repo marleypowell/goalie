@@ -1,3 +1,4 @@
+import { setupTracing } from '@goalie/shared/goals';
 import { Logger, RequestMethod } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
@@ -32,6 +33,7 @@ async function bootstrap() {
   app.use(nestCsrf({ cookieEncryptionService, cookieName: `${cookieNamePrefix}-csrf` }));
 
   setupSwagger(app);
+  setupTracing(app);
 
   app.enableShutdownHooks();
 

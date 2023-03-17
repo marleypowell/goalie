@@ -12,4 +12,10 @@ export default (): Config => ({
   },
   corsEnabled: process.env.CORS_ENABLED ? process.env.CORS_ENABLED === 'true' : true,
   trustedWebOrigins: [process.env.TRUSTED_WEB_ORIGIN || 'http://localhost:3200'],
+  tracingOptions: {
+    enabled: process.env.TRACING_ENABLED ? process.env.TRACING_ENABLED === 'true' : false,
+    serviceName: 'api-gateway',
+    consoleExporter: process.env.TRACING_CONSOLE_EXPORTER ? process.env.TRACING_CONSOLE_EXPORTER === 'true' : false,
+    otelExporter: process.env.TRACING_OTEL_EXPORTER ? process.env.TRACING_OTEL_EXPORTER === 'true' : false,
+  },
 });

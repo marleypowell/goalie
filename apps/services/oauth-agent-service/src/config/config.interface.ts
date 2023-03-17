@@ -1,3 +1,4 @@
+import { TracingOptions } from '@goalie/shared/goals';
 import { CookieSerializeOptions } from 'cookie';
 
 export interface Config {
@@ -28,4 +29,6 @@ export interface Config {
   corsEnabled: boolean;
   trustedWebOrigins: string[];
   cookieOptions: CookieSerializeOptions;
+
+  tracingOptions: TracingOptions;
 }

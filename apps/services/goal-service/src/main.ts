@@ -1,3 +1,4 @@
+import { setupTracing } from '@goalie/shared/goals';
 import { Logger, ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
@@ -18,6 +19,8 @@ async function bootstrap() {
     },
     { inheritAppConfig: true }
   );
+
+  setupTracing(app);
 
   app.useGlobalPipes(new ValidationPipe({ whitelist: true, transform: true }));
   app.enableShutdownHooks();

@@ -37,4 +37,11 @@ export default (): Config => ({
   tokenEndpoint: process.env.TOKEN_ENDPOINT || 'https://login.mp.exclaimertest.net/oauth/v2/oauth-token',
   userInfoEndpoint: process.env.USERINFO_ENDPOINT || 'https://login.mp.exclaimertest.net/oauth/v2/oauth-userinfo',
   curityHealthEndpoint: process.env.CURITY_HEALTH_ENDPOINT || '',
+
+  tracingOptions: {
+    enabled: process.env.TRACING_ENABLED ? process.env.TRACING_ENABLED === 'true' : false,
+    serviceName: 'oauth-agent-service',
+    consoleExporter: process.env.TRACING_CONSOLE_EXPORTER ? process.env.TRACING_CONSOLE_EXPORTER === 'true' : false,
+    otelExporter: process.env.TRACING_OTEL_EXPORTER ? process.env.TRACING_OTEL_EXPORTER === 'true' : false,
+  },
 });

@@ -9,9 +9,7 @@ import { GoalAggregate } from './models/goal.model';
 export class GoalRepository {
   private readonly logger = new Logger(GoalRepository.name);
 
-  private readonly eventStore = this.eventStoreService.getClient();
-
-  public constructor(private readonly eventStoreService: EventStoreService) {}
+  public constructor(private readonly eventStore: EventStoreService) {}
 
   public async save(aggregate: GoalAggregate) {
     this.logger.log(`saving aggregate: ${JSON.stringify(aggregate)}`);
@@ -22,7 +20,7 @@ export class GoalRepository {
       const { eventName, ...data } = event;
       this.logger.log(`saving event: ${eventName} ${JSON.stringify(data)}`);
 
-      await this.eventStore.appendToStream(
+      await this.eventStore.getClient().appendToStream(
         aggregate.getId(),
         jsonEvent({
           type: eventName,
@@ -48,7 +46,7 @@ export class GoalRepository {
   public async findAll(userId: string): Promise<Goal[] | null> {
     const goals: Goal[] = [];
 
-    const events = this.eventStore.readAll({
+    const events = this.eventStore.getClient().readAll({
       direction: FORWARDS,
       fromPosition: START,
       maxCount: 1000,
@@ -108,7 +106,7 @@ export class GoalRepository {
       goalCompleted: false,
     };
 
-    const events = this.eventStore.readStream<GoalJsonEvent>(goalId, {
+    const events = this.eventStore.getClient().readStream<GoalJsonEvent>(goalId, {
       direction: FORWARDS,
       fromRevision: START,
       maxCount: 1000,
@@ -130,7 +128,7 @@ export class GoalRepository {
   }
 
   public async getGoalActivity(goalId: string): Promise<GoalActivity[] | null> {
-    const events = this.eventStore.readStream<GoalJsonEvent>(goalId, {
+    const events = this.eventStore.getClient().readStream<GoalJsonEvent>(goalId, {
       direction: BACKWARDS,
       fromRevision: END,
       maxCount: 1000,
@@ -158,7 +156,7 @@ export class GoalRepository {
   }
 
   private async getEvents(aggregateId: string): Promise<Array<GoalJsonEvent['data']>> {
-    const eventStream = this.eventStore.readStream<GoalJsonEvent>(aggregateId, {
+    const eventStream = this.eventStore.getClient().readStream<GoalJsonEvent>(aggregateId, {
       direction: FORWARDS,
       fromRevision: START,
       maxCount: 1000,

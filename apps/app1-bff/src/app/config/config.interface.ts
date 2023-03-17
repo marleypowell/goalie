@@ -1,3 +1,4 @@
+import { TracingOptions } from '@goalie/shared/goals';
 import { NatsOptions } from '@nestjs/microservices';
 
 export interface JwtConfig {
@@ -12,4 +13,5 @@ export interface Config {
   natsOptions: NatsOptions['options'];
   corsEnabled: boolean;
   trustedWebOrigins: string[];
+  tracingOptions: TracingOptions;
 }

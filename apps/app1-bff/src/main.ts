@@ -1,3 +1,4 @@
+import { setupTracing } from '@goalie/shared/goals';
 import { Logger, RequestMethod, ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
@@ -25,6 +26,7 @@ async function bootstrap() {
   }
 
   setupSwagger(app);
+  setupTracing(app);
 
   app.enableShutdownHooks();
 
