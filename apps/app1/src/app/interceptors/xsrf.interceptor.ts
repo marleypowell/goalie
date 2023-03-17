@@ -5,9 +5,7 @@ import { mergeMap, Observable } from 'rxjs';
 const HEADER_NAME = 'x-goalie-csrf';
 
 export function xsrfInterceptorFn(req: HttpRequest<unknown>, next: HttpHandlerFn): Observable<HttpEvent<unknown>> {
-  const lcUrl = req.url.toLowerCase();
-
-  if (req.method === 'GET' || req.method === 'HEAD' || lcUrl.startsWith('http://') || lcUrl.startsWith('https://')) {
+  if (req.method === 'GET' || req.method === 'HEAD') {
     return next(req);
   }
 

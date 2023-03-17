@@ -38,13 +38,13 @@ jobs:
           yarn install
 
           yarn nx build app1-bff
-          docker build -f apps/app1-bff/Dockerfile . -t ${{ env.REGISTRY }}/api-gateway:${{ github.sha }}
-          docker push ${{ env.REGISTRY }}/api-gateway:${{ github.sha }}
+          docker build -f apps/app1-bff/Dockerfile . -t ${{ env.REGISTRY }}/api-gateway:latest
+          docker push ${{ env.REGISTRY }}/api-gateway:latest
 
           yarn nx build oauth-agent-service
-          docker build -f apps/services/oauth-agent-service/Dockerfile . -t ${{ env.REGISTRY }}/oauth-agent-service:${{ github.sha }}
-          docker push ${{ env.REGISTRY }}/oauth-agent-service:${{ github.sha }}
+          docker build -f apps/services/oauth-agent-service/Dockerfile . -t ${{ env.REGISTRY }}/oauth-agent-service:latest
+          docker push ${{ env.REGISTRY }}/oauth-agent-service:latest
 
           yarn nx build goal-service
-          docker build -f apps/services/goal-service/Dockerfile . -t ${{ env.REGISTRY }}/goals-service:${{ github.sha }}
-          docker push ${{ env.REGISTRY }}/goals-service:${{ github.sha }}
+          docker build -f apps/services/goal-service/Dockerfile . -t ${{ env.REGISTRY }}/goals-service:latest
+          docker push ${{ env.REGISTRY }}/goals-service:latest
