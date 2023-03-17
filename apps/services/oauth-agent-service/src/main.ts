@@ -8,7 +8,9 @@ import { nestCsrf } from './lib/csrf.middleware';
 import { setupSwagger } from './swagger';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, {
+    logger: ['error', 'warn', 'debug', 'log', 'verbose'],
+  });
   const config = app.get(ConfigService);
 
   const endpointsPrefix = config.get<string>('endpointsPrefix', { infer: true });

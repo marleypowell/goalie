@@ -6,7 +6,9 @@ import { AppModule } from './app.module';
 import { EventStoreService } from './common/event-store.service';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, {
+    logger: ['error', 'warn', 'debug', 'log', 'verbose'],
+  });
   const config = app.get(ConfigService);
 
   app.connectMicroservice(

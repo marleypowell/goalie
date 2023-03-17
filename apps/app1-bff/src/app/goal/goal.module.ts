@@ -10,10 +10,11 @@ import { GoalsService } from './goals.service';
   providers: [
     {
       provide: 'NATS_SERVICE',
-      useFactory: (config: ConfigService<Config>) => {
-        const options = config.get('natsOptions', { infer: true });
-        return ClientProxyFactory.create({ transport: Transport.NATS, options });
-      },
+      useFactory: (config: ConfigService<Config>) =>
+        ClientProxyFactory.create({
+          transport: Transport.NATS,
+          options: config.get('natsOptions', { infer: true }),
+        }),
       inject: [ConfigService],
     },
     GoalsService,
