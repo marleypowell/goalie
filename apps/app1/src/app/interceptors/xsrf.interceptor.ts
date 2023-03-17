@@ -9,11 +9,9 @@ export function xsrfInterceptorFn(req: HttpRequest<unknown>, next: HttpHandlerFn
   const lcUrl = req.url.toLowerCase();
 
   if (
-    req.method === 'GET' ||
-    req.method === 'HEAD' ||
-    lcUrl.startsWith('http://') ||
-    lcUrl.startsWith('https://') ||
-    (environment.basePath && !lcUrl.startsWith(environment.basePath))
+    req.method === 'GET' || req.method === 'HEAD' || environment.basePath
+      ? !lcUrl.startsWith(environment.basePath)
+      : lcUrl.startsWith('http://') || lcUrl.startsWith('https://')
   ) {
     return next(req);
   }
