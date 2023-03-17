@@ -1,5 +1,6 @@
-import { HttpClient, HttpEvent, HttpHandlerFn, HttpRequest } from '@angular/common/http';
+import { HttpEvent, HttpHandlerFn, HttpRequest } from '@angular/common/http';
 import { inject } from '@angular/core';
+import { LoginService } from '@goalie/shared/api-client-oauth-agent';
 import { mergeMap, Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 
@@ -16,20 +17,15 @@ export function xsrfInterceptorFn(req: HttpRequest<unknown>, next: HttpHandlerFn
     return next(req);
   }
 
-  const http = inject(HttpClient);
+  const loginService = inject(LoginService);
 
-  return http
-    .get('/oauth-agent/login/token', {
-      withCredentials: true,
-      responseType: 'text',
+  return loginService.getCsrfToken().pipe(
+    mergeMap((token: string) => {
+      if (token != null) {
+        req = req.clone({ headers: req.headers.set(HEADER_NAME, token) });
+      }
+
+      return next(req);
     })
-    .pipe(
-      mergeMap((token: string) => {
-        if (token != null) {
-          req = req.clone({ headers: req.headers.set(HEADER_NAME, token) });
-        }
-
-        return next(req);
-      })
-    );
+  );
 }
