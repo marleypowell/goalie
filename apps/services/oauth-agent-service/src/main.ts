@@ -1,4 +1,4 @@
-import { Logger } from '@nestjs/common';
+import { Logger, RequestMethod } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import cookieParser from 'cookie-parser';
@@ -12,7 +12,9 @@ async function bootstrap() {
   const config = app.get(ConfigService);
 
   const endpointsPrefix = config.get<string>('endpointsPrefix', { infer: true });
-  app.setGlobalPrefix(endpointsPrefix);
+  app.setGlobalPrefix(endpointsPrefix, {
+    exclude: [{ path: 'health', method: RequestMethod.GET }],
+  });
 
   if (config.get<boolean>('corsEnabled', { infer: true })) {
     app.enableCors({
@@ -29,7 +31,9 @@ async function bootstrap() {
 
   setupSwagger(app);
 
-  const port = config.get<number>('port', { infer: true });
+  app.enableShutdownHooks();
+
+  const port = config.getOrThrow<number>('port', { infer: true });
   await app.listen(port);
   Logger.log(`🚀 Application is running on: http://localhost:${port}${endpointsPrefix}`);
 }

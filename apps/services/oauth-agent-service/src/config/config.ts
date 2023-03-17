@@ -36,4 +36,5 @@ export default (): Config => ({
   logoutEndpoint: process.env.LOGOUT_ENDPOINT || 'https://login.mp.exclaimertest.net/oauth/v2/oauth-session/logout',
   tokenEndpoint: process.env.TOKEN_ENDPOINT || 'https://login.mp.exclaimertest.net/oauth/v2/oauth-token',
   userInfoEndpoint: process.env.USERINFO_ENDPOINT || 'https://login.mp.exclaimertest.net/oauth/v2/oauth-userinfo',
+  curityHealthEndpoint: process.env.CURITY_HEALTH_ENDPOINT || '',
 });

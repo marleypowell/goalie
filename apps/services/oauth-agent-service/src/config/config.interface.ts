@@ -20,6 +20,7 @@ export interface Config {
   logoutEndpoint: string;
   tokenEndpoint: string;
   userInfoEndpoint: string;
+  curityHealthEndpoint: string;
 
   // Secure cookie and CORS configuration
   cookieNamePrefix: string;

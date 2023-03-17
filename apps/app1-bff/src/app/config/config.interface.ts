@@ -1,4 +1,4 @@
-import { NatsOptions, Transport } from '@nestjs/microservices';
+import { NatsOptions } from '@nestjs/microservices';
 
 export interface JwtConfig {
   jwksUri: string;
@@ -6,12 +6,10 @@ export interface JwtConfig {
   issuer: string;
 }
 
-export type GoalsServiceOptions = NatsOptions & { transport: Transport.NATS };
-
 export interface Config {
   port: number;
   jwtConfig: JwtConfig;
-  goalsServiceOptions: GoalsServiceOptions;
+  natsOptions: NatsOptions['options'];
   corsEnabled: boolean;
   trustedWebOrigins: string[];
 }

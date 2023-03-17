@@ -13,7 +13,7 @@ import { ClientProxy } from '@nestjs/microservices';
 import { map, Observable, of, tap } from 'rxjs';
 
 export class GoalsService {
-  public constructor(@Inject('GOALS_SERVICE') private readonly client: ClientProxy) {}
+  public constructor(@Inject('NATS_SERVICE') private readonly client: ClientProxy) {}
 
   public create(createGoalDto: CreateGoalDto): Observable<string> {
     return this.client.send<MessageResponse<string>>('createGoal', createGoalDto).pipe(

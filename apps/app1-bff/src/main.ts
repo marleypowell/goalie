@@ -1,4 +1,4 @@
-import { Logger, ValidationPipe } from '@nestjs/common';
+import { Logger, RequestMethod, ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app/app.module';
@@ -9,7 +9,9 @@ async function bootstrap() {
   const config = app.get(ConfigService);
 
   const globalPrefix = 'api';
-  app.setGlobalPrefix(globalPrefix);
+  app.setGlobalPrefix(globalPrefix, {
+    exclude: [{ path: 'health', method: RequestMethod.GET }],
+  });
 
   app.useGlobalPipes(new ValidationPipe({ whitelist: true, transform: true }));
 
@@ -21,6 +23,8 @@ async function bootstrap() {
   }
 
   setupSwagger(app);
+
+  app.enableShutdownHooks();
 
   const port = process.env.PORT || 3333;
   await app.listen(port);

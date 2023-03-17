@@ -1,13 +1,17 @@
 import { BACKWARDS, END, FORWARDS, jsonEvent, START, StreamNotFoundError } from '@eventstore/db-client';
 import { Goal, GoalActivity, GoalJsonEvent } from '@goalie/shared/goals';
 import { Injectable, Logger } from '@nestjs/common';
-import { eventStore } from '../common/event-store';
+import { EventStoreService } from '../common/event-store.service';
 import { goalReducer } from './entities/goal.reducer';
 import { GoalAggregate } from './models/goal.model';
 
 @Injectable()
 export class GoalRepository {
   private readonly logger = new Logger(GoalRepository.name);
+
+  private readonly eventStore = this.eventStoreService.getClient();
+
+  public constructor(private readonly eventStoreService: EventStoreService) {}
 
   public async save(aggregate: GoalAggregate) {
     this.logger.log(`saving aggregate: ${JSON.stringify(aggregate)}`);
@@ -18,7 +22,7 @@ export class GoalRepository {
       const { eventName, ...data } = event;
       this.logger.log(`saving event: ${eventName} ${JSON.stringify(data)}`);
 
-      await eventStore.appendToStream(
+      await this.eventStore.appendToStream(
         aggregate.getId(),
         jsonEvent({
           type: eventName,
@@ -44,7 +48,7 @@ export class GoalRepository {
   public async findAll(userId: string): Promise<Goal[] | null> {
     const goals: Goal[] = [];
 
-    const events = eventStore.readAll({
+    const events = this.eventStore.readAll({
       direction: FORWARDS,
       fromPosition: START,
       maxCount: 1000,
@@ -104,7 +108,7 @@ export class GoalRepository {
       goalCompleted: false,
     };
 
-    const events = eventStore.readStream<GoalJsonEvent>(goalId, {
+    const events = this.eventStore.readStream<GoalJsonEvent>(goalId, {
       direction: FORWARDS,
       fromRevision: START,
       maxCount: 1000,
@@ -126,7 +130,7 @@ export class GoalRepository {
   }
 
   public async getGoalActivity(goalId: string): Promise<GoalActivity[] | null> {
-    const events = eventStore.readStream<GoalJsonEvent>(goalId, {
+    const events = this.eventStore.readStream<GoalJsonEvent>(goalId, {
       direction: BACKWARDS,
       fromRevision: END,
       maxCount: 1000,
@@ -154,7 +158,7 @@ export class GoalRepository {
   }
 
   private async getEvents(aggregateId: string): Promise<Array<GoalJsonEvent['data']>> {
-    const eventStream = eventStore.readStream<GoalJsonEvent>(aggregateId, {
+    const eventStream = this.eventStore.readStream<GoalJsonEvent>(aggregateId, {
       direction: FORWARDS,
       fromRevision: START,
       maxCount: 1000,
