@@ -30,4 +30,17 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
 
     return super.canActivate(context);
   }
+
+  public override handleRequest(err: any, user: any, info: any, context: ExecutionContext, status: any): any {
+    this.logger.debug(
+      `Handling request: ${JSON.stringify({
+        err: err || null,
+        user: user || null,
+        info: info || null,
+        status: status || null,
+      })}`
+    );
+
+    return super.handleRequest(err, user, info, context, status);
+  }
 }
