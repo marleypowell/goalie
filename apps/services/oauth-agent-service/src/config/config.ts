@@ -13,15 +13,15 @@ export default (): Config => ({
   // Client settings
   clientID: process.env.CLIENT_ID || '',
   clientSecret: process.env.CLIENT_SECRET || '',
-  redirectUri: process.env.REDIRECT_URI || 'http://localhost:3200',
-  postLogoutRedirectURI: process.env.POST_LOGOUT_REDIRECT_URI || 'http://localhost:3200',
+  redirectUri: process.env.REDIRECT_URI || 'http://localhost:4200',
+  postLogoutRedirectURI: process.env.POST_LOGOUT_REDIRECT_URI || 'http://localhost:4200',
   scope: process.env.SCOPE || 'openid profile goals accounts',
 
   // Cookie related settings
   cookieNamePrefix: process.env.COOKIE_NAME_PREFIX || 'goalie',
   encKey: process.env.COOKIE_ENCRYPTION_KEY || '',
   corsEnabled: process.env.CORS_ENABLED ? process.env.CORS_ENABLED === 'true' : true,
-  trustedWebOrigins: [process.env.TRUSTED_WEB_ORIGIN || 'http://localhost:3200'],
+  trustedWebOrigins: [process.env.TRUSTED_WEB_ORIGIN || 'http://localhost:4200'],
   cookieOptions: {
     httpOnly: true,
     sameSite: true,

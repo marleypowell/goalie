@@ -1,3 +1,3 @@
 export const environment = {
-  basePath: '',
+  basePath: 'http://localhost:3200',
 };
