@@ -22,6 +22,13 @@ export interface GoalsServiceInterface {
   configuration: Configuration;
 
   /**
+   * Delete a goal for a user.
+   *
+   * @param id
+   */
+  _delete(id: string, extraHttpRequestParams?: any): Observable<{}>;
+
+  /**
    * Complete a goal for a user.
    *
    * @param id
@@ -33,7 +40,7 @@ export interface GoalsServiceInterface {
    *
    * @param createGoalDto
    */
-  create(createGoalDto: CreateGoalDto, extraHttpRequestParams?: any): Observable<{}>;
+  create(createGoalDto: CreateGoalDto, extraHttpRequestParams?: any): Observable<string>;
 
   /**
    * Get a goal for a user.

@@ -1,6 +1,7 @@
 import {
   CompleteGoalDto,
   CreateGoalDto,
+  DeleteGoalDto,
   GetGoalActivityDto,
   GetGoalDto,
   GetGoalsDto,
@@ -68,6 +69,17 @@ export class GoalsService {
       tap((res) => {
         if (res.status !== HttpStatus.OK) {
           throw new HttpException(`Error completing goal with id ${id}`, res.status);
+        }
+      }),
+      map(() => of())
+    );
+  }
+
+  public delete(id: string): Observable<unknown> {
+    return this.client.send<MessageResponse<undefined>>('deleteGoal', new DeleteGoalDto(id)).pipe(
+      tap((res) => {
+        if (res.status !== HttpStatus.OK) {
+          throw new HttpException(`Error deleting goal with id ${id}`, res.status);
         }
       }),
       map(() => of())

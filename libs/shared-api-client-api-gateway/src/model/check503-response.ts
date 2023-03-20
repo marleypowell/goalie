@@ -9,12 +9,11 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { Check200ResponseInfoValue } from './check200-response-info-value';
 
-export interface Goal {
-  goalId: string;
-  userId: string;
-  name: string;
-  target: number;
-  goalCompleted: boolean;
-  goalDeleted: boolean;
+export interface Check503Response {
+  status?: string;
+  info?: { [key: string]: Check200ResponseInfoValue } | null;
+  error?: { [key: string]: Check200ResponseInfoValue } | null;
+  details?: { [key: string]: Check200ResponseInfoValue };
 }

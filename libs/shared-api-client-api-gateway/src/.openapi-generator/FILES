@@ -5,10 +5,15 @@ api.module.ts
 api/api.ts
 api/goals.service.ts
 api/goals.serviceInterface.ts
+api/health.service.ts
+api/health.serviceInterface.ts
 configuration.ts
 encoder.ts
 git_push.sh
 index.ts
+model/check200-response-info-value.ts
+model/check200-response.ts
+model/check503-response.ts
 model/create-goal-dto.ts
 model/goal-activity.ts
 model/goal.ts

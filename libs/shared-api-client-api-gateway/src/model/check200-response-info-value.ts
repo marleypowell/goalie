@@ -10,11 +10,8 @@
  * Do not edit the class manually.
  */
 
-export interface Goal {
-  goalId: string;
-  userId: string;
-  name: string;
-  target: number;
-  goalCompleted: boolean;
-  goalDeleted: boolean;
+export interface Check200ResponseInfoValue {
+  [key: string]: string | any;
+
+  status?: string;
 }

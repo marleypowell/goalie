@@ -89,4 +89,19 @@ export class GoalController {
   public complete(@ReqUser() _user: User, @Param('id') id: string): Observable<unknown> {
     return this.service.complete(id);
   }
+
+  /**
+   * Delete a goal for a user.
+   * @param user the user.
+   * @param id the goal id.
+   * @returns nothing.
+   */
+  @Post(':id/delete')
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'The goal has been successfully deleted.',
+  })
+  public delete(@ReqUser() _user: User, @Param('id') id: string): Observable<unknown> {
+    return this.service.delete(id);
+  }
 }
