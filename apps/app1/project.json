@@ -65,9 +65,7 @@
         },
         "development": {
           "browserTarget": "app1:build:development",
-          "disableHostCheck": true,
-          "port": 4200,
-          "publicHost": "http://localhost:3200"
+          "port": 4200
         }
       },
       "defaultConfiguration": "development",

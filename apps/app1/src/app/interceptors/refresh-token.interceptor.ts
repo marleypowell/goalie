@@ -11,7 +11,7 @@ export function refreshTokenInterceptorFn(
 
   return next(req).pipe(
     catchError((error) => {
-      if (error instanceof HttpErrorResponse && error.status === HttpStatusCode.Unauthorized) {
+      if (error instanceof HttpErrorResponse && (error.status === HttpStatusCode.Unauthorized || error.status === 0)) {
         return authService.refreshToken().pipe(mergeMap(() => next(req)));
       }
 

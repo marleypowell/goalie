@@ -1,0 +1,47 @@
+form {
+  padding: 1rem;
+
+  & > * {
+    margin-bottom: 1rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+
+  &__details {
+    width: 200px;
+  }
+
+  .p-fields {
+    flex: 1;
+
+    & > * {
+      margin-bottom: 1rem;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+.p-field {
+  display: flex;
+  flex-direction: column;
+
+  label {
+    margin-bottom: 0.5rem;
+  }
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1rem;
+}

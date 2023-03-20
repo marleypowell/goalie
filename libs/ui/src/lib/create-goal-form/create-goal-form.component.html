@@ -1,0 +1,44 @@
+<form [formGroup]="formGroup">
+  <div class="section">
+    <div class="section__details">
+      <h3>Objective</h3>
+    </div>
+
+    <div class="p-fields">
+      <div class="p-field">
+        <label for="name">Goal Name</label>
+        <input id="name" type="text" formControlName="name" aria-describedby="name-help" pInputText />
+        <ng-container *ngIf="formGroup.controls.name.dirty && formGroup.controls.name.errors as errors">
+          <small *ngIf="errors['required']" id="name-help" class="p-error block">Please enter a name.</small>
+        </ng-container>
+      </div>
+
+      <div class="p-field">
+        <label for="description">Description</label>
+        <textarea id="description" formControlName="description" pInputTextarea></textarea>
+      </div>
+    </div>
+  </div>
+
+  <p-divider></p-divider>
+
+  <div class="section">
+    <div class="section__details">
+      <h3>Details</h3>
+    </div>
+
+    <div class="p-fields">
+      <div class="p-field">
+        <label for="target">Target</label>
+        <input id="target" type="text" formControlName="target" aria-describedby="target-help" pInputText />
+        <ng-container *ngIf="formGroup.controls.target.dirty && formGroup.controls.target.errors as errors">
+          <small *ngIf="errors['required']" id="target-help" class="p-error block">Please enter a target.</small>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</form>
+
+<div class="actions">
+  <button pButton pRipple label="Save" icon="pi pi-plus" class="p-button-success mr-2" (click)="save()"></button>
+</div>

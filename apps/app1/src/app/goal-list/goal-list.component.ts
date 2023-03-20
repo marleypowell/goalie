@@ -1,17 +1,19 @@
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Goal, GoalsService } from '@goalie/shared/api-client-api-gateway';
+import { CreateGoalForm, CreateGoalFormComponent } from '@goalie/ui';
 import { ButtonModule } from 'primeng/button';
+import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
 import { TableModule } from 'primeng/table';
 import { ToolbarModule } from 'primeng/toolbar';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, mergeMap, take } from 'rxjs';
 
 @Component({
   selector: 'goalie-goal-list',
   standalone: true,
-  imports: [CommonModule, ButtonModule, TableModule, ToolbarModule],
+  imports: [CommonModule, ButtonModule, TableModule, ToolbarModule, DynamicDialogModule],
+  providers: [DialogService],
   templateUrl: './goal-list.component.html',
   styleUrls: ['./goal-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -52,10 +54,10 @@ export class GoalListComponent implements OnInit {
   public readonly goals$ = new BehaviorSubject<Goal[]>([]);
 
   public constructor(
-    private readonly http: HttpClient,
     private readonly router: Router,
     private readonly route: ActivatedRoute,
-    private readonly goalsService: GoalsService
+    private readonly goalsService: GoalsService,
+    private readonly dialogService: DialogService
   ) {}
 
   public ngOnInit(): void {
@@ -63,17 +65,29 @@ export class GoalListComponent implements OnInit {
   }
 
   public createGoal(): void {
-    const goals = this.goals$.getValue();
-    const name = `My goal ${goals.length + 1}`;
-
-    this.goalsService.create({ name, target: 100 }).subscribe(() => {
-      this.loadGoals();
+    const dialogRef = this.dialogService.open(CreateGoalFormComponent, {
+      header: 'New goal',
+      width: '70%',
     });
+
+    dialogRef.onClose
+      .pipe(
+        take(1),
+        mergeMap((form: CreateGoalForm) =>
+          this.goalsService.create({
+            name: form.name,
+            target: Number(form.target),
+          })
+        )
+      )
+      .subscribe(() => {
+        this.loadGoals();
+      });
   }
 
   public completeGoal(event: Event, goalId: string): void {
     event.stopPropagation();
-    this.http.post(`/api/goals/${goalId}/complete`, null, { withCredentials: true }).subscribe(() => {
+    this.goalsService.complete(goalId).subscribe(() => {
       this.loadGoals();
     });
   }
