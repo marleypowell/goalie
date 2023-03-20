@@ -5,4 +5,8 @@ export class Goal {
   public target: number;
   public goalCompleted: boolean;
   public goalDeleted: boolean;
+
+  public static get modelName(): string {
+    return 'Goal';
+  }
 }

@@ -3,13 +3,13 @@ import { Reflector } from '@nestjs/core';
 import { AuthGuard } from '@nestjs/passport';
 import { Request } from 'express';
 import { Observable } from 'rxjs';
-import { ALLOW_ANONYMOUS } from './allow-anonymous.decorator';
+import { ALLOW_ANONYMOUS_KEY } from '../decorators/allow-anonymous.decorator';
 
 @Injectable()
 export class JwtAuthGuard extends AuthGuard('jwt') {
   private readonly logger = new Logger(JwtAuthGuard.name);
 
-  public constructor(private reflector: Reflector) {
+  public constructor(protected readonly reflector: Reflector) {
     super();
   }
 
@@ -19,7 +19,7 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
       JSON.stringify(context.switchToHttp().getRequest<Request>().rawHeaders)
     );
 
-    const allowAnonymous = this.reflector.getAllAndOverride<boolean>(ALLOW_ANONYMOUS, [
+    const allowAnonymous = this.reflector.getAllAndOverride<boolean>(ALLOW_ANONYMOUS_KEY, [
       context.getHandler(),
       context.getClass(),
     ]);

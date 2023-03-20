@@ -11,7 +11,7 @@ export default (): Config => ({
     servers: process.env.NATS_URL || 'nats://localhost:4222',
   },
   corsEnabled: process.env.CORS_ENABLED ? process.env.CORS_ENABLED === 'true' : true,
-  trustedWebOrigins: [process.env.TRUSTED_WEB_ORIGIN || 'http://localhost:4200'],
+  trustedWebOrigins: [process.env.TRUSTED_WEB_ORIGIN || 'http://localhost:3200'],
   tracingOptions: {
     enabled: process.env.TRACING_ENABLED ? process.env.TRACING_ENABLED === 'true' : false,
     serviceName: 'api-gateway',
