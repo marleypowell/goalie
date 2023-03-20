@@ -1,5 +1,5 @@
 import { Body, Controller, Get, HttpCode, HttpStatus, Logger, Post, Req, Res } from '@nestjs/common';
-import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiProduces, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Request, Response } from 'express';
 import { LoginEndDto } from './dto/login-end.dto';
 import { LoginStartDto } from './dto/login-start.dto';
@@ -68,6 +68,7 @@ export class LoginController {
   @Get('/token')
   @HttpCode(HttpStatus.OK)
   @ApiResponse({ status: HttpStatus.OK, description: 'The CSRF token has been successfully retrieved.', type: String })
+  @ApiProduces('text/plain')
   public getCsrfToken(@Req() req): string {
     return req.csrfToken();
   }

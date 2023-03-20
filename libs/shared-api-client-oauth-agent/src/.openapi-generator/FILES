@@ -5,6 +5,8 @@ api.module.ts
 api/api.ts
 api/claims.service.ts
 api/claims.serviceInterface.ts
+api/health.service.ts
+api/health.serviceInterface.ts
 api/login.service.ts
 api/login.serviceInterface.ts
 api/logout.service.ts
@@ -17,6 +19,9 @@ configuration.ts
 encoder.ts
 git_push.sh
 index.ts
+model/check200-response-info-value.ts
+model/check200-response.ts
+model/check503-response.ts
 model/login-end-dto.ts
 model/login-end-response.ts
 model/login-start-dto.ts

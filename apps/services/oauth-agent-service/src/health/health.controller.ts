@@ -1,8 +1,10 @@
 import { Controller, Get } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import { ApiTags } from '@nestjs/swagger';
 import { HealthCheck, HealthCheckResult, HealthCheckService, HttpHealthIndicator } from '@nestjs/terminus';
 import { Config } from '../config/config.interface';
 
+@ApiTags('health')
 @Controller('health')
 export class HealthController {
   public constructor(

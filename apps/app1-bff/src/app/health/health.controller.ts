@@ -1,10 +1,12 @@
 import { Controller, Get } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { Transport } from '@nestjs/microservices';
+import { ApiTags } from '@nestjs/swagger';
 import { HealthCheck, HealthCheckResult, HealthCheckService, MicroserviceHealthIndicator } from '@nestjs/terminus';
 import { AllowAnonymous } from '../auth/allow-anonymous.decorator';
 import { Config } from '../config/config.interface';
 
+@ApiTags('health')
 @Controller('health')
 export class HealthController {
   public constructor(
