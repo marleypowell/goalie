@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { AuthService } from '../auth.service';
+import { ClaimsService, UserInfoService } from '@goalie/shared/api-client-oauth-agent';
 
 @Component({
   selector: 'goalie-profile',
@@ -11,11 +11,12 @@ import { AuthService } from '../auth.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProfileComponent {
-  public readonly authState$ = this.authService.authState$;
+  public readonly userInfo$ = this.userInfoService.getUserInfo();
 
-  public readonly userInfo$ = this.authService.userInfo$;
+  public readonly claims$ = this.claimsService.getClaims();
 
-  public readonly claims$ = this.authService.claims$;
-
-  public constructor(private readonly authService: AuthService) {}
+  public constructor(
+    private readonly userInfoService: UserInfoService,
+    private readonly claimsService: ClaimsService
+  ) {}
 }
