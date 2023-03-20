@@ -8,7 +8,7 @@ const HEADER_NAME = 'x-goalie-csrf';
 export function xsrfInterceptorFn(req: HttpRequest<unknown>, next: HttpHandlerFn): Observable<HttpEvent<unknown>> {
   const lcUrl = req.url.toLowerCase();
 
-  if (req.method === 'GET' || req.method === 'HEAD' || !lcUrl.includes('/api') || !lcUrl.includes('/oauth-agent')) {
+  if (req.method === 'GET' || req.method === 'HEAD' || !(lcUrl.includes('/api') || lcUrl.includes('/oauth-agent'))) {
     return next(req);
   }
 
