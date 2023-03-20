@@ -4,4 +4,5 @@ export class Goal {
   public name: string;
   public target: number;
   public goalCompleted: boolean;
+  public goalDeleted: boolean;
 }

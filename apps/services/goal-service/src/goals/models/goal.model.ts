@@ -1,4 +1,4 @@
-import { CreateGoalCommand, GoalCompletedEvent, GoalCreatedEvent } from '@goalie/shared/goals';
+import { CreateGoalCommand, GoalCompletedEvent, GoalCreatedEvent, GoalDeletedEvent } from '@goalie/shared/goals';
 import { Logger } from '@nestjs/common';
 import { AggregateRoot, IEvent } from '@nestjs/cqrs';
 
@@ -8,6 +8,7 @@ export class GoalAggregate extends AggregateRoot {
   private name: string;
   private target: number;
   private completed: boolean;
+  private deleted: boolean;
 
   private readonly logger = new Logger(GoalAggregate.name);
 
@@ -31,6 +32,10 @@ export class GoalAggregate extends AggregateRoot {
     return this.completed;
   }
 
+  public getDeleted(): boolean {
+    return this.deleted;
+  }
+
   public createGoal(command: CreateGoalCommand): void {
     this.logger.log(`createGoal: ${JSON.stringify(command)}`);
     const event = new GoalCreatedEvent(command);
@@ -48,6 +53,10 @@ export class GoalAggregate extends AggregateRoot {
   public completeGoal(): void {
     this.logger.log(`completeGoal`);
 
+    if (this.deleted) {
+      throw new Error('Goal is deleted');
+    }
+
     if (this.completed) {
       throw new Error('Goal already completed');
     }
@@ -59,6 +68,22 @@ export class GoalAggregate extends AggregateRoot {
   public onGoalCompletedEvent(event: GoalCompletedEvent): void {
     this.logger.log(`onGoalCompletedEvent ${JSON.stringify(event)}`);
     this.completed = true;
+  }
+
+  public deleteGoal(): void {
+    this.logger.log(`deleteGoal`);
+
+    if (this.deleted) {
+      throw new Error('Goal already deleted');
+    }
+
+    const event = new GoalDeletedEvent();
+    this.apply(event);
+  }
+
+  public onGoalDeletedEvent(event: GoalDeletedEvent): void {
+    this.logger.log(`onGoalDeletedEvent ${JSON.stringify(event)}`);
+    this.deleted = true;
   }
 
   public getUncommittedEvents(): Array<IEvent & { eventName: string }> {

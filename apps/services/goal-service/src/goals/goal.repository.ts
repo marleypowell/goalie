@@ -74,6 +74,7 @@ export class GoalRepository {
               name: data.name,
               target: data.target,
               goalCompleted: false,
+              goalDeleted: false,
             });
             break;
           }
@@ -81,6 +82,13 @@ export class GoalRepository {
             const goal = goals.find((g) => g.goalId == resolvedEvent.event.streamId);
             if (goal) {
               goal.goalCompleted = true;
+            }
+            break;
+          }
+          case 'GoalDeletedEvent': {
+            const goal = goals.find((g) => g.goalId == resolvedEvent.event.streamId);
+            if (goal) {
+              goal.goalDeleted = true;
             }
             break;
           }
@@ -104,6 +112,7 @@ export class GoalRepository {
       name: '',
       target: 0,
       goalCompleted: false,
+      goalDeleted: false,
     };
 
     const events = this.eventStore.getClient().readStream<GoalJsonEvent>(goalId, {

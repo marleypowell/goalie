@@ -3,6 +3,8 @@ import {
   CompleteGoalDto,
   CreateGoalCommand,
   CreateGoalDto,
+  DeleteGoalCommand,
+  DeleteGoalDto,
   GetGoalActivityDto,
   GetGoalDto,
   GetGoalsDto,
@@ -37,6 +39,14 @@ export class GoalsController {
     const command = new CompleteGoalCommand(payload);
     await this.commandBus.execute(command);
     return new MessageResponse(HttpStatus.OK, 'SUCCESS');
+  }
+
+  @MessagePattern('deleteGoal')
+  public async delete(@Payload() payload: DeleteGoalDto): Promise<MessageResponse<undefined>> {
+    this.logger.log(`Received deleteGoal command: ${JSON.stringify(payload)}`);
+    const command = new DeleteGoalCommand(payload);
+    await this.commandBus.execute(command);
+    return new MessageResponse(HttpStatus.OK, undefined);
   }
 
   @MessagePattern('getGoals')
