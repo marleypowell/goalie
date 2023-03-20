@@ -3,7 +3,9 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Goal, GoalsService } from '@goalie/shared/api-client-api-gateway';
 import { CreateGoalForm, CreateGoalFormComponent } from '@goalie/ui';
+import { ConfirmationService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
 import { TableModule } from 'primeng/table';
 import { ToolbarModule } from 'primeng/toolbar';
@@ -12,8 +14,8 @@ import { BehaviorSubject, mergeMap, take } from 'rxjs';
 @Component({
   selector: 'goalie-goal-list',
   standalone: true,
-  imports: [CommonModule, ButtonModule, TableModule, ToolbarModule, DynamicDialogModule],
-  providers: [DialogService],
+  imports: [CommonModule, ButtonModule, TableModule, ToolbarModule, DynamicDialogModule, ConfirmDialogModule],
+  providers: [DialogService, ConfirmationService],
   templateUrl: './goal-list.component.html',
   styleUrls: ['./goal-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -57,7 +59,8 @@ export class GoalListComponent implements OnInit {
     private readonly router: Router,
     private readonly route: ActivatedRoute,
     private readonly goalsService: GoalsService,
-    private readonly dialogService: DialogService
+    private readonly dialogService: DialogService,
+    private readonly confirmationService: ConfirmationService
   ) {}
 
   public ngOnInit(): void {
@@ -89,6 +92,19 @@ export class GoalListComponent implements OnInit {
     event.stopPropagation();
     this.goalsService.complete(goalId).subscribe(() => {
       this.loadGoals();
+    });
+  }
+
+  public deleteGoal(event: Event, goalId: string): void {
+    event.stopPropagation();
+
+    this.confirmationService.confirm({
+      message: 'Are you sure that you want to delete this goal?',
+      accept: () => {
+        this.goalsService._delete(goalId).subscribe(() => {
+          this.loadGoals();
+        });
+      },
     });
   }
 

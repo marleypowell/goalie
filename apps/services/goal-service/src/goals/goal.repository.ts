@@ -43,7 +43,7 @@ export class GoalRepository {
     return aggregate;
   }
 
-  public async findAll(userId: string): Promise<Goal[] | null> {
+  public async findAll(): Promise<Goal[] | null> {
     const goals: Goal[] = [];
 
     const events = this.eventStore.getClient().readAll({
@@ -61,10 +61,6 @@ export class GoalRepository {
 
         const event = resolvedEvent.event;
         const data: any = event.data;
-
-        if (!data.userId || data.userId !== userId) {
-          continue;
-        }
 
         switch (event?.type) {
           case 'GoalCreatedEvent': {
