@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "build:frontend": "nx build app1"
+    "build:frontend": "nx build frontend"
   },
   "private": true,
   "dependencies": {

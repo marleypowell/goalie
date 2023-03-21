@@ -37,8 +37,8 @@ jobs:
         run: |
           yarn install
 
-          yarn nx build app1-bff
-          docker build -f apps/app1-bff/Dockerfile . -t ${{ env.REGISTRY }}/api-gateway:latest
+          yarn nx build api-gateway
+          docker build -f apps/api-gateway/Dockerfile . -t ${{ env.REGISTRY }}/api-gateway:latest
           docker push ${{ env.REGISTRY }}/api-gateway:latest
 
           yarn nx build oauth-agent-service

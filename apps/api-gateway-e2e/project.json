@@ -1,12 +1,12 @@
 {
-  "name": "app1-bff-e2e",
+  "name": "api-gateway-e2e",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "targets": {
     "e2e": {
       "executor": "@nrwl/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{e2eProjectRoot}"],
       "options": {
-        "jestConfig": "apps/app1-bff-e2e/jest.config.ts",
+        "jestConfig": "apps/api-gateway-e2e/jest.config.ts",
         "passWithNoTests": true
       }
     },
@@ -14,9 +14,9 @@
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["apps/app1-bff-e2e/**/*.{js,ts}"]
+        "lintFilePatterns": ["apps/api-gateway-e2e/**/*.{js,ts}"]
       }
     }
   },
-  "implicitDependencies": ["app1-bff"]
+  "implicitDependencies": ["api-gateway"]
 }
