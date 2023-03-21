@@ -2,7 +2,7 @@ import { subject } from '@casl/ability';
 import { CaslAbility, UseCasl, UseDtoUserId } from '@goalie/nest-auth';
 import { CreateGoalDto, Goal, GoalActivity } from '@goalie/shared/goals';
 import { Body, Controller, ForbiddenException, Get, HttpStatus, Param, Post } from '@nestjs/common';
-import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiProduces, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { map, mergeMap, Observable } from 'rxjs';
 import { AppAbility } from '../auth/casl/casl.factory';
 import { ReqUser } from '../auth/request-user.decorator';
@@ -27,6 +27,7 @@ export class GoalController {
     description: 'The goal has been successfully created.',
     type: String,
   })
+  @ApiProduces('text/plain')
   public create(@CaslAbility() ability: AppAbility, @Body() createGoalDto: CreateGoalDto): Observable<string> {
     if (ability.cannot('create', 'Goal')) {
       throw new ForbiddenException(`You are not allowed to create a goal.`);

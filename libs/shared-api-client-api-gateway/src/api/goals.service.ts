@@ -275,25 +275,25 @@ export class GoalsService implements GoalsServiceInterface {
     createGoalDto: CreateGoalDto,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: { httpHeaderAccept?: 'application/json'; context?: HttpContext }
+    options?: { httpHeaderAccept?: 'text/plain'; context?: HttpContext }
   ): Observable<string>;
   public create(
     createGoalDto: CreateGoalDto,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: { httpHeaderAccept?: 'application/json'; context?: HttpContext }
+    options?: { httpHeaderAccept?: 'text/plain'; context?: HttpContext }
   ): Observable<HttpResponse<string>>;
   public create(
     createGoalDto: CreateGoalDto,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: { httpHeaderAccept?: 'application/json'; context?: HttpContext }
+    options?: { httpHeaderAccept?: 'text/plain'; context?: HttpContext }
   ): Observable<HttpEvent<string>>;
   public create(
     createGoalDto: CreateGoalDto,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: { httpHeaderAccept?: 'application/json'; context?: HttpContext }
+    options?: { httpHeaderAccept?: 'text/plain'; context?: HttpContext }
   ): Observable<any> {
     if (createGoalDto === null || createGoalDto === undefined) {
       throw new Error('Required parameter createGoalDto was null or undefined when calling create.');
@@ -304,7 +304,7 @@ export class GoalsService implements GoalsServiceInterface {
     let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
     if (localVarHttpHeaderAcceptSelected === undefined) {
       // to determine the Accept header
-      const httpHeaderAccepts: string[] = ['application/json'];
+      const httpHeaderAccepts: string[] = ['text/plain'];
       localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
     }
     if (localVarHttpHeaderAcceptSelected !== undefined) {

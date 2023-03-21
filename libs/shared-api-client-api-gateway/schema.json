@@ -182,7 +182,7 @@
           "201": {
             "description": "The goal has been successfully created.",
             "content": {
-              "application/json": {
+              "text/plain": {
                 "schema": {
                   "type": "string"
                 }
