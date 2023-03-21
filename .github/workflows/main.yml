@@ -45,6 +45,6 @@ jobs:
           docker build -f apps/services/oauth-agent-service/Dockerfile . -t ${{ env.REGISTRY }}/oauth-agent-service:latest
           docker push ${{ env.REGISTRY }}/oauth-agent-service:latest
 
-          yarn nx build goal-service
-          docker build -f apps/services/goal-service/Dockerfile . -t ${{ env.REGISTRY }}/goals-service:latest
+          yarn nx build goals-service
+          docker build -f apps/services/goals-service/Dockerfile . -t ${{ env.REGISTRY }}/goals-service:latest
           docker push ${{ env.REGISTRY }}/goals-service:latest

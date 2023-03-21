@@ -1,13 +1,13 @@
 import { DeleteGoalCommand } from '@goalie/shared/goals';
 import { Logger } from '@nestjs/common';
 import { CommandHandler, EventPublisher, ICommandHandler } from '@nestjs/cqrs';
-import { GoalRepository } from '../goal.repository';
+import { GoalsRepository } from '../goals.repository';
 
 @CommandHandler(DeleteGoalCommand)
 export class DeleteGoalHandler implements ICommandHandler<DeleteGoalCommand> {
   private readonly logger = new Logger(DeleteGoalHandler.name);
 
-  public constructor(private readonly publisher: EventPublisher, private readonly goalRepository: GoalRepository) {}
+  public constructor(private readonly publisher: EventPublisher, private readonly goalRepository: GoalsRepository) {}
 
   public async execute(command: DeleteGoalCommand): Promise<void> {
     this.logger.log(`received deleteGoal command: ${JSON.stringify(command)}`);

@@ -4,12 +4,12 @@ import { ConfigService } from '@nestjs/config';
 import { ClientProxyFactory, Transport } from '@nestjs/microservices';
 import { AppCaslFactory } from '../auth/casl/casl.factory';
 import { Config } from '../config/config.interface';
-import { GoalController } from './goal.controller';
+import { GoalsController } from './goals.controller';
 import { GoalsService } from './goals.service';
 
 @Module({
   imports: [NestAuthModule.register(AppCaslFactory)],
-  controllers: [GoalController],
+  controllers: [GoalsController],
   providers: [
     {
       provide: 'NATS_SERVICE',
@@ -23,4 +23,4 @@ import { GoalsService } from './goals.service';
     GoalsService,
   ],
 })
-export class GoalModule {}
+export class GoalsModule {}

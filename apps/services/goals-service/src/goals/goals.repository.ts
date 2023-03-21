@@ -6,8 +6,8 @@ import { goalReducer } from './entities/goal.reducer';
 import { GoalAggregate } from './models/goal.model';
 
 @Injectable()
-export class GoalRepository {
-  private readonly logger = new Logger(GoalRepository.name);
+export class GoalsRepository {
+  private readonly logger = new Logger(GoalsRepository.name);
 
   public constructor(private readonly eventStore: EventStoreService) {}
 

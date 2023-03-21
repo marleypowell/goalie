@@ -1,13 +1,13 @@
 {
-  "name": "goal-service-e2e",
+  "name": "goals-service-e2e",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-  "implicitDependencies": ["goal-service"],
+  "implicitDependencies": ["goals-service"],
   "targets": {
     "e2e": {
       "executor": "@nrwl/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{e2eProjectRoot}"],
       "options": {
-        "jestConfig": "apps/services/goal-service-e2e/jest.config.ts",
+        "jestConfig": "apps/services/goals-service-e2e/jest.config.ts",
         "passWithNoTests": true
       }
     },
@@ -15,7 +15,7 @@
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["apps/services/goal-service-e2e/**/*.{js,ts}"]
+        "lintFilePatterns": ["apps/services/goals-service-e2e/**/*.{js,ts}"]
       }
     }
   }

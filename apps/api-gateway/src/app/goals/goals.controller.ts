@@ -12,7 +12,7 @@ import { GoalsService } from './goals.service';
 @UseCasl()
 @ApiTags('goals')
 @Controller('goals')
-export class GoalController {
+export class GoalsController {
   public constructor(private readonly service: GoalsService) {}
 
   /**

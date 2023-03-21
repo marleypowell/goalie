@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import config from './config/config';
-import { GoalModule } from './goal/goal.module';
+import { GoalsModule } from './goals/goals.module';
 import { HealthModule } from './health/health.module';
 
 @Module({
@@ -10,7 +10,7 @@ import { HealthModule } from './health/health.module';
     ConfigModule.forRoot({ isGlobal: true, envFilePath: ['.env.local', '.env'], load: [config] }),
     HealthModule,
     AuthModule,
-    GoalModule,
+    GoalsModule,
   ],
 })
 export class AppModule {}

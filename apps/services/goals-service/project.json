@@ -1,7 +1,7 @@
 {
-  "name": "goal-service",
+  "name": "goals-service",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/services/goal-service/src",
+  "sourceRoot": "apps/services/goals-service/src",
   "projectType": "application",
   "targets": {
     "build": {
@@ -10,12 +10,12 @@
       "options": {
         "target": "node",
         "compiler": "tsc",
-        "outputPath": "dist/apps/services/goal-service",
-        "main": "apps/services/goal-service/src/main.ts",
-        "tsConfig": "apps/services/goal-service/tsconfig.app.json",
+        "outputPath": "dist/apps/services/goals-service",
+        "main": "apps/services/goals-service/src/main.ts",
+        "tsConfig": "apps/services/goals-service/tsconfig.app.json",
         "assets": [],
         "isolatedConfig": true,
-        "webpackConfig": "apps/services/goal-service/webpack.config.js",
+        "webpackConfig": "apps/services/goals-service/webpack.config.js",
         "generatePackageJson": true
       },
       "configurations": {
@@ -29,11 +29,11 @@
     "serve": {
       "executor": "@nrwl/js:node",
       "options": {
-        "buildTarget": "goal-service:build"
+        "buildTarget": "goals-service:build"
       },
       "configurations": {
         "production": {
-          "buildTarget": "goal-service:build:production"
+          "buildTarget": "goals-service:build:production"
         }
       }
     },
@@ -41,14 +41,14 @@
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["apps/services/goal-service/**/*.ts"]
+        "lintFilePatterns": ["apps/services/goals-service/**/*.ts"]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "apps/services/goal-service/jest.config.ts",
+        "jestConfig": "apps/services/goals-service/jest.config.ts",
         "passWithNoTests": true
       },
       "configurations": {
@@ -62,7 +62,7 @@
       "dependsOn": ["build"],
       "executor": "nx:run-commands",
       "options": {
-        "commands": ["docker build -f apps/services/goal-service/Dockerfile . -t goals-service"]
+        "commands": ["docker build -f apps/services/goals-service/Dockerfile . -t goals-service"]
       }
     }
   },
