@@ -4,8 +4,8 @@ export class User {
   public readonly roles: string[];
 
   public constructor(payload: Record<string, any>) {
-    this.userId = String(payload['sub']);
-    this.username = String(payload['username']);
+    this.userId = String(payload['account_id']);
+    this.username = String(payload['preferred_username']);
     this.roles = Array.from<string>(payload['roles']);
   }
 
