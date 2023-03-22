@@ -1,4 +1,5 @@
 import { TracingOptions } from '@goalie/shared/goals';
+import { NatsOptions } from '@nestjs/microservices';
 
 export interface AuthOptions {
   clientId: string;
@@ -10,4 +11,5 @@ export interface Config {
   tracingOptions: TracingOptions;
   accountsClientOptions: AuthOptions;
   userManagementEndpoint: string;
+  natsOptions: NatsOptions['options'];
 }

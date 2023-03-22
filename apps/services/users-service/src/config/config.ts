@@ -14,4 +14,7 @@ export default (): Config => ({
   },
   userManagementEndpoint:
     process.env.USER_MANAGEMENT_ENDPOINT || 'https://login.mp.exclaimertest.net/user-management/graphql/admin',
+  natsOptions: {
+    servers: process.env.NATS_URL || 'nats://localhost:4222',
+  },
 });
