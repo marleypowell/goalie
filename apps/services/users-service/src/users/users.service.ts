@@ -5,91 +5,7 @@ import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { firstValueFrom, map } from 'rxjs';
 import { Config } from '../config/config.interface';
-
-const allParts = gql`
-  fragment AllParts on Account {
-    id
-    active
-    addresses {
-      country
-      display
-      formatted
-      locality
-      postalCode
-      primary
-      region
-      streetAddress
-      type
-    }
-    displayName
-    emails {
-      display
-      primary
-      type
-      value
-    }
-    entitlements {
-      display
-      primary
-      type
-      value
-    }
-    externalId
-    groups {
-      display
-      primary
-      type
-      value
-    }
-    ims {
-      display
-      primary
-      type
-      value
-    }
-    locale
-    meta {
-      created
-      lastModified
-      resourceType
-      timeZoneId
-    }
-    name {
-      familyName
-      formatted
-      givenName
-      honorificPrefix
-      honorificSuffix
-      middleName
-    }
-    nickName
-    phoneNumbers {
-      display
-      primary
-      type
-      value
-    }
-    photos {
-      display
-      primary
-      type
-      value
-    }
-    preferredLanguage
-    profileUrl
-    roles {
-      display
-      primary
-      type
-      value
-    }
-    timeZone
-    title
-    userName
-    userType
-    website
-  }
-`;
+import { AccountInfoFields } from './AccountInfo.gql';
 
 @Injectable()
 export class UsersService {
@@ -100,13 +16,13 @@ export class UsersService {
   public async findAll() {
     const result = await this.client.query({
       query: gql`
-        ${allParts}
+        ${AccountInfoFields}
 
         query getAccounts {
           accounts {
             edges {
               node {
-                ...AllParts
+                ...AccountInfoFields
               }
             }
           }
@@ -120,11 +36,11 @@ export class UsersService {
   public async findOne(id: string) {
     const result = await this.client.query({
       query: gql`
-        ${allParts}
+        ${AccountInfoFields}
 
         query findAccount($id: String!) {
           accountById(accountId: $id) {
-            ...AllParts
+            ...AccountInfoFields
           }
         }
       `,

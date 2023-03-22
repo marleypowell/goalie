@@ -5,14 +5,14 @@ import { UsersService } from './users.service';
 export class UsersResolver {
   public constructor(private readonly usersService: UsersService) {}
 
-  @Query('users')
-  public findAll() {
-    return this.usersService.findAll();
+  @Query('user')
+  public user(@Args('id') id: string) {
+    return this.usersService.findOne(id);
   }
 
-  @Query('user')
-  public findOne(@Args('id') id: string) {
-    return this.usersService.findOne(id);
+  @Query('users')
+  public users() {
+    return this.usersService.findAll();
   }
 
   @ResolveReference()
