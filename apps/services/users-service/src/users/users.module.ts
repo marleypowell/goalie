@@ -6,6 +6,7 @@ import { CqrsModule } from '@nestjs/cqrs';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloClientService } from '../common/apollo-client.service';
 import { QueryHandlers } from './queries';
+import { UsersController } from './users.controller';
 import { UsersResolver } from './users.resolver';
 
 @Module({
@@ -19,6 +20,7 @@ import { UsersResolver } from './users.resolver';
     HttpModule,
     CqrsModule,
   ],
+  controllers: [UsersController],
   providers: [UsersResolver, ApolloClientService, ...QueryHandlers],
 })
 export class UsersModule {}
