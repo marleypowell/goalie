@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@goalie/angular-graphql": ["libs/angular-graphql/src/index.ts"],
       "@goalie/common": ["libs/common/src/index.ts"],
       "@goalie/nest-auth": ["libs/nest-auth/src/index.ts"],
       "@goalie/shared/api-client-api-gateway": ["libs/shared-api-client-api-gateway/src/index.ts"],
