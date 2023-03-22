@@ -8,4 +8,10 @@ export default (): Config => ({
     consoleExporter: process.env.TRACING_CONSOLE_EXPORTER ? process.env.TRACING_CONSOLE_EXPORTER === 'true' : false,
     otelExporter: process.env.TRACING_OTEL_EXPORTER ? process.env.TRACING_OTEL_EXPORTER === 'true' : false,
   },
+  accountsClientOptions: {
+    clientId: process.env.ACCOUNTS_CLIENT_ID || '',
+    clientSecret: process.env.ACCOUNTS_CLIENT_SECRET || '',
+  },
+  userManagementEndpoint:
+    process.env.USER_MANAGEMENT_ENDPOINT || 'https://login.mp.exclaimertest.net/user-management/graphql/admin',
 });

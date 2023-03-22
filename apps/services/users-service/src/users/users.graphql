@@ -1,0 +1,70 @@
+extend schema
+  @link(url: "https://specs.apollo.dev/federation/v2.3",
+    import: ["@key", "@shareable", "@provides", "@external", "@tag"])
+
+type Query {
+  users: [User]
+  user(id: ID!): User
+}
+
+type User @key(fields: "id") {
+  id: ID!
+  active: Boolean!
+  addresses: [Address]
+  displayName: String
+  emails: [StringMultiValuedValue]
+  entitlements: [StringMultiValuedValue]
+  externalId: String
+  groups: [StringMultiValuedValue]
+  ims: [StringMultiValuedValue]
+  locale: String
+  meta: Meta
+  name: Name
+  nickName: String
+  phoneNumbers: [StringMultiValuedValue]
+  photos: [StringMultiValuedValue]
+  preferredLanguage: String
+  profileUrl: String
+  roles: [StringMultiValuedValue]
+  timeZone: String
+  title: String
+  userName: String!
+  userType: String
+  website: String
+}
+
+type Address {
+  country: String
+  display: String
+  formatted: String
+  locality: String
+  postalCode: String
+  primary: Boolean
+  region: String
+  streetAddress: String
+  type: String
+}
+
+type StringMultiValuedValue {
+  display: String
+  primary: Boolean
+  type: String
+  value: String
+}
+
+type Meta {
+  created: Float!
+  lastModified: Float!
+  resourceType: String!
+  timeZoneId: String
+}
+
+type Name {
+  familyName: String
+  formatted: String
+  givenName: String
+  honorificPrefix: String
+  honorificSuffix: String
+  middleName: String
+}
+
