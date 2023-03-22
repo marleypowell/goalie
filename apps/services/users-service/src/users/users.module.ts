@@ -2,9 +2,11 @@ import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin
 import { ApolloFederationDriver, ApolloFederationDriverConfig } from '@nestjs/apollo';
 import { HttpModule } from '@nestjs/axios';
 import { Module } from '@nestjs/common';
+import { CqrsModule } from '@nestjs/cqrs';
 import { GraphQLModule } from '@nestjs/graphql';
+import { ApolloClientService } from '../common/apollo-client.service';
+import { QueryHandlers } from './queries';
 import { UsersResolver } from './users.resolver';
-import { UsersService } from './users.service';
 
 @Module({
   imports: [
@@ -15,7 +17,8 @@ import { UsersService } from './users.service';
       plugins: [ApolloServerPluginLandingPageLocalDefault()],
     }),
     HttpModule,
+    CqrsModule,
   ],
-  providers: [UsersResolver, UsersService],
+  providers: [UsersResolver, ApolloClientService, ...QueryHandlers],
 })
 export class UsersModule {}

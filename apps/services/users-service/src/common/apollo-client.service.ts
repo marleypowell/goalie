@@ -1,60 +1,16 @@
-import { ApolloClient, createHttpLink, gql, InMemoryCache, NormalizedCacheObject } from '@apollo/client';
+import { ApolloClient, createHttpLink, InMemoryCache, NormalizedCacheObject } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { firstValueFrom, map } from 'rxjs';
 import { Config } from '../config/config.interface';
-import { AccountInfoFields } from './AccountInfo.gql';
 
 @Injectable()
-export class UsersService {
-  private readonly client: ApolloClient<NormalizedCacheObject> = this.createApolloClient();
-
+export class ApolloClientService {
   public constructor(private readonly config: ConfigService<Config>, private readonly http: HttpService) {}
 
-  public async findAll() {
-    const result = await this.client.query({
-      query: gql`
-        ${AccountInfoFields}
-
-        query getAccounts {
-          accounts {
-            edges {
-              node {
-                ...AccountInfoFields
-              }
-            }
-          }
-        }
-      `,
-    });
-
-    return result.data.accounts.edges.map((edge) => edge.node);
-  }
-
-  public async findOne(id: string) {
-    const result = await this.client.query({
-      query: gql`
-        ${AccountInfoFields}
-
-        query findAccount($id: String!) {
-          accountById(accountId: $id) {
-            ...AccountInfoFields
-          }
-        }
-      `,
-      variables: {
-        id,
-      },
-    });
-
-    const { __typename, ...user } = result.data.accountById;
-
-    return user;
-  }
-
-  private createApolloClient(): ApolloClient<NormalizedCacheObject> {
+  public createApolloClient(): ApolloClient<NormalizedCacheObject> {
     const asyncAuthLink = setContext(async () => {
       const accessToken = await this.getAccessToken();
       return {
@@ -78,15 +34,15 @@ export class UsersService {
               data: options.body,
             })
             .pipe(
-              map((response) => {
-                console.log(response.data);
-                return {
-                  headers: response.headers,
-                  status: response.status,
-                  statusText: response.statusText,
-                  text: () => Promise.resolve(JSON.stringify(response.data)),
-                } as any;
-              })
+              map(
+                (response) =>
+                  ({
+                    headers: response.headers,
+                    status: response.status,
+                    statusText: response.statusText,
+                    text: () => Promise.resolve(JSON.stringify(response.data)),
+                  } as any)
+              )
             )
         ),
     });

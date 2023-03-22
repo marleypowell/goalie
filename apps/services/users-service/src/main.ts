@@ -2,6 +2,7 @@ import { setupTracing } from '@goalie/shared/goals';
 import { Logger, ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
+import { NatsOptions, Transport } from '@nestjs/microservices';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
@@ -10,10 +11,20 @@ async function bootstrap() {
   });
   const config = app.get(ConfigService);
 
+  app.connectMicroservice(
+    {
+      transport: Transport.NATS,
+      options: config.get<NatsOptions['options']>('natsOptions', { infer: true }),
+    },
+    { inheritAppConfig: true }
+  );
+
   setupTracing(app);
 
   app.useGlobalPipes(new ValidationPipe({ whitelist: true, transform: true }));
   app.enableShutdownHooks();
+
+  await app.startAllMicroservices();
 
   const port = config.getOrThrow<number>('port', { infer: true });
   await app.listen(port);
