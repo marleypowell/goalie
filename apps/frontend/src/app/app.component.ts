@@ -2,12 +2,13 @@ import { AsyncPipe, JsonPipe, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { HeaderComponent } from '@goalie/ui';
+import { ToastModule } from 'primeng/toast';
 import { AuthService } from './auth.service';
 import { SidebarComponent } from './sidebar/sidebar.component';
 
 @Component({
   standalone: true,
-  imports: [RouterModule, HeaderComponent, AsyncPipe, JsonPipe, NgIf, SidebarComponent],
+  imports: [RouterModule, HeaderComponent, AsyncPipe, JsonPipe, NgIf, SidebarComponent, ToastModule],
   selector: 'goalie-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],

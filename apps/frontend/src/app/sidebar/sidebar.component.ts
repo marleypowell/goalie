@@ -20,7 +20,23 @@ export class SidebarComponent {
   @Output() public readonly closed = new EventEmitter<boolean>();
 
   public readonly links: MenuItem[] = [
-    { label: 'Home', icon: PrimeIcons.HOME, routerLink: 'home', routerLinkActiveOptions: 'link-active' },
-    { label: 'Goals', icon: PrimeIcons.FLAG, routerLink: 'goals', routerLinkActiveOptions: 'link-active' },
+    {
+      label: 'Home',
+      icon: PrimeIcons.HOME,
+      routerLink: 'home',
+      routerLinkActiveOptions: 'link-active',
+    },
+    {
+      label: 'My Goals',
+      icon: PrimeIcons.FLAG,
+      routerLink: 'goals',
+      routerLinkActiveOptions: 'link-active',
+    },
+    {
+      label: `People's Goals`,
+      icon: PrimeIcons.FLAG,
+      routerLink: 'peoples-goals',
+      routerLinkActiveOptions: 'link-active',
+    },
   ];
 }

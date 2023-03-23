@@ -1,26 +1,25 @@
 import { CommonModule } from '@angular/common';
 import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Goal, GoalsService } from '@goalie/shared/api-client-api-gateway';
-import { CreateGoalForm, UserGoalsComponent } from '@goalie/ui';
+import { GoalsTableComponent } from '@goalie/ui';
 import { MessageService } from 'primeng/api';
-import { ToastModule } from 'primeng/toast';
 import { BehaviorSubject, catchError, throwError } from 'rxjs';
+
 @Component({
-  selector: 'goalie-goal-list',
+  selector: 'goalie-peoples-goals',
   standalone: true,
-  imports: [CommonModule, UserGoalsComponent, ToastModule],
-  templateUrl: './goal-list.component.html',
-  styleUrls: ['./goal-list.component.scss'],
+  imports: [CommonModule, GoalsTableComponent],
+  templateUrl: './peoples-goals.component.html',
+  styleUrls: ['./peoples-goals.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GoalListComponent implements OnInit {
+export class PeoplesGoalsComponent implements OnInit {
   public readonly goals$ = new BehaviorSubject<Goal[]>([]);
 
   public constructor(
     private readonly router: Router,
-    private readonly route: ActivatedRoute,
     private readonly goalsService: GoalsService,
     private readonly messageService: MessageService
   ) {}
@@ -29,25 +28,20 @@ export class GoalListComponent implements OnInit {
     this.loadGoals();
   }
 
-  public createGoal(form: CreateGoalForm): void {
-    this.goalsService
-      .create({
-        name: form.name,
-        target: Number(form.target),
-      })
-      .subscribe(() => {
-        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Goal created' });
-        this.loadGoals();
-      });
+  public deleteGoal(goalId: string): void {
+    this.goalsService._delete(goalId).subscribe(() => {
+      this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Goal deleted' });
+      this.loadGoals();
+    });
   }
 
   public navigateToGoal(goalId: string): void {
-    this.router.navigate([goalId], { relativeTo: this.route });
+    this.router.navigate(['goals', goalId]);
   }
 
   private loadGoals(): void {
     this.goalsService
-      .getUsersGoals('me')
+      .getAll()
       .pipe(
         catchError((err) => {
           if (err instanceof HttpErrorResponse && err.status === HttpStatusCode.Forbidden) {

@@ -3,6 +3,7 @@ import { authGuard } from './auth/auth.guard';
 import { GoalListComponent } from './goal-list/goal-list.component';
 import { GoalComponent } from './goal/goal.component';
 import { HomeComponent } from './home/home.component';
+import { PeoplesGoalsComponent } from './peoples-goals/peoples-goals.component';
 import { ProfileComponent } from './profile/profile.component';
 
 export const appRoutes: Route[] = [
@@ -11,4 +12,5 @@ export const appRoutes: Route[] = [
   { path: 'profile', component: ProfileComponent, canActivate: [authGuard] },
   { path: 'goals', component: GoalListComponent, canActivate: [authGuard] },
   { path: 'goals/:id', component: GoalComponent, canActivate: [authGuard] },
+  { path: 'peoples-goals', component: PeoplesGoalsComponent, canActivate: [authGuard] },
 ];

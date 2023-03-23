@@ -1,0 +1,5 @@
+<goalie-goals-table
+  [goals]="goals$ | async"
+  (goalClicked)="navigateToGoal($event)"
+  (deleteGoal)="deleteGoal($event)"
+></goalie-goals-table>

@@ -1,0 +1,14 @@
+:host {
+  ::ng-deep {
+    .p-avatar.p-avatar-lg {
+      font-size: 1rem;
+      font-weight: 600;
+    }
+  }
+
+  .goals-table {
+    &__avatar {
+      cursor: pointer;
+    }
+  }
+}
