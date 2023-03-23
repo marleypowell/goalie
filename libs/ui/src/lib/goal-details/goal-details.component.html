@@ -1,0 +1,54 @@
+<div class="goal-details">
+  <p-card *ngIf="goal" styleClass="goal-details__info-card">
+    <ng-template pTemplate="title">
+      <span class="p-card-title"><i class="pi pi-flag-fill"></i> {{ goal.name }}</span>
+    </ng-template>
+
+    <div class="goal-details__info">
+      <div class="goal-details__info-item">
+        <span class="goal-details__info-item-title">Owner</span>
+        <span class="goal-details__info-item-owner" [title]="$any(goal).user.name.formatted">
+          <p-avatar
+            *ngIf="$any(goal).user | userAvatar as avatar"
+            class="goals-table__avatar"
+            shape="circle"
+            [label]="avatar.initials"
+            [style]="{ 'background-color': avatar.color, color: '#ffffff', 'font-size': '0.9rem' }"
+          ></p-avatar>
+          {{ $any(goal).user.name.formatted }}
+        </span>
+      </div>
+
+      <div class="goal-details__info-item">
+        <span class="goal-details__info-item-title">Created</span>
+        <span>{{ goal.createdAt | date: 'd/MM/yy hh:mm' }}</span>
+      </div>
+
+      <div class="goal-details__info-item">
+        <span class="goal-details__info-item-title">Target</span>
+        <span>{{ goal.target }}</span>
+      </div>
+
+      <div class="goal-details__info-item">
+        <span class="goal-details__info-item-title">Completed</span>
+        <span>{{ goal.goalCompleted }}</span>
+      </div>
+    </div>
+
+    <ng-template pTemplate="footer">
+      <p-button
+        label="Complete"
+        icon="pi pi-check"
+        styleClass="p-button-sm p-button-success"
+        [disabled]="goal.goalCompleted"
+      ></p-button>
+
+      <p-menu #menu [model]="moreButtonItems" [popup]="true"></p-menu>
+      <p-button label="More" icon="pi pi-bars" styleClass="p-button-sm" (click)="menu.toggle($event)"></p-button>
+    </ng-template>
+  </p-card>
+
+  <p-card styleClass="goal-details__activity-card" header="Activity">
+    <goalie-goal-activity [activity]="goalActivity"></goalie-goal-activity>
+  </p-card>
+</div>

@@ -1,0 +1,29 @@
+<div *ngIf="goals" class="goals-list">
+  <div
+    *ngFor="let goal of goals; trackBy: trackByGoalId"
+    class="goals-list__item-container"
+    (click)="goalClicked.emit(goal.goalId)"
+  >
+    <div class="goals-list__item">
+      <i class="pi pi-flag item item__icon" style="font-size: 1rem"></i>
+
+      <span class="item item__name">{{ goal.name }}</span>
+
+      <div title="Progress" class="item item__progress">
+        <span>{{ goal.goalCompleted ? 100 : 0 }}%</span>
+        <p-progressBar
+          [value]="goal.goalCompleted ? 100 : 0"
+          [showValue]="false"
+          [style]="{ height: '10px' }"
+        ></p-progressBar>
+      </div>
+
+      <p-tag
+        *ngIf="goal.createdAt | date: 'd MMM y' as created"
+        title="Created"
+        class="item item__created"
+        [value]="created"
+      ></p-tag>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+<div class="goal-activity">
+  <p-timeline *ngIf="activity" [value]="activity">
+    <ng-template pTemplate="marker" let-event>
+      <p-avatar
+        *ngIf="event.data?.user | userAvatar as avatar"
+        class="goals-table__avatar"
+        shape="circle"
+        [label]="avatar.initials"
+        [title]="event.data?.user.name.formatted"
+        [style]="{ 'background-color': avatar.color, color: '#ffffff', 'font-size': '0.9rem' }"
+      ></p-avatar>
+    </ng-template>
+
+    <ng-template pTemplate="content" let-event>
+      <p>{{ event.created | date: 'd/MM/yy hh:mm' }} - {{ event.data?.user.name.formatted }} {{ event.type }}</p>
+    </ng-template>
+  </p-timeline>
+</div>

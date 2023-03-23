@@ -1,0 +1,22 @@
+:host ::ng-deep {
+  .p-timeline.p-timeline-vertical {
+    .p-timeline-event-opposite {
+      flex: 0 0 auto;
+      padding: 0;
+    }
+
+    .p-timeline-event-content {
+      display: flex;
+      flex-direction: row;
+
+      padding-top: 4px;
+
+      p {
+        margin: 0;
+      }
+    }
+  }
+}
+
+.goal-activity {
+}

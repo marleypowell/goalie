@@ -1,0 +1,20 @@
+<div class="user-goals">
+  <p-toolbar class="user-goals__toolbar" styleClass="mb-4 gap-2">
+    <button
+      pButton
+      pRipple
+      label="Create Goal"
+      icon="pi pi-plus"
+      class="p-button-success mr-2"
+      (click)="createGoalHandler()"
+    ></button>
+  </p-toolbar>
+
+  <div class="user-goals__list-container">
+    <goalie-goals-list
+      class="user-goals__list"
+      [goals]="goals"
+      (goalClicked)="goalClicked.emit($event)"
+    ></goalie-goals-list>
+  </div>
+</div>

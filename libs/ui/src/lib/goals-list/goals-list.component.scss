@@ -1,0 +1,61 @@
+.goals-list {
+  &__item-container {
+    cursor: pointer;
+    border: 1px solid #ebebeb;
+    border-radius: 6px;
+
+    margin-bottom: 1rem;
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    &:hover {
+      background-color: #f5f5f5;
+    }
+  }
+
+  &__item {
+    padding: 2rem 1rem;
+
+    display: grid;
+    grid-template-areas: 'icon name progress created';
+    grid-template-columns: minmax(20px, auto) 1fr auto auto;
+    gap: 1rem;
+
+    .item {
+      display: flex;
+      align-items: center;
+
+      &__icon {
+        grid-area: icon;
+
+        display: flex;
+        align-items: center;
+      }
+
+      &__name {
+        grid-area: name;
+      }
+
+      &__progress {
+        grid-area: progress;
+
+        display: flex;
+        align-items: center;
+
+        span {
+          margin-right: 0.5rem;
+        }
+
+        p-progressbar {
+          flex: 1;
+          min-width: 150px;
+        }
+      }
+
+      &__created {
+        grid-area: created;
+      }
+    }
+  }
+}

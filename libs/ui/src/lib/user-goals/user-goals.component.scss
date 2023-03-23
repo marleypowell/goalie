@@ -1,0 +1,18 @@
+.user-goals {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  &__toolbar {
+    display: block;
+    margin-bottom: 1rem;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+  }
+
+  &__list-container {
+    overflow-y: auto;
+    margin-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+}
