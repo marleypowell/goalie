@@ -11,7 +11,7 @@ import {
 } from '@goalie/shared/goals';
 import { HttpException, HttpStatus, Inject, NotFoundException } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
-import { map, Observable, of, tap } from 'rxjs';
+import { combineLatest, map, mergeMap, Observable, of, tap } from 'rxjs';
 
 export class GoalsService {
   public constructor(@Inject('NATS_SERVICE') private readonly client: ClientProxy) {}
@@ -34,7 +34,18 @@ export class GoalsService {
           throw new HttpException(`Error getting goals for user ${userId}`, res.status);
         }
       }),
-      map((res) => res.data)
+      mergeMap((res) => {
+        const goals = res.data;
+        const userIds = Array.from(new Set(goals.map((goal) => goal.userId)));
+        return combineLatest(userIds.map((userId) => this.client.send('getUser', { userId }))).pipe(
+          map((users) => {
+            return goals.map((goal) => {
+              const res = users.find((user) => user.data.id === goal.userId);
+              return { ...goal, user: res.data } as Goal;
+            });
+          })
+        );
+      })
     );
   }
 
@@ -47,7 +58,16 @@ export class GoalsService {
           throw new HttpException(`Error getting goal with id ${id}`, res.status);
         }
       }),
-      map((res) => res.data)
+      mergeMap((res) => {
+        return this.client.send('getUser', { userId: res.data.userId }).pipe(
+          map((user) => {
+            return {
+              ...res.data,
+              user: user.data,
+            } as Goal;
+          })
+        );
+      })
     );
   }
 
@@ -60,7 +80,24 @@ export class GoalsService {
           throw new HttpException(`Error getting goal activity with id ${id}`, res.status);
         }
       }),
-      map((res) => res.data)
+      mergeMap((res) => {
+        const activity = res.data;
+        const userIds = Array.from(new Set(activity.map((a) => a.data?.userId)));
+        return combineLatest(userIds.map((userId) => this.client.send('getUser', { userId }))).pipe(
+          map((users) => {
+            return activity.map((a) => {
+              const res = users.find((user) => user.data.id === a.data.userId);
+              return {
+                ...a,
+                data: {
+                  ...a.data,
+                  user: res.data,
+                } as unknown,
+              } as GoalActivity;
+            });
+          })
+        );
+      })
     );
   }
 

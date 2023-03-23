@@ -17,4 +17,5 @@ export interface Goal {
   target: number;
   goalCompleted: boolean;
   goalDeleted: boolean;
+  createdAt: string;
 }

@@ -2,6 +2,14 @@ module.exports = {
   core: { builder: 'webpack5' },
   stories: ['../**/*.stories.mdx', '../**/*.stories.@(js|jsx|ts|tsx)'],
   addons: ['@storybook/addon-essentials'],
+  previewBody: (body) => `
+		${body}
+		<style>
+		    #root {
+          height: 100%;
+        }
+		</style>
+	`,
 };
 
 // To customize your webpack configuration you can use the webpackFinal field.

@@ -1,4 +1,4 @@
-import { JSONEventType } from '@eventstore/db-client';
+import { JSONEventType, RecordedEvent } from '@eventstore/db-client';
 import { GoalCompletedEvent } from './goal-completed.event';
 import { GoalCreatedEvent } from './goal-created.event';
 import { GoalDeletedEvent } from './goal-delete.event';
@@ -12,3 +12,4 @@ type JsonEvent<T extends { eventName: string }> = {
 
 export type GoalEvent = GoalCreatedEvent | GoalCompletedEvent | GoalDeletedEvent;
 export type GoalJsonEvent = JsonEvent<GoalEvent>;
+export type GoalRecordedEvent = RecordedEvent<GoalJsonEvent>;

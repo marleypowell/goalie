@@ -1,5 +1,5 @@
 import { BACKWARDS, END, FORWARDS, jsonEvent, START, StreamNotFoundError } from '@eventstore/db-client';
-import { Goal, GoalActivity, GoalJsonEvent } from '@goalie/shared/goals';
+import { Goal, GoalActivity, GoalJsonEvent, GoalRecordedEvent } from '@goalie/shared/goals';
 import { Injectable, Logger } from '@nestjs/common';
 import { EventStoreService } from '../common/event-store.service';
 import { goalReducer } from './entities/goal.reducer';
@@ -71,6 +71,7 @@ export class GoalsRepository {
               target: data.target,
               goalCompleted: false,
               goalDeleted: false,
+              createdAt: event.created.toISOString(),
             });
             break;
           }
@@ -78,6 +79,7 @@ export class GoalsRepository {
             const goal = goals.find((g) => g.goalId == resolvedEvent.event.streamId);
             if (goal) {
               goal.goalCompleted = true;
+              goal.completedAt = event.created.toISOString();
             }
             break;
           }
@@ -85,6 +87,7 @@ export class GoalsRepository {
             const goal = goals.find((g) => g.goalId == resolvedEvent.event.streamId);
             if (goal) {
               goal.goalDeleted = true;
+              goal.deletedAt = event.created.toISOString();
             }
             break;
           }
@@ -109,9 +112,10 @@ export class GoalsRepository {
       target: 0,
       goalCompleted: false,
       goalDeleted: false,
+      createdAt: '',
     };
 
-    const events = this.eventStore.getClient().readStream<GoalJsonEvent>(goalId, {
+    const events = this.eventStore.getClient().readStream<GoalRecordedEvent>(goalId, {
       direction: FORWARDS,
       fromRevision: START,
       maxCount: 1000,
@@ -148,6 +152,19 @@ export class GoalsRepository {
           type: resolvedEvent.event.type,
           data: resolvedEvent.event.data,
         });
+      }
+
+      let userId: string | undefined;
+
+      // add userId to events that don't have it for backwards compatibility. can be removed in the future.
+      for (let i = activities.length - 1; i >= 0; i--) {
+        const a = activities[i];
+
+        if (a.data?.userId) {
+          userId = a.data.userId;
+        } else if (userId) {
+          (a.data as any).userId = userId;
+        }
       }
 
       return activities;
