@@ -2,14 +2,13 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { GoalsService } from '@goalie/shared/api-client-api-gateway';
-import { CardModule } from 'primeng/card';
-import { TimelineModule } from 'primeng/timeline';
+import { GoalDetailsComponent } from '@goalie/ui';
 import { iif, map, mergeMap, of, shareReplay } from 'rxjs';
 
 @Component({
   selector: 'goalie-goal',
   standalone: true,
-  imports: [CommonModule, TimelineModule, CardModule],
+  imports: [CommonModule, GoalDetailsComponent],
   templateUrl: './goal.component.html',
   styleUrls: ['./goal.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

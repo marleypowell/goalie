@@ -2,19 +2,28 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Goal, GoalsService } from '@goalie/shared/api-client-api-gateway';
-import { CreateGoalForm, CreateGoalFormComponent } from '@goalie/ui';
+import { CreateGoalForm, UserGoalsComponent } from '@goalie/ui';
 import { ConfirmationService } from 'primeng/api';
+import { AvatarModule } from 'primeng/avatar';
 import { ButtonModule } from 'primeng/button';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
 import { TableModule } from 'primeng/table';
 import { ToolbarModule } from 'primeng/toolbar';
-import { BehaviorSubject, mergeMap, take } from 'rxjs';
-
+import { BehaviorSubject } from 'rxjs';
 @Component({
   selector: 'goalie-goal-list',
   standalone: true,
-  imports: [CommonModule, ButtonModule, TableModule, ToolbarModule, DynamicDialogModule, ConfirmDialogModule],
+  imports: [
+    CommonModule,
+    ButtonModule,
+    TableModule,
+    ToolbarModule,
+    DynamicDialogModule,
+    ConfirmDialogModule,
+    AvatarModule,
+    UserGoalsComponent,
+  ],
   providers: [DialogService, ConfirmationService],
   templateUrl: './goal-list.component.html',
   styleUrls: ['./goal-list.component.scss'],
@@ -59,7 +68,6 @@ export class GoalListComponent implements OnInit {
     private readonly router: Router,
     private readonly route: ActivatedRoute,
     private readonly goalsService: GoalsService,
-    private readonly dialogService: DialogService,
     private readonly confirmationService: ConfirmationService
   ) {}
 
@@ -67,22 +75,12 @@ export class GoalListComponent implements OnInit {
     this.loadGoals();
   }
 
-  public createGoal(): void {
-    const dialogRef = this.dialogService.open(CreateGoalFormComponent, {
-      header: 'New goal',
-      width: '70%',
-    });
-
-    dialogRef.onClose
-      .pipe(
-        take(1),
-        mergeMap((form: CreateGoalForm) =>
-          this.goalsService.create({
-            name: form.name,
-            target: Number(form.target),
-          })
-        )
-      )
+  public createGoal(form: CreateGoalForm): void {
+    this.goalsService
+      .create({
+        name: form.name,
+        target: Number(form.target),
+      })
       .subscribe(() => {
         this.loadGoals();
       });

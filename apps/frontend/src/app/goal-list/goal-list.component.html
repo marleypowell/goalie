@@ -1,4 +1,4 @@
-<div class="card">
+<!-- <div class="card">
   <p-toolbar styleClass="mb-4 gap-2">
     <ng-template pTemplate="left">
       <button
@@ -9,7 +9,7 @@
         class="p-button-success mr-2"
         (click)="createGoal()"
       ></button>
-      <!-- <button
+      <button
         pButton
         pRipple
         [label]="Delete"
@@ -17,11 +17,11 @@
         class="p-button-danger"
         (click)="deleteSelectedProducts()"
         [disabled]="!selectedProducts || !selectedProducts.length"
-      ></button> -->
+      ></button>
     </ng-template>
 
     <ng-template pTemplate="right">
-      <!-- <p-fileUpload
+      <p-fileUpload
         mode="basic"
         accept="image/*"
         [maxFileSize]="1000000"
@@ -29,7 +29,7 @@
         chooseLabel="Import"
         class="mr-2 inline-block"
       ></p-fileUpload>
-      <button pButton pRipple label="Export" icon="pi pi-upload" class="p-button-help"></button> -->
+      <button pButton pRipple label="Export" icon="pi pi-upload" class="p-button-help"></button>
     </ng-template>
   </p-toolbar>
 
@@ -66,7 +66,7 @@
           <p-tableCheckbox [value]="goal" (click)="itemSelected($event)"></p-tableCheckbox>
         </td>
         <td>{{ goal.name }}</td>
-        <td>{{ goal.userId }}</td>
+        <td>{{ goal.user.name.formatted }}</td>
         <td>{{ goal.target }}</td>
         <td>{{ goal.goalCompleted }}</td>
         <td>
@@ -89,6 +89,12 @@
       </tr>
     </ng-template>
   </p-table>
-</div>
+</div> -->
+
+<goalie-user-goals
+  [goals]="goals$ | async"
+  (createGoal)="createGoal($event)"
+  (goalClicked)="navigateToGoal($event)"
+></goalie-user-goals>
 
 <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
