@@ -61,4 +61,11 @@ export interface GoalsServiceInterface {
    *
    */
   getAll(extraHttpRequestParams?: any): Observable<Array<Goal>>;
+
+  /**
+   *
+   *
+   * @param userId
+   */
+  getUsersGoals(userId: string, extraHttpRequestParams?: any): Observable<Array<Goal>>;
 }

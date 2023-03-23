@@ -27,7 +27,7 @@ export class GoalsService {
     );
   }
 
-  public getAll(userId: string): Observable<Goal[]> {
+  public getAll(userId?: string): Observable<Goal[]> {
     return this.client.send<MessageResponse<Goal[]>>('getGoals', new GetGoalsDto(userId)).pipe(
       tap((res) => {
         if (res.status !== HttpStatus.OK) {
@@ -36,12 +36,17 @@ export class GoalsService {
       }),
       mergeMap((res) => {
         const goals = res.data;
+
+        if (!goals || goals.length === 0) {
+          return of([]);
+        }
+
         const userIds = Array.from(new Set(goals.map((goal) => goal.userId)));
         return combineLatest(userIds.map((userId) => this.client.send('getUser', { userId }))).pipe(
           map((users) => {
             return goals.map((goal) => {
-              const res = users.find((user) => user.data.id === goal.userId);
-              return { ...goal, user: res.data } as Goal;
+              const res = users.find((user) => user?.data?.id === goal.userId);
+              return { ...goal, user: res?.data } as Goal;
             });
           })
         );
@@ -49,7 +54,7 @@ export class GoalsService {
     );
   }
 
-  public get(id: string): Observable<Goal> {
+  public get(id: string): Observable<Goal | null> {
     return this.client.send<MessageResponse<Goal>>('getGoal', new GetGoalDto(id)).pipe(
       tap((res) => {
         if (res.status === HttpStatus.NOT_FOUND) {
@@ -59,6 +64,10 @@ export class GoalsService {
         }
       }),
       mergeMap((res) => {
+        if (!res.data) {
+          return of(null);
+        }
+
         return this.client.send('getUser', { userId: res.data.userId }).pipe(
           map((user) => {
             return {
@@ -82,6 +91,11 @@ export class GoalsService {
       }),
       mergeMap((res) => {
         const activity = res.data;
+
+        if (!activity || activity.length === 0) {
+          return of([]);
+        }
+
         const userIds = Array.from(new Set(activity.map((a) => a.data?.userId)));
         return combineLatest(userIds.map((userId) => this.client.send('getUser', { userId }))).pipe(
           map((users) => {

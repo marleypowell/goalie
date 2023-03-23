@@ -1,11 +1,10 @@
-import { IsNotEmpty, IsString } from 'class-validator';
+import { IsString } from 'class-validator';
 
 export class GetGoalsDto {
   @IsString()
-  @IsNotEmpty()
-  public userId: string;
+  public userId?: string;
 
-  public constructor(userId: string) {
+  public constructor(userId?: string) {
     this.userId = userId;
   }
 }

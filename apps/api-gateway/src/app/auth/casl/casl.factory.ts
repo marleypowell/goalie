@@ -13,6 +13,7 @@ export class AppCaslFactory extends CaslFactory {
 
     if (user.roles.includes(Role.Admin)) {
       builder.can('manage', 'All');
+      builder.can(['create', 'read', 'update', 'delete', 'manage'], ['Goal']);
     } else {
       builder.can(['create', 'read', 'update', 'delete'], ['Goal'], { userId: user.userId });
     }

@@ -12,7 +12,14 @@ export class GetGoalsHandler implements IQueryHandler<GetGoalsQuery> {
 
   public async execute(query: GetGoalsQuery): Promise<Goal[]> {
     this.logger.log('received getGoals query');
-    const goals = await this.goalRepository.findAll();
-    return goals.filter((goal) => goal.userId === query.userId && !goal.goalDeleted);
+    let goals = await this.goalRepository.findAll();
+
+    goals = goals.filter((goal) => !goal.goalDeleted);
+
+    if (query.userId) {
+      goals = goals.filter((goal) => goal.userId === query.userId);
+    }
+
+    return goals;
   }
 }

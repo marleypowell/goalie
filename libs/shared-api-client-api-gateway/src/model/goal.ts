@@ -15,7 +15,9 @@ export interface Goal {
   userId: string;
   name: string;
   target: number;
-  goalCompleted: boolean;
-  goalDeleted: boolean;
   createdAt: string;
+  goalCompleted: boolean;
+  completedAt?: string;
+  goalDeleted: boolean;
+  deletedAt?: string;
 }

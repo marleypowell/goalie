@@ -32,6 +32,10 @@ export class GetUserHandler implements IQueryHandler<GetUserQuery> {
       },
     });
 
+    if (!result.data?.accountById) {
+      return null;
+    }
+
     const { __typename, ...user } = result.data.accountById;
 
     if (!user) {

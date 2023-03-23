@@ -1,7 +1,7 @@
 import { subject } from '@casl/ability';
 import { CaslAbility, UseCasl, UseDtoUserId } from '@goalie/nest-auth';
 import { CreateGoalDto, Goal, GoalActivity } from '@goalie/shared/goals';
-import { Body, Controller, ForbiddenException, Get, HttpStatus, Param, Post } from '@nestjs/common';
+import { Body, Controller, ForbiddenException, Get, HttpStatus, Logger, Param, Post } from '@nestjs/common';
 import { ApiProduces, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { map, mergeMap, Observable } from 'rxjs';
 import { AppAbility } from '../auth/casl/casl.factory';
@@ -13,6 +13,8 @@ import { GoalsService } from './goals.service';
 @ApiTags('goals')
 @Controller('goals')
 export class GoalsController {
+  private readonly logger = new Logger(GoalsController.name);
+
   public constructor(private readonly service: GoalsService) {}
 
   /**
@@ -47,8 +49,36 @@ export class GoalsController {
     description: 'The list of goals has been successfully retrieved.',
     type: [Goal],
   })
-  public getAll(@CaslAbility() ability: AppAbility, @ReqUser() user: User): Observable<Goal[]> {
-    return this.service.getAll(user.userId).pipe(
+  public getAll(@CaslAbility() ability: AppAbility): Observable<Goal[]> {
+    this.logger.debug(`Getting all goals`);
+
+    if (ability.cannot('manage', 'Goal')) {
+      throw new ForbiddenException(`You are not allowed to access some of the goals.`);
+    }
+
+    return this.service.getAll();
+  }
+
+  @Get('users/:userId/goals/list')
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'The list of goals has been successfully retrieved.',
+    type: [Goal],
+  })
+  public getUsersGoals(
+    @CaslAbility() ability: AppAbility,
+    @ReqUser() user: User,
+    @Param('userId') userId: string
+  ): Observable<Goal[]> {
+    this.logger.debug(`Getting goals for user ${user.userId}`);
+
+    const usrId = userId === 'me' ? user.userId : userId;
+
+    if (usrId !== user.userId && ability.cannot('read', 'Goal')) {
+      throw new ForbiddenException(`You are not allowed to access some of the goals.`);
+    }
+
+    return this.service.getAll(usrId).pipe(
       map((goals) => {
         if (goals.some((goal) => ability.cannot('read', subject('Goal', goal)))) {
           throw new ForbiddenException(`You are not allowed to access some of the goals.`);
