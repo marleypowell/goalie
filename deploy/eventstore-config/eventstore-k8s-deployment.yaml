@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eventstore
+spec:
+  selector:
+    matchLabels:
+      app: eventstore
+  template:
+    metadata:
+      labels:
+        app: eventstore
+    spec:
+      containers:
+        - name: eventstore
+          image: eventstore/eventstore:latest
+          env:
+            - name: EVENTSTORE_CLUSTER_SIZE
+              value: '1'
+            - name: EVENTSTORE_RUN_PROJECTIONS
+              value: 'All'
+            - name: EVENTSTORE_START_STANDARD_PROJECTIONS
+              value: 'true'
+            - name: EVENTSTORE_INSECURE
+            - name: EVENTSTORE_ALLOW_UNKNOWN_OPTIONS
+              value: 'true'
+          ports:
+            - containerPort: 1112
+            - containerPort: 1113
+            - containerPort: 2112
+            - containerPort: 2113
+          livenessProbe:
+            httpGet:
+              path: /stats
+              port: 2113
+            initialDelaySeconds: 15
+            timeoutSeconds: 5
+            periodSeconds: 15
+          readinessProbe:
+            httpGet:
+              path: /stats
+              port: 2113
+            initialDelaySeconds: 15
+            timeoutSeconds: 5
+            periodSeconds: 15
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/eventstore
+      volumes:
+        - name: data
+          emptyDir: {}

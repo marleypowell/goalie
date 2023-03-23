@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-gateway
+spec:
+  selector:
+    matchLabels:
+      app: api-gateway
+  template:
+    metadata:
+      labels:
+        app: api-gateway
+    spec:
+      containers:
+        - name: api-gateway
+          image: goalie.azurecr.io/api-gateway:c6aafc53001a11c1803fd389bcbf1ac38d96c93d
+          env:
+            - name: ISSUER
+              value: 'https://login.mp.exclaimertest.net/oauth/v2/oauth-anonymous'
+            - name: JWKS_ENDPOINT
+              value: 'http://login.mp.exclaimertest.net/oauth/v2/oauth-anonymous/jwks'
+            - name: AUDIENCE
+              value: 'spa-client'
+            - name: NATS_URL
+              value: 'nats://nats-service.nats:4222'
+            - name: CORS_ENABLED
+              value: 'true'
+            - name: TRUSTED_WEB_ORIGIN
+              value: 'https://goalie.mp.exclaimertest.net'
+            - name: TRACING_ENABLED
+              value: 'false'
+            - name: TRACING_CONSOLE_EXPORTER
+              value: 'false'
+          ports:
+            - containerPort: 3000
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+              scheme: HTTP
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            timeoutSeconds: 4
+            failureThreshold: 5
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+              scheme: HTTP
+            initialDelaySeconds: 4
+            periodSeconds: 5
+            timeoutSeconds: 2
+            successThreshold: 1
+            failureThreshold: 2

@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: 'letsencrypt-prod'
+    nginx.ingress.kubernetes.io/use-regex: 'true'
+    nginx.ingress.kubernetes.io/rewrite-target: /oauth-agent/$2
+  name: oauth-agent-service-ingress
+spec:
+  rules:
+    - host: api.mp.exclaimertest.net
+      http:
+        paths:
+          - backend:
+              service:
+                name: oauth-agent-service-service
+                port:
+                  name: http-port
+            path: /oauth-agent(/|$)(.*)
+            pathType: ImplementationSpecific
+  tls:
+    - hosts:
+        - api.mp.exclaimertest.net
+      secretName: api-aks-tls

@@ -1,0 +1,16 @@
+controller:
+  name: controller
+  image:
+    repository: goalie.azurecr.io/nginx-ingress-controller-custom
+    tag: "v1.2.0"
+    pullPolicy: IfNotPresent
+    digest: sha256:c2647f5ba0fd10b2b26d6399bc9a69066f5076516f8768f807d827ce5393cc0a
+  config:
+    main-snippet: |
+      load_module /usr/lib/nginx/modules/ngx_curity_http_phantom_token_module.so;
+      load_module /usr/lib/nginx/modules/ngx_curity_http_oauth_proxy_module.so;
+    http-snippet: proxy_cache_path cache levels=1:2 keys_zone=api_cache:10m max_size=10g inactive=60m use_temp_path=off;
+    ssl-redirect: "false"
+  service:
+    annotations:
+      service.beta.kubernetes.io/azure-load-balancer-health-probe-request-path: /healthz # https://github.com/Azure/AKS/issues/2903

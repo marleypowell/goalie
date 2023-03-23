@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: goals-service
+spec:
+  selector:
+    matchLabels:
+      app: goals-service
+  template:
+    metadata:
+      labels:
+        app: goals-service
+    spec:
+      containers:
+        - name: goals-service
+          image: goalie.azurecr.io/goals-service:7e7cb7d9ada4657d950d013aeb0feabcbf71db51
+          env:
+            - name: NATS_URL
+              value: 'nats://nats-service.nats:4222'
+            - name: EVENT_STORE_CONNECTION_STRING
+              value: 'esdb://eventstore-service.eventstore:2113?tls=false'
+            - name: TRACING_ENABLED
+              value: 'false'
+            - name: TRACING_CONSOLE_EXPORTER
+              value: 'false'
+          ports:
+            - containerPort: 3000
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+              scheme: HTTP
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            timeoutSeconds: 4
+            failureThreshold: 5
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+              scheme: HTTP
+            initialDelaySeconds: 4
+            periodSeconds: 5
+            timeoutSeconds: 2
+            successThreshold: 1
+            failureThreshold: 2

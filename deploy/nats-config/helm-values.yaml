@@ -1,0 +1,4 @@
+nats:
+  connectRetries: 30
+  client:
+    port: 4222
