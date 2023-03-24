@@ -11,7 +11,7 @@ describe('ClaimsService', () => {
 
   beforeEach(async () => {
     cookieServiceSpy = {
-      getIdTokenCookie: jest.fn(
+      getIdTokenCookie: jest.fn(),
     };
 
     const module: TestingModule = await Test.createTestingModule({
@@ -26,7 +26,9 @@ describe('ClaimsService', () => {
   });
 
   it('should get claims from id token', () => {
-    cookieServiceSpy.getIdTokenCookie.mockReturnValue('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c');
+    cookieServiceSpy.getIdTokenCookie.mockReturnValue(
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'
+    );
     const claims = service.getClaims({});
     expect(claims).toEqual({
       sub: '1234567890',
@@ -52,7 +54,9 @@ describe('ClaimsService', () => {
   });
 
   it('should throw an error if the id token is not a valid JWT', () => {
-    cookieServiceSpy.getIdTokenCookie.mockReturnValue('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.ey.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c');
+    cookieServiceSpy.getIdTokenCookie.mockReturnValue(
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.ey.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'
+    );
     expect(() => service.getClaims({})).toThrow('ID token is not a valid JWT');
     expect(cookieServiceSpy.getIdTokenCookie).toHaveBeenCalledTimes(1);
     expect(cookieServiceSpy.getIdTokenCookie).toHaveBeenCalledWith({});
