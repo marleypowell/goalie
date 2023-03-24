@@ -57,21 +57,15 @@ jobs:
 
       - name: Build
         run: |
-          yarn install
-
-          yarn nx build api-gateway
           docker build -f apps/api-gateway/Dockerfile . -t ${{ env.REGISTRY }}/api-gateway:latest
           docker push ${{ env.REGISTRY }}/api-gateway:latest
 
-          yarn nx build oauth-agent-service
           docker build -f apps/services/oauth-agent-service/Dockerfile . -t ${{ env.REGISTRY }}/oauth-agent-service:latest
           docker push ${{ env.REGISTRY }}/oauth-agent-service:latest
 
-          yarn nx build goals-service
           docker build -f apps/services/goals-service/Dockerfile . -t ${{ env.REGISTRY }}/goals-service:latest
           docker push ${{ env.REGISTRY }}/goals-service:latest
 
-          yarn nx build users-service
           docker build -f apps/services/users-service/Dockerfile . -t ${{ env.REGISTRY }}/users-service:latest
           docker push ${{ env.REGISTRY }}/users-service:latest
 
