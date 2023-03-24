@@ -78,6 +78,15 @@ jobs:
         run: terraform init
         working-directory: deploy/terraform-config
 
+      - name: Set Terraform variables
+        run: |
+          tee terraform.tfvars <<EOF
+          cookie_encryption_key = "${{ secrets.COOKIE_ENCRYPTION_KEY }}"
+          oauth_proxy_client_secret = "${{ secrets.OAUTH_PROXY_CLIENT_SECRET }}"
+          oauth_agent_client_secret = "${{ secrets.OAUTH_AGENT_CLIENT_SECRET }}"
+          EOF
+        working-directory: deploy/terraform-config
+
       - name: Terraform Format
         run: terraform fmt -check
         working-directory: deploy/terraform-config

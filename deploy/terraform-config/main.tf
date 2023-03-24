@@ -38,11 +38,13 @@ module "curity_idsvr" {
 }
 
 module "api_gateway" {
-  source                 = "./modules/api-gateway/"
-  host                   = module.aks_cluster.host
-  client_certificate     = base64decode(module.aks_cluster.client_certificate)
-  client_key             = base64decode(module.aks_cluster.client_key)
-  cluster_ca_certificate = base64decode(module.aks_cluster.cluster_ca_certificate)
+  source                     = "./modules/api-gateway/"
+  host                       = module.aks_cluster.host
+  client_certificate         = base64decode(module.aks_cluster.client_certificate)
+  client_key                 = base64decode(module.aks_cluster.client_key)
+  cluster_ca_certificate     = base64decode(module.aks_cluster.cluster_ca_certificate)
+  oauth_proxy_encryption_key = var.cookie_encryption_key
+  oauth_proxy_client_secret  = var.oauth_proxy_client_secret
 }
 
 module "goals_service" {
@@ -54,11 +56,13 @@ module "goals_service" {
 }
 
 module "oauth_agent_service" {
-  source                 = "./modules/oauth-agent-service/"
-  host                   = module.aks_cluster.host
-  client_certificate     = base64decode(module.aks_cluster.client_certificate)
-  client_key             = base64decode(module.aks_cluster.client_key)
-  cluster_ca_certificate = base64decode(module.aks_cluster.cluster_ca_certificate)
+  source                    = "./modules/oauth-agent-service/"
+  host                      = module.aks_cluster.host
+  client_certificate        = base64decode(module.aks_cluster.client_certificate)
+  client_key                = base64decode(module.aks_cluster.client_key)
+  cluster_ca_certificate    = base64decode(module.aks_cluster.cluster_ca_certificate)
+  oauth_agent_client_secret = var.oauth_agent_client_secret
+  cookie_encryption_key     = var.cookie_encryption_key
 }
 
 module "ingress_nginx" {

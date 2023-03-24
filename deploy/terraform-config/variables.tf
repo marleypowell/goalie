@@ -56,3 +56,15 @@ variable "common_tags" {
   description = "tags"
   type        = map(string)
 }
+
+variable "cookie_encryption_key" {
+  type = string
+}
+
+variable "oauth_proxy_client_secret" {
+  type = string
+}
+
+variable "oauth_agent_client_secret" {
+  type = string
+}
