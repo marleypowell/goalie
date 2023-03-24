@@ -1,13 +1,3 @@
-# Idsvr files
-idsvr-config/license.json
-idsvr-config/templates/*
-
-# Self signed certficates
-certs/*.pem
-certs/*.key
-certs/*.csr
-certs/*.srl
-
 # Local .terraform directories
 **/.terraform/*
 
@@ -19,10 +9,6 @@ certs/*.srl
 # Ignore CLI configuration files
 .terraformrc
 terraform.rc
-
-# Dependency directories
-node_modules/
-**/package-lock.json
 
 # terraform config backup
 terraform-config-bkup/*

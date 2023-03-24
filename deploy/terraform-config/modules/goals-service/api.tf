@@ -27,12 +27,12 @@ resource "kubernetes_namespace" "goals_ns" {
 }
 
 resource "kubectl_manifest" "goals_service_deployment" {
-  yaml_body          = file("${path.cwd}/../goals-service-config/goals-service-k8s-deployment.yaml")
+  yaml_body          = file("${path.cwd}/deploy/goals-service-config/goals-service-k8s-deployment.yaml")
   override_namespace = kubernetes_namespace.goals_ns.metadata.0.name
 }
 
 resource "kubectl_manifest" "goals_service_svc_deployment" {
-  yaml_body          = file("${path.cwd}/../goals-service-config/goals-service-k8s-service.yaml")
+  yaml_body          = file("${path.cwd}/deploy/goals-service-config/goals-service-k8s-service.yaml")
   override_namespace = kubernetes_namespace.goals_ns.metadata.0.name
 }
 

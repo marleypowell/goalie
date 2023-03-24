@@ -27,11 +27,11 @@ resource "kubernetes_namespace" "nats_ns" {
 }
 
 resource "kubectl_manifest" "nats_deployment" {
-  yaml_body          = file("${path.cwd}/../nats-config/nats-k8s-deployment.yaml")
+  yaml_body          = file("${path.cwd}/deploy/nats-config/nats-k8s-deployment.yaml")
   override_namespace = kubernetes_namespace.nats_ns.metadata.0.name
 }
 
 resource "kubectl_manifest" "nats_svc_deployment" {
-  yaml_body          = file("${path.cwd}/../nats-config/nats-k8s-service.yaml")
+  yaml_body          = file("${path.cwd}/deploy/nats-config/nats-k8s-service.yaml")
   override_namespace = kubernetes_namespace.nats_ns.metadata.0.name
 }

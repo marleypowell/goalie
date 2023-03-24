@@ -37,7 +37,7 @@ resource "kubernetes_namespace" "api_gateway_ns" {
 
 resource "helm_release" "example" {
   name       = "api-gateway"
-  chart      = "${path.cwd}/../api-gateway-config"
+  chart      = "${path.cwd}/deploy/api-gateway-config"
   namespace  = kubernetes_namespace.api_gateway_ns.metadata.0.name
 
   set {

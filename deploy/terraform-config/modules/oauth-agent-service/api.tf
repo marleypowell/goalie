@@ -37,7 +37,7 @@ resource "kubernetes_namespace" "oauth_agent_ns" {
 
 resource "helm_release" "example" {
   name       = "oauth-agent-service"
-  chart      = "${path.cwd}/../oauth-agent-service-config"
+  chart      = "${path.cwd}/deploy/oauth-agent-service-config"
   namespace  = kubernetes_namespace.oauth_agent_ns.metadata.0.name
 
   set {

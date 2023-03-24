@@ -28,8 +28,8 @@ resource "kubernetes_secret_v1" "idsvr_config" {
     namespace = kubernetes_namespace.curity_ns.metadata.0.name
   }
   data = {
-    "idsvr-cluster-config.xml" = file("${path.cwd}/../idsvr-config/idsvr-cluster-config.xml")
-    "license.json"             = file("${path.cwd}/../idsvr-config/license.json")
+    "idsvr-cluster-config.xml" = file("${path.cwd}/deploy/idsvr-config/idsvr-cluster-config.xml")
+    "license.json"             = file("${path.cwd}/deploy/idsvr-config/license.json")
   }
 }
 
@@ -41,7 +41,7 @@ resource "helm_release" "curity_idsvr" {
   namespace  = kubernetes_namespace.curity_ns.metadata.0.name
 
   values = [
-    file("${path.cwd}/../idsvr-config/helm-values.yaml")
+    file("${path.cwd}/deploy/idsvr-config/helm-values.yaml")
   ]
 
 }

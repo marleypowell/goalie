@@ -45,7 +45,7 @@ resource "helm_release" "ingress-nginx" {
   namespace  = kubernetes_namespace.ingress_ns.metadata.0.name
 
   values = [
-    file("${path.cwd}/../ingress-nginx-config/helm-values.yaml")
+    file("${path.cwd}/deploy/ingress-nginx-config/helm-values.yaml")
   ]
 
   depends_on = [
@@ -62,13 +62,13 @@ resource "helm_release" "cert-manager" {
   namespace  = kubernetes_namespace.ingress_ns.metadata.0.name
 
   values = [
-    file("${path.cwd}/../cert-manager-config/helm-values.yaml")
+    file("${path.cwd}/deploy/cert-manager-config/helm-values.yaml")
   ]
 
 }
 
 resource "kubectl_manifest" "cert_manager_issuer" {
-  yaml_body          = file("${path.cwd}/../cert-manager-config/cert-issuer.yaml")
+  yaml_body          = file("${path.cwd}/deploy/cert-manager-config/cert-issuer.yaml")
   override_namespace = kubernetes_namespace.ingress_ns.metadata.0.name
 
   depends_on = [
