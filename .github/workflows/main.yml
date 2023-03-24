@@ -21,8 +21,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - uses: nrwl/nx-set-shas@v3
-
       - run: yarn install --frozen-lockfile
 
       - run: yarn nx-cloud record -- yarn nx format:check
