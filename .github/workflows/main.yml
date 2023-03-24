@@ -1,9 +1,4 @@
-name: Docker
-
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
+name: Build and Deploy
 
 on:
   push:
@@ -11,10 +6,12 @@ on:
     # Publish semver tags as releases.
     tags: ['v*.*.*']
   pull_request:
-    branches: ['main']
 
 env:
   REGISTRY: goalie.azurecr.io
+
+permissions:
+  contents: read
 
 jobs:
   build:
@@ -23,6 +20,31 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+
+      - uses: nrwl/nx-set-shas@v3
+
+      - run: yarn install --frozen-lockfile
+
+      - run: yarn nx-cloud record -- yarn nx format:check
+
+      - run: yarn nx run-many --target=lint --all --parallel=3 --configuration=production
+      - run: yarn nx run-many --target=test --all --parallel=3 --ci --code-coverage
+      - run: yarn nx run-many --target=build --all --parallel=3 --configuration=production --verbose
+
+      - name: Deploy Website
+        id: builddeploy
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_POLITE_HILL_00CF44403 }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (i.e. PR comments)
+          action: 'upload'
+          ###### Repository/Build Configurations - These values can be configured to match your app requirements. ######
+          # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
+          app_location: '/' # App source code path
+          api_location: '' # Api source code path - optional
+          output_location: 'dist/apps/frontend' # Built app content directory - optional
+          skip_app_build: true
+          ###### End of Repository/Build Configurations ######
 
       # Login against a Docker registry except on PR
       - name: Azure Container Registry Login
@@ -48,3 +70,29 @@ jobs:
           yarn nx build goals-service
           docker build -f apps/services/goals-service/Dockerfile . -t ${{ env.REGISTRY }}/goals-service:latest
           docker push ${{ env.REGISTRY }}/goals-service:latest
+
+          yarn nx build users-service
+          docker build -f apps/services/users-service/Dockerfile . -t ${{ env.REGISTRY }}/users-service:latest
+          docker push ${{ env.REGISTRY }}/users-service:latest
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+
+      - name: Terraform Init
+        run: terraform init
+        working-directory: deploy/terraform-config
+
+      - name: Terraform Format
+        run: terraform fmt -check
+        working-directory: deploy/terraform-config
+
+      - name: Terraform Plan
+        run: terraform plan -input=false
+        working-directory: deploy/terraform-config
+
+      - name: Terraform Apply
+        if: github.ref == 'refs/heads/"main"' && github.event_name == 'push'
+        run: terraform apply -auto-approve -input=false
+        working-directory: deploy/terraform-config
