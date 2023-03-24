@@ -10,33 +10,33 @@ curity:
     uiEnabled: true
     backup: true
     configuration:
-        - secretRef:
-            name: idsvr-config
-            items:
-              - key: license.json
-                path: license/license.json
+      - secretRef:
+          name: idsvr-config
+          items:
+            - key: license.json
+              path: license/license.json
     configurationSecret: idsvr-config
     configurationSecretItemName: idsvr-cluster-config.xml
-#
+
   admin:
     logging:
-      level: $logging_level
+      level: DEBUG
 
   runtime:
     logging:
-      level: $logging_level
+      level: DEBUG
 
 ingress:
-    enabled: true
-    annotations:
-      kubernetes.io/ingress.class: nginx
-      nginx.ingress.kubernetes.io/ssl-redirect: "false"
-      cert-manager.io/cluster-issuer: "letsencrypt-prod"
-    runtime:
-      host: $runtime_hostname
-      secretName: login-aks-tls
-      paths:
-        - /
-    admin:
-      host: $admin_hostname
-      secretName: admin-aks-tls
+  enabled: true
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/ssl-redirect: 'false'
+    cert-manager.io/cluster-issuer: 'letsencrypt-prod'
+  runtime:
+    host: login.mp.exclaimertest.net
+    secretName: login-aks-tls
+    paths:
+      - /
+  admin:
+    host: admin.mp.exclaimertest.net
+    secretName: admin-aks-tls

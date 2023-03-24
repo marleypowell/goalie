@@ -20,20 +20,19 @@ provider "kubernetes" {
   cluster_ca_certificate = var.cluster_ca_certificate
 }
 
-resource "kubernetes_namespace" "eventstore_namespace" {
+resource "kubernetes_namespace" "eventstore_ns" {
   metadata {
-    name = var.eventstore_namespace
+    name = "eventstore"
   }
 }
 
 resource "kubectl_manifest" "eventstore_deployment" {
   yaml_body          = file("${path.cwd}/../eventstore-config/eventstore-k8s-deployment.yaml")
-  override_namespace = var.eventstore_namespace
+  override_namespace = kubernetes_namespace.eventstore_ns.metadata.0.name
 }
 
 resource "kubectl_manifest" "eventstore_svc_deployment" {
   yaml_body          = file("${path.cwd}/../eventstore-config/eventstore-k8s-service.yaml")
-  override_namespace = var.eventstore_namespace
-
+  override_namespace = kubernetes_namespace.eventstore_ns.metadata.0.name
 }
 

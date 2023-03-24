@@ -56,30 +56,3 @@ variable "common_tags" {
   description = "tags"
   type        = map(string)
 }
-
-# Curity Idsvr
-variable "idsvr_namespace" {
-  description = "Name of the k8s namespace to deploy Curity Identity Server"
-  type        = string
-}
-
-# NGINX Ingress Controller
-variable "ingress_controller_namespace" {
-  description = "Name of the k8s namespace to deploy NGINX Ingress Controller"
-  type        = string
-}
-
-variable "api_namespace" {
-  description = "Name of the k8s namespace to deploy example api"
-  type        = string
-}
-
-variable "eventstore_namespace" {
-  description = "Name of the k8s namespace to deploy eventstore"
-  type        = string
-}
-
-variable "nats_namespace" {
-  description = "Name of the k8s namespace to deploy NATS"
-  type        = string
-}

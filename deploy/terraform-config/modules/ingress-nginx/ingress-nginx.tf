@@ -50,7 +50,6 @@ resource "helm_release" "ingress-nginx" {
 
   depends_on = [
     var.ingress_nginx_depends_on_1,
-    var.ingress_nginx_depends_on_2,
   ]
 
 }

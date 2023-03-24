@@ -17,6 +17,8 @@ spec:
           env:
             - name: NATS_URL
               value: 'nats://nats-service.nats:4222'
+            - name: EVENT_STORE_ENDPOINT
+              value: 'eventstore-service.eventstore:2113'
             - name: EVENT_STORE_CONNECTION_STRING
               value: 'esdb://eventstore-service.eventstore:2113?tls=false'
             - name: TRACING_ENABLED

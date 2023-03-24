@@ -1,8 +1,3 @@
-variable "eventstore_namespace" {
-  description = "Name of the k8s namespace to deploy eventstore"
-  type        = string
-}
-
 variable "host" {
   description = "The Kubernetes cluster server host"
   type        = string

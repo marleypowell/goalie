@@ -28,8 +28,3 @@ variable "ingress_nginx_depends_on_1" {
   # The value is not important because we're just using this for creating dependencies
   type    = string
 }
-
-variable "ingress_nginx_depends_on_2" {
-  # The value is not important because we're just using this for creating dependencies
-  type    = string
-}

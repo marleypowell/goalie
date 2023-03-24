@@ -22,6 +22,7 @@ spec:
             - name: EVENTSTORE_START_STANDARD_PROJECTIONS
               value: 'true'
             - name: EVENTSTORE_INSECURE
+              value: 'true'
             - name: EVENTSTORE_ALLOW_UNKNOWN_OPTIONS
               value: 'true'
           ports:

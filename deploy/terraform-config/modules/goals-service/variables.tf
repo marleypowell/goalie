@@ -1,8 +1,3 @@
-variable "api_namespace" {
-  description = "Name of the k8s namespace to deploy goals service api"
-  type        = string
-}
-
 variable "host" {
   description = "The Kubernetes cluster server host"
   type        = string
