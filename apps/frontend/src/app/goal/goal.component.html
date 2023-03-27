@@ -1,1 +1,7 @@
-<goalie-goal-details [goal]="goal$ | async" [goalActivity]="goalActivity$ | async"></goalie-goal-details>
+<goalie-goal-details
+  [goal]="goal$ | async"
+  [goalActivity]="goalActivity$ | async"
+  (deleteGoal)="deleteGoal($event)"
+></goalie-goal-details>
+
+<p-confirmDialog></p-confirmDialog>

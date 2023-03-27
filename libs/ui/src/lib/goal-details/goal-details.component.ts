@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { Goal, GoalActivity } from '@goalie/shared/api-client-api-gateway';
 import { MenuItem } from 'primeng/api';
 import { AvatarModule } from 'primeng/avatar';
@@ -22,6 +22,8 @@ export class GoalDetailsComponent {
 
   @Input() public goalActivity: GoalActivity[] | null = null;
 
+  @Output() public readonly deleteGoal = new EventEmitter<string>();
+
   public readonly moreButtonItems: MenuItem[] = [
     {
       label: 'Edit',
@@ -34,7 +36,9 @@ export class GoalDetailsComponent {
       label: 'Delete',
       icon: 'pi pi-times',
       command: () => {
-        // this.delete();
+        if (this.goal) {
+          this.deleteGoal.emit(this.goal.goalId);
+        }
       },
     },
   ];
