@@ -55,6 +55,15 @@ module "goals_service" {
   cluster_ca_certificate = base64decode(module.aks_cluster.cluster_ca_certificate)
 }
 
+module "users_service" {
+  source                 = "./modules/users-service/"
+  host                   = module.aks_cluster.host
+  client_certificate     = base64decode(module.aks_cluster.client_certificate)
+  client_key             = base64decode(module.aks_cluster.client_key)
+  cluster_ca_certificate = base64decode(module.aks_cluster.cluster_ca_certificate)
+  accounts_client_secret = var.accounts_client_secret
+}
+
 module "oauth_agent_service" {
   source                    = "./modules/oauth-agent-service/"
   host                      = module.aks_cluster.host

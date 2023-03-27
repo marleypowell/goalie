@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: users-service
+spec:
+  selector:
+    matchLabels:
+      app: users-service
+  template:
+    metadata:
+      labels:
+        app: users-service
+    spec:
+      containers:
+        - name: users-service
+          image: goalie.azurecr.io/users-service:{{ .Values.image.tag }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: NATS_URL
+              value: 'nats://nats-service.nats:4222'
+            - name: TRACING_ENABLED
+              value: 'false'
+            - name: TRACING_CONSOLE_EXPORTER
+              value: 'false'
+            - name: USER_MANAGEMENT_ENDPOINT
+              value: 'https://login.mp.exclaimertest.net/user-management/graphql/admin'
+            - name: ACCOUNTS_CLIENT_ID
+              value: 'accounts-client'
+            - name: ACCOUNTS_CLIENT_SECRET
+              value: '{{ .Values.accountsClientSecret }}'
+          ports:
+            - containerPort: 3000
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+              scheme: HTTP
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            timeoutSeconds: 4
+            failureThreshold: 5
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+              scheme: HTTP
+            initialDelaySeconds: 4
+            periodSeconds: 5
+            timeoutSeconds: 2
+            successThreshold: 1
+            failureThreshold: 2

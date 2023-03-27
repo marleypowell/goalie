@@ -30,18 +30,23 @@ provider "kubernetes" {
   cluster_ca_certificate = var.cluster_ca_certificate
 }
 
-resource "kubernetes_namespace" "goals_ns" {
+resource "kubernetes_namespace" "users_ns" {
   metadata {
-    name = "goals"
+    name = "users"
   }
 }
 
-resource "helm_release" "goals_service" {
-  name       = "goals-service"
-  chart      = "${path.cwd}/deploy/goals-service-config"
-  namespace  = kubernetes_namespace.goals_ns.metadata.0.name
+resource "helm_release" "users_service" {
+  name       = "users-service"
+  chart      = "${path.cwd}/deploy/users-service-config"
+  namespace  = kubernetes_namespace.users_ns.metadata.0.name
 
   values = [
-    file("${path.cwd}/deploy/goals-service-config/values.yaml")
+    file("${path.cwd}/deploy/users-service-config/values.yaml")
   ]
+
+  set {
+    name  = "accountsClientSecret"
+    value = var.accounts_client_secret
+  }
 }

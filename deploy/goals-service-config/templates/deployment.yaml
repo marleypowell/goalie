@@ -13,7 +13,8 @@ spec:
     spec:
       containers:
         - name: goals-service
-          image: goalie.azurecr.io/goals-service:7e7cb7d9ada4657d950d013aeb0feabcbf71db51
+          image: goalie.azurecr.io/goals-service:{{ .Values.image.tag }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
             - name: NATS_URL
               value: 'nats://nats-service.nats:4222'

@@ -68,3 +68,7 @@ variable "oauth_proxy_client_secret" {
 variable "oauth_agent_client_secret" {
   type = string
 }
+
+variable "accounts_client_secret" {
+  type = string
+}

@@ -1,0 +1,6 @@
+apiVersion: v2
+name: goals-service
+type: application
+version: 1.0.0
+metadata:
+  name: goals-service
