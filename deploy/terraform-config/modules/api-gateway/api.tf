@@ -41,6 +41,10 @@ resource "helm_release" "example" {
   chart      = "${path.cwd}/deploy/api-gateway-config"
   namespace  = kubernetes_namespace.api_gateway_ns.metadata.0.name
 
+  values = [
+    file("${path.cwd}/deploy/api-gateway-config/values.yaml")
+  ]
+
   set {
     name  = "oauthProxy.encryptionKey"
     value = var.oauth_proxy_encryption_key

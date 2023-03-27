@@ -41,6 +41,10 @@ resource "helm_release" "example" {
   chart      = "${path.cwd}/deploy/oauth-agent-service-config"
   namespace  = kubernetes_namespace.oauth_agent_ns.metadata.0.name
 
+  values = [
+    file("${path.cwd}/deploy/oauth-agent-service-config/values.yaml")
+  ]
+
   set {
     name  = "clientSecret"
     value = var.oauth_agent_client_secret

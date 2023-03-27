@@ -13,7 +13,8 @@ spec:
     spec:
       containers:
         - name: oauth-agent-service
-          image: goalie.azurecr.io/oauth-agent-service:7e7cb7d9ada4657d950d013aeb0feabcbf71db51
+          image: goalie.azurecr.io/oauth-agent-service:{{ .Values.image.tag }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
             - name: CLIENT_ID
               value: 'spa-client'
