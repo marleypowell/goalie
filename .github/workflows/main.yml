@@ -83,7 +83,7 @@ jobs:
           cookie_encryption_key     = "${{ secrets.COOKIE_ENCRYPTION_KEY }}"
           oauth_proxy_client_secret = "${{ secrets.OAUTH_PROXY_CLIENT_SECRET }}"
           oauth_agent_client_secret = "${{ secrets.OAUTH_AGENT_CLIENT_SECRET }}"
-          account_client_secret     = "${{ secrets.ACCOUNT_CLIENT_SECRET }}"
+          accounts_client_secret     = "${{ secrets.ACCOUNTS_CLIENT_SECRET }}"
           EOF
         working-directory: deploy/terraform-config
 
