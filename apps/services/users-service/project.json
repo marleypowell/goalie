@@ -13,7 +13,7 @@
         "outputPath": "dist/apps/services/users-service",
         "main": "apps/services/users-service/src/main.ts",
         "tsConfig": "apps/services/users-service/tsconfig.app.json",
-        "assets": [],
+        "assets": ["apps/services/users-service/src/users/users.graphql"],
         "isolatedConfig": true,
         "webpackConfig": "apps/services/users-service/webpack.config.js",
         "generatePackageJson": true
