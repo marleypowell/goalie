@@ -22,6 +22,8 @@ export class GoalDetailsComponent {
 
   @Input() public goalActivity: GoalActivity[] | null = null;
 
+  @Output() public readonly completeGoal = new EventEmitter<string>();
+
   @Output() public readonly deleteGoal = new EventEmitter<string>();
 
   public readonly moreButtonItems: MenuItem[] = [

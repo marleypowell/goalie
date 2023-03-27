@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GoalDetailsComponent } from '@goalie/ui';
-import { iif, map, mergeMap, of, shareReplay } from 'rxjs';
+import { map } from 'rxjs';
 import { GoalsFacade } from '../services/goals.facade';
 
 @Component({
@@ -13,25 +13,30 @@ import { GoalsFacade } from '../services/goals.facade';
   styleUrls: ['./goal.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GoalComponent {
-  public readonly goalId$ = this.route.paramMap.pipe(
-    map((params) => params.get('id')),
-    shareReplay()
-  );
+export class GoalComponent implements OnInit {
+  public readonly goal$ = this.goalsFacade.goal$;
 
-  public readonly goal$ = this.goalId$.pipe(
-    mergeMap((id) => iif(() => !!id, this.goalsFacade.getGoal(String(id)), of(null)))
-  );
-
-  public readonly goalActivity$ = this.goalId$.pipe(
-    mergeMap((id) => iif(() => !!id, this.goalsFacade.getGoalActivity(String(id)), of(null)))
-  );
+  public readonly goalActivity$ = this.goalsFacade.goalActivity$;
 
   public constructor(
     private readonly route: ActivatedRoute,
     private readonly router: Router,
     private readonly goalsFacade: GoalsFacade
   ) {}
+
+  public ngOnInit(): void {
+    this.route.paramMap.pipe(map((params) => params.get('id'))).subscribe((goalId) => {
+      if (goalId) {
+        this.goalsFacade.loadGoal(goalId);
+      }
+    });
+  }
+
+  public completeGoal(goalId: string): void {
+    this.goalsFacade.completeGoal(goalId).subscribe(() => {
+      this.goalsFacade.loadGoal(goalId);
+    });
+  }
 
   public deleteGoal(goalId: string): void {
     this.goalsFacade.deleteGoal(goalId, () => {

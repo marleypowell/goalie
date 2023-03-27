@@ -41,6 +41,7 @@
         icon="pi pi-check"
         styleClass="p-button-sm p-button-success"
         [disabled]="goal.goalCompleted"
+        (click)="completeGoal.emit(goal.goalId)"
       ></p-button>
 
       <p-menu #menu [model]="moreButtonItems" [popup]="true"></p-menu>
