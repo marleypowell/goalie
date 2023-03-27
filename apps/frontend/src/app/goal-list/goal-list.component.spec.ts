@@ -1,7 +1,7 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { GoalListComponent } from './goal-list.component';
 
 describe('GoalListComponent', () => {
@@ -11,7 +11,7 @@ describe('GoalListComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [GoalListComponent, HttpClientTestingModule, RouterTestingModule],
-      providers: [MessageService],
+      providers: [MessageService, ConfirmationService],
     }).compileComponents();
 
     fixture = TestBed.createComponent(GoalListComponent);

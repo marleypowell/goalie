@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { GoalsService } from '@goalie/shared/api-client-api-gateway';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { GoalsFacade } from '../services/goals.facade';
 
 import { GoalComponent } from './goal.component';
 
@@ -12,7 +12,7 @@ describe('GoalComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [GoalComponent, RouterTestingModule],
-      providers: [MessageService, { provide: GoalsService, useValue: {} }],
+      providers: [MessageService, ConfirmationService, { provide: GoalsFacade, useValue: {} }],
     }).compileComponents();
 
     fixture = TestBed.createComponent(GoalComponent);

@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { GoalsService } from '@goalie/shared/api-client-api-gateway';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { EMPTY } from 'rxjs';
+import { GoalsFacade } from '../services/goals.facade';
 
 import { PeoplesGoalsComponent } from './peoples-goals.component';
 
@@ -9,16 +9,16 @@ describe('PeoplesGoalsComponent', () => {
   let component: PeoplesGoalsComponent;
   let fixture: ComponentFixture<PeoplesGoalsComponent>;
 
-  let goalsServiceSpy: { [key in keyof GoalsService]?: jest.Mock };
+  let goalsFacadeSpy: { [key in keyof GoalsFacade]?: jest.Mock };
 
   beforeEach(async () => {
-    goalsServiceSpy = {
-      getAll: jest.fn(() => EMPTY),
+    goalsFacadeSpy = {
+      getGoals: jest.fn(() => EMPTY),
     };
 
     await TestBed.configureTestingModule({
       imports: [PeoplesGoalsComponent],
-      providers: [MessageService, { provide: GoalsService, useValue: goalsServiceSpy }],
+      providers: [MessageService, ConfirmationService, { provide: GoalsFacade, useValue: goalsFacadeSpy }],
     }).compileComponents();
 
     fixture = TestBed.createComponent(PeoplesGoalsComponent);

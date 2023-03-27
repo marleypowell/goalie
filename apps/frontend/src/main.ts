@@ -5,7 +5,7 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter, withEnabledBlockingInitialNavigation } from '@angular/router';
 import { ApiGatewayApiModule, Configuration as ApiGatewayConfiguration } from '@goalie/shared/api-client-api-gateway';
 import { Configuration as OAuthAgentConfiguration, OAuthAgentApiModule } from '@goalie/shared/api-client-oauth-agent';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { AppComponent } from './app/app.component';
 import { appRoutes } from './app/app.routes';
 import { refreshTokenInterceptorFn } from './app/interceptors/refresh-token.interceptor';
@@ -29,5 +29,6 @@ bootstrapApplication(AppComponent, {
       )
     ),
     MessageService,
+    ConfirmationService,
   ],
 }).catch((err) => console.error(err));

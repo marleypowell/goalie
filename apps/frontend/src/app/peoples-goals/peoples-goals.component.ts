@@ -1,11 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Goal, GoalsService } from '@goalie/shared/api-client-api-gateway';
+import { Goal } from '@goalie/shared/api-client-api-gateway';
 import { GoalsTableComponent } from '@goalie/ui';
-import { MessageService } from 'primeng/api';
-import { BehaviorSubject, catchError, throwError } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
+import { GoalsFacade } from '../services/goals.facade';
 
 @Component({
   selector: 'goalie-peoples-goals',
@@ -18,19 +17,14 @@ import { BehaviorSubject, catchError, throwError } from 'rxjs';
 export class PeoplesGoalsComponent implements OnInit {
   public readonly goals$ = new BehaviorSubject<Goal[]>([]);
 
-  public constructor(
-    private readonly router: Router,
-    private readonly goalsService: GoalsService,
-    private readonly messageService: MessageService
-  ) {}
+  public constructor(private readonly router: Router, private readonly goalsFacade: GoalsFacade) {}
 
   public ngOnInit(): void {
     this.loadGoals();
   }
 
   public deleteGoal(goalId: string): void {
-    this.goalsService._delete(goalId).subscribe(() => {
-      this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Goal deleted' });
+    this.goalsFacade.deleteGoal(goalId, () => {
       this.loadGoals();
     });
   }
@@ -40,20 +34,8 @@ export class PeoplesGoalsComponent implements OnInit {
   }
 
   private loadGoals(): void {
-    this.goalsService
-      .getAll()
-      .pipe(
-        catchError((err) => {
-          if (err instanceof HttpErrorResponse && err.status === HttpStatusCode.Forbidden) {
-            this.messageService.add({ severity: 'error', summary: 'Error', detail: err.message });
-            return [];
-          }
-
-          return throwError(() => err);
-        })
-      )
-      .subscribe((goals: Goal[]) => {
-        this.goals$.next(goals);
-      });
+    this.goalsFacade.getGoals().subscribe((goals: Goal[]) => {
+      this.goals$.next(goals);
+    });
   }
 }
