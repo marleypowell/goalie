@@ -1,3 +1,4 @@
+import { MessageResponse } from '@goalie/common';
 import {
   CompleteGoalDto,
   CreateGoalDto,
@@ -7,7 +8,6 @@ import {
   GetGoalsDto,
   Goal,
   GoalActivity,
-  MessageResponse,
 } from '@goalie/shared/goals';
 import { HttpException, HttpStatus, Inject, NotFoundException } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';

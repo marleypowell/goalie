@@ -1,4 +1,4 @@
-import { setupTracing } from '@goalie/shared/goals';
+import { setupTracing } from '@goalie/common';
 import { Logger, RequestMethod, ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';

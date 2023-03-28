@@ -1,4 +1,4 @@
-import { TracingOptions } from '@goalie/shared/goals';
+import { TracingOptions } from '@goalie/common';
 import { NatsOptions } from '@nestjs/microservices';
 
 export interface AuthOptions {

@@ -1,4 +1,4 @@
-import { MessageResponse } from '@goalie/shared/goals';
+import { MessageResponse } from '@goalie/common';
 import { Controller, HttpStatus, Logger } from '@nestjs/common';
 import { QueryBus } from '@nestjs/cqrs';
 import { MessagePattern, Payload } from '@nestjs/microservices';

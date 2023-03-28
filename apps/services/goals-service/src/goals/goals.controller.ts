@@ -1,3 +1,4 @@
+import { MessageResponse } from '@goalie/common';
 import {
   CompleteGoalCommand,
   CompleteGoalDto,
@@ -10,7 +11,6 @@ import {
   GetGoalsDto,
   Goal,
   GoalActivity,
-  MessageResponse,
 } from '@goalie/shared/goals';
 import { Controller, HttpStatus, Logger } from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';

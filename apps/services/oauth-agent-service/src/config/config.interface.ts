@@ -1,4 +1,4 @@
-import { TracingOptions } from '@goalie/shared/goals';
+import { TracingOptions } from '@goalie/common';
 import { CookieSerializeOptions } from 'cookie';
 
 export interface Config {
