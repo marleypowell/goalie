@@ -3,11 +3,12 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
 import { Goal } from '@goalie/shared/api-client-api-gateway';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { TagModule } from 'primeng/tag';
+import { GoalProgressPipe } from '../pipes/goal-progress.pipe';
 
 @Component({
   selector: 'goalie-goals-list',
   standalone: true,
-  imports: [CommonModule, TagModule, ProgressBarModule],
+  imports: [CommonModule, TagModule, ProgressBarModule, GoalProgressPipe],
   templateUrl: './goals-list.component.html',
   styleUrls: ['./goals-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -11,6 +11,7 @@ import { ProgressBarModule } from 'primeng/progressbar';
 import { filter, take } from 'rxjs';
 import { CheckInFormComponent } from '../check-in-form/check-in-form.component';
 import { GoalActivityComponent } from '../goal-activity/goal-activity.component';
+import { GoalProgressPipe } from '../pipes/goal-progress.pipe';
 import { UserAvatarPipe } from '../pipes/user-avatar.pipe';
 
 @Component({
@@ -25,6 +26,7 @@ import { UserAvatarPipe } from '../pipes/user-avatar.pipe';
     ButtonModule,
     MenuModule,
     ProgressBarModule,
+    GoalProgressPipe,
   ],
   providers: [DialogService],
   templateUrl: './goal-details.component.html',

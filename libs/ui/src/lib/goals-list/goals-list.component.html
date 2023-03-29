@@ -10,12 +10,8 @@
       <span class="item item__name">{{ goal.name }}</span>
 
       <div title="Progress" class="item item__progress">
-        <span>{{ goal.goalCompleted ? 100 : 0 }}%</span>
-        <p-progressBar
-          [value]="goal.goalCompleted ? 100 : 0"
-          [showValue]="false"
-          [style]="{ height: '10px' }"
-        ></p-progressBar>
+        <span>{{ goal | goalProgress }}%</span>
+        <p-progressBar [value]="goal | goalProgress" [showValue]="false" [style]="{ height: '10px' }"></p-progressBar>
       </div>
 
       <p-tag

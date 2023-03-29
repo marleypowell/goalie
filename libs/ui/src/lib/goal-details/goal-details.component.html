@@ -55,8 +55,8 @@
   </p-card>
 
   <p-card styleClass="goal-details__progress-card" header="Progress">
-    <p>Progress: {{ progressPercentage }}%</p>
-    <p-progressBar [value]="progressPercentage" [showValue]="false"></p-progressBar>
+    <p>Progress: {{ goal | goalProgress }}%</p>
+    <p-progressBar [value]="goal | goalProgress" [showValue]="false"></p-progressBar>
 
     <ng-template pTemplate="footer">
       <p-button
