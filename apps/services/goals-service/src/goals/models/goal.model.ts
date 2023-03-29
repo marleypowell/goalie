@@ -66,6 +66,10 @@ export class GoalAggregate extends AggregateRoot {
     this.logger.log(`checkIn: ${JSON.stringify(command)}`);
     const event = new GoalCheckedInEvent(command);
     this.apply(event);
+
+    if (command.progress === this.target) {
+      this.completeGoal();
+    }
   }
 
   public onGoalCheckedInEvent(event: GoalCheckedInEvent): void {
@@ -103,6 +107,7 @@ export class GoalAggregate extends AggregateRoot {
 
   public onGoalCompletedEvent(event: GoalCompletedEvent): void {
     this.logger.log(`onGoalCompletedEvent ${JSON.stringify(event)}`);
+    this.progress = this.target;
     this.completed = true;
   }
 
