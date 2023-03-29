@@ -559,11 +559,16 @@
           "progress": {
             "type": "number",
             "description": "The progress of the goal."
+          },
+          "comment": {
+            "type": "string",
+            "description": "The comment for the check-in."
           }
         },
         "required": [
           "goalId",
-          "progress"
+          "progress",
+          "comment"
         ]
       }
     }

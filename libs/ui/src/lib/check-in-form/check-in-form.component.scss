@@ -10,7 +10,7 @@ form {
   }
 }
 
-.p-fields {
+.progress__field {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -25,6 +25,15 @@ form {
 
   p-slider {
     flex: 1;
+  }
+}
+
+.p-field {
+  display: flex;
+  flex-direction: column;
+
+  label {
+    margin-bottom: 0.5rem;
   }
 }
 

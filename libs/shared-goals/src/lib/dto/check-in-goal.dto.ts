@@ -26,8 +26,15 @@ export class CheckInGoalDto {
   @IsNumber()
   public progress: number;
 
-  public constructor(goalId: string, progress: number) {
+  /**
+   * The comment for the check-in.
+   */
+  @IsString()
+  public comment: string;
+
+  public constructor(goalId: string, progress: number, comment: string) {
     this.goalId = goalId;
     this.progress = progress;
+    this.comment = comment;
   }
 }

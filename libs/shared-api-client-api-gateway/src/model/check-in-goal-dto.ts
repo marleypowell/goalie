@@ -23,4 +23,8 @@ export interface CheckInGoalDto {
    * The progress of the goal.
    */
   progress: number;
+  /**
+   * The comment for the check-in.
+   */
+  comment: string;
 }

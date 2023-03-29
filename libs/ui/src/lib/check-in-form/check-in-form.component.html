@@ -1,23 +1,30 @@
 <form *ngIf="goal" [formGroup]="formGroup">
-  <label for="progress">Progress</label>
-  <span class="p-fields">
-    <p-slider
-      inputId="progress"
-      formControlName="progress"
-      [ngModel]="progress$ | async"
-      [min]="0"
-      [max]="goal.target"
-    ></p-slider>
+  <div class="p-field">
+    <label for="progress">Progress</label>
+    <span class="progress__field">
+      <p-slider
+        inputId="progress"
+        formControlName="progress"
+        [ngModel]="progress$ | async"
+        [min]="0"
+        [max]="goal.target"
+      ></p-slider>
 
-    <p-inputNumber
-      inputId="progress"
-      formControlName="progress"
-      [ngModel]="progress$ | async"
-      [min]="0"
-      [max]="goal.target"
-      [suffix]="' / ' + goal.target"
-    ></p-inputNumber>
-  </span>
+      <p-inputNumber
+        inputId="progress"
+        formControlName="progress"
+        [ngModel]="progress$ | async"
+        [min]="0"
+        [max]="goal.target"
+        [suffix]="' / ' + goal.target"
+      ></p-inputNumber>
+    </span>
+  </div>
+
+  <div class="p-field">
+    <label for="comment">Comment</label>
+    <textarea pInputTextarea id="comment" formControlName="comment"></textarea>
+  </div>
 </form>
 
 <div class="actions">

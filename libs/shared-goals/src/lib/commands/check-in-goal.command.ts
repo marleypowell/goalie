@@ -5,10 +5,12 @@ export class CheckInGoalCommand implements ICommand {
   public readonly goalId: string;
   public readonly userId: string;
   public readonly progress: number;
+  public readonly comment: string;
 
   public constructor(payload: CheckInGoalDto) {
     this.goalId = payload.goalId;
     this.userId = payload.userId;
     this.progress = payload.progress;
+    this.comment = payload.comment;
   }
 }

@@ -5,17 +5,19 @@ import { Goal } from '@goalie/shared/api-client-api-gateway';
 import { ButtonModule } from 'primeng/button';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { InputTextareaModule } from 'primeng/inputtextarea';
 import { SliderModule } from 'primeng/slider';
 import { map, startWith } from 'rxjs';
 
 export interface CheckInForm {
   progress: number;
+  comment: string;
 }
 
 @Component({
   selector: 'goalie-check-in-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, InputNumberModule, SliderModule, ButtonModule],
+  imports: [CommonModule, ReactiveFormsModule, InputNumberModule, SliderModule, ButtonModule, InputTextareaModule],
   templateUrl: './check-in-form.component.html',
   styleUrls: ['./check-in-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -25,6 +27,7 @@ export class CheckInFormComponent implements OnInit {
 
   public readonly formGroup = new FormGroup({
     progress: new FormControl<number>(0, [Validators.required]),
+    comment: new FormControl<string>(''),
   });
 
   public readonly progress$ = this.formGroup.controls.progress.valueChanges.pipe(
@@ -37,6 +40,7 @@ export class CheckInFormComponent implements OnInit {
   public ngOnInit(): void {
     this.formGroup.setValue({
       progress: this.goal?.progress ?? 0,
+      comment: '',
     });
   }
 
@@ -48,6 +52,7 @@ export class CheckInFormComponent implements OnInit {
 
     this.ref.close({
       progress: this.formGroup.value.progress,
+      comment: this.formGroup.value.comment,
     } as CheckInForm);
   }
 }

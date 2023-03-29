@@ -8,8 +8,11 @@ export class GoalCheckedInEvent implements IEvent {
 
   public readonly progress: number;
 
+  public readonly comment: string;
+
   public constructor(command: CheckInGoalCommand) {
     this.userId = command.userId;
     this.progress = command.progress;
+    this.comment = command.comment;
   }
 }

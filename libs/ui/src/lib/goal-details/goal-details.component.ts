@@ -89,6 +89,7 @@ export class GoalDetailsComponent {
       this.checkInGoal.emit({
         goalId: this.goal?.goalId ?? '',
         progress: res.progress,
+        comment: res.comment,
       });
     });
   }

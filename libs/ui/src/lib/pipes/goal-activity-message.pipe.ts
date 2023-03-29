@@ -18,8 +18,16 @@ export class GoalActivityMessagePipe implements PipeTransform {
         return `completed this Goal`;
       case 'GoalDeletedEvent':
         return `deleted this Goal`;
-      case 'GoalCheckedInEvent':
-        return `made a check-in. Set progress to ${(activity.data as any).progress}`;
+      case 'GoalCheckedInEvent': {
+        const comment = (activity.data as any).comment;
+        let message = `made a check-in. Set progress to ${(activity.data as any).progress}.`;
+
+        if (comment) {
+          message += ` Comment: ${comment}`;
+        }
+
+        return message;
+      }
       default:
         return null;
     }
