@@ -46,11 +46,11 @@
         icon="pi pi-check"
         styleClass="p-button-sm p-button-success"
         [disabled]="goal.goalCompleted"
-        (click)="completeGoal.emit(goal.goalId)"
+        (onClick)="completeGoal.emit(goal.goalId)"
       ></p-button>
 
       <p-menu #menu [model]="moreButtonItems" [popup]="true"></p-menu>
-      <p-button label="More" icon="pi pi-bars" styleClass="p-button-sm" (click)="menu.toggle($event)"></p-button>
+      <p-button label="More" icon="pi pi-bars" styleClass="p-button-sm" (onClick)="menu.toggle($event)"></p-button>
     </ng-template>
   </p-card>
 
@@ -64,7 +64,7 @@
         icon="pi pi-file-edit"
         styleClass="p-button-sm p-button-primary"
         [disabled]="goal.goalCompleted"
-        (click)="checkInGoalHandler()"
+        (onClick)="checkInGoalHandler()"
       ></p-button>
     </ng-template>
   </p-card>

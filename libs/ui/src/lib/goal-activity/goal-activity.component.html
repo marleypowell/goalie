@@ -12,7 +12,10 @@
     </ng-template>
 
     <ng-template pTemplate="content" let-event>
-      <p>{{ event.created | date: 'd/MM/yy hh:mm' }} - {{ event.data?.user.name.formatted }} {{ event.type }}</p>
+      <p>
+        {{ event.created | date: 'd/MM/yy hh:mm' }} - <b>{{ event.data?.user.name.formatted }}</b>
+        {{ event | goalActivityMessage }}
+      </p>
     </ng-template>
   </p-timeline>
 </div>
