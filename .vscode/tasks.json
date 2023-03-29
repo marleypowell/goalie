@@ -1,0 +1,99 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "bridge-to-kubernetes.resource",
+      "type": "bridge-to-kubernetes.resource",
+      "resource": "api-gateway-service",
+      "resourceType": "service",
+      "ports": [3333],
+      "targetCluster": "goalie",
+      "targetNamespace": "api",
+      "useKubernetesServiceEnvironmentVariables": false
+    },
+    {
+      "type": "shell",
+      "command": "docker compose up -d",
+      "group": "build",
+      "problemMatcher": [],
+      "label": "docker: docker compose up -d",
+      "presentation": {
+        "reveal": "silent",
+        "panel": "new"
+      }
+    },
+    {
+      "type": "shell",
+      "command": "yarn nx serve frontend",
+      "group": "build",
+      "problemMatcher": ["$webpack-builder"],
+      "label": "frontend",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "group": "main"
+      }
+    },
+    {
+      "type": "shell",
+      "command": "yarn nx serve api-gateway",
+      "group": "build",
+      "problemMatcher": ["$webpack-builder"],
+      "label": "api-gateway",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "group": "main"
+      }
+    },
+    {
+      "type": "shell",
+      "command": "yarn nx serve oauth-agent-service",
+      "group": "build",
+      "problemMatcher": ["$webpack-builder"],
+      "label": "oauth-agent-service",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "group": "main"
+      }
+    },
+    {
+      "type": "shell",
+      "command": "yarn nx serve goals-service",
+      "group": "build",
+      "problemMatcher": ["$webpack-builder"],
+      "label": "goals-service",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "group": "microservices"
+      }
+    },
+    {
+      "type": "shell",
+      "command": "yarn nx serve users-service",
+      "group": "build",
+      "problemMatcher": ["$webpack-builder"],
+      "label": "users-service",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "group": "microservices"
+      }
+    },
+    {
+      "label": "serve",
+      "dependsOn": [
+        "docker: docker compose up -d",
+        "frontend",
+        "api-gateway",
+        "oauth-agent-service",
+        "goals-service",
+        "users-service"
+      ],
+      "dependsOrder": "parallel",
+      "problemMatcher": ["$webpack-builder"]
+    }
+  ]
+}
