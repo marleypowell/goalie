@@ -2,7 +2,7 @@ import { CreateGoalCommand } from '@goalie/shared/goals';
 import { Logger } from '@nestjs/common';
 import { CommandHandler, EventPublisher, ICommandHandler } from '@nestjs/cqrs';
 import { GoalsRepository } from '../goals.repository';
-import { GoalAggregate } from '../models/goal.model';
+import { GoalAggregate } from '../models/goal.aggregate';
 
 @CommandHandler(CreateGoalCommand)
 export class CreateGoalHandler implements ICommandHandler<CreateGoalCommand> {

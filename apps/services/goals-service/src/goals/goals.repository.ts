@@ -3,7 +3,7 @@ import { Goal, GoalActivity, GoalJsonEvent, GoalRecordedEvent } from '@goalie/sh
 import { Injectable, Logger } from '@nestjs/common';
 import { EventStoreService } from '../common/event-store.service';
 import { goalReducer } from './entities/goal.reducer';
-import { GoalAggregate } from './models/goal.model';
+import { GoalAggregate } from './models/goal.aggregate';
 
 @Injectable()
 export class GoalsRepository {
@@ -44,7 +44,7 @@ export class GoalsRepository {
   }
 
   public async findAll(): Promise<Goal[] | null> {
-    const goals: Goal[] = [];
+    const goals = new Map<string, Goal>();
 
     const events = this.eventStore.getClient().readAll({
       direction: FORWARDS,
@@ -64,7 +64,7 @@ export class GoalsRepository {
 
         switch (event?.type) {
           case 'GoalCreatedEvent': {
-            goals.push({
+            goals.set(data.goalId, {
               goalId: data.goalId,
               userId: data.userId,
               name: data.name,
@@ -77,24 +77,24 @@ export class GoalsRepository {
             break;
           }
           case 'GoalCompletedEvent': {
-            const goal = goals.find((g) => g.goalId == resolvedEvent.event.streamId);
-            if (goal) {
+            if (goals.has(resolvedEvent.event.streamId)) {
+              const goal = goals.get(resolvedEvent.event.streamId);
               goal.goalCompleted = true;
               goal.completedAt = event.created.toISOString();
             }
             break;
           }
           case 'GoalDeletedEvent': {
-            const goal = goals.find((g) => g.goalId == resolvedEvent.event.streamId);
-            if (goal) {
+            if (goals.has(resolvedEvent.event.streamId)) {
+              const goal = goals.get(resolvedEvent.event.streamId);
               goal.goalDeleted = true;
               goal.deletedAt = event.created.toISOString();
             }
             break;
           }
           case 'GoalCheckedInEvent': {
-            const goal = goals.find((g) => g.goalId == resolvedEvent.event.streamId);
-            if (goal) {
+            if (goals.has(resolvedEvent.event.streamId)) {
+              const goal = goals.get(resolvedEvent.event.streamId);
               goal.progress = data.progress;
               goal.updatedAt = event.created.toISOString();
             }
@@ -102,7 +102,7 @@ export class GoalsRepository {
         }
       }
 
-      return goals;
+      return goals.size > 0 ? Array.from(goals.values()) : [];
     } catch (error) {
       if (error instanceof StreamNotFoundError) {
         return null;
