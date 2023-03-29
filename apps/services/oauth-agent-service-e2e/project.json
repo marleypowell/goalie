@@ -1,6 +1,7 @@
 {
   "name": "oauth-agent-service-e2e",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
   "implicitDependencies": ["oauth-agent-service"],
   "targets": {
     "e2e": {

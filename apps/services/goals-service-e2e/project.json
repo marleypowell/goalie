@@ -1,6 +1,7 @@
 {
   "name": "goals-service-e2e",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
   "implicitDependencies": ["goals-service"],
   "targets": {
     "e2e": {
