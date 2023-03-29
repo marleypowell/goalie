@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-inferrable-types */
+
 import {
   CheckInGoalCommand,
   CreateGoalCommand,
@@ -14,8 +16,8 @@ export class GoalAggregate extends AggregateRoot {
   private userId: string;
   private name: string;
   private target: number;
-  private completed: boolean;
-  private deleted: boolean;
+  private completed: boolean = false;
+  private deleted: boolean = false;
   private progress: number;
 
   private readonly logger = new Logger(GoalAggregate.name);
@@ -66,10 +68,6 @@ export class GoalAggregate extends AggregateRoot {
     this.logger.log(`checkIn: ${JSON.stringify(command)}`);
     const event = new GoalCheckedInEvent(command);
     this.apply(event);
-
-    if (command.progress === this.target) {
-      this.completeGoal();
-    }
   }
 
   public onGoalCheckedInEvent(event: GoalCheckedInEvent): void {
@@ -88,6 +86,10 @@ export class GoalAggregate extends AggregateRoot {
     }
 
     this.progress = event.progress;
+
+    if (this.progress === this.target) {
+      this.completeGoal();
+    }
   }
 
   public completeGoal(): void {
@@ -98,7 +100,7 @@ export class GoalAggregate extends AggregateRoot {
     }
 
     if (this.completed) {
-      throw new Error('Goal already completed');
+      throw new Error('Goal is already completed');
     }
 
     const event = new GoalCompletedEvent();
@@ -115,7 +117,7 @@ export class GoalAggregate extends AggregateRoot {
     this.logger.log(`deleteGoal`);
 
     if (this.deleted) {
-      throw new Error('Goal already deleted');
+      throw new Error('Goal is already deleted');
     }
 
     const event = new GoalDeletedEvent();
