@@ -17,6 +17,47 @@
         <label for="description">Description</label>
         <textarea id="description" formControlName="description" pInputTextarea></textarea>
       </div>
+
+      <div *ngIf="showOwner" class="p-field">
+        <label for="owner">Owner</label>
+        <p-dropdown inputId="owner" formControlName="owner" [options]="users">
+          <ng-template let-user pTemplate="selectedItem">
+            <span class="dropdown__user">
+              <p-avatar
+                *ngIf="user | userAvatar as avatar"
+                class="goals-table__avatar"
+                shape="circle"
+                [label]="avatar.initials"
+                [style]="{ 'background-color': avatar.color, color: '#ffffff', 'font-size': '0.9rem' }"
+              ></p-avatar>
+              {{ user.name.formatted }}
+            </span>
+          </ng-template>
+          <ng-template let-user pTemplate="item">
+            <span class="dropdown__user">
+              <p-avatar
+                *ngIf="user | userAvatar as avatar"
+                class="goals-table__avatar"
+                shape="circle"
+                [label]="avatar.initials"
+                [style]="{ 'background-color': avatar.color, color: '#ffffff', 'font-size': '0.9rem' }"
+              ></p-avatar>
+              {{ user.name.formatted }}
+            </span>
+          </ng-template>
+        </p-dropdown>
+      </div>
+
+      <div *ngIf="showTimeFrame" class="p-field">
+        <label for="timeFrame">Time frame</label>
+        <p-calendar
+          inputId="timeFrame"
+          formControlName="timeFrame"
+          selectionMode="range"
+          dateFormat="dd/mm/yy"
+          [readonlyInput]="true"
+        ></p-calendar>
+      </div>
     </div>
   </div>
 
