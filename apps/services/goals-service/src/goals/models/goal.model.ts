@@ -1,4 +1,11 @@
-import { CreateGoalCommand, GoalCompletedEvent, GoalCreatedEvent, GoalDeletedEvent } from '@goalie/shared/goals';
+import {
+  CheckInGoalCommand,
+  CreateGoalCommand,
+  GoalCheckedInEvent,
+  GoalCompletedEvent,
+  GoalCreatedEvent,
+  GoalDeletedEvent,
+} from '@goalie/shared/goals';
 import { Logger } from '@nestjs/common';
 import { AggregateRoot, IEvent } from '@nestjs/cqrs';
 
@@ -9,6 +16,7 @@ export class GoalAggregate extends AggregateRoot {
   private target: number;
   private completed: boolean;
   private deleted: boolean;
+  private progress: number;
 
   private readonly logger = new Logger(GoalAggregate.name);
 
@@ -36,6 +44,10 @@ export class GoalAggregate extends AggregateRoot {
     return this.deleted;
   }
 
+  public getProgress(): number {
+    return this.progress;
+  }
+
   public createGoal(command: CreateGoalCommand): void {
     this.logger.log(`createGoal: ${JSON.stringify(command)}`);
     const event = new GoalCreatedEvent(command);
@@ -48,6 +60,32 @@ export class GoalAggregate extends AggregateRoot {
     this.userId = event.userId;
     this.name = event.name;
     this.target = event.target;
+  }
+
+  public checkIn(command: CheckInGoalCommand): void {
+    this.logger.log(`checkIn: ${JSON.stringify(command)}`);
+    const event = new GoalCheckedInEvent(command);
+    this.apply(event);
+  }
+
+  public onGoalCheckedInEvent(event: GoalCheckedInEvent): void {
+    this.logger.log(`onGoalCheckedInEvent: ${JSON.stringify(event)}`);
+
+    if (this.deleted) {
+      throw new Error('Goal is deleted');
+    }
+
+    if (this.completed) {
+      throw new Error('Goal is completed');
+    }
+
+    const newProgress = (this.progress ?? 0) + event.progress;
+
+    if (newProgress > this.target) {
+      throw new Error('Progress cannot exceed target');
+    }
+
+    this.progress = newProgress;
   }
 
   public completeGoal(): void {

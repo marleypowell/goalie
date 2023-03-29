@@ -1,3 +1,4 @@
+export * from './check-in-goal.dto';
 export * from './complete-goal.dto';
 export * from './create-goal.dto';
 export * from './delete-goal.dto';

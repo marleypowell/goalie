@@ -3,7 +3,9 @@ export class Goal {
   public userId: string;
   public name: string;
   public target: number;
+  public progress: number;
   public createdAt: string;
+  public updatedAt?: string;
 
   public goalCompleted: boolean;
   public completedAt?: string;
