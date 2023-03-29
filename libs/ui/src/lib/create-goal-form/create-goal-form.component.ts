@@ -80,9 +80,9 @@ export class CreateGoalFormComponent implements OnInit {
     this.ref.close({
       name: this.formGroup.value.name ?? '',
       description: this.formGroup.value.description ?? '',
-      owner: this.formGroup.value.owner,
-      startDate: (this.formGroup.value.timeFrame ?? [])[0].toISOString(),
-      endDate: (this.formGroup.value.timeFrame ?? [])[1].toISOString(),
+      owner: this.showOwner ? this.formGroup.value.owner : null,
+      startDate: this.showTimeFrame ? (this.formGroup.value.timeFrame ?? [])[0].toISOString() : '',
+      endDate: this.showTimeFrame ? (this.formGroup.value.timeFrame ?? [])[1].toISOString() : '',
       target: this.formGroup.value.target,
     } as CreateGoalForm);
   }

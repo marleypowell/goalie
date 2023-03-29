@@ -1,5 +1,5 @@
-<div class="goal-details">
-  <p-card *ngIf="goal" styleClass="goal-details__info-card">
+<div *ngIf="goal" class="goal-details">
+  <p-card styleClass="goal-details__info-card">
     <ng-template pTemplate="title">
       <span class="p-card-title"><i class="pi pi-flag-fill"></i> {{ goal.name }}</span>
     </ng-template>
@@ -25,6 +25,11 @@
       </div>
 
       <div class="goal-details__info-item">
+        <span class="goal-details__info-item-title">Updated</span>
+        <span>{{ goal.updatedAt | date: 'd/MM/yy hh:mm' }}</span>
+      </div>
+
+      <div class="goal-details__info-item">
         <span class="goal-details__info-item-title">Target</span>
         <span>{{ goal.target }}</span>
       </div>
@@ -46,6 +51,21 @@
 
       <p-menu #menu [model]="moreButtonItems" [popup]="true"></p-menu>
       <p-button label="More" icon="pi pi-bars" styleClass="p-button-sm" (click)="menu.toggle($event)"></p-button>
+    </ng-template>
+  </p-card>
+
+  <p-card styleClass="goal-details__progress-card" header="Progress">
+    <p>Progress: {{ progressPercentage }}%</p>
+    <p-progressBar [value]="progressPercentage" [showValue]="false"></p-progressBar>
+
+    <ng-template pTemplate="footer">
+      <p-button
+        label="Check-in"
+        icon="pi pi-file-edit"
+        styleClass="p-button-sm p-button-primary"
+        [disabled]="goal.goalCompleted"
+        (click)="checkInGoalHandler()"
+      ></p-button>
     </ng-template>
   </p-card>
 

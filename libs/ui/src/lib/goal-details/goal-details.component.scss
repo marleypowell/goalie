@@ -48,4 +48,19 @@
       }
     }
   }
+
+  ::ng-deep &__progress-card {
+    .p-card-footer {
+      display: flex;
+      justify-content: flex-end;
+
+      & > * {
+        margin-left: 0.5rem;
+
+        &:first-child {
+          margin-left: 0;
+        }
+      }
+    }
+  }
 }

@@ -2,5 +2,6 @@
   [goal]="goal$ | async"
   [goalActivity]="goalActivity$ | async"
   (completeGoal)="completeGoal($event)"
+  (checkInGoal)="checkInGoal($event)"
   (deleteGoal)="deleteGoal($event)"
 ></goalie-goal-details>

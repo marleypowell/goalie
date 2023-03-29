@@ -1,6 +1,6 @@
 import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Goal, GoalActivity, GoalsService } from '@goalie/shared/api-client-api-gateway';
+import { CheckInGoalDto, Goal, GoalActivity, GoalsService } from '@goalie/shared/api-client-api-gateway';
 import { CreateGoalForm } from '@goalie/ui';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { BehaviorSubject, catchError, Observable, tap, throwError } from 'rxjs';
@@ -98,6 +98,21 @@ export class GoalsFacade {
           return throwError(() => err);
         })
       );
+  }
+
+  public checkInGoal(dto: CheckInGoalDto): Observable<void> {
+    return this.goalsService.checkIn(dto.goalId, dto).pipe(
+      tap(() => {
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Goal checked in' });
+      }),
+      catchError((err) => {
+        if (err instanceof HttpErrorResponse && err.status === HttpStatusCode.Forbidden) {
+          this.messageService.add({ severity: 'error', summary: 'Error', detail: err.message });
+        }
+
+        return throwError(() => err);
+      })
+    );
   }
 
   public completeGoal(goalId: string): Observable<void> {

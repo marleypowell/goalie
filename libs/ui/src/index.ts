@@ -1,3 +1,4 @@
+export * from './lib/check-in-form/check-in-form.component';
 export * from './lib/create-goal-form/create-goal-form.component';
 export * from './lib/goal-details/goal-details.component';
 export * from './lib/goals-list/goals-list.component';

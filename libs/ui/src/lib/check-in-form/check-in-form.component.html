@@ -1,0 +1,25 @@
+<form *ngIf="goal" [formGroup]="formGroup">
+  <label for="progress">Progress</label>
+  <span class="p-fields">
+    <p-slider
+      inputId="progress"
+      formControlName="progress"
+      [ngModel]="progress$ | async"
+      [min]="0"
+      [max]="goal.target"
+    ></p-slider>
+
+    <p-inputNumber
+      inputId="progress"
+      formControlName="progress"
+      [ngModel]="progress$ | async"
+      [min]="0"
+      [max]="goal.target"
+      [suffix]="' / ' + goal.target"
+    ></p-inputNumber>
+  </span>
+</form>
+
+<div class="actions">
+  <button pButton pRipple label="Save" icon="pi pi-plus" class="p-button-success mr-2" (click)="save()"></button>
+</div>

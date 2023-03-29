@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CheckInGoalDto } from '@goalie/shared/api-client-api-gateway';
 import { GoalDetailsComponent } from '@goalie/ui';
 import { map } from 'rxjs';
 import { GoalsFacade } from '../services/goals.facade';
@@ -35,6 +36,12 @@ export class GoalComponent implements OnInit {
   public completeGoal(goalId: string): void {
     this.goalsFacade.completeGoal(goalId).subscribe(() => {
       this.goalsFacade.loadGoal(goalId);
+    });
+  }
+
+  public checkInGoal(dto: CheckInGoalDto): void {
+    this.goalsFacade.checkInGoal(dto).subscribe(() => {
+      this.goalsFacade.loadGoal(dto.goalId);
     });
   }
 
