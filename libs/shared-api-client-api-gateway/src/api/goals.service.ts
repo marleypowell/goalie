@@ -25,6 +25,8 @@ import { Observable } from 'rxjs';
 import { CustomHttpParameterCodec } from '../encoder';
 
 // @ts-ignore
+import { CheckInGoalDto } from '../model/check-in-goal-dto';
+// @ts-ignore
 import { CreateGoalDto } from '../model/create-goal-dto';
 // @ts-ignore
 import { Goal } from '../model/goal';
@@ -176,6 +178,103 @@ export class GoalsService implements GoalsServiceInterface {
     })}/delete`;
     return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`, {
       context: localVarHttpContext,
+      responseType: <any>responseType_,
+      withCredentials: this.configuration.withCredentials,
+      headers: localVarHeaders,
+      observe: observe,
+      reportProgress: reportProgress,
+    });
+  }
+
+  /**
+   * Check-in a goal for a user.
+   * @param id
+   * @param checkInGoalDto
+   * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+   * @param reportProgress flag to report request and response progress.
+   */
+  public checkIn(
+    id: string,
+    checkInGoalDto: CheckInGoalDto,
+    observe?: 'body',
+    reportProgress?: boolean,
+    options?: { httpHeaderAccept?: 'application/json'; context?: HttpContext }
+  ): Observable<any>;
+  public checkIn(
+    id: string,
+    checkInGoalDto: CheckInGoalDto,
+    observe?: 'response',
+    reportProgress?: boolean,
+    options?: { httpHeaderAccept?: 'application/json'; context?: HttpContext }
+  ): Observable<HttpResponse<any>>;
+  public checkIn(
+    id: string,
+    checkInGoalDto: CheckInGoalDto,
+    observe?: 'events',
+    reportProgress?: boolean,
+    options?: { httpHeaderAccept?: 'application/json'; context?: HttpContext }
+  ): Observable<HttpEvent<any>>;
+  public checkIn(
+    id: string,
+    checkInGoalDto: CheckInGoalDto,
+    observe: any = 'body',
+    reportProgress: boolean = false,
+    options?: { httpHeaderAccept?: 'application/json'; context?: HttpContext }
+  ): Observable<any> {
+    if (id === null || id === undefined) {
+      throw new Error('Required parameter id was null or undefined when calling checkIn.');
+    }
+    if (checkInGoalDto === null || checkInGoalDto === undefined) {
+      throw new Error('Required parameter checkInGoalDto was null or undefined when calling checkIn.');
+    }
+
+    let localVarHeaders = this.defaultHeaders;
+
+    let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+    if (localVarHttpHeaderAcceptSelected === undefined) {
+      // to determine the Accept header
+      const httpHeaderAccepts: string[] = ['application/json'];
+      localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+    }
+    if (localVarHttpHeaderAcceptSelected !== undefined) {
+      localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+    }
+
+    let localVarHttpContext: HttpContext | undefined = options && options.context;
+    if (localVarHttpContext === undefined) {
+      localVarHttpContext = new HttpContext();
+    }
+
+    // to determine the Content-Type header
+    const consumes: string[] = ['application/json'];
+    const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+    if (httpContentTypeSelected !== undefined) {
+      localVarHeaders = localVarHeaders.set('Content-Type', httpContentTypeSelected);
+    }
+
+    let responseType_: 'text' | 'json' | 'blob' = 'json';
+    if (localVarHttpHeaderAcceptSelected) {
+      if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+        responseType_ = 'text';
+      } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+        responseType_ = 'json';
+      } else {
+        responseType_ = 'blob';
+      }
+    }
+
+    let localVarPath = `/api/goals/${this.configuration.encodeParam({
+      name: 'id',
+      value: id,
+      in: 'path',
+      style: 'simple',
+      explode: false,
+      dataType: 'string',
+      dataFormat: undefined,
+    })}/check-in`;
+    return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`, {
+      context: localVarHttpContext,
+      body: checkInGoalDto,
       responseType: <any>responseType_,
       withCredentials: this.configuration.withCredentials,
       headers: localVarHeaders,

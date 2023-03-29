@@ -11,6 +11,7 @@ configuration.ts
 encoder.ts
 git_push.sh
 index.ts
+model/check-in-goal-dto.ts
 model/check200-response-info-value.ts
 model/check200-response.ts
 model/check503-response.ts

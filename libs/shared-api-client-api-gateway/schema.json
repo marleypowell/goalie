@@ -318,6 +318,50 @@
         ]
       }
     },
+    "/api/goals/{id}/check-in": {
+      "post": {
+        "operationId": "checkIn",
+        "summary": "Check-in a goal for a user.",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CheckInGoalDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The goal has been successfully checked in."
+          },
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "goals"
+        ]
+      }
+    },
     "/api/goals/{id}/complete": {
       "post": {
         "operationId": "complete",
@@ -448,7 +492,13 @@
           "target": {
             "type": "number"
           },
+          "progress": {
+            "type": "number"
+          },
           "createdAt": {
+            "type": "string"
+          },
+          "updatedAt": {
             "type": "string"
           },
           "goalCompleted": {
@@ -469,6 +519,7 @@
           "userId",
           "name",
           "target",
+          "progress",
           "createdAt",
           "goalCompleted",
           "goalDeleted"
@@ -492,6 +543,27 @@
           "created",
           "type",
           "data"
+        ]
+      },
+      "CheckInGoalDto": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string",
+            "description": "The user ID."
+          },
+          "goalId": {
+            "type": "string",
+            "description": "The goal ID."
+          },
+          "progress": {
+            "type": "number",
+            "description": "The progress of the goal."
+          }
+        },
+        "required": [
+          "goalId",
+          "progress"
         ]
       }
     }

@@ -10,16 +10,17 @@
  * Do not edit the class manually.
  */
 
-export interface Goal {
+export interface CheckInGoalDto {
+  /**
+   * The user ID.
+   */
+  userId?: string;
+  /**
+   * The goal ID.
+   */
   goalId: string;
-  userId: string;
-  name: string;
-  target: number;
+  /**
+   * The progress of the goal.
+   */
   progress: number;
-  createdAt: string;
-  updatedAt?: string;
-  goalCompleted: boolean;
-  completedAt?: string;
-  goalDeleted: boolean;
-  deletedAt?: string;
 }

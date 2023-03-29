@@ -13,7 +13,7 @@ import { HttpHeaders } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
 
-import { CreateGoalDto, Goal, GoalActivity } from '../model/models';
+import { CheckInGoalDto, CreateGoalDto, Goal, GoalActivity } from '../model/models';
 
 import { Configuration } from '../configuration';
 
@@ -27,6 +27,14 @@ export interface GoalsServiceInterface {
    * @param id
    */
   _delete(id: string, extraHttpRequestParams?: any): Observable<{}>;
+
+  /**
+   * Check-in a goal for a user.
+   *
+   * @param id
+   * @param checkInGoalDto
+   */
+  checkIn(id: string, checkInGoalDto: CheckInGoalDto, extraHttpRequestParams?: any): Observable<{}>;
 
   /**
    * Complete a goal for a user.

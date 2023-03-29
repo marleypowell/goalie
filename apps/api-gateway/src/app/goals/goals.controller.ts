@@ -1,6 +1,6 @@
 import { subject } from '@casl/ability';
 import { CaslAbility, UseCasl, UseDtoUserId } from '@goalie/nest-auth';
-import { CreateGoalDto, Goal, GoalActivity } from '@goalie/shared/goals';
+import { CheckInGoalDto, CreateGoalDto, Goal, GoalActivity } from '@goalie/shared/goals';
 import { Body, Controller, ForbiddenException, Get, HttpStatus, Logger, Param, Post } from '@nestjs/common';
 import { ApiProduces, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { map, mergeMap, Observable } from 'rxjs';
@@ -133,6 +133,35 @@ export class GoalsController {
         }
 
         return this.service.getActivity(id);
+      })
+    );
+  }
+
+  /**
+   * Check-in a goal for a user.
+   * @param user the user.
+   * @param id the goal id.
+   * @param checkInGoalDto the check-in data.
+   * @returns nothing.
+   */
+  @Post(':id/check-in')
+  @UseDtoUserId()
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'The goal has been successfully checked in.',
+  })
+  public checkIn(
+    @CaslAbility() ability: AppAbility,
+    @Param('id') id: string,
+    @Body() checkInGoalDto: CheckInGoalDto
+  ): Observable<unknown> {
+    return this.service.get(id).pipe(
+      mergeMap((goal) => {
+        if (ability.cannot('update', subject('Goal', goal))) {
+          throw new ForbiddenException(`You are not allowed to check in this goal.`);
+        }
+
+        return this.service.checkIn(checkInGoalDto);
       })
     );
   }

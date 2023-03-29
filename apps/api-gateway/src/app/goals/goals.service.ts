@@ -1,5 +1,6 @@
 import { MessageResponse } from '@goalie/common';
 import {
+  CheckInGoalDto,
   CompleteGoalDto,
   CreateGoalDto,
   DeleteGoalDto,
@@ -112,6 +113,17 @@ export class GoalsService {
           })
         );
       })
+    );
+  }
+
+  public checkIn(checkInGoalDto: CheckInGoalDto): Observable<unknown> {
+    return this.client.send<MessageResponse<string>>('checkInGoal', checkInGoalDto).pipe(
+      tap((res) => {
+        if (res.status !== HttpStatus.OK) {
+          throw new HttpException(`Error checking in goal with id ${checkInGoalDto.goalId}`, res.status);
+        }
+      }),
+      map(() => of())
     );
   }
 

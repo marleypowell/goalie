@@ -1,3 +1,4 @@
+export * from './check-in-goal-dto';
 export * from './check200-response';
 export * from './check200-response-info-value';
 export * from './check503-response';
