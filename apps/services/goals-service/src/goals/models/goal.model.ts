@@ -79,13 +79,11 @@ export class GoalAggregate extends AggregateRoot {
       throw new Error('Goal is completed');
     }
 
-    const newProgress = (this.progress ?? 0) + event.progress;
-
-    if (newProgress > this.target) {
+    if (event.progress > this.target) {
       throw new Error('Progress cannot exceed target');
     }
 
-    this.progress = newProgress;
+    this.progress = event.progress;
   }
 
   public completeGoal(): void {

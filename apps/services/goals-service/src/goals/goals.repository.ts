@@ -69,6 +69,7 @@ export class GoalsRepository {
               userId: data.userId,
               name: data.name,
               target: data.target,
+              progress: 0,
               goalCompleted: false,
               goalDeleted: false,
               createdAt: event.created.toISOString(),
@@ -91,6 +92,13 @@ export class GoalsRepository {
             }
             break;
           }
+          case 'GoalCheckedInEvent': {
+            const goal = goals.find((g) => g.goalId == resolvedEvent.event.streamId);
+            if (goal) {
+              goal.progress = data.progress;
+              goal.updatedAt = event.created.toISOString();
+            }
+          }
         }
       }
 
@@ -110,6 +118,7 @@ export class GoalsRepository {
       userId: '',
       name: '',
       target: 0,
+      progress: 0,
       goalCompleted: false,
       goalDeleted: false,
       createdAt: '',
@@ -160,7 +169,7 @@ export class GoalsRepository {
       for (let i = activities.length - 1; i >= 0; i--) {
         const a = activities[i];
 
-        if (a.data?.userId) {
+        if ('userId' in a.data && a.data.userId) {
           userId = a.data.userId;
         } else if (userId) {
           (a.data as any).userId = userId;

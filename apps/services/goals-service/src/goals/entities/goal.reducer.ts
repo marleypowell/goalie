@@ -8,6 +8,7 @@ export const goalReducer = (goal: Goal, event: GoalRecordedEvent): Goal => {
         userId: event.data.userId,
         name: event.data.name,
         target: event.data.target,
+        progress: 0,
         goalCompleted: false,
         goalDeleted: false,
         createdAt: event.created.toISOString(),
@@ -25,6 +26,13 @@ export const goalReducer = (goal: Goal, event: GoalRecordedEvent): Goal => {
         ...goal,
         goalDeleted: true,
         deletedAt: event.created.toISOString(),
+      };
+    }
+    case 'GoalCheckedInEvent': {
+      return {
+        ...goal,
+        progress: event.data.progress,
+        updatedAt: event.created.toISOString(),
       };
     }
   }

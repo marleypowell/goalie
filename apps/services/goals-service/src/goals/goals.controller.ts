@@ -1,5 +1,7 @@
 import { MessageResponse } from '@goalie/common';
 import {
+  CheckInGoalCommand,
+  CheckInGoalDto,
   CompleteGoalCommand,
   CompleteGoalDto,
   CreateGoalCommand,
@@ -31,6 +33,14 @@ export class GoalsController {
     const command = new CreateGoalCommand(payload);
     await this.commandBus.execute(command);
     return new MessageResponse(HttpStatus.CREATED, command.goalId);
+  }
+
+  @MessagePattern('checkInGoal')
+  public async checkIn(@Payload() payload: CheckInGoalDto): Promise<MessageResponse<string>> {
+    this.logger.log(`Received checkInGoal command: ${JSON.stringify(payload)}`);
+    const command = new CheckInGoalCommand(payload);
+    await this.commandBus.execute(command);
+    return new MessageResponse(HttpStatus.OK, 'SUCCESS');
   }
 
   @MessagePattern('completeGoal')
