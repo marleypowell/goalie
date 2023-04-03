@@ -43,3 +43,7 @@ Thumbs.db
 /apps/**/prisma/generated/
 
 .structurizr
+
+# Generated Docusaurus files
+.docusaurus/
+.cache-loader/

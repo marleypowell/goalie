@@ -8,5 +8,8 @@
   "eslint.packageManager": "yarn",
   "[prisma]": {
     "editor.defaultFormatter": "Prisma.prisma"
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "yzhang.markdown-all-in-one"
   }
 }
