@@ -1,3 +1,3 @@
 # Deployment Architecture
 
-![Deployment Architecture](img/deployment-architecture.svg)
+![Deployment Architecture](img/deployment-architecture.png)
