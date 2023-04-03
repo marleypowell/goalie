@@ -1,11 +1,12 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: eventstore
 spec:
   selector:
     matchLabels:
       app: eventstore
+  serviceName: eventstore-service
   template:
     metadata:
       labels:
@@ -45,8 +46,19 @@ spec:
             timeoutSeconds: 5
             periodSeconds: 15
           volumeMounts:
-            - name: data
+            - name: eventstore-vol
               mountPath: /var/lib/eventstore
-      volumes:
-        - name: data
-          emptyDir: {}
+      securityContext:
+        fsGroup: 2000
+        runAsNonRoot: true
+        runAsUser: 1000
+  volumeClaimTemplates:
+    - metadata:
+        name: eventstore-vol
+        namespace: eventstore
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 10Gi

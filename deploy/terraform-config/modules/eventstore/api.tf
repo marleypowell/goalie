@@ -28,7 +28,7 @@ resource "kubernetes_namespace" "eventstore_ns" {
 }
 
 resource "kubectl_manifest" "eventstore_deployment" {
-  yaml_body          = file("${path.cwd}/deploy/eventstore-config/eventstore-k8s-deployment.yaml")
+  yaml_body          = file("${path.cwd}/deploy/eventstore-config/eventstore-k8s-stateful-set.yaml")
   override_namespace = kubernetes_namespace.eventstore_ns.metadata.0.name
 }
 
