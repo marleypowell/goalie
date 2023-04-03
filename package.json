@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "build:frontend": "nx build frontend"
+    "build:frontend": "nx build frontend",
+    "changelog": "auto-changelog -o apps/website/docs/changelog.md --commit-limit false --template ./tools/changelog/template.hbs --tag-pattern .+ && cp apps/website/docs/changelog.md CHANGELOG.md"
   },
   "private": true,
   "dependencies": {
@@ -120,6 +121,7 @@
     "@types/uuid": "9.0.1",
     "@typescript-eslint/eslint-plugin": "5.36.1",
     "@typescript-eslint/parser": "5.36.1",
+    "auto-changelog": "2.4.0",
     "cypress": "12.2.0",
     "eslint": "8.15.0",
     "eslint-config-prettier": "8.1.0",
