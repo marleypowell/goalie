@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkwebsite=self.webpackChunkwebsite||[]).push([[213],{7532:e=>{e.exports=JSON.parse('{"title":"Deployment","slug":"/category/deployment","permalink":"/category/deployment","navigation":{"previous":{"title":"Test Cases","permalink":"/testing/test-cases"},"next":{"title":"Deployment","permalink":"/deployment/"}}}')}}]);
