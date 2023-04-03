@@ -108,6 +108,7 @@ describe(GoalAggregate.name, () => {
         goalId: goal.getId(),
         userId: goal.getUserId(),
         progress: 50,
+        comment: 'test',
       });
 
       goal.checkIn(checkInCommand);
@@ -129,6 +130,7 @@ describe(GoalAggregate.name, () => {
         goalId: goal.getId(),
         userId: goal.getUserId(),
         progress: 100,
+        comment: 'test',
       });
 
       goal.checkIn(checkInCommand);
@@ -150,6 +152,7 @@ describe(GoalAggregate.name, () => {
         goalId: goal.getId(),
         userId: goal.getUserId(),
         progress: 101,
+        comment: 'test',
       });
 
       expect(() => goal.checkIn(checkInCommand)).toThrowError('Progress cannot exceed target');
@@ -169,6 +172,7 @@ describe(GoalAggregate.name, () => {
         goalId: goal.getId(),
         userId: goal.getUserId(),
         progress: 50,
+        comment: 'test',
       });
 
       expect(() => goal.checkIn(checkInCommand)).toThrowError('Goal is completed');
@@ -188,6 +192,7 @@ describe(GoalAggregate.name, () => {
         goalId: goal.getId(),
         userId: goal.getUserId(),
         progress: 50,
+        comment: 'test',
       });
 
       expect(() => goal.checkIn(checkInCommand)).toThrowError('Goal is deleted');
