@@ -40,8 +40,6 @@ export const authGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: R
           },
           queryParamsHandling: 'merge',
         });
-      } else {
-        authService.refreshToken().subscribe();
       }
 
       return true;
