@@ -1,9 +1,9 @@
 import { Route } from '@angular/router';
+import { GoalListComponent } from './features/goal-list/goal-list.component';
 import { GoalComponent } from './features/goal/goal.component';
-import { GoalListComponent } from './goal-list/goal-list.component';
-import { HomeComponent } from './home/home.component';
-import { PeoplesGoalsComponent } from './peoples-goals/peoples-goals.component';
-import { ProfileComponent } from './profile/profile.component';
+import { HomeComponent } from './features/home/home.component';
+import { PeoplesGoalsComponent } from './features/peoples-goals/peoples-goals.component';
+import { ProfileComponent } from './features/profile/profile.component';
 import { authGuard } from './shared/guards/auth.guard';
 
 export const appRoutes: Route[] = [
