@@ -8,8 +8,8 @@ import { Configuration as OAuthAgentConfiguration, OAuthAgentApiModule } from '@
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { AppComponent } from './app/app.component';
 import { appRoutes } from './app/app.routes';
-import { refreshTokenInterceptorFn } from './app/interceptors/refresh-token.interceptor';
-import { xsrfInterceptorFn } from './app/interceptors/xsrf.interceptor';
+import { refreshTokenInterceptorFn } from './app/shared/interceptors/refresh-token.interceptor';
+import { xsrfInterceptorFn } from './app/shared/interceptors/xsrf.interceptor';
 import { environment } from './environments/environment';
 
 bootstrapApplication(AppComponent, {
