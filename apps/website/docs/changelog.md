@@ -6,6 +6,29 @@ sidebar_position: 999
 
 Commits follow the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) specification.
 
+## [2023-04-03](https://github.com/marleypowell/goalie/compare/2023-03-29...2023-04-03)
+
+### Commits
+
+- docs: :memo: added `docusaurus` docs site [`9595506`](https://github.com/marleypowell/goalie/commit/9595506bfd9774899d3868ba0be3ea4d3226d39a)
+- docs: :memo: added generated changelog [`6605174`](https://github.com/marleypowell/goalie/commit/6605174826fd3bda4af7923878b9a5a7829c3dd8)
+- docs: :memo: updated documentation [`d880af5`](https://github.com/marleypowell/goalie/commit/d880af51ccf32aa001a52dca5a60bc5bf48d07c4)
+- docs: :memo: updated documentation [`b13af1d`](https://github.com/marleypowell/goalie/commit/b13af1dd32e1f94356812003be3ca5786f28241c)
+- docs: :memo: updated documentation [`5cd2119`](https://github.com/marleypowell/goalie/commit/5cd2119160d7bc811252b4f1ef8bfd7ac541e1eb)
+- docs: :memo: added entity relationship documentation [`25bb61a`](https://github.com/marleypowell/goalie/commit/25bb61a4d2238d2f5192c8881d66c0596ab5e9d9)
+- refactor: :fire: removed unused docs [`e483f45`](https://github.com/marleypowell/goalie/commit/e483f45e0faff400cc0eedb3630705ddb40bc6f4)
+- docs: :memo: added some initial documentation [`9a22832`](https://github.com/marleypowell/goalie/commit/9a228321631d2b61636d9b90e2ff760849c5098c)
+- feat: :rocket: updated deployment config for eventstore [`1d25ad1`](https://github.com/marleypowell/goalie/commit/1d25ad1cb65184d43d0937121cd336307525dae5)
+- ci: :construction_worker: updated CI pipeline to deploy docs site [`2b8eb96`](https://github.com/marleypowell/goalie/commit/2b8eb96857a40f00fd6944623c19689810a5876b)
+- fix: :white_check_mark: fixed small test issue [`03eb411`](https://github.com/marleypowell/goalie/commit/03eb411025a4f3b6a84de71c986957753f9c001e)
+- docs: :memo: updated documentation [`fc16bec`](https://github.com/marleypowell/goalie/commit/fc16bec2e4e8c6393188888625bfb41f6105b28a)
+- docs: :memo: updated documentation [`3222ef4`](https://github.com/marleypowell/goalie/commit/3222ef4c77ba2d2b4d117aae90c474c5b23d65a8)
+- ci: :green_heart: updated pipeline permissions [`fa26737`](https://github.com/marleypowell/goalie/commit/fa267375fe1d37c0c7359315431456f21d01fe7e)
+- chore: :wrench: updated docusaurus config [`0c7cca1`](https://github.com/marleypowell/goalie/commit/0c7cca1c9946151cbf6cc4d11cd84e507f48bc70)
+- Create CNAME [`e2ff393`](https://github.com/marleypowell/goalie/commit/e2ff393e9584c8e2be720ed4e57721f12b802526)
+- Delete CNAME [`b34245d`](https://github.com/marleypowell/goalie/commit/b34245d4521e990d75b5c307216f26bce3b00a4b)
+- Create CNAME [`05f42cd`](https://github.com/marleypowell/goalie/commit/05f42cdf747e037aa34202168f5bae36372d5779)
+
 ## [2023-03-29](https://github.com/marleypowell/goalie/compare/2023-03-28...2023-03-29)
 
 ### Commits
