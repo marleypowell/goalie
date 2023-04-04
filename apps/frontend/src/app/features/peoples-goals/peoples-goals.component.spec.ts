@@ -1,8 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { EMPTY } from 'rxjs';
-import { GoalsFacade } from '../services/goals.facade';
-
+import { GoalsFacade } from '../../services/goals.facade';
 import { PeoplesGoalsComponent } from './peoples-goals.component';
 
 describe('PeoplesGoalsComponent', () => {

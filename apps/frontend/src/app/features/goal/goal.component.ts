@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CheckInGoalDto } from '@goalie/shared/api-client-api-gateway';
 import { GoalDetailsComponent } from '@goalie/ui';
 import { map } from 'rxjs';
-import { GoalsFacade } from '../services/goals.facade';
+import { GoalsFacade } from '../../services/goals.facade';
 
 @Component({
   selector: 'goalie-goal',

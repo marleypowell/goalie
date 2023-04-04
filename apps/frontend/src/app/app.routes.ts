@@ -1,6 +1,6 @@
 import { Route } from '@angular/router';
+import { GoalComponent } from './features/goal/goal.component';
 import { GoalListComponent } from './goal-list/goal-list.component';
-import { GoalComponent } from './goal/goal.component';
 import { HomeComponent } from './home/home.component';
 import { PeoplesGoalsComponent } from './peoples-goals/peoples-goals.component';
 import { ProfileComponent } from './profile/profile.component';

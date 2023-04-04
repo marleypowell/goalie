@@ -5,7 +5,7 @@ import { Goal } from '@goalie/shared/api-client-api-gateway';
 import { CreateGoalForm, UserGoalsComponent } from '@goalie/ui';
 import { ToastModule } from 'primeng/toast';
 import { BehaviorSubject } from 'rxjs';
-import { GoalsFacade } from '../services/goals.facade';
+import { GoalsFacade } from '../../services/goals.facade';
 
 @Component({
   selector: 'goalie-goal-list',

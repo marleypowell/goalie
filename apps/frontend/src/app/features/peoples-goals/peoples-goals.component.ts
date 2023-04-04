@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Goal } from '@goalie/shared/api-client-api-gateway';
 import { GoalsTableComponent } from '@goalie/ui';
 import { BehaviorSubject } from 'rxjs';
-import { GoalsFacade } from '../services/goals.facade';
+import { GoalsFacade } from '../../services/goals.facade';
 
 @Component({
   selector: 'goalie-peoples-goals',
