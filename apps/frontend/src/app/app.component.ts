@@ -1,11 +1,10 @@
 import { AsyncPipe, JsonPipe, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
-import { HeaderComponent } from '@goalie/ui';
+import { HeaderComponent, SidebarComponent } from '@goalie/ui';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
 import { AuthService } from './auth.service';
-import { SidebarComponent } from './sidebar/sidebar.component';
 
 @Component({
   standalone: true,
