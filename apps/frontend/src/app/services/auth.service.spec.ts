@@ -1,8 +1,8 @@
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { firstValueFrom, take } from 'rxjs';
+import { WINDOW } from '../shared/injection-tokens';
 import { AuthService } from './auth.service';
-import { WINDOW } from './injection-tokens';
 
 describe(AuthService.name, () => {
   let service: AuthService;
