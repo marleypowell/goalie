@@ -1,8 +1,8 @@
 import { inject } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivateFn, Params, Router, RouterStateSnapshot } from '@angular/router';
 import { map } from 'rxjs';
-import { AuthService } from '../services/auth.service';
-import { WINDOW } from '../shared/injection-tokens';
+import { AuthService } from '../../services/auth.service';
+import { WINDOW } from '../injection-tokens';
 
 export const authGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
   const authService = inject(AuthService);
