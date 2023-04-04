@@ -7,7 +7,7 @@ import {
   RefreshTokenService,
 } from '@goalie/shared/api-client-oauth-agent';
 import { BehaviorSubject, catchError, EMPTY, Observable, of, tap } from 'rxjs';
-import { WINDOW } from '../injection-tokens';
+import { WINDOW } from '../shared/injection-tokens';
 
 interface AuthState {
   handled: boolean;
