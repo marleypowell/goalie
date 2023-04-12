@@ -73,6 +73,8 @@ The Goals Service is built using the following technologies:
 - [NATS](https://nats.io/)
 - [Open Telemetry](https://opentelemetry.io/)
 
+A detailed architecture diagram for the goals service can be found [here](architecture/goals-service-architecture).
+
 ### [OAuth Agent Service](https://github.com/marleypowell/goalie/tree/main/apps/services/oauth-agent-service)
 
 The OAuth Agent Service is a [NestJS](https://nestjs.com/) application that is responsible for authenticating users using OAuth. The OAuth Agent Service uses [Curity Identity Server](#curity-identity-server) to authenticate users. The OAuth Agent Service uses [NATS](https://nats.io/) to communicate with the [API Gateway](#api-gateway).

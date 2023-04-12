@@ -1,0 +1,1723 @@
+{
+  "id" : 1,
+  "name" : "Name",
+  "description" : "Description",
+  "lastModifiedDate" : "2023-04-12T13:30:16Z",
+  "lastModifiedAgent" : "structurizr-javascript",
+  "properties" : {
+    "structurizr.dsl" : "d29ya3NwYWNlIHsKICAhaWRlbnRpZmllcnMgaGllcmFyY2hpY2FsCgogIG1vZGVsIHsKICAgIHVzZXIgPSBwZXJzb24gIlVzZXIiICJBIHVzZXIgdGhhdCB3YW50cyB0byB0cmFjayBnb2FscyIKCiAgICBnb2Fsc1N5c3RlbSA9IHNvZnR3YXJlU3lzdGVtICJHb2FscyBTeXN0ZW0iIHsKICAgICAgbWVzc2FnZUJ1cyA9IGNvbnRhaW5lciAiTWVzc2FnZSBCdXMiIHsKICAgICAgICB0YWdzICJNZXNzYWdlIEJ1cyIKICAgICAgICBkZXNjcmlwdGlvbiAiVGhlIG1lc3NhZ2UgYnVzIGlzIHJlc3BvbnNpYmxlIGZvciBkaXNwYXRjaGluZyBtZXNzYWdlcyB0byB0aGUgYXBwcm9wcmlhdGUgbWVzc2FnZSBoYW5kbGVyLiIKICAgICAgICB0ZWNobm9sb2d5ICJOQVRTIgogICAgICB9CgogICAgICBnb2Fsc0FwcGxpY2F0aW9uID0gY29udGFpbmVyICJHb2FscyBBcHBsaWNhdGlvbiIgewogICAgICAgIHRhZ3MgIldlYiBBcHBsaWNhdGlvbiIgIkFuZ3VsYXIiCiAgICAgICAgdGVjaG5vbG9neSAiQW5ndWxhciIKICAgICAgfQoKICAgICAgZ29hbHNTZXJ2aWNlID0gZ3JvdXAgIkdvYWxzIFNlcnZpY2UiIHsKICAgICAgICBnb2Fsc1NlcnZpY2VEYXRhYmFzZSA9IGNvbnRhaW5lciAiR29hbHMgU2VydmljZSBFdmVudFN0b3JlIiB7CiAgICAgICAgICB0YWdzICJHb2FscyBTZXJ2aWNlIiAiRGF0YWJhc2UiICJFdmVudFN0b3JlIgogICAgICAgICAgdGVjaG5vbG9neSAiRXZlbnRTdG9yZURCIgogICAgICAgIH0KCiAgICAgICAgZ29hbHNTZXJ2aWNlQXBpID0gY29udGFpbmVyICJHb2FscyBTZXJ2aWNlIEFQSSIgewogICAgICAgICAgdGFncyAiR29hbHMgU2VydmljZSIgIlNlcnZpY2UgQVBJIgogICAgICAgICAgdGVjaG5vbG9neSAiTmVzdEpTIgoKICAgICAgICAgIHF1ZXJ5QnVzID0gY29tcG9uZW50ICJRdWVyeSBCdXMiIHsKICAgICAgICAgICAgdGFncyAiUXVlcnkgQnVzIgogICAgICAgICAgICBkZXNjcmlwdGlvbiAiVGhlIHF1ZXJ5IGJ1cyBpcyByZXNwb25zaWJsZSBmb3IgZGlzcGF0Y2hpbmcgcXVlcmllcyB0byB0aGUgYXBwcm9wcmlhdGUgcXVlcnkgaGFuZGxlci4iCiAgICAgICAgICB9CgogICAgICAgICAgY29tbWFuZEJ1cyA9IGNvbXBvbmVudCAiQ29tbWFuZCBCdXMiIHsKICAgICAgICAgICAgdGFncyAiQ29tbWFuZCBCdXMiCiAgICAgICAgICAgIGRlc2NyaXB0aW9uICJUaGUgY29tbWFuZCBidXMgaXMgcmVzcG9uc2libGUgZm9yIGRpc3BhdGNoaW5nIGNvbW1hbmRzIHRvIHRoZSBhcHByb3ByaWF0ZSBjb21tYW5kIGhhbmRsZXIuIgogICAgICAgICAgfQoKICAgICAgICAgIGV2ZW50QnVzID0gY29tcG9uZW50ICJFdmVudCBCdXMiIHsKICAgICAgICAgICAgdGFncyAiRXZlbnQgQnVzIgogICAgICAgICAgICBkZXNjcmlwdGlvbiAiVGhlIGV2ZW50IGJ1cyBpcyByZXNwb25zaWJsZSBmb3IgZGlzcGF0Y2hpbmcgZXZlbnRzIHRvIHRoZSBhcHByb3ByaWF0ZSBldmVudCBoYW5kbGVyLiIKICAgICAgICAgIH0KCiAgICAgICAgICBnb2Fsc0NvbnRyb2xsZXIgPSBjb21wb25lbnQgIkdvYWxzIENvbnRyb2xsZXIiIHsKICAgICAgICAgICAgdGFncyAiQ29udHJvbGxlciIgIkdvYWxzIENvbnRyb2xsZXIiCiAgICAgICAgICAgIGRlc2NyaXB0aW9uICJUaGUgZ29hbHMgY29udHJvbGxlciBpcyByZXNwb25zaWJsZSBmb3IgaGFuZGxpbmcgYWxsIHJlcXVlc3RzIHRvIGNyZWF0ZSwgdXBkYXRlLCBhbmQgZGVsZXRlIGdvYWxzLiIKICAgICAgICAgIH0KCiAgICAgICAgICAjIGhlYWx0aENvbnRyb2xsZXIgPSBjb21wb25lbnQgIkhlYWx0aCBDb250cm9sbGVyIiB7CiAgICAgICAgICAjICAgdGFncyAiQ29udHJvbGxlciIgIkhlYWx0aCBDb250cm9sbGVyIgogICAgICAgICAgIyAgIGRlc2NyaXB0aW9uICJUaGUgaGVhbHRoIGNvbnRyb2xsZXIgaXMgcmVzcG9uc2libGUgZm9yIGhhbmRsaW5nIGFsbCByZXF1ZXN0cyB0byBjaGVjayB0aGUgaGVhbHRoIG9mIHRoZSBzZXJ2aWNlLiIKICAgICAgICAgICMgfQoKICAgICAgICAgIGdvYWxzUmVwb3NpdG9yeSA9IGNvbXBvbmVudCAiR29hbHMgUmVwb3NpdG9yeSIKCiAgICAgICAgICBxdWVyaWVzID0gZ3JvdXAgIlF1ZXJpZXMiIHsKICAgICAgICAgICAgZ2V0R29hbEFjdGl2aXR5UXVlcnkgPSBjb21wb25lbnQgIkdldCBHb2FsIEFjdGl2aXR5IFF1ZXJ5IiB7CiAgICAgICAgICAgICAgdGFncyAiUXVlcnkiCiAgICAgICAgICAgIH0KICAgICAgICAgICAgZ2V0R29hbFF1ZXJ5ID0gY29tcG9uZW50ICJHZXQgR29hbCBRdWVyeSIgewogICAgICAgICAgICAgIHRhZ3MgIlF1ZXJ5IgogICAgICAgICAgICB9CiAgICAgICAgICAgIGdldEdvYWxzUXVlcnkgPSBjb21wb25lbnQgIkdldCBHb2FscyBRdWVyeSIgewogICAgICAgICAgICAgIHRhZ3MgIlF1ZXJ5IgogICAgICAgICAgICB9CiAgICAgICAgICB9CgogICAgICAgICAgY29tbWFuZHMgPSBncm91cCAiQ29tbWFuZHMiIHsKICAgICAgICAgICAgY2hlY2tJbkdvYWxDb21tYW5kID0gY29tcG9uZW50ICJDaGVjayBJbiBHb2FsIENvbW1hbmQiIHsKICAgICAgICAgICAgICB0YWdzICJDb21tYW5kIgogICAgICAgICAgICB9CiAgICAgICAgICAgIGNvbXBsZXRlR29hbENvbW1hbmQgPSBjb21wb25lbnQgIkNvbXBsZXRlIEdvYWwgQ29tbWFuZCIgewogICAgICAgICAgICAgIHRhZ3MgIkNvbW1hbmQiCiAgICAgICAgICAgIH0KICAgICAgICAgICAgY3JlYXRlR29hbENvbW1hbmQgPSBjb21wb25lbnQgIkNyZWF0ZSBHb2FsIENvbW1hbmQiIHsKICAgICAgICAgICAgICB0YWdzICJDb21tYW5kIgogICAgICAgICAgICB9CiAgICAgICAgICAgIGRlbGV0ZUdvYWxDb21tYW5kID0gY29tcG9uZW50ICJEZWxldGUgR29hbCBDb21tYW5kIiB7CiAgICAgICAgICAgICAgdGFncyAiQ29tbWFuZCIKICAgICAgICAgICAgfQogICAgICAgICAgfQoKICAgICAgICAgIGV2ZW50cyA9IGdyb3VwICJFdmVudHMiIHsKICAgICAgICAgICAgZ29hbENoZWNrZWRJbkV2ZW50ID0gY29tcG9uZW50ICJHb2FsIENoZWNrZWQgSW4gRXZlbnQiIHsKICAgICAgICAgICAgICB0YWdzICJFdmVudCIKICAgICAgICAgICAgfQogICAgICAgICAgICBnb2FsQ29tcGxldGVkRXZlbnQgPSBjb21wb25lbnQgIkdvYWwgQ29tcGxldGVkIEV2ZW50IiB7CiAgICAgICAgICAgICAgdGFncyAiRXZlbnQiCiAgICAgICAgICAgIH0KICAgICAgICAgICAgZ29hbENyZWF0ZWRFdmVudCA9IGNvbXBvbmVudCAiR29hbCBDcmVhdGVkIEV2ZW50IiB7CiAgICAgICAgICAgICAgdGFncyAiRXZlbnQiCiAgICAgICAgICAgIH0KICAgICAgICAgICAgZ29hbERlbGV0ZWRFdmVudCA9IGNvbXBvbmVudCAiR29hbCBEZWxldGVkIEV2ZW50IiB7CiAgICAgICAgICAgICAgdGFncyAiRXZlbnQiCiAgICAgICAgICAgIH0KICAgICAgICAgIH0KCiAgICAgICAgICBnb2Fsc0NvbnRyb2xsZXIgLT4gcXVlcnlCdXMgIlJlYWRzIHVzaW5nIgogICAgICAgICAgZ29hbHNDb250cm9sbGVyIC0+IGNvbW1hbmRCdXMgIldyaXRlcyB1c2luZyIKCiAgICAgICAgICAjIGhlYWx0aENvbnRyb2xsZXIgLT4gZ29hbHNTZXJ2aWNlRGF0YWJhc2UgIkNoZWNrcyBoZWFsdGggb2YiCiAgICAgICAgICAjIGhlYWx0aENvbnRyb2xsZXIgLT4gbWVzc2FnZUJ1cyAiQ2hlY2tzIGhlYWx0aCBvZiIKCiAgICAgICAgICBxdWVyeUJ1cyAtPiBnZXRHb2FsQWN0aXZpdHlRdWVyeSAiRGlzcGF0Y2hlcyB0byIKICAgICAgICAgIHF1ZXJ5QnVzIC0+IGdldEdvYWxRdWVyeSAiRGlzcGF0Y2hlcyB0byIKICAgICAgICAgIHF1ZXJ5QnVzIC0+IGdldEdvYWxzUXVlcnkgIkRpc3BhdGNoZXMgdG8iCgogICAgICAgICAgY29tbWFuZEJ1cyAtPiBjaGVja0luR29hbENvbW1hbmQgIkRpc3BhdGNoZXMgdG8iCiAgICAgICAgICBjb21tYW5kQnVzIC0+IGNvbXBsZXRlR29hbENvbW1hbmQgIkRpc3BhdGNoZXMgdG8iCiAgICAgICAgICBjb21tYW5kQnVzIC0+IGNyZWF0ZUdvYWxDb21tYW5kICJEaXNwYXRjaGVzIHRvIgogICAgICAgICAgY29tbWFuZEJ1cyAtPiBkZWxldGVHb2FsQ29tbWFuZCAiRGlzcGF0Y2hlcyB0byIKCiAgICAgICAgICBldmVudEJ1cyAtPiBnb2FsQ2hlY2tlZEluRXZlbnQgIlB1Ymxpc2hlcyB0byIKICAgICAgICAgIGV2ZW50QnVzIC0+IGdvYWxDb21wbGV0ZWRFdmVudCAiUHVibGlzaGVzIHRvIgogICAgICAgICAgZXZlbnRCdXMgLT4gZ29hbENyZWF0ZWRFdmVudCAiUHVibGlzaGVzIHRvIgogICAgICAgICAgZXZlbnRCdXMgLT4gZ29hbERlbGV0ZWRFdmVudCAiUHVibGlzaGVzIHRvIgoKICAgICAgICAgIGdldEdvYWxBY3Rpdml0eVF1ZXJ5IC0+IGdvYWxzUmVwb3NpdG9yeSAiUmVhZHMgZnJvbSIKICAgICAgICAgIGdldEdvYWxRdWVyeSAtPiBnb2Fsc1JlcG9zaXRvcnkgIlJlYWRzIGZyb20iCiAgICAgICAgICBnZXRHb2Fsc1F1ZXJ5IC0+IGdvYWxzUmVwb3NpdG9yeSAiUmVhZHMgZnJvbSIKCiAgICAgICAgICBjaGVja0luR29hbENvbW1hbmQgLT4gZ29hbHNSZXBvc2l0b3J5ICJXcml0ZXMgdG8iCiAgICAgICAgICBjb21wbGV0ZUdvYWxDb21tYW5kIC0+IGdvYWxzUmVwb3NpdG9yeSAiV3JpdGVzIHRvIgogICAgICAgICAgY3JlYXRlR29hbENvbW1hbmQgLT4gZ29hbHNSZXBvc2l0b3J5ICJXcml0ZXMgdG8iCiAgICAgICAgICBkZWxldGVHb2FsQ29tbWFuZCAtPiBnb2Fsc1JlcG9zaXRvcnkgIldyaXRlcyB0byIKCiAgICAgICAgICBnb2Fsc1JlcG9zaXRvcnkgLT4gZ29hbHNTZXJ2aWNlRGF0YWJhc2UgIlJlYWRzIGZyb20gYW5kIHdyaXRlcyB0byIKICAgICAgICAgIGdvYWxzUmVwb3NpdG9yeSAtPiBldmVudEJ1cyAiUHVibGlzaGVzIHRvIgogICAgICAgIH0KCiAgICAgICAgZ29hbHNTZXJ2aWNlQXBpIC0+IGdvYWxzU2VydmljZURhdGFiYXNlICJSZWFkcyBmcm9tIGFuZCB3cml0ZXMgdG8iCiAgICAgIH0KCiAgICAgIGFwaUdhdGV3YXkgPSBncm91cCAiQVBJIEdhdGV3YXkiIHsKICAgICAgICBhcGlHYXRld2F5QXBpID0gY29udGFpbmVyICJBUEkgR2F0ZXdheSBBUEkiIHsKICAgICAgICAgIHRhZ3MgIkFQSSBHYXRld2F5IiAiU2VydmljZSBBUEkiCiAgICAgICAgICB0ZWNobm9sb2d5ICJOZXN0SlMiCiAgICAgICAgfQogICAgICB9CgogICAgICB1c2Vyc1NlcnZpY2UgPSBncm91cCAiVXNlcnMgU2VydmljZSIgewogICAgICAgIHVzZXJzU2VydmljZUFwaSA9IGNvbnRhaW5lciAiVXNlcnMgU2VydmljZSBBUEkiIHsKICAgICAgICAgIHRhZ3MgIlVzZXJzIFNlcnZpY2UiICJTZXJ2aWNlIEFQSSIKICAgICAgICAgIHRlY2hub2xvZ3kgIk5lc3RKUyIKCiAgICAgICAgICB1c2Vyc0NvbnRyb2xsZXIgPSBjb21wb25lbnQgIlVzZXJzIENvbnRyb2xsZXIiIHsKICAgICAgICAgICAgdGFncyAiQ29udHJvbGxlciIgIlVzZXJzIENvbnRyb2xsZXIiCiAgICAgICAgICAgIGRlc2NyaXB0aW9uICJUaGUgdXNlcnMgY29udHJvbGxlciBpcyByZXNwb25zaWJsZSBmb3IgcmVhZGluZyB1c2Vycy4iCiAgICAgICAgICB9CiAgICAgICAgfQogICAgICB9CgogICAgICBjdXJpdHlTZXJ2aWNlID0gZ3JvdXAgIkN1cml0eSBTZXJ2aWNlIiB7CiAgICAgICAgY3VyaXR5QXBwbGljYXRpb24gPSBjb250YWluZXIgIkN1cml0eSBBcHBsaWNhdGlvbiIgewogICAgICAgICAgdGFncyAiV2ViIEFwcGxpY2F0aW9uIgogICAgICAgICAgdGVjaG5vbG9neSAiQW5ndWxhciIKICAgICAgICB9CgogICAgICAgIGN1cml0eVNlcnZpY2VBcGkgPSBjb250YWluZXIgIkN1cml0eSBTZXJ2aWNlIEFQSSIgewogICAgICAgICAgdGFncyAiQ3VyaXR5IFNlcnZpY2UiICJTZXJ2aWNlIEFQSSIKICAgICAgICAgIHRlY2hub2xvZ3kgIkphdmEiCiAgICAgICAgfQoKICAgICAgICBjdXJpdHlTZXJ2aWNlRGF0YWJhc2UgPSBjb250YWluZXIgIkN1cml0eSBTZXJ2aWNlIERhdGFiYXNlIiB7CiAgICAgICAgICB0YWdzICJDdXJpdHkgU2VydmljZSIgIkRhdGFiYXNlIgogICAgICAgICAgdGVjaG5vbG9neSAiUG9zdGdyZVNRTCIKICAgICAgICAgIGN1cml0eVNlcnZpY2VBcGkgLT4gdGhpcyAiUmVhZHMgZnJvbSBhbmQgd3JpdGVzIHRvIgogICAgICAgIH0KICAgICAgfQoKICAgICAgb2F1dGhBZ2VudFNlcnZpY2UgPSBncm91cCAiT0F1dGggQWdlbnQgU2VydmljZSIgewogICAgICAgIG9hdXRoQWdlbnRTZXJ2aWNlQXBpID0gY29udGFpbmVyICJPQXV0aCBBZ2VudCBTZXJ2aWNlIEFQSSIgewogICAgICAgICAgdGFncyAiT0F1dGggQWdlbnQgU2VydmljZSIgIlNlcnZpY2UgQVBJIgogICAgICAgICAgdGVjaG5vbG9neSAiTmVzdEpTIgoKICAgICAgICAgIGNsYWltc0NvbnRyb2xsZXIgPSBjb21wb25lbnQgIkNsYWltcyBDb250cm9sbGVyIiB7CiAgICAgICAgICAgIHRhZ3MgIkNvbnRyb2xsZXIiICJDbGFpbXMgQ29udHJvbGxlciIKICAgICAgICAgICAgZGVzY3JpcHRpb24gIlRoZSBjbGFpbXMgY29udHJvbGxlciBpcyByZXNwb25zaWJsZSBmb3IgaGFuZGxpbmcgYWxsIHJlcXVlc3RzIHRvIGdldCBjbGFpbXMgZnJvbSB0aGUgT0F1dGggQWdlbnQgU2VydmljZS4iCiAgICAgICAgICB9CgogICAgICAgICAgaGVhbHRoQ29udHJvbGxlciA9IGNvbXBvbmVudCAiSGVhbHRoIENvbnRyb2xsZXIiIHsKICAgICAgICAgICAgdGFncyAiQ29udHJvbGxlciIgIkhlYWx0aCBDb250cm9sbGVyIgogICAgICAgICAgICBkZXNjcmlwdGlvbiAiVGhlIGhlYWx0aCBjb250cm9sbGVyIGlzIHJlc3BvbnNpYmxlIGZvciBoYW5kbGluZyBhbGwgcmVxdWVzdHMgdG8gY2hlY2sgdGhlIGhlYWx0aCBvZiB0aGUgc2VydmljZS4iCiAgICAgICAgICB9CgogICAgICAgICAgbG9naW5Db250cm9sbGVyID0gY29tcG9uZW50ICJMb2dpbiBDb250cm9sbGVyIiB7CiAgICAgICAgICAgIHRhZ3MgIkNvbnRyb2xsZXIiICJMb2dpbiBDb250cm9sbGVyIgogICAgICAgICAgICBkZXNjcmlwdGlvbiAiVGhlIGxvZ2luIGNvbnRyb2xsZXIgaXMgcmVzcG9uc2libGUgZm9yIGhhbmRsaW5nIGFsbCByZXF1ZXN0cyB0byBsb2dpbiB0byB0aGUgT0F1dGggQWdlbnQgU2VydmljZS4iCiAgICAgICAgICB9CgogICAgICAgICAgbG9naW5TZXJ2aWNlID0gY29tcG9uZW50ICJMb2dpbiBTZXJ2aWNlIiB7CiAgICAgICAgICAgIHRhZ3MgIk5lc3QgU2VydmljZSIgIkxvZ2luIFNlcnZpY2UiCiAgICAgICAgICB9CgogICAgICAgICAgbG9nb3V0Q29udHJvbGxlciA9IGNvbXBvbmVudCAiTG9nb3V0IENvbnRyb2xsZXIiIHsKICAgICAgICAgICAgdGFncyAiQ29udHJvbGxlciIgIkxvZ291dCBDb250cm9sbGVyIgogICAgICAgICAgICBkZXNjcmlwdGlvbiAiVGhlIGxvZ291dCBjb250cm9sbGVyIGlzIHJlc3BvbnNpYmxlIGZvciBoYW5kbGluZyBhbGwgcmVxdWVzdHMgdG8gbG9nb3V0IG9mIHRoZSBPQXV0aCBBZ2VudCBTZXJ2aWNlLiIKICAgICAgICAgIH0KCiAgICAgICAgICByZWZyZXNoVG9rZW5Db250cm9sbGVyID0gY29tcG9uZW50ICJSZWZyZXNoIFRva2VuIENvbnRyb2xsZXIiIHsKICAgICAgICAgICAgdGFncyAiQ29udHJvbGxlciIgIlJlZnJlc2ggVG9rZW4gQ29udHJvbGxlciIKICAgICAgICAgICAgZGVzY3JpcHRpb24gIlRoZSByZWZyZXNoIHRva2VuIGNvbnRyb2xsZXIgaXMgcmVzcG9uc2libGUgZm9yIGhhbmRsaW5nIGFsbCByZXF1ZXN0cyB0byByZWZyZXNoIGEgdG9rZW4gZnJvbSB0aGUgT0F1dGggQWdlbnQgU2VydmljZS4iCiAgICAgICAgICB9CgogICAgICAgICAgdXNlckluZm9Db250cm9sbGVyID0gY29tcG9uZW50ICJVc2VyIEluZm8gQ29udHJvbGxlciIgewogICAgICAgICAgICB0YWdzICJDb250cm9sbGVyIiAiVXNlciBJbmZvIENvbnRyb2xsZXIiCiAgICAgICAgICAgIGRlc2NyaXB0aW9uICJUaGUgdXNlciBpbmZvIGNvbnRyb2xsZXIgaXMgcmVzcG9uc2libGUgZm9yIGhhbmRsaW5nIGFsbCByZXF1ZXN0cyB0byBnZXQgdXNlciBpbmZvIGZyb20gdGhlIE9BdXRoIEFnZW50IFNlcnZpY2UuIgogICAgICAgICAgfQoKICAgICAgICAgIGxvZ2luQ29udHJvbGxlciAtPiBsb2dpblNlcnZpY2UgIlVzZXMiCiAgICAgICAgfQogICAgICB9CgogICAgICAjIHJlbGF0aW9uc2hpcHMgdG8vZnJvbSBjb250YWluZXJzCiAgICAgIHVzZXIgLT4gZ29hbHNBcHBsaWNhdGlvbiAiQ3JlYXRlcyBhbmQgdHJhY2tzIGdvYWxzIHVzaW5nIgogICAgICB1c2VyIC0+IGN1cml0eUFwcGxpY2F0aW9uICJMb2dzIGluIG9yIHJlZ2lzdGVycyB1c2luZyIKCiAgICAgIGdvYWxzQXBwbGljYXRpb24gLT4gYXBpR2F0ZXdheUFwaSAiTWFrZXMgQVBJIGNhbGxzIHRvIiAiSlNPTi9IVFRQUyIKICAgICAgZ29hbHNBcHBsaWNhdGlvbiAtPiBvYXV0aEFnZW50U2VydmljZUFwaSAiQXV0aGVudGljYXRlcyB3aXRoIgogICAgICBnb2Fsc0FwcGxpY2F0aW9uIC0+IGN1cml0eUFwcGxpY2F0aW9uICJSZWRpcmVjdHMgdG8iCgogICAgICBhcGlHYXRld2F5QXBpIC0+IG1lc3NhZ2VCdXMgIlB1Ymxpc2hlcyBtZXNzYWdlcyB0byIgIk5BVFMiCgogICAgICBvYXV0aEFnZW50U2VydmljZUFwaSAtPiBjdXJpdHlTZXJ2aWNlQXBpICJBdXRoZW50aWNhdGVzIHdpdGgiICJKU09OL0hUVFBTIgoKICAgICAgdXNlcnNTZXJ2aWNlQXBpIC0+IGN1cml0eVNlcnZpY2VBcGkgIkZldGNoZXMgdXNlciBkYXRhIGZyb20iICJKU09OL0hUVFBTIgoKICAgICAgY3VyaXR5QXBwbGljYXRpb24gLT4gZ29hbHNBcHBsaWNhdGlvbiAiUmVkaXJlY3RzIHRvIgogICAgICBjdXJpdHlBcHBsaWNhdGlvbiAtPiBjdXJpdHlTZXJ2aWNlQXBpICJWYWxpZGF0ZXMgY3JlZGVudGlhbHMgYW5kIHJlZ2lzdGVycyB3aXRoIgoKICAgICAgIyByZWxhdGlvbnNoaXBzIHRvL2Zyb20gY29tcG9uZW50cwogICAgICBnb2Fsc0FwcGxpY2F0aW9uIC0+IG9hdXRoQWdlbnRTZXJ2aWNlQXBpLmxvZ2luQ29udHJvbGxlciAiTG9ncyBpbiB3aXRoIiAiSlNPTi9IVFRQUyIKICAgICAgZ29hbHNBcHBsaWNhdGlvbiAtPiBvYXV0aEFnZW50U2VydmljZUFwaS5sb2dvdXRDb250cm9sbGVyICJMb2dzIG91dCB3aXRoIiAiSlNPTi9IVFRQUyIKICAgICAgZ29hbHNBcHBsaWNhdGlvbiAtPiBvYXV0aEFnZW50U2VydmljZUFwaS5yZWZyZXNoVG9rZW5Db250cm9sbGVyICJSZWZyZXNoZXMgdG9rZW5zIHdpdGgiICJKU09OL0hUVFBTIgogICAgICBnb2Fsc0FwcGxpY2F0aW9uIC0+IG9hdXRoQWdlbnRTZXJ2aWNlQXBpLnVzZXJJbmZvQ29udHJvbGxlciAiRmV0Y2hlcyB1c2VyIGluZm8gd2l0aCIgIkpTT04vSFRUUFMiCiAgICAgIGdvYWxzQXBwbGljYXRpb24gLT4gb2F1dGhBZ2VudFNlcnZpY2VBcGkuY2xhaW1zQ29udHJvbGxlciAiRmV0Y2hlcyBjbGFpbXMgd2l0aCIgIkpTT04vSFRUUFMiCgogICAgICBtZXNzYWdlQnVzIC0+IGdvYWxzU2VydmljZUFwaS5nb2Fsc0NvbnRyb2xsZXIgIlNlbmRzIG1lc3NhZ2VzIHRvIiAiTkFUUyIKICAgICAgbWVzc2FnZUJ1cyAtPiB1c2Vyc1NlcnZpY2VBcGkudXNlcnNDb250cm9sbGVyICJTZW5kcyBtZXNzYWdlcyB0byIgIk5BVFMiCgogICAgICBvYXV0aEFnZW50U2VydmljZUFwaS5sb2dpblNlcnZpY2UgLT4gY3VyaXR5U2VydmljZUFwaSAiQ3JlYXRlcyBsb2dpbiB1cmwgYW5kIGdldHMgYXV0aCB0b2tlbiB1c2luZyIgIkpTT04vSFRUUFMiCiAgICB9CgogICAgIyByZWxhdGlvbnNoaXBzIGJldHdlZW4gcGVvcGxlIGFuZCBzb2Z0d2FyZSBzeXN0ZW1zCiAgICB1c2VyIC0+IGdvYWxzU3lzdGVtICJDcmVhdGVzIGFuZCB0cmFja3MgZ29hbHMgdXNpbmciCgogICAgbGl2ZSA9IGRlcGxveW1lbnRFbnZpcm9ubWVudCAiTGl2ZSIgewogICAgICBkZXBsb3ltZW50Tm9kZSAiQXp1cmUiIHsKICAgICAgICBkZXBsb3ltZW50Tm9kZSAiVUsgU291dGgiIHsKICAgICAgICAgIGRuc1pvbmUgPSBpbmZyYXN0cnVjdHVyZU5vZGUgIkROUyBab25lIiB7CiAgICAgICAgICAgIHRhZ3MgIk1pY3Jvc29mdCBBenVyZSAtIEROUyBab25lcyIKICAgICAgICAgIH0KCiAgICAgICAgICBjb250YWluZXJSZWdpc3RyeSA9IGluZnJhc3RydWN0dXJlTm9kZSAiQ29udGFpbmVyIFJlZ2lzdHJ5IiB7CiAgICAgICAgICAgIHRhZ3MgIk1pY3Jvc29mdCBBenVyZSAtIENvbnRhaW5lciBSZWdpc3RyaWVzIgogICAgICAgICAgfQoKICAgICAgICAgIGRlcGxveW1lbnROb2RlICJQb3N0Z3JlU1FMIiB7CiAgICAgICAgICAgIHRhZ3MgIk1pY3Jvc29mdCBBenVyZSAtIEF6dXJlIERhdGFiYXNlIFBvc3RncmVTUUwgU2VydmVyIgoKICAgICAgICAgICAgY29udGFpbmVySW5zdGFuY2UgZ29hbHNTeXN0ZW0uY3VyaXR5U2VydmljZURhdGFiYXNlCiAgICAgICAgICB9CgogICAgICAgICAgYWtzID0gZGVwbG95bWVudE5vZGUgIkF6dXJlIEt1YmVybmV0ZXMgU2VydmljZSIgewogICAgICAgICAgICB0YWdzICJNaWNyb3NvZnQgQXp1cmUgLSBLdWJlcm5ldGVzIFNlcnZpY2VzIgoKICAgICAgICAgICAgaW5ncmVzcyA9IGluZnJhc3RydWN0dXJlTm9kZSAiSW5ncmVzcyBDb250cm9sbGVyIiB7CiAgICAgICAgICAgICAgdGVjaG5vbG9neSAiTkdJTlgiCiAgICAgICAgICAgIH0KCgogICAgICAgICAgICBhcGlHYXRld2F5ID0gY29udGFpbmVySW5zdGFuY2UgZ29hbHNTeXN0ZW0uYXBpR2F0ZXdheUFwaQogICAgICAgICAgICBjb250YWluZXJJbnN0YW5jZSBnb2Fsc1N5c3RlbS5nb2Fsc1NlcnZpY2VBcGkKICAgICAgICAgICAgY29udGFpbmVySW5zdGFuY2UgZ29hbHNTeXN0ZW0udXNlcnNTZXJ2aWNlQXBpCiAgICAgICAgICAgIG9hdXRoQWdlbnRTZXJ2aWNlID0gY29udGFpbmVySW5zdGFuY2UgZ29hbHNTeXN0ZW0ub2F1dGhBZ2VudFNlcnZpY2VBcGkKICAgICAgICAgICAgY29udGFpbmVySW5zdGFuY2UgZ29hbHNTeXN0ZW0uY3VyaXR5QXBwbGljYXRpb24KICAgICAgICAgICAgY29udGFpbmVySW5zdGFuY2UgZ29hbHNTeXN0ZW0uY3VyaXR5U2VydmljZUFwaQoKICAgICAgICAgICAgZGVwbG95bWVudE5vZGUgIkV2ZW50U3RvcmUiIHsKICAgICAgICAgICAgICB0YWdzICJFdmVudFN0b3JlIgoKICAgICAgICAgICAgICBjb250YWluZXJJbnN0YW5jZSBnb2Fsc1N5c3RlbS5nb2Fsc1NlcnZpY2VEYXRhYmFzZQogICAgICAgICAgICB9CgogICAgICAgICAgICBkZXBsb3ltZW50Tm9kZSAiTkFUUyIgewogICAgICAgICAgICAgIHRhZ3MgIk5BVFMiCiAgICAgICAgICAgICAgdGVjaG5vbG9neSAiTkFUUyIKCiAgICAgICAgICAgICAgY29udGFpbmVySW5zdGFuY2UgZ29hbHNTeXN0ZW0ubWVzc2FnZUJ1cwogICAgICAgICAgICB9CiAgICAgICAgICB9CgogICAgICAgICAgc3RhdGljR29hbHNBcHBsaWNhdGlvbiA9IGRlcGxveW1lbnROb2RlICJTdGF0aWMgV2ViIEFwcCIgewogICAgICAgICAgICB0YWdzICJNaWNyb3NvZnQgQXp1cmUgLSBTdGF0aWMgQXBwcyIKCiAgICAgICAgICAgIHcgPSBjb250YWluZXJJbnN0YW5jZSBnb2Fsc1N5c3RlbS5nb2Fsc0FwcGxpY2F0aW9uCiAgICAgICAgICB9CgogICAgICAgICAgYWtzIC0+IGNvbnRhaW5lclJlZ2lzdHJ5ICJMb2FkcyBjb250YWluZXJzIGZyb20iCiAgICAgICAgICBha3MuaW5ncmVzcyAtPiBha3MuYXBpR2F0ZXdheSAiUm91dGVzIHRvIgogICAgICAgICAgYWtzLmluZ3Jlc3MgLT4gYWtzLm9hdXRoQWdlbnRTZXJ2aWNlICJSb3V0ZXMgdG8iCgogICAgICAgICAgZG5zWm9uZSAtPiBha3MuaW5ncmVzcyAiUmVzb2x2ZXMgdG8iCiAgICAgICAgICBkbnNab25lIC0+IHN0YXRpY0dvYWxzQXBwbGljYXRpb24gIlJlc29sdmVzIHRvIgogICAgICAgIH0KICAgICAgfQogICAgfQogIH0KCiAgdmlld3MgewogICAgc3lzdGVtY29udGV4dCBnb2Fsc1N5c3RlbSAiU3lzdGVtQ29udGV4dCIgewogICAgICAgIGluY2x1ZGUgKgogICAgICAgIGF1dG9MYXlvdXQKICAgICAgICBkZXNjcmlwdGlvbiAiVGhlIHN5c3RlbSBjb250ZXh0IGRpYWdyYW0gZm9yIHRoZSBHb2FscyBTeXN0ZW0uIgogICAgICAgIHByb3BlcnRpZXMgewogICAgICAgICAgICBzdHJ1Y3R1cml6ci5ncm91cHMgZmFsc2UKICAgICAgICB9CiAgICB9CgogICAgY29udGFpbmVyIGdvYWxzU3lzdGVtICJHb2Fsc19TeXN0ZW1fQ29udGFpbmVyIiB7CiAgICAgIGluY2x1ZGUgKgogICAgICBhdXRvbGF5b3V0IGxyCgogICAgICBleGNsdWRlICJnb2Fsc1N5c3RlbS5nb2Fsc0FwcGxpY2F0aW9uIC0+IGdvYWxzU3lzdGVtLmN1cml0eUFwcGxpY2F0aW9uIgogICAgICBleGNsdWRlICJnb2Fsc1N5c3RlbS5jdXJpdHlBcHBsaWNhdGlvbiAtPiBnb2Fsc1N5c3RlbS5nb2Fsc0FwcGxpY2F0aW9uIgogICAgfQoKICAgIGNvbXBvbmVudCBnb2Fsc1N5c3RlbS5nb2Fsc1NlcnZpY2VBcGkgIkdvYWxzX1NlcnZpY2VfQVBJIiB7CiAgICAgIGluY2x1ZGUgKgogICAgICBhdXRvbGF5b3V0CiAgICAgIGRlc2NyaXB0aW9uICJUaGUgY29tcG9uZW50IGRpYWdyYW0gZm9yIHRoZSBHb2FscyBTZXJ2aWNlIEFQSS4iCiAgICB9CgogICAgY29tcG9uZW50IGdvYWxzU3lzdGVtLm9hdXRoQWdlbnRTZXJ2aWNlQXBpICJPQXV0aF9BZ2VudF9TZXJ2aWNlX0FQSSIgewogICAgICBpbmNsdWRlICoKICAgICAgYXV0b2xheW91dAogICAgICBkZXNjcmlwdGlvbiAiVGhlIGNvbXBvbmVudCBkaWFncmFtIGZvciB0aGUgT0F1dGggQWdlbnQgU2VydmljZSBBUEkuIgogICAgfQoKICAgIGR5bmFtaWMgZ29hbHNTeXN0ZW0ub2F1dGhBZ2VudFNlcnZpY2VBcGkgIlNpZ25JbiIgewogICAgICB1c2VyIC0+IGdvYWxzU3lzdGVtLmdvYWxzQXBwbGljYXRpb24gIlVzZXMiCiAgICAgIGdvYWxzU3lzdGVtLmdvYWxzQXBwbGljYXRpb24gLT4gZ29hbHNTeXN0ZW0ub2F1dGhBZ2VudFNlcnZpY2VBcGkubG9naW5Db250cm9sbGVyICJTdWJtaXRzIGEgbG9naW4gc3RhcnQgcmVxdWVzdCB0byIKICAgICAgZ29hbHNTeXN0ZW0ub2F1dGhBZ2VudFNlcnZpY2VBcGkubG9naW5Db250cm9sbGVyIC0+IGdvYWxzU3lzdGVtLmdvYWxzQXBwbGljYXRpb24gIlJldHVybnMgYSBsb2dpbiB1cmwgdG8iCiAgICAgIGdvYWxzU3lzdGVtLmdvYWxzQXBwbGljYXRpb24gLT4gZ29hbHNTeXN0ZW0uY3VyaXR5QXBwbGljYXRpb24gIlJlZGlyZWN0cyB0byIKICAgICAgdXNlciAtPiBnb2Fsc1N5c3RlbS5jdXJpdHlBcHBsaWNhdGlvbiAiRW50ZXJzIGNyZWRlbnRpYWxzIGFuZCBzaWducyBpbiB0byIKICAgICAgZ29hbHNTeXN0ZW0uY3VyaXR5QXBwbGljYXRpb24gLT4gZ29hbHNTeXN0ZW0uY3VyaXR5U2VydmljZUFwaSAiVmFsaWRhdGVzIGNyZWRlbnRpYWxzIHdpdGgiCiAgICAgIGdvYWxzU3lzdGVtLmN1cml0eVNlcnZpY2VBcGkgLT4gZ29hbHNTeXN0ZW0uY3VyaXR5QXBwbGljYXRpb24gIlJldHVybnMgYXV0aCBjb2RlIGFuZCBzdGF0ZSB0byIKICAgICAgZ29hbHNTeXN0ZW0uY3VyaXR5QXBwbGljYXRpb24gLT4gZ29hbHNTeXN0ZW0uZ29hbHNBcHBsaWNhdGlvbiAiUmVkaXJlY3RzIHRvIgogICAgICBnb2Fsc1N5c3RlbS5nb2Fsc0FwcGxpY2F0aW9uIC0+IGdvYWxzU3lzdGVtLm9hdXRoQWdlbnRTZXJ2aWNlQXBpLmxvZ2luQ29udHJvbGxlciAiU3VibWl0cyBhIGxvZ2luIGVuZCByZXF1ZXN0IHRvIgogICAgICBnb2Fsc1N5c3RlbS5vYXV0aEFnZW50U2VydmljZUFwaS5sb2dpbkNvbnRyb2xsZXIgLT4gZ29hbHNTeXN0ZW0ub2F1dGhBZ2VudFNlcnZpY2VBcGkubG9naW5TZXJ2aWNlICJTZW5kcyBhdXRoIGNvZGUgdG8iCiAgICAgIGdvYWxzU3lzdGVtLm9hdXRoQWdlbnRTZXJ2aWNlQXBpLmxvZ2luU2VydmljZSAtPiBnb2Fsc1N5c3RlbS5jdXJpdHlTZXJ2aWNlQXBpICJTZW5kcyBhdXRoIGNvZGUgdG8iCiAgICAgIGdvYWxzU3lzdGVtLmN1cml0eVNlcnZpY2VBcGkgLT4gZ29hbHNTeXN0ZW0ub2F1dGhBZ2VudFNlcnZpY2VBcGkubG9naW5TZXJ2aWNlICJSZXR1cm5zIGF1dGggdG9rZW4gdG8iCiAgICAgIGdvYWxzU3lzdGVtLm9hdXRoQWdlbnRTZXJ2aWNlQXBpLmxvZ2luU2VydmljZSAtPiBnb2Fsc1N5c3RlbS5vYXV0aEFnZW50U2VydmljZUFwaS5sb2dpbkNvbnRyb2xsZXIgIlJldHVybnMgYXV0aCBjb29raWVzIHRvIgogICAgICBnb2Fsc1N5c3RlbS5vYXV0aEFnZW50U2VydmljZUFwaS5sb2dpbkNvbnRyb2xsZXIgLT4gZ29hbHNTeXN0ZW0uZ29hbHNBcHBsaWNhdGlvbiAiUmV0dXJucyBhdXRoIGNvb2tpZXMgdG8iCiAgICAgIGRlc2NyaXB0aW9uICJUaGUgdXNlciBzaWducyBpbiB0byB0aGUgR29hbHMgU3lzdGVtLiIKICAgIH0KCiAgICBkZXBsb3ltZW50IGdvYWxzU3lzdGVtIGxpdmUgIkRlcGxveW1lbnRfQWxsIiB7CiAgICAgIGluY2x1ZGUgKgogICAgICBhdXRvbGF5b3V0IGxyCgogICAgICBleGNsdWRlICJnb2Fsc1N5c3RlbS5nb2Fsc0FwcGxpY2F0aW9uIC0+IGdvYWxzU3lzdGVtLmN1cml0eUFwcGxpY2F0aW9uIgogICAgICBleGNsdWRlICJnb2Fsc1N5c3RlbS5jdXJpdHlBcHBsaWNhdGlvbiAtPiBnb2Fsc1N5c3RlbS5nb2Fsc0FwcGxpY2F0aW9uIgogICAgfQoKICAgIHN0eWxlcyB7CiAgICAgIGVsZW1lbnQgIlBlcnNvbiIgewogICAgICAgIHNoYXBlIFBlcnNvbgogICAgICAgIGNvbG9yICNmZmZmZmYKICAgICAgICBiYWNrZ3JvdW5kICMwODQyN2IKICAgICAgfQogICAgICBlbGVtZW50ICJTZXJ2aWNlIEFQSSIgewogICAgICAgIHNoYXBlIGhleGFnb24KICAgICAgfQogICAgICBlbGVtZW50ICJEYXRhYmFzZSIgewogICAgICAgIHNoYXBlIGN5bGluZGVyCiAgICAgIH0KICAgICAgZWxlbWVudCAiR29hbHMgU2VydmljZSIgewogICAgICAgIGJhY2tncm91bmQgIzkxRjBBRQogICAgICB9CiAgICAgIGVsZW1lbnQgIkFQSSBHYXRld2F5IiB7CiAgICAgICAgYmFja2dyb3VuZCAjRURGMDhDCiAgICAgIH0KICAgICAgZWxlbWVudCAiVXNlcnMgU2VydmljZSIgewogICAgICAgIGJhY2tncm91bmQgIzhDRDBGMAogICAgICB9CiAgICAgIGVsZW1lbnQgIk9BdXRoIEFnZW50IFNlcnZpY2UiIHsKICAgICAgICBiYWNrZ3JvdW5kICNGMDhDQTQKICAgICAgfQogICAgICBlbGVtZW50ICJDdXJpdHkgU2VydmljZSIgewogICAgICAgIGJhY2tncm91bmQgI0ZGQUMzMwogICAgICB9CgogICAgICBlbGVtZW50ICJNZXNzYWdlIEJ1cyIgewogICAgICAgIHNoYXBlIHBpcGUKICAgICAgICBiYWNrZ3JvdW5kICNmN2RkMTkKICAgICAgfQoKICAgICAgZWxlbWVudCAiQ29udHJvbGxlciIgewogICAgICAgIGNvbG9yICNmZmZmZmYKICAgICAgICBiYWNrZ3JvdW5kICMwODQyN2IKICAgICAgfQoKICAgICAgZWxlbWVudCAiQ29tbWFuZCBCdXMiIHsKICAgICAgICBzaGFwZSBwaXBlCiAgICAgICAgYmFja2dyb3VuZCAjMjJlMzY5CiAgICAgIH0KICAgICAgZWxlbWVudCAiQ29tbWFuZCIgewogICAgICAgIHNoYXBlIHJvdW5kZWRCb3gKICAgICAgICBiYWNrZ3JvdW5kICMwY2IzNDkKICAgICAgfQoKICAgICAgZWxlbWVudCAiUXVlcnkgQnVzIiB7CiAgICAgICAgc2hhcGUgcGlwZQogICAgICAgIGJhY2tncm91bmQgI2ZjYmEwMwogICAgICB9CiAgICAgIGVsZW1lbnQgIlF1ZXJ5IiB7CiAgICAgICAgc2hhcGUgcm91bmRlZEJveAogICAgICAgIGJhY2tncm91bmQgI2ZhOTMwMgogICAgICB9CgogICAgICBlbGVtZW50ICJFdmVudCBCdXMiIHsKICAgICAgICBzaGFwZSBwaXBlCiAgICAgICAgYmFja2dyb3VuZCAjZjdmN2Y3CiAgICAgIH0KICAgICAgZWxlbWVudCAiRXZlbnQiIHsKICAgICAgICBzaGFwZSByb3VuZGVkQm94CiAgICAgICAgYmFja2dyb3VuZCAjZjdmN2Y3CiAgICAgIH0KCiAgICAgIGVsZW1lbnQgIldlYiBBcHBsaWNhdGlvbiIgewogICAgICAgIHNoYXBlIHdlYmJyb3dzZXIKICAgICAgfQoKICAgICAgZWxlbWVudCAiQW5ndWxhciIgewogICAgICAgIGNvbG9yICNmZmZmZmYKICAgICAgICBiYWNrZ3JvdW5kICNkZDFiMTYKICAgICAgfQoKICAgICAgZWxlbWVudCAiTmVzdCBTZXJ2aWNlIiB7CiAgICAgICAgYmFja2dyb3VuZCAjZmFmMDM5CiAgICAgIH0KICAgIH0KCiAgICB0aGVtZSBodHRwczovL3N0YXRpYy5zdHJ1Y3R1cml6ci5jb20vdGhlbWVzL21pY3Jvc29mdC1henVyZS0yMDIzLjAxLjI0L3RoZW1lLmpzb24KICB9Cn0K"
+  },
+  "configuration" : { },
+  "model" : {
+    "people" : [ {
+      "id" : "1",
+      "tags" : "Element,Person",
+      "properties" : {
+        "structurizr.dsl.identifier" : "user"
+      },
+      "name" : "User",
+      "description" : "A user that wants to track goals",
+      "relationships" : [ {
+        "id" : "62",
+        "tags" : "Relationship",
+        "sourceId" : "1",
+        "destinationId" : "4",
+        "description" : "Creates and tracks goals using"
+      }, {
+        "id" : "64",
+        "tags" : "Relationship",
+        "sourceId" : "1",
+        "destinationId" : "49",
+        "description" : "Logs in or registers using"
+      }, {
+        "id" : "63",
+        "sourceId" : "1",
+        "destinationId" : "2",
+        "description" : "Creates and tracks goals using",
+        "linkedRelationshipId" : "62"
+      } ],
+      "location" : "Unspecified"
+    } ],
+    "softwareSystems" : [ {
+      "id" : "2",
+      "tags" : "Element,Software System",
+      "properties" : {
+        "structurizr.dsl.identifier" : "goalssystem"
+      },
+      "name" : "Goals System",
+      "location" : "Unspecified",
+      "containers" : [ {
+        "id" : "5",
+        "tags" : "Element,Container,Goals Service,Database,EventStore",
+        "properties" : {
+          "structurizr.dsl.identifier" : "goalssystem.goalsservicedatabase"
+        },
+        "name" : "Goals Service EventStore",
+        "group" : "Goals Service",
+        "technology" : "EventStoreDB",
+        "documentation" : { }
+      }, {
+        "id" : "53",
+        "tags" : "Element,Container,OAuth Agent Service,Service API",
+        "properties" : {
+          "structurizr.dsl.identifier" : "goalssystem.oauthagentserviceapi"
+        },
+        "name" : "OAuth Agent Service API",
+        "relationships" : [ {
+          "id" : "69",
+          "tags" : "Relationship",
+          "sourceId" : "53",
+          "destinationId" : "50",
+          "description" : "Authenticates with",
+          "technology" : "JSON/HTTPS"
+        } ],
+        "group" : "OAuth Agent Service",
+        "technology" : "NestJS",
+        "components" : [ {
+          "id" : "56",
+          "tags" : "Element,Component,Controller,Login Controller",
+          "properties" : {
+            "structurizr.dsl.identifier" : "goalssystem.oauthagentserviceapi.logincontroller"
+          },
+          "name" : "Login Controller",
+          "description" : "The login controller is responsible for handling all requests to login to the OAuth Agent Service.",
+          "relationships" : [ {
+            "id" : "61",
+            "tags" : "Relationship",
+            "sourceId" : "56",
+            "destinationId" : "57",
+            "description" : "Uses"
+          } ],
+          "documentation" : { }
+        }, {
+          "id" : "58",
+          "tags" : "Element,Component,Controller,Logout Controller",
+          "properties" : {
+            "structurizr.dsl.identifier" : "goalssystem.oauthagentserviceapi.logoutcontroller"
+          },
+          "name" : "Logout Controller",
+          "description" : "The logout controller is responsible for handling all requests to logout of the OAuth Agent Service.",
+          "documentation" : { }
+        }, {
+          "id" : "60",
+          "tags" : "Element,Component,Controller,User Info Controller",
+          "properties" : {
+            "structurizr.dsl.identifier" : "goalssystem.oauthagentserviceapi.userinfocontroller"
+          },
+          "name" : "User Info Controller",
+          "description" : "The user info controller is responsible for handling all requests to get user info from the OAuth Agent Service.",
+          "documentation" : { }
+        }, {
+          "id" : "55",
+          "tags" : "Element,Component,Controller,Health Controller",
+          "properties" : {
+            "structurizr.dsl.identifier" : "goalssystem.oauthagentserviceapi.healthcontroller"
+          },
+          "name" : "Health Controller",
+          "description" : "The health controller is responsible for handling all requests to check the health of the service.",
+          "documentation" : { }
+        }, {
+          "id" : "57",
+          "tags" : "Element,Component,Nest Service,Login Service",
+          "properties" : {
+            "structurizr.dsl.identifier" : "goalssystem.oauthagentserviceapi.loginservice"
+          },
+          "name" : "Login Service",
+          "relationships" : [ {
+            "id" : "82",
+            "tags" : "Relationship",
+            "sourceId" : "57",
+            "destinationId" : "50",
+            "description" : "Creates login url and gets auth token using",
+            "technology" : "JSON/HTTPS"
+          } ],
+          "documentation" : { }
+        }, {
+          "id" : "59",
+          "tags" : "Element,Component,Controller,Refresh Token Controller",
+          "properties" : {
+            "structurizr.dsl.identifier" : "goalssystem.oauthagentserviceapi.refreshtokencontroller"
+          },
+          "name" : "Refresh Token Controller",
+          "description" : "The refresh token controller is responsible for handling all requests to refresh a token from the OAuth Agent Service.",
+          "documentation" : { }
+        }, {
+          "id" : "54",
+          "tags" : "Element,Component,Controller,Claims Controller",
+          "properties" : {
+            "structurizr.dsl.identifier" : "goalssystem.oauthagentserviceapi.claimscontroller"
+          },
+          "name" : "Claims Controller",
+          "description" : "The claims controller is responsible for handling all requests to get claims from the OAuth Agent Service.",
+          "documentation" : { }
+        } ],
+        "documentation" : { }
+      }, {
+        "id" : "51",
+        "tags" : "Element,Container,Curity Service,Database",
+        "properties" : {
+          "structurizr.dsl.identifier" : "goalssystem.curityservicedatabase"
+        },
+        "name" : "Curity Service Database",
+        "group" : "Curity Service",
+        "technology" : "PostgreSQL",
+        "documentation" : { }
+      }, {
+        "id" : "47",
+        "tags" : "Element,Container,Users Service,Service API",
+        "properties" : {
+          "structurizr.dsl.identifier" : "goalssystem.usersserviceapi"
+        },
+        "name" : "Users Service API",
+        "relationships" : [ {
+          "id" : "70",
+          "tags" : "Relationship",
+          "sourceId" : "47",
+          "destinationId" : "50",
+          "description" : "Fetches user data from",
+          "technology" : "JSON/HTTPS"
+        } ],
+        "group" : "Users Service",
+        "technology" : "NestJS",
+        "components" : [ {
+          "id" : "48",
+          "tags" : "Element,Component,Controller,Users Controller",
+          "properties" : {
+            "structurizr.dsl.identifier" : "goalssystem.usersserviceapi.userscontroller"
+          },
+          "name" : "Users Controller",
+          "description" : "The users controller is responsible for reading users.",
+          "documentation" : { }
+        } ],
+        "documentation" : { }
+      }, {
+        "id" : "3",
+        "tags" : "Element,Container,Message Bus",
+        "properties" : {
+          "structurizr.dsl.identifier" : "goalssystem.messagebus"
+        },
+        "name" : "Message Bus",
+        "description" : "The message bus is responsible for dispatching messages to the appropriate message handler.",
+        "relationships" : [ {
+          "id" : "80",
+          "tags" : "Relationship",
+          "sourceId" : "3",
+          "destinationId" : "48",
+          "description" : "Sends messages to",
+          "technology" : "NATS"
+        }, {
+          "id" : "79",
+          "sourceId" : "3",
+          "destinationId" : "6",
+          "description" : "Sends messages to",
+          "technology" : "NATS",
+          "linkedRelationshipId" : "78"
+        }, {
+          "id" : "81",
+          "sourceId" : "3",
+          "destinationId" : "47",
+          "description" : "Sends messages to",
+          "technology" : "NATS",
+          "linkedRelationshipId" : "80"
+        }, {
+          "id" : "78",
+          "tags" : "Relationship",
+          "sourceId" : "3",
+          "destinationId" : "10",
+          "description" : "Sends messages to",
+          "technology" : "NATS"
+        } ],
+        "technology" : "NATS",
+        "documentation" : { }
+      }, {
+        "id" : "49",
+        "tags" : "Element,Container,Web Application",
+        "properties" : {
+          "structurizr.dsl.identifier" : "goalssystem.curityapplication"
+        },
+        "name" : "Curity Application",
+        "relationships" : [ {
+          "id" : "72",
+          "tags" : "Relationship",
+          "sourceId" : "49",
+          "destinationId" : "50",
+          "description" : "Validates credentials and registers with"
+        }, {
+          "id" : "71",
+          "tags" : "Relationship",
+          "sourceId" : "49",
+          "destinationId" : "4",
+          "description" : "Redirects to"
+        } ],
+        "group" : "Curity Service",
+        "technology" : "Angular",
+        "documentation" : { }
+      }, {
+        "id" : "4",
+        "tags" : "Element,Container,Web Application,Angular",
+        "properties" : {
+          "structurizr.dsl.identifier" : "goalssystem.goalsapplication"
+        },
+        "name" : "Goals Application",
+        "relationships" : [ {
+          "id" : "65",
+          "tags" : "Relationship",
+          "sourceId" : "4",
+          "destinationId" : "46",
+          "description" : "Makes API calls to",
+          "technology" : "JSON/HTTPS"
+        }, {
+          "id" : "74",
+          "tags" : "Relationship",
+          "sourceId" : "4",
+          "destinationId" : "58",
+          "description" : "Logs out with",
+          "technology" : "JSON/HTTPS"
+        }, {
+          "id" : "75",
+          "tags" : "Relationship",
+          "sourceId" : "4",
+          "destinationId" : "59",
+          "description" : "Refreshes tokens with",
+          "technology" : "JSON/HTTPS"
+        }, {
+          "id" : "66",
+          "tags" : "Relationship",
+          "sourceId" : "4",
+          "destinationId" : "53",
+          "description" : "Authenticates with"
+        }, {
+          "id" : "77",
+          "tags" : "Relationship",
+          "sourceId" : "4",
+          "destinationId" : "54",
+          "description" : "Fetches claims with",
+          "technology" : "JSON/HTTPS"
+        }, {
+          "id" : "73",
+          "tags" : "Relationship",
+          "sourceId" : "4",
+          "destinationId" : "56",
+          "description" : "Logs in with",
+          "technology" : "JSON/HTTPS"
+        }, {
+          "id" : "67",
+          "tags" : "Relationship",
+          "sourceId" : "4",
+          "destinationId" : "49",
+          "description" : "Redirects to"
+        }, {
+          "id" : "76",
+          "tags" : "Relationship",
+          "sourceId" : "4",
+          "destinationId" : "60",
+          "description" : "Fetches user info with",
+          "technology" : "JSON/HTTPS"
+        } ],
+        "technology" : "Angular",
+        "documentation" : { }
+      }, {
+        "id" : "46",
+        "tags" : "Element,Container,API Gateway,Service API",
+        "properties" : {
+          "structurizr.dsl.identifier" : "goalssystem.apigatewayapi"
+        },
+        "name" : "API Gateway API",
+        "relationships" : [ {
+          "id" : "68",
+          "tags" : "Relationship",
+          "sourceId" : "46",
+          "destinationId" : "3",
+          "description" : "Publishes messages to",
+          "technology" : "NATS"
+        } ],
+        "group" : "API Gateway",
+        "technology" : "NestJS",
+        "documentation" : { }
+      }, {
+        "id" : "50",
+        "tags" : "Element,Container,Curity Service,Service API",
+        "properties" : {
+          "structurizr.dsl.identifier" : "goalssystem.curityserviceapi"
+        },
+        "name" : "Curity Service API",
+        "relationships" : [ {
+          "id" : "52",
+          "tags" : "Relationship",
+          "sourceId" : "50",
+          "destinationId" : "51",
+          "description" : "Reads from and writes to"
+        } ],
+        "group" : "Curity Service",
+        "technology" : "Java",
+        "documentation" : { }
+      }, {
+        "id" : "6",
+        "tags" : "Element,Container,Goals Service,Service API",
+        "properties" : {
+          "structurizr.dsl.identifier" : "goalssystem.goalsserviceapi"
+        },
+        "name" : "Goals Service API",
+        "relationships" : [ {
+          "id" : "44",
+          "sourceId" : "6",
+          "destinationId" : "5",
+          "description" : "Reads from and writes to",
+          "linkedRelationshipId" : "43"
+        } ],
+        "group" : "Goals Service",
+        "technology" : "NestJS",
+        "components" : [ {
+          "id" : "22",
+          "tags" : "Element,Component,Event",
+          "properties" : {
+            "structurizr.dsl.identifier" : "goalssystem.goalsserviceapi.goaldeletedevent"
+          },
+          "name" : "Goal Deleted Event",
+          "group" : "Events",
+          "documentation" : { }
+        }, {
+          "id" : "11",
+          "tags" : "Element,Component",
+          "properties" : {
+            "structurizr.dsl.identifier" : "goalssystem.goalsserviceapi.goalsrepository"
+          },
+          "name" : "Goals Repository",
+          "relationships" : [ {
+            "id" : "45",
+            "tags" : "Relationship",
+            "sourceId" : "11",
+            "destinationId" : "9",
+            "description" : "Publishes to"
+          }, {
+            "id" : "43",
+            "tags" : "Relationship",
+            "sourceId" : "11",
+            "destinationId" : "5",
+            "description" : "Reads from and writes to"
+          } ],
+          "documentation" : { }
+        }, {
+          "id" : "16",
+          "tags" : "Element,Component,Command",
+          "properties" : {
+            "structurizr.dsl.identifier" : "goalssystem.goalsserviceapi.completegoalcommand"
+          },
+          "name" : "Complete Goal Command",
+          "relationships" : [ {
+            "id" : "40",
+            "tags" : "Relationship",
+            "sourceId" : "16",
+            "destinationId" : "11",
+            "description" : "Writes to"
+          } ],
+          "group" : "Commands",
+          "documentation" : { }
+        }, {
+          "id" : "19",
+          "tags" : "Element,Component,Event",
+          "properties" : {
+            "structurizr.dsl.identifier" : "goalssystem.goalsserviceapi.goalcheckedinevent"
+          },
+          "name" : "Goal Checked In Event",
+          "group" : "Events",
+          "documentation" : { }
+        }, {
+          "id" : "18",
+          "tags" : "Element,Component,Command",
+          "properties" : {
+            "structurizr.dsl.identifier" : "goalssystem.goalsserviceapi.deletegoalcommand"
+          },
+          "name" : "Delete Goal Command",
+          "relationships" : [ {
+            "id" : "42",
+            "tags" : "Relationship",
+            "sourceId" : "18",
+            "destinationId" : "11",
+            "description" : "Writes to"
+          } ],
+          "group" : "Commands",
+          "documentation" : { }
+        }, {
+          "id" : "21",
+          "tags" : "Element,Component,Event",
+          "properties" : {
+            "structurizr.dsl.identifier" : "goalssystem.goalsserviceapi.goalcreatedevent"
+          },
+          "name" : "Goal Created Event",
+          "group" : "Events",
+          "documentation" : { }
+        }, {
+          "id" : "9",
+          "tags" : "Element,Component,Event Bus",
+          "properties" : {
+            "structurizr.dsl.identifier" : "goalssystem.goalsserviceapi.eventbus"
+          },
+          "name" : "Event Bus",
+          "description" : "The event bus is responsible for dispatching events to the appropriate event handler.",
+          "relationships" : [ {
+            "id" : "33",
+            "tags" : "Relationship",
+            "sourceId" : "9",
+            "destinationId" : "20",
+            "description" : "Publishes to"
+          }, {
+            "id" : "34",
+            "tags" : "Relationship",
+            "sourceId" : "9",
+            "destinationId" : "21",
+            "description" : "Publishes to"
+          }, {
+            "id" : "35",
+            "tags" : "Relationship",
+            "sourceId" : "9",
+            "destinationId" : "22",
+            "description" : "Publishes to"
+          }, {
+            "id" : "32",
+            "tags" : "Relationship",
+            "sourceId" : "9",
+            "destinationId" : "19",
+            "description" : "Publishes to"
+          } ],
+          "documentation" : { }
+        }, {
+          "id" : "20",
+          "tags" : "Element,Component,Event",
+          "properties" : {
+            "structurizr.dsl.identifier" : "goalssystem.goalsserviceapi.goalcompletedevent"
+          },
+          "name" : "Goal Completed Event",
+          "group" : "Events",
+          "documentation" : { }
+        }, {
+          "id" : "15",
+          "tags" : "Element,Component,Command",
+          "properties" : {
+            "structurizr.dsl.identifier" : "goalssystem.goalsserviceapi.checkingoalcommand"
+          },
+          "name" : "Check In Goal Command",
+          "relationships" : [ {
+            "id" : "39",
+            "tags" : "Relationship",
+            "sourceId" : "15",
+            "destinationId" : "11",
+            "description" : "Writes to"
+          } ],
+          "group" : "Commands",
+          "documentation" : { }
+        }, {
+          "id" : "7",
+          "tags" : "Element,Component,Query Bus",
+          "properties" : {
+            "structurizr.dsl.identifier" : "goalssystem.goalsserviceapi.querybus"
+          },
+          "name" : "Query Bus",
+          "description" : "The query bus is responsible for dispatching queries to the appropriate query handler.",
+          "relationships" : [ {
+            "id" : "27",
+            "tags" : "Relationship",
+            "sourceId" : "7",
+            "destinationId" : "14",
+            "description" : "Dispatches to"
+          }, {
+            "id" : "25",
+            "tags" : "Relationship",
+            "sourceId" : "7",
+            "destinationId" : "12",
+            "description" : "Dispatches to"
+          }, {
+            "id" : "26",
+            "tags" : "Relationship",
+            "sourceId" : "7",
+            "destinationId" : "13",
+            "description" : "Dispatches to"
+          } ],
+          "documentation" : { }
+        }, {
+          "id" : "14",
+          "tags" : "Element,Component,Query",
+          "properties" : {
+            "structurizr.dsl.identifier" : "goalssystem.goalsserviceapi.getgoalsquery"
+          },
+          "name" : "Get Goals Query",
+          "relationships" : [ {
+            "id" : "38",
+            "tags" : "Relationship",
+            "sourceId" : "14",
+            "destinationId" : "11",
+            "description" : "Reads from"
+          } ],
+          "group" : "Queries",
+          "documentation" : { }
+        }, {
+          "id" : "8",
+          "tags" : "Element,Component,Command Bus",
+          "properties" : {
+            "structurizr.dsl.identifier" : "goalssystem.goalsserviceapi.commandbus"
+          },
+          "name" : "Command Bus",
+          "description" : "The command bus is responsible for dispatching commands to the appropriate command handler.",
+          "relationships" : [ {
+            "id" : "30",
+            "tags" : "Relationship",
+            "sourceId" : "8",
+            "destinationId" : "17",
+            "description" : "Dispatches to"
+          }, {
+            "id" : "29",
+            "tags" : "Relationship",
+            "sourceId" : "8",
+            "destinationId" : "16",
+            "description" : "Dispatches to"
+          }, {
+            "id" : "31",
+            "tags" : "Relationship",
+            "sourceId" : "8",
+            "destinationId" : "18",
+            "description" : "Dispatches to"
+          }, {
+            "id" : "28",
+            "tags" : "Relationship",
+            "sourceId" : "8",
+            "destinationId" : "15",
+            "description" : "Dispatches to"
+          } ],
+          "documentation" : { }
+        }, {
+          "id" : "10",
+          "tags" : "Element,Component,Controller,Goals Controller",
+          "properties" : {
+            "structurizr.dsl.identifier" : "goalssystem.goalsserviceapi.goalscontroller"
+          },
+          "name" : "Goals Controller",
+          "description" : "The goals controller is responsible for handling all requests to create, update, and delete goals.",
+          "relationships" : [ {
+            "id" : "24",
+            "tags" : "Relationship",
+            "sourceId" : "10",
+            "destinationId" : "8",
+            "description" : "Writes using"
+          }, {
+            "id" : "23",
+            "tags" : "Relationship",
+            "sourceId" : "10",
+            "destinationId" : "7",
+            "description" : "Reads using"
+          } ],
+          "documentation" : { }
+        }, {
+          "id" : "12",
+          "tags" : "Element,Component,Query",
+          "properties" : {
+            "structurizr.dsl.identifier" : "goalssystem.goalsserviceapi.getgoalactivityquery"
+          },
+          "name" : "Get Goal Activity Query",
+          "relationships" : [ {
+            "id" : "36",
+            "tags" : "Relationship",
+            "sourceId" : "12",
+            "destinationId" : "11",
+            "description" : "Reads from"
+          } ],
+          "group" : "Queries",
+          "documentation" : { }
+        }, {
+          "id" : "17",
+          "tags" : "Element,Component,Command",
+          "properties" : {
+            "structurizr.dsl.identifier" : "goalssystem.goalsserviceapi.creategoalcommand"
+          },
+          "name" : "Create Goal Command",
+          "relationships" : [ {
+            "id" : "41",
+            "tags" : "Relationship",
+            "sourceId" : "17",
+            "destinationId" : "11",
+            "description" : "Writes to"
+          } ],
+          "group" : "Commands",
+          "documentation" : { }
+        }, {
+          "id" : "13",
+          "tags" : "Element,Component,Query",
+          "properties" : {
+            "structurizr.dsl.identifier" : "goalssystem.goalsserviceapi.getgoalquery"
+          },
+          "name" : "Get Goal Query",
+          "relationships" : [ {
+            "id" : "37",
+            "tags" : "Relationship",
+            "sourceId" : "13",
+            "destinationId" : "11",
+            "description" : "Reads from"
+          } ],
+          "group" : "Queries",
+          "documentation" : { }
+        } ],
+        "documentation" : { }
+      } ],
+      "documentation" : { }
+    } ],
+    "deploymentNodes" : [ {
+      "id" : "83",
+      "tags" : "Element,Deployment Node",
+      "name" : "Azure",
+      "environment" : "Live",
+      "instances" : "1",
+      "children" : [ {
+        "id" : "84",
+        "tags" : "Element,Deployment Node",
+        "name" : "UK South",
+        "environment" : "Live",
+        "instances" : "1",
+        "children" : [ {
+          "id" : "87",
+          "tags" : "Element,Deployment Node,Microsoft Azure - Azure Database PostgreSQL Server",
+          "name" : "PostgreSQL",
+          "environment" : "Live",
+          "instances" : "1",
+          "containerInstances" : [ {
+            "id" : "88",
+            "tags" : "Container Instance",
+            "environment" : "Live",
+            "deploymentGroups" : [ "Default" ],
+            "instanceId" : 1,
+            "containerId" : "51"
+          } ]
+        }, {
+          "id" : "89",
+          "tags" : "Element,Deployment Node,Microsoft Azure - Kubernetes Services",
+          "properties" : {
+            "structurizr.dsl.identifier" : "null.aks"
+          },
+          "name" : "Azure Kubernetes Service",
+          "relationships" : [ {
+            "id" : "115",
+            "tags" : "Relationship",
+            "sourceId" : "89",
+            "destinationId" : "86",
+            "description" : "Loads containers from"
+          } ],
+          "environment" : "Live",
+          "instances" : "1",
+          "children" : [ {
+            "id" : "101",
+            "tags" : "Element,Deployment Node,EventStore",
+            "name" : "EventStore",
+            "environment" : "Live",
+            "instances" : "1",
+            "containerInstances" : [ {
+              "id" : "102",
+              "tags" : "Container Instance",
+              "environment" : "Live",
+              "deploymentGroups" : [ "Default" ],
+              "instanceId" : 1,
+              "containerId" : "5"
+            } ]
+          }, {
+            "id" : "104",
+            "tags" : "Element,Deployment Node,NATS",
+            "name" : "NATS",
+            "environment" : "Live",
+            "technology" : "NATS",
+            "instances" : "1",
+            "containerInstances" : [ {
+              "id" : "105",
+              "tags" : "Container Instance",
+              "relationships" : [ {
+                "id" : "107",
+                "sourceId" : "105",
+                "destinationId" : "92",
+                "description" : "Sends messages to",
+                "technology" : "NATS",
+                "linkedRelationshipId" : "79"
+              }, {
+                "id" : "108",
+                "sourceId" : "105",
+                "destinationId" : "93",
+                "description" : "Sends messages to",
+                "technology" : "NATS",
+                "linkedRelationshipId" : "81"
+              } ],
+              "environment" : "Live",
+              "deploymentGroups" : [ "Default" ],
+              "instanceId" : 1,
+              "containerId" : "3"
+            } ]
+          } ],
+          "infrastructureNodes" : [ {
+            "id" : "90",
+            "tags" : "Element,Infrastructure Node",
+            "properties" : {
+              "structurizr.dsl.identifier" : "null.aks.ingress"
+            },
+            "name" : "Ingress Controller",
+            "relationships" : [ {
+              "id" : "116",
+              "tags" : "Relationship",
+              "sourceId" : "90",
+              "destinationId" : "91",
+              "description" : "Routes to"
+            }, {
+              "id" : "117",
+              "tags" : "Relationship",
+              "sourceId" : "90",
+              "destinationId" : "94",
+              "description" : "Routes to"
+            } ],
+            "environment" : "Live",
+            "technology" : "NGINX"
+          } ],
+          "containerInstances" : [ {
+            "id" : "92",
+            "tags" : "Container Instance",
+            "relationships" : [ {
+              "id" : "103",
+              "sourceId" : "92",
+              "destinationId" : "102",
+              "description" : "Reads from and writes to",
+              "linkedRelationshipId" : "44"
+            } ],
+            "environment" : "Live",
+            "deploymentGroups" : [ "Default" ],
+            "instanceId" : 1,
+            "containerId" : "6"
+          }, {
+            "id" : "91",
+            "tags" : "Container Instance",
+            "properties" : {
+              "structurizr.dsl.identifier" : "null.aks.apigateway"
+            },
+            "relationships" : [ {
+              "id" : "106",
+              "sourceId" : "91",
+              "destinationId" : "105",
+              "description" : "Publishes messages to",
+              "technology" : "NATS",
+              "linkedRelationshipId" : "68"
+            } ],
+            "environment" : "Live",
+            "deploymentGroups" : [ "Default" ],
+            "instanceId" : 1,
+            "containerId" : "46"
+          }, {
+            "id" : "93",
+            "tags" : "Container Instance",
+            "relationships" : [ {
+              "id" : "100",
+              "sourceId" : "93",
+              "destinationId" : "96",
+              "description" : "Fetches user data from",
+              "technology" : "JSON/HTTPS",
+              "linkedRelationshipId" : "70"
+            } ],
+            "environment" : "Live",
+            "deploymentGroups" : [ "Default" ],
+            "instanceId" : 1,
+            "containerId" : "47"
+          }, {
+            "id" : "94",
+            "tags" : "Container Instance",
+            "properties" : {
+              "structurizr.dsl.identifier" : "null.aks.oauthagentservice"
+            },
+            "relationships" : [ {
+              "id" : "97",
+              "sourceId" : "94",
+              "destinationId" : "96",
+              "description" : "Authenticates with",
+              "technology" : "JSON/HTTPS",
+              "linkedRelationshipId" : "69"
+            } ],
+            "environment" : "Live",
+            "deploymentGroups" : [ "Default" ],
+            "instanceId" : 1,
+            "containerId" : "53"
+          }, {
+            "id" : "95",
+            "tags" : "Container Instance",
+            "relationships" : [ {
+              "id" : "113",
+              "sourceId" : "95",
+              "destinationId" : "110",
+              "description" : "Redirects to",
+              "linkedRelationshipId" : "71"
+            }, {
+              "id" : "99",
+              "sourceId" : "95",
+              "destinationId" : "96",
+              "description" : "Validates credentials and registers with",
+              "linkedRelationshipId" : "72"
+            } ],
+            "environment" : "Live",
+            "deploymentGroups" : [ "Default" ],
+            "instanceId" : 1,
+            "containerId" : "49"
+          }, {
+            "id" : "96",
+            "tags" : "Container Instance",
+            "relationships" : [ {
+              "id" : "98",
+              "sourceId" : "96",
+              "destinationId" : "88",
+              "description" : "Reads from and writes to",
+              "linkedRelationshipId" : "52"
+            } ],
+            "environment" : "Live",
+            "deploymentGroups" : [ "Default" ],
+            "instanceId" : 1,
+            "containerId" : "50"
+          } ]
+        }, {
+          "id" : "109",
+          "tags" : "Element,Deployment Node,Microsoft Azure - Static Apps",
+          "properties" : {
+            "structurizr.dsl.identifier" : "null.staticgoalsapplication"
+          },
+          "name" : "Static Web App",
+          "environment" : "Live",
+          "instances" : "1",
+          "containerInstances" : [ {
+            "id" : "110",
+            "tags" : "Container Instance",
+            "properties" : {
+              "structurizr.dsl.identifier" : "null.staticgoalsapplication.w"
+            },
+            "relationships" : [ {
+              "id" : "114",
+              "sourceId" : "110",
+              "destinationId" : "91",
+              "description" : "Makes API calls to",
+              "technology" : "JSON/HTTPS",
+              "linkedRelationshipId" : "65"
+            }, {
+              "id" : "112",
+              "sourceId" : "110",
+              "destinationId" : "95",
+              "description" : "Redirects to",
+              "linkedRelationshipId" : "67"
+            }, {
+              "id" : "111",
+              "sourceId" : "110",
+              "destinationId" : "94",
+              "description" : "Authenticates with",
+              "linkedRelationshipId" : "66"
+            } ],
+            "environment" : "Live",
+            "deploymentGroups" : [ "Default" ],
+            "instanceId" : 1,
+            "containerId" : "4"
+          } ]
+        } ],
+        "infrastructureNodes" : [ {
+          "id" : "85",
+          "tags" : "Element,Infrastructure Node,Microsoft Azure - DNS Zones",
+          "properties" : {
+            "structurizr.dsl.identifier" : "null.dnszone"
+          },
+          "name" : "DNS Zone",
+          "relationships" : [ {
+            "id" : "119",
+            "tags" : "Relationship",
+            "sourceId" : "85",
+            "destinationId" : "109",
+            "description" : "Resolves to"
+          }, {
+            "id" : "118",
+            "tags" : "Relationship",
+            "sourceId" : "85",
+            "destinationId" : "90",
+            "description" : "Resolves to"
+          } ],
+          "environment" : "Live"
+        }, {
+          "id" : "86",
+          "tags" : "Element,Infrastructure Node,Microsoft Azure - Container Registries",
+          "properties" : {
+            "structurizr.dsl.identifier" : "null.containerregistry"
+          },
+          "name" : "Container Registry",
+          "environment" : "Live"
+        } ]
+      } ]
+    } ]
+  },
+  "documentation" : { },
+  "views" : {
+    "systemContextViews" : [ {
+      "key" : "SystemContext",
+      "order" : 1,
+      "description" : "The system context diagram for the Goals System.",
+      "properties" : {
+        "structurizr.groups" : "false"
+      },
+      "softwareSystemId" : "2",
+      "paperSize" : "A6_Portrait",
+      "dimensions" : {
+        "width" : 866,
+        "height" : 1416
+      },
+      "automaticLayout" : {
+        "implementation" : "Graphviz",
+        "rankDirection" : "TopBottom",
+        "rankSeparation" : 300,
+        "nodeSeparation" : 300,
+        "edgeSeparation" : 0,
+        "vertices" : false
+      },
+      "enterpriseBoundaryVisible" : true,
+      "relationships" : [ {
+        "id" : "63"
+      } ],
+      "elements" : [ {
+        "id" : "1",
+        "x" : 233,
+        "y" : 208
+      }, {
+        "id" : "2",
+        "x" : 208,
+        "y" : 908
+      } ]
+    } ],
+    "containerViews" : [ {
+      "key" : "Goals_System_Container",
+      "order" : 2,
+      "softwareSystemId" : "2",
+      "dimensions" : {
+        "width" : 5340,
+        "height" : 2831
+      },
+      "automaticLayout" : {
+        "implementation" : "Graphviz",
+        "rankDirection" : "LeftRight",
+        "rankSeparation" : 300,
+        "nodeSeparation" : 300,
+        "edgeSeparation" : 0,
+        "vertices" : false
+      },
+      "externalSoftwareSystemBoundariesVisible" : true,
+      "relationships" : [ {
+        "id" : "70"
+      }, {
+        "id" : "72"
+      }, {
+        "id" : "81"
+      }, {
+        "id" : "62"
+      }, {
+        "id" : "52"
+      }, {
+        "id" : "65"
+      }, {
+        "id" : "64",
+        "vertices" : [ {
+          "x" : 795,
+          "y" : 1440
+        } ]
+      }, {
+        "id" : "44"
+      }, {
+        "id" : "66",
+        "vertices" : [ {
+          "x" : 1545,
+          "y" : 677
+        } ]
+      }, {
+        "id" : "69",
+        "vertices" : [ {
+          "x" : 3703,
+          "y" : 673
+        } ]
+      }, {
+        "id" : "79",
+        "vertices" : [ {
+          "x" : 3045,
+          "y" : 1944
+        } ]
+      }, {
+        "id" : "68"
+      } ],
+      "elements" : [ {
+        "id" : "1",
+        "x" : 199,
+        "y" : 1111
+      }, {
+        "id" : "46",
+        "x" : 1649,
+        "y" : 857
+      }, {
+        "id" : "3",
+        "x" : 2399,
+        "y" : 857
+      }, {
+        "id" : "47",
+        "x" : 3149,
+        "y" : 852
+      }, {
+        "id" : "4",
+        "x" : 899,
+        "y" : 857
+      }, {
+        "id" : "5",
+        "x" : 3899,
+        "y" : 2077
+      }, {
+        "id" : "49",
+        "x" : 3149,
+        "y" : 1465
+      }, {
+        "id" : "6",
+        "x" : 3149,
+        "y" : 2077
+      }, {
+        "id" : "50",
+        "x" : 3899,
+        "y" : 1465
+      }, {
+        "id" : "51",
+        "x" : 4649,
+        "y" : 1465
+      }, {
+        "id" : "53",
+        "x" : 3149,
+        "y" : 240
+      } ]
+    } ],
+    "componentViews" : [ {
+      "key" : "OAuth_Agent_Service_API",
+      "order" : 4,
+      "description" : "The component diagram for the OAuth Agent Service API.",
+      "dimensions" : {
+        "width" : 4640,
+        "height" : 2589
+      },
+      "automaticLayout" : {
+        "implementation" : "Graphviz",
+        "rankDirection" : "TopBottom",
+        "rankSeparation" : 300,
+        "nodeSeparation" : 300,
+        "edgeSeparation" : 0,
+        "vertices" : false
+      },
+      "containerId" : "53",
+      "externalContainerBoundariesVisible" : true,
+      "relationships" : [ {
+        "id" : "82"
+      }, {
+        "id" : "61"
+      }, {
+        "id" : "74"
+      }, {
+        "id" : "73",
+        "vertices" : [ {
+          "x" : 3069,
+          "y" : 696
+        } ]
+      }, {
+        "id" : "76"
+      }, {
+        "id" : "75"
+      }, {
+        "id" : "77",
+        "vertices" : [ {
+          "x" : 819,
+          "y" : 696
+        } ]
+      } ],
+      "elements" : [ {
+        "id" : "55",
+        "x" : 3969,
+        "y" : 800
+      }, {
+        "id" : "56",
+        "x" : 3219,
+        "y" : 800
+      }, {
+        "id" : "57",
+        "x" : 3219,
+        "y" : 1400
+      }, {
+        "id" : "58",
+        "x" : 2469,
+        "y" : 800
+      }, {
+        "id" : "59",
+        "x" : 1719,
+        "y" : 800
+      }, {
+        "id" : "4",
+        "x" : 1719,
+        "y" : 200
+      }, {
+        "id" : "60",
+        "x" : 969,
+        "y" : 800
+      }, {
+        "id" : "50",
+        "x" : 3219,
+        "y" : 2000
+      }, {
+        "id" : "54",
+        "x" : 219,
+        "y" : 800
+      } ]
+    }, {
+      "key" : "Goals_Service_API",
+      "order" : 3,
+      "description" : "The component diagram for the Goals Service API.",
+      "dimensions" : {
+        "width" : 6165,
+        "height" : 4465
+      },
+      "automaticLayout" : {
+        "implementation" : "Graphviz",
+        "rankDirection" : "TopBottom",
+        "rankSeparation" : 300,
+        "nodeSeparation" : 300,
+        "edgeSeparation" : 0,
+        "vertices" : false
+      },
+      "containerId" : "6",
+      "externalContainerBoundariesVisible" : true,
+      "relationships" : [ {
+        "id" : "40",
+        "vertices" : [ {
+          "x" : 3852,
+          "y" : 2403
+        } ]
+      }, {
+        "id" : "41"
+      }, {
+        "id" : "42"
+      }, {
+        "id" : "43"
+      }, {
+        "id" : "32"
+      }, {
+        "id" : "31"
+      }, {
+        "id" : "30"
+      }, {
+        "id" : "29"
+      }, {
+        "id" : "28",
+        "vertices" : [ {
+          "x" : 4602,
+          "y" : 1895
+        } ]
+      }, {
+        "id" : "27",
+        "vertices" : [ {
+          "x" : 840,
+          "y" : 1895
+        } ]
+      }, {
+        "id" : "37",
+        "vertices" : [ {
+          "x" : 1590,
+          "y" : 2403
+        } ]
+      }, {
+        "id" : "26"
+      }, {
+        "id" : "36",
+        "vertices" : [ {
+          "x" : 2323,
+          "y" : 2403
+        } ]
+      }, {
+        "id" : "25"
+      }, {
+        "id" : "35",
+        "vertices" : [ {
+          "x" : 3852,
+          "y" : 3695
+        } ]
+      }, {
+        "id" : "24"
+      }, {
+        "id" : "34",
+        "vertices" : [ {
+          "x" : 2352,
+          "y" : 3695
+        } ]
+      }, {
+        "id" : "23"
+      }, {
+        "id" : "33"
+      }, {
+        "id" : "78"
+      }, {
+        "id" : "45"
+      }, {
+        "id" : "38",
+        "vertices" : [ {
+          "x" : 840,
+          "y" : 2403
+        } ]
+      }, {
+        "id" : "39",
+        "vertices" : [ {
+          "x" : 4602,
+          "y" : 2403
+        } ]
+      } ],
+      "elements" : [ {
+        "id" : "22",
+        "x" : 4002,
+        "y" : 3799
+      }, {
+        "id" : "11",
+        "x" : 2877,
+        "y" : 2599
+      }, {
+        "id" : "12",
+        "x" : 1740,
+        "y" : 1999
+      }, {
+        "id" : "13",
+        "x" : 990,
+        "y" : 1999
+      }, {
+        "id" : "14",
+        "x" : 240,
+        "y" : 1999
+      }, {
+        "id" : "15",
+        "x" : 4752,
+        "y" : 1999
+      }, {
+        "id" : "16",
+        "x" : 4002,
+        "y" : 1999
+      }, {
+        "id" : "17",
+        "x" : 3252,
+        "y" : 1999
+      }, {
+        "id" : "18",
+        "x" : 2502,
+        "y" : 1999
+      }, {
+        "id" : "19",
+        "x" : 3252,
+        "y" : 3799
+      }, {
+        "id" : "3",
+        "x" : 2307,
+        "y" : 199
+      }, {
+        "id" : "5",
+        "x" : 5515,
+        "y" : 3199
+      }, {
+        "id" : "7",
+        "x" : 1365,
+        "y" : 1399
+      }, {
+        "id" : "8",
+        "x" : 3252,
+        "y" : 1399
+      }, {
+        "id" : "9",
+        "x" : 2877,
+        "y" : 3199
+      }, {
+        "id" : "20",
+        "x" : 2502,
+        "y" : 3799
+      }, {
+        "id" : "21",
+        "x" : 1752,
+        "y" : 3799
+      }, {
+        "id" : "10",
+        "x" : 2307,
+        "y" : 799
+      } ]
+    } ],
+    "dynamicViews" : [ {
+      "key" : "SignIn",
+      "order" : 5,
+      "description" : "The user signs in to the Goals System.",
+      "paperSize" : "A4_Portrait",
+      "dimensions" : {
+        "width" : 2066,
+        "height" : 2616
+      },
+      "elementId" : "53",
+      "externalBoundariesVisible" : true,
+      "relationships" : [ {
+        "id" : "62",
+        "description" : "Uses",
+        "order" : "1",
+        "response" : false
+      }, {
+        "id" : "73",
+        "description" : "Submits a login start request to",
+        "order" : "2",
+        "response" : false,
+        "vertices" : [ {
+          "x" : 804,
+          "y" : 1208
+        } ]
+      }, {
+        "id" : "73",
+        "description" : "Returns a login url to",
+        "order" : "3",
+        "response" : true,
+        "vertices" : [ {
+          "x" : 810,
+          "y" : 1100
+        } ]
+      }, {
+        "id" : "67",
+        "description" : "Redirects to",
+        "order" : "4",
+        "response" : false,
+        "vertices" : [ {
+          "x" : 1154,
+          "y" : 1358
+        } ]
+      }, {
+        "id" : "64",
+        "description" : "Enters credentials and signs in to",
+        "order" : "5",
+        "response" : false,
+        "vertices" : [ {
+          "x" : 1679,
+          "y" : 804
+        }, {
+          "x" : 1679,
+          "y" : 1208
+        } ]
+      }, {
+        "id" : "72",
+        "description" : "Validates credentials with",
+        "order" : "6",
+        "response" : false,
+        "vertices" : [ {
+          "x" : 1154,
+          "y" : 1980
+        } ]
+      }, {
+        "id" : "72",
+        "description" : "Returns auth code and state to",
+        "order" : "7",
+        "response" : true,
+        "vertices" : [ {
+          "x" : 1454,
+          "y" : 1980
+        } ]
+      }, {
+        "id" : "71",
+        "description" : "Redirects to",
+        "order" : "8",
+        "response" : false,
+        "vertices" : [ {
+          "x" : 1454,
+          "y" : 1358
+        } ]
+      }, {
+        "id" : "73",
+        "description" : "Submits a login end request to",
+        "order" : "9",
+        "response" : false,
+        "vertices" : [ {
+          "x" : 805,
+          "y" : 1095
+        } ]
+      }, {
+        "id" : "61",
+        "description" : "Sends auth code to",
+        "order" : "10",
+        "response" : false,
+        "vertices" : [ {
+          "x" : 404,
+          "y" : 1358
+        } ]
+      }, {
+        "id" : "82",
+        "description" : "Sends auth code to",
+        "order" : "11",
+        "response" : false,
+        "vertices" : [ {
+          "x" : 831,
+          "y" : 2094
+        } ]
+      }, {
+        "id" : "82",
+        "description" : "Returns auth token to",
+        "order" : "12",
+        "response" : true,
+        "vertices" : [ {
+          "x" : 1026,
+          "y" : 1866
+        } ]
+      }, {
+        "id" : "61",
+        "description" : "Returns auth cookies to",
+        "order" : "13",
+        "response" : true,
+        "vertices" : [ {
+          "x" : 704,
+          "y" : 1358
+        } ]
+      }, {
+        "id" : "73",
+        "description" : "Returns auth cookies to",
+        "order" : "14",
+        "response" : true,
+        "vertices" : [ {
+          "x" : 835,
+          "y" : 975
+        } ]
+      } ],
+      "elements" : [ {
+        "id" : "1",
+        "x" : 1441,
+        "y" : 208
+      }, {
+        "id" : "56",
+        "x" : 329,
+        "y" : 908
+      }, {
+        "id" : "57",
+        "x" : 329,
+        "y" : 1508
+      }, {
+        "id" : "4",
+        "x" : 1079,
+        "y" : 908
+      }, {
+        "id" : "49",
+        "x" : 1079,
+        "y" : 1508
+      }, {
+        "id" : "50",
+        "x" : 1079,
+        "y" : 2108
+      } ]
+    } ],
+    "deploymentViews" : [ {
+      "key" : "Deployment_All",
+      "order" : 6,
+      "softwareSystemId" : "2",
+      "dimensions" : {
+        "width" : 5496,
+        "height" : 3212
+      },
+      "automaticLayout" : {
+        "implementation" : "Graphviz",
+        "rankDirection" : "LeftRight",
+        "rankSeparation" : 300,
+        "nodeSeparation" : 300,
+        "edgeSeparation" : 0,
+        "vertices" : false
+      },
+      "environment" : "Live",
+      "relationships" : [ {
+        "id" : "97",
+        "vertices" : [ {
+          "x" : 3240,
+          "y" : 1618
+        } ]
+      }, {
+        "id" : "98"
+      }, {
+        "id" : "108"
+      }, {
+        "id" : "119"
+      }, {
+        "id" : "118"
+      }, {
+        "id" : "107"
+      }, {
+        "id" : "100"
+      }, {
+        "id" : "111"
+      }, {
+        "id" : "99"
+      }, {
+        "id" : "115"
+      }, {
+        "id" : "103"
+      }, {
+        "id" : "114",
+        "vertices" : [ {
+          "x" : 1544,
+          "y" : 2248
+        }, {
+          "x" : 1740,
+          "y" : 1618
+        } ]
+      }, {
+        "id" : "117"
+      }, {
+        "id" : "106"
+      }, {
+        "id" : "116"
+      } ],
+      "elements" : [ {
+        "id" : "88",
+        "x" : 4786,
+        "y" : 1614
+      }, {
+        "id" : "89",
+        "x" : 175,
+        "y" : 175
+      }, {
+        "id" : "110",
+        "x" : 990,
+        "y" : 2439
+      }, {
+        "id" : "101",
+        "x" : 175,
+        "y" : 175
+      }, {
+        "id" : "102",
+        "x" : 3990,
+        "y" : 423
+      }, {
+        "id" : "104",
+        "x" : 175,
+        "y" : 175
+      }, {
+        "id" : "105",
+        "x" : 2490,
+        "y" : 860
+      }, {
+        "id" : "90",
+        "x" : 990,
+        "y" : 1768
+      }, {
+        "id" : "91",
+        "x" : 1740,
+        "y" : 1168
+      }, {
+        "id" : "92",
+        "x" : 3240,
+        "y" : 260
+      }, {
+        "id" : "93",
+        "x" : 3240,
+        "y" : 860
+      }, {
+        "id" : "109",
+        "x" : 175,
+        "y" : 175
+      }, {
+        "id" : "94",
+        "x" : 1740,
+        "y" : 1768
+      }, {
+        "id" : "83",
+        "x" : 175,
+        "y" : 175
+      }, {
+        "id" : "95",
+        "x" : 3240,
+        "y" : 1768
+      }, {
+        "id" : "84",
+        "x" : 175,
+        "y" : 175
+      }, {
+        "id" : "85",
+        "x" : 240,
+        "y" : 2106
+      }, {
+        "id" : "96",
+        "x" : 3990,
+        "y" : 1314
+      }, {
+        "id" : "86",
+        "x" : 4786,
+        "y" : 1014
+      }, {
+        "id" : "87",
+        "x" : 175,
+        "y" : 175
+      } ]
+    } ],
+    "configuration" : {
+      "branding" : { },
+      "styles" : {
+        "elements" : [ {
+          "tag" : "Person",
+          "background" : "#08427b",
+          "color" : "#ffffff",
+          "shape" : "Person"
+        }, {
+          "tag" : "Service API",
+          "shape" : "Hexagon"
+        }, {
+          "tag" : "Database",
+          "shape" : "Cylinder"
+        }, {
+          "tag" : "Goals Service",
+          "background" : "#91f0ae"
+        }, {
+          "tag" : "API Gateway",
+          "background" : "#edf08c"
+        }, {
+          "tag" : "Users Service",
+          "background" : "#8cd0f0"
+        }, {
+          "tag" : "OAuth Agent Service",
+          "background" : "#f08ca4"
+        }, {
+          "tag" : "Curity Service",
+          "background" : "#ffac33"
+        }, {
+          "tag" : "Message Bus",
+          "background" : "#f7dd19",
+          "shape" : "Pipe"
+        }, {
+          "tag" : "Controller",
+          "background" : "#08427b",
+          "color" : "#ffffff"
+        }, {
+          "tag" : "Command Bus",
+          "background" : "#22e369",
+          "shape" : "Pipe"
+        }, {
+          "tag" : "Command",
+          "background" : "#0cb349",
+          "shape" : "RoundedBox"
+        }, {
+          "tag" : "Query Bus",
+          "background" : "#fcba03",
+          "shape" : "Pipe"
+        }, {
+          "tag" : "Query",
+          "background" : "#fa9302",
+          "shape" : "RoundedBox"
+        }, {
+          "tag" : "Event Bus",
+          "background" : "#f7f7f7",
+          "shape" : "Pipe"
+        }, {
+          "tag" : "Event",
+          "background" : "#f7f7f7",
+          "shape" : "RoundedBox"
+        }, {
+          "tag" : "Web Application",
+          "shape" : "WebBrowser"
+        }, {
+          "tag" : "Angular",
+          "background" : "#dd1b16",
+          "color" : "#ffffff"
+        }, {
+          "tag" : "Nest Service",
+          "background" : "#faf039"
+        } ]
+      },
+      "themes" : [ "https://static.structurizr.com/themes/microsoft-azure-2023.01.24/theme.json" ],
+      "terminology" : { },
+      "metadataSymbols" : "SquareBrackets",
+      "lastSavedView" : "Goals_Service_API"
+    }
+  }
+}

@@ -21,6 +21,9 @@ import { GetGoalActivityQuery } from './queries/get-goal-activity.query';
 import { GetGoalQuery } from './queries/get-goal.query';
 import { GetGoalsQuery } from './queries/get-goals.query';
 
+/**
+ * The goals controller is responsible for handling all requests to create, update, and delete goals.
+ */
 @Controller()
 export class GoalsController {
   private readonly logger = new Logger(GoalsController.name);

@@ -33,6 +33,7 @@ Based on the given requirements, the following nice-to-have features **may not b
 -	**Advanced analytics and reporting**: While the application should include basic analytics and reporting features, more advanced features such as data visualization or machine learning-based analytics may not be included.
 -	**User details**: the ability for users to edit their own details may not be included in the minimum viable product, but they will still be able to view their details.
 
+It is important to note that these features are considered "nice-to-have" and not essential to the core functionality of the application. The goal of the minimum viable product is to provide a working prototype that satisfies the essential requirements, while additional features can be added later as time and resources permit.
 
 ## Context
 ### Exclaimer
