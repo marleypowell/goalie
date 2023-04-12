@@ -19,6 +19,6 @@ Further documentation of the components in this diagram can be found here:
 - [API Gateway API](../project-structure/services/api-gateway)
 - [Message Bus](../architecture/technologies/nats)
 - [OAuth Agent Service API](../project-structure/services/oauth-agent-service)
-- [User Service API](../project-structure/services/user-service)
+- [Users Service API](../project-structure/services/users-service)
 - [Goals Service API](../project-structure/services/goals-service)
 - [Curity Service API](../project-structure/services/curity-identity-server)
