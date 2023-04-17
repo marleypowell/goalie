@@ -3,6 +3,9 @@ import { Injectable, Logger, Module, OnApplicationShutdown } from '@nestjs/commo
 import { ConfigService } from '@nestjs/config';
 import { Config } from '../config/config.interface';
 
+/**
+ * The EventStore service.
+ */
 @Injectable()
 export class EventStoreService implements OnApplicationShutdown {
   private client: EventStoreDBClient;
@@ -11,6 +14,10 @@ export class EventStoreService implements OnApplicationShutdown {
 
   public constructor(private readonly config: ConfigService<Config>) {}
 
+  /**
+   * Connect to the EventStoreDB
+   * @returns The EventStoreDB client
+   */
   public async connect(): Promise<EventStoreDBClient> {
     try {
       this.logger.log('Connecting to EventStoreDB');
@@ -30,10 +37,18 @@ export class EventStoreService implements OnApplicationShutdown {
     }
   }
 
+  /**
+   * Get the EventStoreDB client
+   * @returns The EventStoreDB client
+   */
   public getClient(): EventStoreDBClient {
     return this.client;
   }
 
+  /**
+   * Disconnect from the EventStoreDB when the application shuts down
+   * @param signal the signal
+   */
   public async onApplicationShutdown(signal?: string): Promise<void> {
     this.logger.log(`Received ${signal} signal. Disconnecting from EventStoreDB.`);
     await this.client.dispose();

@@ -5,12 +5,19 @@ import { EventStoreService } from '../common/event-store.service';
 import { goalReducer } from './entities/goal.reducer';
 import { GoalAggregate } from './models/goal.aggregate';
 
+/**
+ * The goals repository. This repository is responsible for managing the goals.
+ */
 @Injectable()
 export class GoalsRepository {
   private readonly logger = new Logger(GoalsRepository.name);
 
   public constructor(private readonly eventStore: EventStoreService) {}
 
+  /**
+   * Save the aggregate. This method will save all uncommitted events.
+   * @param aggregate the aggregate
+   */
   public async save(aggregate: GoalAggregate) {
     this.logger.log(`saving aggregate: ${JSON.stringify(aggregate)}`);
 
@@ -32,6 +39,11 @@ export class GoalsRepository {
     aggregate.commit();
   }
 
+  /**
+   * Gets the goal aggregate by id.
+   * @param goalId the goal id
+   * @returns the goal aggregate
+   */
   public async getById(goalId: string): Promise<GoalAggregate> {
     this.logger.log(`getting aggregate by id: ${goalId}`);
 
@@ -43,6 +55,10 @@ export class GoalsRepository {
     return aggregate;
   }
 
+  /**
+   * Gets all goals.
+   * @returns all goals
+   */
   public async findAll(): Promise<Goal[] | null> {
     const goals = new Map<string, Goal>();
 
@@ -112,6 +128,11 @@ export class GoalsRepository {
     }
   }
 
+  /**
+   * Finds a goal by id.
+   * @param goalId the goal id
+   * @returns the goal
+   */
   public async findOne(goalId: string): Promise<Goal | null> {
     let goal: Goal = {
       goalId: '',
@@ -145,6 +166,11 @@ export class GoalsRepository {
     }
   }
 
+  /**
+   * Gets the goal activity.
+   * @param goalId the goal id
+   * @returns the goal activity
+   */
   public async getGoalActivity(goalId: string): Promise<GoalActivity[] | null> {
     const events = this.eventStore.getClient().readStream<GoalJsonEvent>(goalId, {
       direction: BACKWARDS,
@@ -186,6 +212,13 @@ export class GoalsRepository {
     }
   }
 
+  /**
+   * Gets the events for the aggregate.
+   * If the aggregate does not exist, null is returned.
+   * If the aggregate exists but has no events, an empty array is returned.
+   * @param aggregateId the aggregate id
+   * @returns the events
+   */
   private async getEvents(aggregateId: string): Promise<Array<GoalJsonEvent['data']>> {
     const eventStream = this.eventStore.getClient().readStream<GoalJsonEvent>(aggregateId, {
       direction: FORWARDS,

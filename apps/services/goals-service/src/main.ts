@@ -6,6 +6,9 @@ import { NatsOptions, Transport } from '@nestjs/microservices';
 import { AppModule } from './app.module';
 import { EventStoreService } from './common/event-store.service';
 
+/**
+ * The bootstrap function.
+ */
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
     logger: ['error', 'warn', 'debug', 'log', 'verbose'],

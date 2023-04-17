@@ -1,5 +1,11 @@
 import { Goal, GoalRecordedEvent } from '@goalie/shared/goals';
 
+/**
+ * The goal reducer. This reducer is responsible for reducing the goal.
+ * @param goal the goal
+ * @param event the event
+ * @returns the updated goal
+ */
 export const goalReducer = (goal: Goal, event: GoalRecordedEvent): Goal => {
   switch (event.type) {
     case 'GoalCreatedEvent': {

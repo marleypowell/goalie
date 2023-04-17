@@ -30,6 +30,11 @@ export class GoalsController {
 
   public constructor(private readonly commandBus: CommandBus, private readonly queryBus: QueryBus) {}
 
+  /**
+   * Create a new goal. Returns the id of the newly created goal. This executes the create goal command.
+   * @param payload the payload
+   * @returns the id of the newly created goal
+   */
   @MessagePattern('createGoal')
   public async create(@Payload() payload: CreateGoalDto): Promise<MessageResponse<string>> {
     this.logger.log(`Received createGoal command: ${JSON.stringify(payload)}`);
@@ -38,6 +43,11 @@ export class GoalsController {
     return new MessageResponse(HttpStatus.CREATED, command.goalId);
   }
 
+  /**
+   * Check in to a goal. This executes the check in goal command.
+   * @param payload the payload
+   * @returns success
+   */
   @MessagePattern('checkInGoal')
   public async checkIn(@Payload() payload: CheckInGoalDto): Promise<MessageResponse<string>> {
     this.logger.log(`Received checkInGoal command: ${JSON.stringify(payload)}`);
@@ -46,6 +56,11 @@ export class GoalsController {
     return new MessageResponse(HttpStatus.OK, 'SUCCESS');
   }
 
+  /**
+   * Complete a goal. This executes the complete goal command.
+   * @param payload the payload
+   * @returns success
+   */
   @MessagePattern('completeGoal')
   public async complete(@Payload() payload: CompleteGoalDto): Promise<MessageResponse<string>> {
     this.logger.log(`Received completeGoal command: ${JSON.stringify(payload)}`);
@@ -54,6 +69,11 @@ export class GoalsController {
     return new MessageResponse(HttpStatus.OK, 'SUCCESS');
   }
 
+  /**
+   * Delete a goal. This executes the delete goal command.
+   * @param payload the payload
+   * @returns nothing
+   */
   @MessagePattern('deleteGoal')
   public async delete(@Payload() payload: DeleteGoalDto): Promise<MessageResponse<undefined>> {
     this.logger.log(`Received deleteGoal command: ${JSON.stringify(payload)}`);
@@ -62,6 +82,11 @@ export class GoalsController {
     return new MessageResponse(HttpStatus.OK, undefined);
   }
 
+  /**
+   * Get all goals. This executes the get goals query.
+   * @param payload the payload
+   * @returns the goals
+   */
   @MessagePattern('getGoals')
   public async getGoals(@Payload() payload: GetGoalsDto): Promise<MessageResponse<Goal[]>> {
     this.logger.log('Received getGoals query');
@@ -70,6 +95,11 @@ export class GoalsController {
     return new MessageResponse(HttpStatus.OK, goals);
   }
 
+  /**
+   * Get a goal by id. This executes the get goal query. Returns null if no goal is found.
+   * @param payload the payload
+   * @returns the goal
+   */
   @MessagePattern('getGoal')
   public async getGoal(@Payload() payload: GetGoalDto): Promise<MessageResponse<Goal>> {
     this.logger.log(`Received getGoal query: ${JSON.stringify(payload)}`);
@@ -85,6 +115,11 @@ export class GoalsController {
     return new MessageResponse(HttpStatus.OK, goal);
   }
 
+  /**
+   * Get the activity for a goal. This executes the get goal activity query. Returns null if no goal is found.
+   * @param payload the payload
+   * @returns the goal activity
+   */
   @MessagePattern('getGoalActivity')
   public async getGoalActivity(@Payload() payload: GetGoalActivityDto): Promise<MessageResponse<GoalActivity[]>> {
     this.logger.log(`Received getGoalActivity query: ${JSON.stringify(payload)}`);
