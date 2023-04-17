@@ -4,6 +4,9 @@ import { Request } from 'express';
 import { UserInfo } from '../lib/user-info';
 import { UserInfoService } from './user-info.service';
 
+/**
+ * The user info controller. It is used to get the user info.
+ */
 @ApiTags('user-info')
 @Controller('user-info')
 export class UserInfoController {

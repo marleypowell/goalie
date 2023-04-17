@@ -4,6 +4,9 @@ import { CookieService } from '../lib/cookie.service';
 import { CurityService } from '../lib/curity.service';
 import { UserInfo } from '../lib/user-info';
 
+/**
+ * The user info service. It is used to get user info from the access token.
+ */
 @Injectable()
 export class UserInfoService {
   public constructor(private readonly curityService: CurityService, private readonly cookieService: CookieService) {}

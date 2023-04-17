@@ -1,10 +1,18 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { CookieService } from '../lib/cookie.service';
 
+/**
+ * The claims service. It is used to get claims from the access token.
+ */
 @Injectable()
 export class ClaimsService {
   public constructor(private readonly cookieService: CookieService) {}
 
+  /**
+   * Get claims from the access token. The access token is stored in a cookie.
+   * @param cookies the cookies
+   * @returns the claims
+   */
   public getClaims(cookies: Record<string, string>): Record<string, any> {
     const idToken = this.cookieService.getIdTokenCookie(cookies);
 

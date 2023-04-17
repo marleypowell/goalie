@@ -10,10 +10,18 @@ import { AuthState } from './models/auth-state';
 import { LoginEndResponse } from './models/login-end-response.model';
 import { LoginStartResponse } from './models/login-start-response.model';
 
+/**
+ * The login service. It is used to start and end the login process.
+ */
 @Injectable()
 export class LoginService {
   public constructor(private readonly curityService: CurityService, private readonly cookieService: CookieService) {}
 
+  /**
+   * Start the login process.
+   * @param path The path.
+   * @returns the login start response.
+   */
   public loginStart(path: string): LoginStartResponse & { tempLoginDataCookie: string } {
     const state = new AuthState(path).toString();
     const codeVerifier = generateRandomString();
@@ -23,6 +31,12 @@ export class LoginService {
     };
   }
 
+  /**
+   * End the login process.
+   * @param pageUrl The page url.
+   * @param cookies The cookies.
+   * @returns the login end response.
+   */
   public async loginEnd(
     pageUrl: string,
     cookies: Record<string, string>
@@ -65,6 +79,11 @@ export class LoginService {
     };
   }
 
+  /**
+   * Decode the page url. It will return the code and state if they are present.
+   * @param pageUrl The page url.
+   * @returns the code and state.
+   */
   private decodePageUrl(pageUrl: string | undefined): {
     code: string | null;
     state: string | null;

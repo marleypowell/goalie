@@ -3,6 +3,9 @@ import type { Config } from './config.interface';
 
 const useSsl = !!process.env.SERVER_CERT_P12_PATH;
 
+/**
+ * The configuration.
+ */
 export default (): Config => ({
   // Host settings
   port: parseInt(process.env.PORT, 10) || 3334,

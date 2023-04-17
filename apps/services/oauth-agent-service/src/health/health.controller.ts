@@ -4,6 +4,9 @@ import { ApiTags } from '@nestjs/swagger';
 import { HealthCheck, HealthCheckResult, HealthCheckService, HttpHealthIndicator } from '@nestjs/terminus';
 import { Config } from '../config/config.interface';
 
+/**
+ * The health controller. It is used to check the health of the service.
+ */
 @ApiTags('health')
 @Controller('health')
 export class HealthController {
@@ -13,6 +16,10 @@ export class HealthController {
     private readonly config: ConfigService<Config>
   ) {}
 
+  /**
+   * Check the health of the service. It checks the health of the Curity server if the configuration is set.
+   * @returns the health check result.
+   */
   @Get()
   @HealthCheck()
   public check(): Promise<HealthCheckResult> {

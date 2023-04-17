@@ -8,6 +8,9 @@ import { CookieEncryptionService } from './lib/cookie-encryption.service';
 import { nestCsrf } from './lib/csrf.middleware';
 import { setupSwagger } from './swagger';
 
+/**
+ * The bootstrap function. It is used to bootstrap the application.
+ */
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
     logger: ['error', 'warn', 'debug', 'log', 'verbose'],

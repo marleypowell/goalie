@@ -3,6 +3,9 @@ import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Request } from 'express';
 import { ClaimsService } from './claims.service';
 
+/**
+ * The claims controller. It is used to get claims from the access token.
+ */
 @ApiTags('claims')
 @Controller('claims')
 export class ClaimsController {

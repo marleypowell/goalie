@@ -4,6 +4,9 @@ import { Request, Response } from 'express';
 import { LogoutService } from './logout.service';
 import { LogoutResponse } from './models/logout-response.model';
 
+/**
+ * The logout controller. It is used to logout.
+ */
 @ApiTags('logout')
 @Controller('logout')
 export class LogoutController {

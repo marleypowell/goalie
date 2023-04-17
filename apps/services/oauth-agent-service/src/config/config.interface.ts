@@ -1,6 +1,9 @@
 import { TracingOptions } from '@goalie/common';
 import { CookieSerializeOptions } from 'cookie';
 
+/**
+ * The configuration interface.
+ */
 export interface Config {
   // Host settings
   port: number;

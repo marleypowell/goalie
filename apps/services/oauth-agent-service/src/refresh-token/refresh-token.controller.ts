@@ -3,6 +3,9 @@ import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Request, Response } from 'express';
 import { RefreshTokenService } from './refresh-token.service';
 
+/**
+ * The refresh token controller. It is used to refresh the refresh token.
+ */
 @ApiTags('refresh-token')
 @Controller('refresh-token')
 export class RefreshTokenController {
