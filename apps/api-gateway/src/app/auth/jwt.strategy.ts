@@ -6,6 +6,9 @@ import { ExtractJwt, Strategy, StrategyOptions } from 'passport-jwt';
 import { Config } from '../config/config.interface';
 import { User } from './user.model';
 
+/**
+ * The JWT strategy for authenticating users
+ */
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
   private readonly logger = new Logger(JwtStrategy.name);
@@ -33,6 +36,11 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     super(options);
   }
 
+  /**
+   * Validate the JWT payload and return the user
+   * @param payload The JWT payload
+   * @returns The user
+   */
   public validate(payload: Record<string, any>): User {
     this.logger.debug(`Validating JWT payload: ${JSON.stringify(payload)}`);
     return new User(payload);

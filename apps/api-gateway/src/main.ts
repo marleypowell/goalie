@@ -5,6 +5,9 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app/app.module';
 import { setupSwagger } from './swagger';
 
+/**
+ * Bootstrap the application
+ */
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
     logger: ['error', 'warn', 'debug', 'log', 'verbose'],
@@ -25,7 +28,7 @@ async function bootstrap() {
     });
   }
 
-  setupSwagger(app);
+  setupSwagger(app, true);
   setupTracing(app);
 
   app.enableShutdownHooks();

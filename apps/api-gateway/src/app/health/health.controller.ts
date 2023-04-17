@@ -6,6 +6,9 @@ import { ApiTags } from '@nestjs/swagger';
 import { HealthCheck, HealthCheckResult, HealthCheckService, MicroserviceHealthIndicator } from '@nestjs/terminus';
 import { Config } from '../config/config.interface';
 
+/**
+ * The health controller. Handles all requests for health checks.
+ */
 @ApiTags('health')
 @Controller('health')
 export class HealthController {
@@ -15,6 +18,10 @@ export class HealthController {
     private readonly config: ConfigService<Config>
   ) {}
 
+  /**
+   * Check the health of the service.
+   * @returns the health check result.
+   */
   @Get()
   @AllowAnonymous()
   @HealthCheck()

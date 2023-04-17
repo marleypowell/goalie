@@ -7,7 +7,15 @@ export type AppSubjects = InferSubjects<typeof Goal | typeof GoalActivity, true>
 export type AppAbility = Ability<[Action, AppSubjects]>;
 const AppAbility = Ability as AbilityClass<AppAbility>;
 
+/**
+ * The CASL auth factory.
+ */
 export class AppCaslFactory extends CaslFactory {
+  /**
+   * Creates the ability for the user.
+   * @param user The user
+   * @returns The ability
+   */
   public createAbility(user: RequestUser<Role>): AppAbility {
     const builder = new AbilityBuilder<AppAbility>(AppAbility);
 

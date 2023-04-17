@@ -9,6 +9,9 @@ import { ReqUser } from '../auth/request-user.decorator';
 import { User } from '../auth/user.model';
 import { GoalsService } from './goals.service';
 
+/**
+ * The goals controller. Handles all requests for goals.
+ */
 @UseCasl()
 @ApiTags('goals')
 @Controller('goals')
@@ -59,6 +62,13 @@ export class GoalsController {
     return this.service.getAll();
   }
 
+  /**
+   * Get all goals for a user.
+   * @param ability the CASL ability.
+   * @param user the user.
+   * @param userId the user id.
+   * @returns the list of goals.
+   */
   @Get('users/:userId/goals/list')
   @ApiResponse({
     status: HttpStatus.OK,

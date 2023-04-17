@@ -10,7 +10,12 @@ function createOpenAPIObject(app: INestApplication, setup: (db: DocumentBuilder)
   });
 }
 
-export function setupSwagger(app: INestApplication, output?: boolean) {
+/**
+ * Setup swagger for the application.
+ * @param app The nest application.
+ * @param output Whether to output the schema to a file.
+ */
+export function setupSwagger(app: INestApplication, output?: boolean): void {
   const document = createOpenAPIObject(app, (db: DocumentBuilder) =>
     db.setTitle('api-gateway').setVersion('1.0').addTag('api-gateway').addBearerAuth(
       {

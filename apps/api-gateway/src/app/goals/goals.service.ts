@@ -14,9 +14,17 @@ import { HttpException, HttpStatus, Inject, NotFoundException } from '@nestjs/co
 import { ClientProxy } from '@nestjs/microservices';
 import { combineLatest, map, mergeMap, Observable, of, tap } from 'rxjs';
 
+/**
+ * The goals service. Handles all requests for goals.
+ */
 export class GoalsService {
   public constructor(@Inject('NATS_SERVICE') private readonly client: ClientProxy) {}
 
+  /**
+   * Create a new goal.
+   * @param createGoalDto the goal to create.
+   * @returns nothing.
+   */
   public create(createGoalDto: CreateGoalDto): Observable<string> {
     return this.client.send<MessageResponse<string>>('createGoal', createGoalDto).pipe(
       tap((res) => {
@@ -28,6 +36,11 @@ export class GoalsService {
     );
   }
 
+  /**
+   * Get all goals for a user.
+   * @param userId the user id.
+   * @returns the list of goals.
+   */
   public getAll(userId?: string): Observable<Goal[]> {
     return this.client.send<MessageResponse<Goal[]>>('getGoals', new GetGoalsDto(userId)).pipe(
       tap((res) => {
@@ -55,6 +68,11 @@ export class GoalsService {
     );
   }
 
+  /**
+   * Get a goal by id.
+   * @param id the goal id.
+   * @returns the goal.
+   */
   public get(id: string): Observable<Goal | null> {
     return this.client.send<MessageResponse<Goal>>('getGoal', new GetGoalDto(id)).pipe(
       tap((res) => {
@@ -81,6 +99,11 @@ export class GoalsService {
     );
   }
 
+  /**
+   * Get the activity for a goal.
+   * @param id the goal id.
+   * @returns the activity.
+   */
   public getActivity(id: string): Observable<GoalActivity[]> {
     return this.client.send<MessageResponse<GoalActivity[]>>('getGoalActivity', new GetGoalActivityDto(id)).pipe(
       tap((res) => {
@@ -116,6 +139,11 @@ export class GoalsService {
     );
   }
 
+  /**
+   * Check in a goal.
+   * @param checkInGoalDto the check in data.
+   * @returns nothing.
+   */
   public checkIn(checkInGoalDto: CheckInGoalDto): Observable<unknown> {
     return this.client.send<MessageResponse<string>>('checkInGoal', checkInGoalDto).pipe(
       tap((res) => {
@@ -127,6 +155,11 @@ export class GoalsService {
     );
   }
 
+  /**
+   * Complete a goal.
+   * @param id the goal id.
+   * @returns nothing.
+   */
   public complete(id: string): Observable<unknown> {
     return this.client.send<MessageResponse<string>>('completeGoal', new CompleteGoalDto(id)).pipe(
       tap((res) => {
@@ -138,6 +171,11 @@ export class GoalsService {
     );
   }
 
+  /**
+   * Delete a goal.
+   * @param id the goal id.
+   * @returns nothing.
+   */
   public delete(id: string): Observable<unknown> {
     return this.client.send<MessageResponse<undefined>>('deleteGoal', new DeleteGoalDto(id)).pipe(
       tap((res) => {
