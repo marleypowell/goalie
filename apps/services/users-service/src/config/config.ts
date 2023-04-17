@@ -1,5 +1,8 @@
 import type { Config } from './config.interface';
 
+/**
+ * The configuration factory.
+ */
 export default (): Config => ({
   port: parseInt(process.env.PORT, 10) || 3336,
   tracingOptions: {

@@ -1,5 +1,8 @@
 import { gql } from '@apollo/client/core';
 
+/**
+ * The account info fields fragment. It is used to get the account info fields.
+ */
 export const AccountInfoFields = gql`
   fragment AccountInfoFields on Account {
     id

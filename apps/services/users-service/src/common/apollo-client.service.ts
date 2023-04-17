@@ -6,10 +6,19 @@ import { ConfigService } from '@nestjs/config';
 import { firstValueFrom, map } from 'rxjs';
 import { Config } from '../config/config.interface';
 
+/**
+ * The apollo client service.
+ * It is used to create an apollo client.
+ * The apollo client is used to communicate with the user management service.
+ */
 @Injectable()
 export class ApolloClientService {
   public constructor(private readonly config: ConfigService<Config>, private readonly http: HttpService) {}
 
+  /**
+   * Create an apollo client. The apollo client is used to communicate with the user management service.
+   * @returns the apollo client
+   */
   public createApolloClient(): ApolloClient<NormalizedCacheObject> {
     const asyncAuthLink = setContext(async () => {
       const accessToken = await this.getAccessToken();
@@ -53,6 +62,10 @@ export class ApolloClientService {
     });
   }
 
+  /**
+   * Get an access token. The access token is used to communicate with the user management service.
+   * @returns the access token
+   */
   private getAccessToken(): Promise<string> {
     const { clientId, clientSecret } = this.config.get('accountsClientOptions', { infer: true });
     return firstValueFrom(

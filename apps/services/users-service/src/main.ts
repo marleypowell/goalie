@@ -5,6 +5,9 @@ import { NestFactory } from '@nestjs/core';
 import { NatsOptions, Transport } from '@nestjs/microservices';
 import { AppModule } from './app.module';
 
+/**
+ * The bootstrap function. It is used to bootstrap the application.
+ */
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
     logger: ['error', 'warn', 'debug', 'log', 'verbose'],

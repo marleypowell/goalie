@@ -6,6 +6,9 @@ import { AccountInfoFields } from '../AccountInfo.gql';
 import { User } from '../entities/user.entity';
 import { GetUserQuery } from './get-user.query';
 
+/**
+ * The get user query handler. It is used to handle the get user query.
+ */
 @QueryHandler(GetUserQuery)
 export class GetUserHandler implements IQueryHandler<GetUserQuery> {
   private readonly logger = new Logger(GetUserHandler.name);
@@ -14,6 +17,11 @@ export class GetUserHandler implements IQueryHandler<GetUserQuery> {
 
   public constructor(private readonly apolloClientService: ApolloClientService) {}
 
+  /**
+   * Handle the get user query. It is used to get a user by id.
+   * @param query the query
+   * @returns the user
+   */
   public async execute(query: GetUserQuery): Promise<User | null> {
     this.logger.log('received getUser query');
 
