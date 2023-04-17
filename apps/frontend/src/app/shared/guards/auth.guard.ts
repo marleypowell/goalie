@@ -4,6 +4,12 @@ import { map } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
 import { WINDOW } from '../injection-tokens';
 
+/**
+ * Guard that checks if the user is authenticated. If not, it redirects to the login page.
+ * @param route the route
+ * @param state the router state
+ * @returns true if the user is authenticated, false otherwise.
+ */
 export const authGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
   const authService = inject(AuthService);
   const router = inject(Router);

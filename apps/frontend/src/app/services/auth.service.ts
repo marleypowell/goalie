@@ -15,6 +15,9 @@ interface AuthState {
   path?: string;
 }
 
+/**
+ * The auth service.
+ */
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private readonly authState = new BehaviorSubject<AuthState>({ handled: false, isLoggedIn: false });
@@ -27,18 +30,30 @@ export class AuthService {
     private readonly refreshTokenService: RefreshTokenService
   ) {}
 
+  /**
+   * Starts the login process.
+   * @param path The path to redirect to after login.
+   */
   public login(path: string): void {
     this.loginService.loginStart({ path }).subscribe((res) => {
       this.window.location.href = res.authorizationRequestUrl;
     });
   }
 
+  /**
+   * Starts the logout process.
+   */
   public logout(): void {
     this.logoutService.logout().subscribe((res) => {
       this.window.location.href = res.url;
     });
   }
 
+  /**
+   * Checks if the user is authenticated.
+   * @param pageUrl The url of the page.
+   * @returns An observable that emits the login end response.
+   */
   public checkAuth(pageUrl: string): Observable<LoginEndResponse> {
     return this.loginService.loginEnd({ pageUrl }).pipe(
       catchError(() => of({ handled: false, isLoggedIn: false })),
@@ -52,6 +67,10 @@ export class AuthService {
     );
   }
 
+  /**
+   * Refreshes the access token.
+   * @returns An observable that emits the refresh token response.
+   */
   public refreshToken(): Observable<unknown> {
     return this.refreshTokenService.refreshToken().pipe(
       catchError((error: Error) => {

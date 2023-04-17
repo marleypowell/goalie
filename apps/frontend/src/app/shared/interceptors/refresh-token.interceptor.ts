@@ -3,6 +3,12 @@ import { inject } from '@angular/core';
 import { catchError, mergeMap, Observable, throwError } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
 
+/**
+ * Interceptor that refreshes the token if the request fails with a 401.
+ * @param req the request
+ * @param next the next handler
+ * @returns the response
+ */
 export function refreshTokenInterceptorFn(
   req: HttpRequest<unknown>,
   next: HttpHandlerFn

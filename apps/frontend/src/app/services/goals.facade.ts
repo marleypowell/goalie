@@ -5,6 +5,9 @@ import { CreateGoalForm } from '@goalie/ui';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { BehaviorSubject, catchError, Observable, tap, throwError } from 'rxjs';
 
+/**
+ * The goals facade.
+ */
 @Injectable({ providedIn: 'root' })
 export class GoalsFacade {
   private readonly goal = new BehaviorSubject<Goal | null>(null);
@@ -19,6 +22,10 @@ export class GoalsFacade {
     private readonly messageService: MessageService
   ) {}
 
+  /**
+   * Creates a goal.
+   * @param goalId The goal id.
+   */
   public loadGoal(goalId: string): void {
     this.getGoal(goalId).subscribe((goal) => {
       this.goal.next(goal);
@@ -29,6 +36,10 @@ export class GoalsFacade {
     });
   }
 
+  /**
+   * Gets the goals.
+   * @returns An observable that emits the goals.
+   */
   public getGoals(): Observable<Goal[]> {
     return this.goalsService.getAll().pipe(
       catchError((err) => {
@@ -50,6 +61,11 @@ export class GoalsFacade {
     );
   }
 
+  /**
+   * Gets the users goals.
+   * @param userId The user id.
+   * @returns An observable that emits the goals.
+   */
   public getUsersGoals(userId: string): Observable<Goal[]> {
     return this.goalsService.getUsersGoals(userId).pipe(
       catchError((err) => {
@@ -71,6 +87,11 @@ export class GoalsFacade {
     );
   }
 
+  /**
+   * Gets a goal.
+   * @param goalId The goal id.
+   * @returns An observable that emits the goal.
+   */
   public getGoal(goalId: string): Observable<Goal> {
     return this.goalsService.get(goalId).pipe(
       catchError((err) => {
@@ -87,6 +108,11 @@ export class GoalsFacade {
     );
   }
 
+  /**
+   * Gets the goal activity.
+   * @param goalId The goal id.
+   * @returns An observable that emits the goal activity.
+   */
   public getGoalActivity(goalId: string): Observable<GoalActivity[]> {
     return this.goalsService.getActivity(goalId).pipe(
       catchError((err) => {
@@ -108,6 +134,11 @@ export class GoalsFacade {
     );
   }
 
+  /**
+   * Creates a goal.
+   * @param form The form data.
+   * @returns An observable that emits the goal id.
+   */
   public createGoal(form: CreateGoalForm): Observable<string> {
     return this.goalsService
       .create({
@@ -138,6 +169,10 @@ export class GoalsFacade {
       );
   }
 
+  /**
+   * Checks in a goal.
+   * @param dto The dto.
+   */
   public checkInGoal(dto: CheckInGoalDto): Observable<void> {
     return this.goalsService.checkIn(dto.goalId, dto).pipe(
       tap(() => {
@@ -163,6 +198,11 @@ export class GoalsFacade {
     );
   }
 
+  /**
+   * Completes a goal.
+   * @param goalId The goal id.
+   * @returns nothing.
+   */
   public completeGoal(goalId: string): Observable<void> {
     return this.goalsService.complete(goalId).pipe(
       tap(() => {
@@ -188,6 +228,11 @@ export class GoalsFacade {
     );
   }
 
+  /**
+   * Deletes a goal.
+   * @param goalId The goal id.
+   * @param onDelete The on delete callback.
+   */
   public deleteGoal(goalId: string, onDelete: () => void): void {
     this.confirmationService.confirm({
       header: 'Delete Confirmation',

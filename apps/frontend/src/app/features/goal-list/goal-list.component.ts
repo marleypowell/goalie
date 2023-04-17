@@ -7,6 +7,9 @@ import { ToastModule } from 'primeng/toast';
 import { BehaviorSubject } from 'rxjs';
 import { GoalsFacade } from '../../services/goals.facade';
 
+/**
+ * The goal list component. Displays the users goals.
+ */
 @Component({
   selector: 'goalie-goal-list',
   standalone: true,
@@ -24,20 +27,34 @@ export class GoalListComponent implements OnInit {
     private readonly goalsFacade: GoalsFacade
   ) {}
 
+  /**
+   * Initializes the component. Loads the users goals.
+   */
   public ngOnInit(): void {
     this.loadGoals();
   }
 
+  /**
+   * Creates a goal then loads the goals.
+   * @param form The create goal form.
+   */
   public createGoal(form: CreateGoalForm): void {
     this.goalsFacade.createGoal(form).subscribe(() => {
       this.loadGoals();
     });
   }
 
+  /**
+   * Navigates to the goal page.
+   * @param goalId The goal id.
+   */
   public navigateToGoal(goalId: string): void {
     this.router.navigate([goalId], { relativeTo: this.route });
   }
 
+  /**
+   * Loads the users goals.
+   */
   private loadGoals(): void {
     this.goalsFacade.getUsersGoals('me').subscribe((goals: Goal[]) => {
       this.goals$.next(goals);

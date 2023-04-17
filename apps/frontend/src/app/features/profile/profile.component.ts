@@ -2,6 +2,9 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ClaimsService, UserInfoService } from '@goalie/shared/api-client-oauth-agent';
 
+/**
+ * The profile component. Displays the profile.
+ */
 @Component({
   selector: 'goalie-profile',
   standalone: true,

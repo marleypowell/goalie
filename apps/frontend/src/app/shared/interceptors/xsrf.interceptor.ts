@@ -5,6 +5,12 @@ import { mergeMap, Observable } from 'rxjs';
 
 const HEADER_NAME = 'x-goalie-csrf';
 
+/**
+ * Interceptor that adds the CSRF token to the request.
+ * @param req the request
+ * @param next the next handler
+ * @returns the response
+ */
 export function xsrfInterceptorFn(req: HttpRequest<unknown>, next: HttpHandlerFn): Observable<HttpEvent<unknown>> {
   const lcUrl = req.url.toLowerCase();
 

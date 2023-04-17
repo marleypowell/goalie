@@ -27,10 +27,16 @@ export class AppComponent {
 
   public constructor(private readonly authService: AuthService, private readonly router: Router) {}
 
+  /**
+   * Logout the user.
+   */
   public logout(): void {
     this.authService.logout();
   }
 
+  /**
+   * Navigate to the profile page.
+   */
   public navigateToProfile(): void {
     this.router.navigate(['profile']);
   }
