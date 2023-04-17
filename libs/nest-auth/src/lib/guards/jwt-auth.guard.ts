@@ -1,7 +1,6 @@
 import { ExecutionContext, Injectable, Logger } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { AuthGuard } from '@nestjs/passport';
-import { Request } from 'express';
 import { Observable } from 'rxjs';
 import { ALLOW_ANONYMOUS_KEY } from '../decorators/allow-anonymous.decorator';
 
@@ -14,11 +13,6 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
   }
 
   public override canActivate(context: ExecutionContext): boolean | Promise<boolean> | Observable<boolean> {
-    this.logger.debug(
-      `Checking if request is allowed to be anonymous`,
-      JSON.stringify(context.switchToHttp().getRequest<Request>().rawHeaders)
-    );
-
     const allowAnonymous = this.reflector.getAllAndOverride<boolean>(ALLOW_ANONYMOUS_KEY, [
       context.getHandler(),
       context.getClass(),

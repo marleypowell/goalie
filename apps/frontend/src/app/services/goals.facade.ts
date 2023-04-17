@@ -32,11 +32,19 @@ export class GoalsFacade {
   public getGoals(): Observable<Goal[]> {
     return this.goalsService.getAll().pipe(
       catchError((err) => {
-        if (err instanceof HttpErrorResponse && err.status === HttpStatusCode.Forbidden) {
-          this.messageService.add({ severity: 'error', summary: 'Error', detail: err.message });
-          return [];
+        if (err instanceof HttpErrorResponse) {
+          if (err.status === HttpStatusCode.Forbidden) {
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Error',
+              detail: 'You are not authorized to access this. (Admin Only)',
+            });
+            return [];
+          } else {
+            this.messageService.add({ severity: 'error', summary: 'Error', detail: 'An error occurred.' });
+            return [];
+          }
         }
-
         return throwError(() => err);
       })
     );
@@ -45,11 +53,19 @@ export class GoalsFacade {
   public getUsersGoals(userId: string): Observable<Goal[]> {
     return this.goalsService.getUsersGoals(userId).pipe(
       catchError((err) => {
-        if (err instanceof HttpErrorResponse && err.status === HttpStatusCode.Forbidden) {
-          this.messageService.add({ severity: 'error', summary: 'Error', detail: err.message });
-          return [];
+        if (err instanceof HttpErrorResponse) {
+          if (err instanceof HttpErrorResponse && err.status === HttpStatusCode.Forbidden) {
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Error',
+              detail: 'You are not authorized to access this. (Admin Only)',
+            });
+            return [];
+          } else {
+            this.messageService.add({ severity: 'error', summary: 'Error', detail: 'An error occurred.' });
+            return [];
+          }
         }
-
         return throwError(() => err);
       })
     );
@@ -59,7 +75,11 @@ export class GoalsFacade {
     return this.goalsService.get(goalId).pipe(
       catchError((err) => {
         if (err instanceof HttpErrorResponse && err.status === HttpStatusCode.Forbidden) {
-          this.messageService.add({ severity: 'error', summary: 'Error', detail: err.message });
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: 'You are not authorized to access this. (Admin Only)',
+          });
         }
 
         return throwError(() => err);
@@ -70,11 +90,19 @@ export class GoalsFacade {
   public getGoalActivity(goalId: string): Observable<GoalActivity[]> {
     return this.goalsService.getActivity(goalId).pipe(
       catchError((err) => {
-        if (err instanceof HttpErrorResponse && err.status === HttpStatusCode.Forbidden) {
-          this.messageService.add({ severity: 'error', summary: 'Error', detail: err.message });
-          return [];
+        if (err instanceof HttpErrorResponse) {
+          if (err instanceof HttpErrorResponse && err.status === HttpStatusCode.Forbidden) {
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Error',
+              detail: 'You are not authorized to access this. (Admin Only)',
+            });
+            return [];
+          } else {
+            this.messageService.add({ severity: 'error', summary: 'Error', detail: 'An error occurred.' });
+            return [];
+          }
         }
-
         return throwError(() => err);
       })
     );
@@ -91,8 +119,18 @@ export class GoalsFacade {
           this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Goal created' });
         }),
         catchError((err) => {
-          if (err instanceof HttpErrorResponse && err.status === HttpStatusCode.Forbidden) {
-            this.messageService.add({ severity: 'error', summary: 'Error', detail: err.message });
+          if (err instanceof HttpErrorResponse) {
+            if (err instanceof HttpErrorResponse && err.status === HttpStatusCode.Forbidden) {
+              this.messageService.add({
+                severity: 'error',
+                summary: 'Error',
+                detail: 'You are not authorized to access this. (Admin Only)',
+              });
+              return [];
+            } else {
+              this.messageService.add({ severity: 'error', summary: 'Error', detail: 'An error occurred.' });
+              return [];
+            }
           }
 
           return throwError(() => err);
@@ -106,8 +144,18 @@ export class GoalsFacade {
         this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Goal checked in' });
       }),
       catchError((err) => {
-        if (err instanceof HttpErrorResponse && err.status === HttpStatusCode.Forbidden) {
-          this.messageService.add({ severity: 'error', summary: 'Error', detail: err.message });
+        if (err instanceof HttpErrorResponse) {
+          if (err instanceof HttpErrorResponse && err.status === HttpStatusCode.Forbidden) {
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Error',
+              detail: 'You are not authorized to access this. (Admin Only)',
+            });
+            return [];
+          } else {
+            this.messageService.add({ severity: 'error', summary: 'Error', detail: 'An error occurred.' });
+            return [];
+          }
         }
 
         return throwError(() => err);
@@ -121,8 +169,18 @@ export class GoalsFacade {
         this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Goal completed' });
       }),
       catchError((err) => {
-        if (err instanceof HttpErrorResponse && err.status === HttpStatusCode.Forbidden) {
-          this.messageService.add({ severity: 'error', summary: 'Error', detail: err.message });
+        if (err instanceof HttpErrorResponse) {
+          if (err instanceof HttpErrorResponse && err.status === HttpStatusCode.Forbidden) {
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Error',
+              detail: 'You are not authorized to access this. (Admin Only)',
+            });
+            return [];
+          } else {
+            this.messageService.add({ severity: 'error', summary: 'Error', detail: 'An error occurred.' });
+            return [];
+          }
         }
 
         return throwError(() => err);
@@ -143,8 +201,18 @@ export class GoalsFacade {
               this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Goal deleted' });
             }),
             catchError((err) => {
-              if (err instanceof HttpErrorResponse && err.status === HttpStatusCode.Forbidden) {
-                this.messageService.add({ severity: 'error', summary: 'Error', detail: err.message });
+              if (err instanceof HttpErrorResponse) {
+                if (err instanceof HttpErrorResponse && err.status === HttpStatusCode.Forbidden) {
+                  this.messageService.add({
+                    severity: 'error',
+                    summary: 'Error',
+                    detail: 'You are not authorized to access this. (Admin Only)',
+                  });
+                  return [];
+                } else {
+                  this.messageService.add({ severity: 'error', summary: 'Error', detail: 'An error occurred.' });
+                  return [];
+                }
               }
 
               return throwError(() => err);

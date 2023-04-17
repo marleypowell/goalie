@@ -1,0 +1,41 @@
+@startuml
+left to right direction
+
+actor "Unauthenticated User" as u
+
+package "Authenticated Users" {
+  actor "Regular User" as r
+  actor "Admin User" as a
+}
+
+package Goalie {
+  usecase "Register" as uc1
+  usecase "Login" as uc2
+  usecase "Sign out" as uc3
+  usecase "View User Details" as uc4
+  usecase "Create Goal" as uc5
+  usecase "View own goals" as uc6
+  usecase "View all goals" as uc7
+  usecase "Goal Check-in" as uc8
+  usecase "Delete Goal" as uc9
+  usecase "View goal details" as uc10
+}
+
+u --> uc1
+r --> uc2
+a --> uc2
+r --> uc3
+a --> uc4
+r --> uc4
+a --> uc5
+r --> uc5
+a --> uc6
+r --> uc6
+a --> uc7
+a --> uc8
+r --> uc8
+a --> uc9
+r --> uc9
+a --> uc10
+r --> uc10
+@enduml

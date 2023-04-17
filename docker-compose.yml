@@ -1,0 +1,103 @@
+version: '3.1'
+
+services:
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_PASSWORD: example
+    ports:
+      - 5432:5432
+
+  nats:
+    image: nats:latest
+    ports:
+      - 4222:4222
+
+  identity-server:
+    image: curity.azurecr.io/curity/idsvr:latest
+    environment:
+      PASSWORD: example
+    ports:
+      - 8443:8443 # Auth API
+      - 6749:6749 # Admin UI
+      - 4465:4465 # Health Check
+
+  eventstore.db:
+    image: eventstore/eventstore:21.10.0-buster-slim
+    environment:
+      - EVENTSTORE_CLUSTER_SIZE=1
+      - EVENTSTORE_RUN_PROJECTIONS=All
+      - EVENTSTORE_START_STANDARD_PROJECTIONS=true
+      - EVENTSTORE_EXT_TCP_PORT=1113
+      - EVENTSTORE_HTTP_PORT=2113
+      - EVENTSTORE_INSECURE=true
+      - EVENTSTORE_ENABLE_EXTERNAL_TCP=true
+      - EVENTSTORE_ENABLE_ATOM_PUB_OVER_HTTP=true
+    ports:
+      - '1113:1113'
+      - '2113:2113'
+    volumes:
+      - type: volume
+        source: eventstore-volume-data
+        target: /var/lib/eventstore
+      - type: volume
+        source: eventstore-volume-logs
+        target: /var/log/eventstore
+
+  otel-collector:
+    image: otel/opentelemetry-collector:latest
+    container_name: otel-collector
+    command: [--config=/etc/otel-collector-config.yaml]
+    volumes:
+      - ./otel-collector-config.yaml:/etc/otel-collector-config.yaml
+    ports:
+      - 1888:1888 # pprof extension
+      # - 8888:8888 # Prometheus metrics exposed by the collector
+      # - 8889:8889 # Prometheus exporter metrics
+      - 13133:13133 # health_check extension
+      - '4317' # OTLP gRPC receiver
+      # - 4318:4318 # OTLP http receiver
+      # - 55679:55679 # zpages extension
+    depends_on:
+      - jaeger
+
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    container_name: jaeger
+    ports:
+      - 16686:16686 # Jaeger UI
+      - '4317' # OTLP gRPC receiver
+    environment:
+      - COLLECTOR_OTLP_ENABLED=true
+      - LOG_LEVEL=debug
+
+  grafana:
+    image: grafana/grafana:latest
+    volumes:
+      - ./tools/grafana/grafana.ini:/etc/grafana/grafana.ini
+      - ./tools/grafana/provisioning/:/etc/grafana/provisioning/
+    ports:
+      - '3000'
+
+  nginx-api-gateway:
+    build: ./tools/nginx
+    hostname: apigateway
+    ports:
+      - 3200:3000
+    volumes:
+      - ./tools/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./tools/nginx/default.conf:/etc/nginx/templates/default.conf.template
+      - ./tools/nginx/oauth2.js:/etc/nginx/conf.d/oauth2.js
+    environment:
+      - ENCRYPTION_KEY=${ENCRYPTION_KEY}
+
+  structurizr:
+    image: structurizr/lite
+    ports:
+      - 8080:8080
+    volumes:
+      - ./docs/structurizr:/usr/local/structurizr
+
+volumes:
+  eventstore-volume-data:
+  eventstore-volume-logs:
