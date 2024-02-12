@@ -19,14 +19,14 @@ provider "kubectl" {
   client_certificate     = base64decode(azurerm_kubernetes_cluster.aks_cluster.kube_config[0].client_certificate)
   client_key             = base64decode(azurerm_kubernetes_cluster.aks_cluster.kube_config[0].client_key)
   cluster_ca_certificate = base64decode(azurerm_kubernetes_cluster.aks_cluster.kube_config[0].cluster_ca_certificate)
-  load_config_file = false
+  load_config_file       = false
 }
 
 # API Gateway Service
 resource "helm_release" "api_gateway_service" {
-  name       = "api-gateway"
-  chart      = "${path.cwd}/deploy/api-gateway-config"
-  namespace  = "api-gateway"
+  name             = "api-gateway"
+  chart            = "${path.cwd}/deploy/api-gateway-config"
+  namespace        = "api-gateway"
   create_namespace = true
 
   values = [
@@ -46,9 +46,9 @@ resource "helm_release" "api_gateway_service" {
 
 # Goals Service
 resource "helm_release" "goals_service" {
-  name       = "goals"
-  chart      = "${path.cwd}/deploy/goals-service-config"
-  namespace  = "goals"
+  name             = "goals"
+  chart            = "${path.cwd}/deploy/goals-service-config"
+  namespace        = "goals"
   create_namespace = true
 
   values = [
@@ -58,9 +58,9 @@ resource "helm_release" "goals_service" {
 
 # Users Service
 resource "helm_release" "users_service" {
-  name       = "users"
-  chart      = "${path.cwd}/deploy/users-service-config"
-  namespace  = "users"
+  name             = "users"
+  chart            = "${path.cwd}/deploy/users-service-config"
+  namespace        = "users"
   create_namespace = true
 
   values = [
@@ -75,9 +75,9 @@ resource "helm_release" "users_service" {
 
 # OAuth Agent Service
 resource "helm_release" "oauth_agent_service" {
-  name       = "oauth-agent"
-  chart      = "${path.cwd}/deploy/oauth-agent-service-config"
-  namespace  = "oauth-agent"
+  name             = "oauth-agent"
+  chart            = "${path.cwd}/deploy/oauth-agent-service-config"
+  namespace        = "oauth-agent"
   create_namespace = true
 
   values = [
@@ -148,10 +148,10 @@ resource "kubernetes_secret_v1" "idsvr_config" {
 }
 
 resource "helm_release" "curity_idsvr" {
-  name = "curity"
+  name       = "curity"
   repository = "https://curityio.github.io/idsvr-helm/"
   chart      = "idsvr"
-  namespace = kubernetes_namespace.curity_ns.metadata.0.name
+  namespace  = kubernetes_namespace.curity_ns.metadata.0.name
 
   values = [
     file("${path.cwd}/deploy/idsvr-config/helm-values.yaml")
@@ -166,9 +166,9 @@ resource "helm_release" "curity_idsvr" {
 resource "helm_release" "ingress_nginx" {
   name = "ingress-nginx"
 
-  repository = "https://kubernetes.github.io/ingress-nginx"
-  chart      = "ingress-nginx"
-  namespace  = "ingress-nginx"
+  repository       = "https://kubernetes.github.io/ingress-nginx"
+  chart            = "ingress-nginx"
+  namespace        = "ingress-nginx"
   create_namespace = true
 
   values = [
