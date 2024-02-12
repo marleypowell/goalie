@@ -28,7 +28,7 @@ async function bootstrap() {
     });
   }
 
-  setupSwagger(app, true);
+  setupSwagger(app);
   setupTracing(app);
 
   app.enableShutdownHooks();
