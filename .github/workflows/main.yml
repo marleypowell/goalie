@@ -74,27 +74,34 @@ jobs:
           username: ${{ secrets.ACR_USERNAME }}
           password: ${{ secrets.ACR_PASSWORD }}
 
-      - name: Build
+      - name: Build and Push (api-gateway)
         run: |
           docker build -f apps/api-gateway/Dockerfile . -t ${{ env.REGISTRY }}/api-gateway:latest
           docker push ${{ env.REGISTRY }}/api-gateway:latest
 
-          docker build -f apps/services/oauth-agent-service/Dockerfile . -t ${{ env.REGISTRY }}/oauth-agent-service:latest
+      - name: Build and Push (oauth-agent-service)
+        run: |
+          docker build -f apps/oauth-agent-service/Dockerfile . -t ${{ env.REGISTRY }}/oauth-agent-service:latest
           docker push ${{ env.REGISTRY }}/oauth-agent-service:latest
 
-          docker build -f apps/services/goals-service/Dockerfile . -t ${{ env.REGISTRY }}/goals-service:latest
+      - name: Build and Push (goals-service)
+        run: |
+          docker build -f apps/goals-service/Dockerfile . -t ${{ env.REGISTRY }}/goals-service:latest
           docker push ${{ env.REGISTRY }}/goals-service:latest
 
-          docker build -f apps/services/users-service/Dockerfile . -t ${{ env.REGISTRY }}/users-service:latest
+      - name: Build and Push (users-service)
+        run: |
+          docker build -f apps/users-service/Dockerfile . -t ${{ env.REGISTRY }}/users-service:latest
           docker push ${{ env.REGISTRY }}/users-service:latest
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
         with:
-          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+          terraform_wrapper: false
 
       - name: Terraform Init
-        run: terraform -chdir=deploy/terraform-config init
+        run: terraform init -backend-config="storage_account_name=goalieterraform" -backend-config="container_name=terraform" -backend-config="key=terraform.tfstate" -backend-config="access_key=${{ secrets.TERRAFORM_STORAGE_ACCOUNT_KEY }}" -upgrade
+        working-directory: deploy/terraform-config
 
       - name: Set Terraform variables
         run: |
@@ -107,21 +114,43 @@ jobs:
         working-directory: deploy/terraform-config
 
       - name: Terraform Format
-        run: terraform -chdir=deploy/terraform-config fmt -check
+        run: terraform fmt -check
+        working-directory: deploy/terraform-config
 
       - name: Terraform Plan
-        run: terraform -chdir=deploy/terraform-config plan -input=false
+        run: terraform plan -out tfplan
+        working-directory: deploy/terraform-config
         env:
           ARM_CLIENT_ID: ${{ vars.ARM_CLIENT_ID }}
           ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
           ARM_TENANT_ID: ${{ vars.ARM_TENANT_ID }}
           ARM_SUBSCRIPTION_ID: ${{ vars.ARM_SUBSCRIPTION_ID }}
 
-      - name: Terraform Apply
+      - name: Terraform Validate and Apply
         if: github.ref == 'refs/heads/"main"' && github.event_name == 'push'
-        run: terraform -chdir=deploy/terraform-config apply -auto-approve -input=false
+        run: terraform apply tfplan
+        working-directory: deploy/terraform-config
         env:
           ARM_CLIENT_ID: ${{ vars.ARM_CLIENT_ID }}
           ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
           ARM_TENANT_ID: ${{ vars.ARM_TENANT_ID }}
           ARM_SUBSCRIPTION_ID: ${{ vars.ARM_SUBSCRIPTION_ID }}
+
+      - name: Retrieve terraform outputs
+        if: github.ref == 'refs/heads/"main"' && github.event_name == 'push'
+        run: |
+          $outputs = terraform output -json | ConvertFrom-Json -AsHashTable
+          $outputs.Keys | ForEach-Object {
+              $key = $_
+              $output = $outputs[$key]
+              $value = $output.value
+              $sensitive = $output.sensitive
+
+              Write-Host "$key = $(($sensitive ? "***" : $value))"
+              if ($sensitive) {
+                Write-Host "::add-mask::$value"
+              }
+              "$key=$value" >> $env:GITHUB_ENV
+          }
+        shell: pwsh
+        working-directory: deploy/terraform-config
