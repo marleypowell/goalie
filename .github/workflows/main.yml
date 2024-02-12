@@ -52,17 +52,17 @@ jobs:
 
       - name: Build and Push (oauth-agent-service)
         run: |
-          docker build -f apps/oauth-agent-service/Dockerfile . -t ${{ env.REGISTRY }}/oauth-agent-service:latest
+          docker build -f apps/services/oauth-agent-service/Dockerfile . -t ${{ env.REGISTRY }}/oauth-agent-service:latest
           docker push ${{ env.REGISTRY }}/oauth-agent-service:latest
 
       - name: Build and Push (goals-service)
         run: |
-          docker build -f apps/goals-service/Dockerfile . -t ${{ env.REGISTRY }}/goals-service:latest
+          docker build -f apps/services/goals-service/Dockerfile . -t ${{ env.REGISTRY }}/goals-service:latest
           docker push ${{ env.REGISTRY }}/goals-service:latest
 
       - name: Build and Push (users-service)
         run: |
-          docker build -f apps/users-service/Dockerfile . -t ${{ env.REGISTRY }}/users-service:latest
+          docker build -f apps/services/users-service/Dockerfile . -t ${{ env.REGISTRY }}/users-service:latest
           docker push ${{ env.REGISTRY }}/users-service:latest
 
       - name: Deploy Docs
