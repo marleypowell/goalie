@@ -8,7 +8,7 @@ const jsonReportName = 'report_json.json';
 const mdReportName = 'report_md.md';
 const htmlReportName = 'report_html.html';
 
-export async function run() {
+async function run() {
   try {
     const workspace = process.env.GITHUB_WORKSPACE;
     const currentRunnerID = process.env.GITHUB_RUN_ID;
