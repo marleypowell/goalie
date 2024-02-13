@@ -26,4 +26,4 @@ jobs:
 
       - uses: ./tools/zap/
         with:
-          automation_file: tools/zap/plan.yml
+          automation_file: plan.yml

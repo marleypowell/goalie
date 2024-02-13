@@ -39,7 +39,7 @@ async function run() {
       '-t',
       dockerName,
     ];
-    const zapArguments = ['zap.sh', '-cmd', '-autorun', automationFile];
+    const zapArguments = ['zap.sh', '-cmd', '-autorun', `/zap/wrk/${automationFile}`];
 
     try {
       await exec.exec('docker', [...dockerArguments, ...zapArguments]);
