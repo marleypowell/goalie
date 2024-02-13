@@ -1,3 +1,7 @@
+CREATE USER goalie WITH PASSWORD '<SET_PASSWORD>';
+GRANT pg_read_all_data TO goalie;
+GRANT pg_write_all_data TO goalie;
+
 -- While Postgres has native support for UUID's, an extension is needed for generating them.
 -- This extension comes bundled with most installations of Postgres but if not must be installed separately
 --

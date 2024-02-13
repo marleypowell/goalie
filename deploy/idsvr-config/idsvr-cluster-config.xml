@@ -697,7 +697,7 @@
           <name>admin</name>
           <uid>0</uid>
           <gid>0</gid>
-          <password>$5$M4MWewiF$/TgWTiY6ARO59ae3N6TuFm33D2YRupStLnQ0okLY1jD</password>
+          <password>$5$aPXaBa2W$Vmwkl0SD3CjeJF9LP.TVKsd7NcEFqhoOsKphvR37Tv7</password>
           <ssh_keydir>/opt/idsvr/home/admin/.ssh</ssh_keydir>
           <homedir>/opt/idsvr/home/admin</homedir>
         </user>

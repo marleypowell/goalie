@@ -176,7 +176,7 @@ resource "helm_release" "ingress_nginx" {
   ]
 
   depends_on = [
-    helm_release.curity_idsvr,
+    helm_release.curity_idsvr
   ]
 }
 

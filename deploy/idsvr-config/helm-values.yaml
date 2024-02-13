@@ -27,16 +27,17 @@ curity:
       level: DEBUG
 
 ingress:
-  enabled: true
   annotations:
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/ssl-redirect: 'false'
     cert-manager.io/cluster-issuer: 'letsencrypt-prod'
   runtime:
+    enabled: true
     host: login.mp.exclaimertest.net
     secretName: login-aks-tls
     paths:
       - /
   admin:
+    enabled: true
     host: admin.mp.exclaimertest.net
     secretName: admin-aks-tls
