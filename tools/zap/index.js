@@ -23,14 +23,12 @@ async function run() {
     console.log('starting the program');
     console.log('github run id :' + currentRunnerID);
 
-    // Create the files so we can change the perms and allow the docker non root user to update them
-    await exec.exec(`touch ${jsonReportName} ${mdReportName} ${htmlReportName}`);
-    await exec.exec(`chmod a+w ${jsonReportName} ${mdReportName} ${htmlReportName}`);
-
     await exec.exec(`docker pull ${dockerName} -q`);
 
     const dockerArguments = [
       'run',
+      '--user',
+      'root',
       '-v',
       `${workspace}/tools/zap:/zap/wrk/:rw`,
       '-v',
