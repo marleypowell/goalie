@@ -1,0 +1,106 @@
+---
+env:
+  contexts:
+    - name: 'Authentication Test'
+      urls:
+        - 'https://goalie.mp.exclaimertest.net'
+      includePaths:
+        - 'https://.*.mp.exclaimertest.net.*'
+      excludePaths: []
+      authentication:
+        method: 'browser'
+        parameters:
+          loginPageUrl: 'https://goalie.mp.exclaimertest.net'
+          loginPageWait: 2
+          browserId: 'chrome-headless'
+        verification:
+          method: 'autodetect'
+          pollFrequency: 60
+          pollUnits: 'requests'
+      sessionManagement:
+        method: 'headers'
+        parameters:
+          Cookie:
+            "goalie-csrf=AdOR6zftfYAD8rCbuIlKRXiMn03CjvSKBEM1MKcvlRpHVOWjwWwDfVDagfbPhNpLPGJY7GhBDm0C1FOlTEd5ZWhr2q03caA2pQNu5MReuoOJD2FU3ZTIHa_mHCmT;\
+            \ goalie-login={%cookie:goalie-login%}; ssm=ssm; sessionid=65cb58c0-1527463b-0158-4dec-b542-4dc91e9b15ea###0c0338111805fe3de1d9cbe4f300c11dbc2bb2390f1f40d9173ca5602d69259a;\
+            \ goalie-at=ASXsauUXUVzOAkYGUMjr1lN5FDLUR4gtZP10FccDFKoHYdcFhPzit0uHFW_AU7a5UmLlfJfWRIccrbP8M_lfED3UTe099J-3u_Q"
+      technology:
+        exclude: []
+      users:
+        - name: 'zaproxy'
+          credentials:
+            username: 'zaproxy'
+            password: 'zaproxy'
+  parameters:
+    failOnError: true
+    failOnWarning: false
+    progressToStdout: true
+  vars: {}
+
+jobs:
+  - type: 'passiveScan-config'
+    parameters:
+      scanOnlyInScope: true
+      enableTags: false
+      disableAllRules: false
+    rules: []
+
+  - type: 'spider'
+    parameters: {}
+    tests:
+      - onFail: 'INFO'
+        statistic: 'automation.spider.urls.added'
+        site: ''
+        operator: '>='
+        value: 100
+        name: 'At least 100 URLs found'
+        type: 'stats'
+
+  - type: 'spiderAjax'
+    parameters:
+      maxDuration: 60
+      maxCrawlDepth: 10
+      numberOfBrowsers: 32
+      inScopeOnly: true
+    tests:
+      - onFail: 'INFO'
+        statistic: 'spiderAjax.urls.added'
+        site: ''
+        operator: '>='
+        value: 100
+        name: 'At least 100 URLs found'
+        type: 'stats'
+
+  - type: 'passiveScan-wait'
+    parameters: {}
+
+  - type: 'report'
+    parameters:
+      template: 'risk-confidence-html'
+      reportTitle: 'ZAP Scanning Report'
+      reportDescription: ''
+      reportDir: /home/zap/reports/
+
+  - type: 'report'
+    parameters:
+      template: 'traditional-html'
+      reportTitle: 'ZAP Scanning Report'
+      reportDescription: ''
+      reportDir: /home/zap/reports/
+      reportFile: report_html
+
+  - type: 'report'
+    parameters:
+      template: 'traditional-json'
+      reportTitle: 'ZAP Scanning Report'
+      reportDescription: ''
+      reportDir: /home/zap/reports/
+      reportFile: report_json
+
+  - type: 'report'
+    parameters:
+      template: 'traditional-md'
+      reportTitle: 'ZAP Scanning Report'
+      reportDescription: ''
+      reportDir: /home/zap/reports/
+      reportFile: report_md

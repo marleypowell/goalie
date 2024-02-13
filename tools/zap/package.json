@@ -1,0 +1,8 @@
+{
+  "main": "action.js",
+  "dependencies": {
+    "@actions/core": "^1.6.0",
+    "@actions/exec": "^1.1.1",
+    "@zaproxy/actions-common-scans": "^0.2.0"
+  }
+}

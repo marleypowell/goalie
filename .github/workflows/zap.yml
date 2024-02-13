@@ -1,0 +1,26 @@
+name: ZAP
+
+on:
+  push:
+    branches: ['main']
+
+permissions:
+  contents: write
+
+jobs:
+  zap:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          cache: yarn
+
+      - run: yarn install --frozen-lockfile
+        working-directory: tools/zap
+
+      - uses: ./tools/zap/
+        with:
+          automation_file: tools/zap/plan.yml
