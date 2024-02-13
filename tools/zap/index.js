@@ -29,6 +29,7 @@ async function run() {
       'run',
       '--user',
       'root',
+      '--rm',
       '-v',
       `${workspace}/tools/zap:/zap/wrk/:rw`,
       '-v',
