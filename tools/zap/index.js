@@ -57,6 +57,8 @@ async function run() {
       }
     }
 
+    console.log('Scanning process completed, starting to analyze the results!');
+
     await common.main.processReport(
       token,
       `${workspace}/tools/zap/reports`,
