@@ -36,7 +36,7 @@ async function run() {
       '-v',
       `${workspace}:/home/zap/reports/:rw`,
       '--network=host',
-      '--tag',
+      '-t',
       dockerName,
     ];
     const zapArguments = ['zap.sh', '-cmd', '-autorun', automationFile];
