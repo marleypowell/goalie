@@ -11,7 +11,7 @@ inputs:
   docker_name:
     description: 'The Docker file to be executed'
     required: true
-    default: 'owasp/zap2docker-stable'
+    default: 'ghcr.io/zaproxy/zaproxy:stable'
   automation_file:
     description: 'The YAML file containing the jobs to be executed'
     required: true

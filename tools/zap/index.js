@@ -32,9 +32,9 @@ async function run() {
     const dockerArguments = [
       'run',
       '-v',
-      `${workspace}:/zap/wrk/:rw`,
+      `${workspace}/tools/zap:/zap/wrk/:rw`,
       '-v',
-      `${workspace}:/home/zap/reports/:rw`,
+      `${workspace}/tools/zap/reports:/home/zap/reports/:rw`,
       '--network=host',
       '-t',
       dockerName,
@@ -59,7 +59,15 @@ async function run() {
       }
     }
 
-    await common.main.processReport(token, workspace, [], currentRunnerID, issueTitle, repoName, createIssue);
+    await common.main.processReport(
+      token,
+      `${workspace}/tools/zap/reports`,
+      [],
+      currentRunnerID,
+      issueTitle,
+      repoName,
+      createIssue
+    );
   } catch (error) {
     core.setFailed(error.message);
   }
