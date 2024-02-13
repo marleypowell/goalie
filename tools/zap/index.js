@@ -23,6 +23,8 @@ async function run() {
     console.log('starting the program');
     console.log('github run id :' + currentRunnerID);
 
+    await exec.exec(`ls ${workspace}/tools/zap`);
+
     await exec.exec(`docker pull ${dockerName} -q`);
 
     const dockerArguments = [
@@ -37,7 +39,7 @@ async function run() {
       '-t',
       dockerName,
     ];
-    const zapArguments = ['zap.sh', '-cmd', '-autorun', `/zap/wrk/${automationFile}`];
+    const zapArguments = ['zap.sh', '-cmd', '-autorun', automationFile];
 
     try {
       await exec.exec('docker', [...dockerArguments, ...zapArguments]);
