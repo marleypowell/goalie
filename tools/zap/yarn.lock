@@ -204,6 +204,11 @@
   resolved "https://registry.yarnpkg.com/@types/tmp/-/tmp-0.1.0.tgz#19cf73a7bcf641965485119726397a096f0049bd"
   integrity sha512-6IwZ9HzWbCq6XoQWhxLpDjuADodH/MKXRUIDFudvgjcVdjFknvmR+DNsoUeer4XPrEnrZs04Jj+kfV9pFsrhmA==
 
+"@vercel/ncc@^0.36.1":
+  version "0.36.1"
+  resolved "https://registry.yarnpkg.com/@vercel/ncc/-/ncc-0.36.1.tgz#d4c01fdbbe909d128d1bf11c7f8b5431654c5b95"
+  integrity sha512-S4cL7Taa9yb5qbv+6wLgiKVZ03Qfkc4jGRuiUQMQ8HGBD5pcNRnHeYM33zBvJE4/zJGjJJ8GScB+WmTsn9mORw==
+
 "@zaproxy/actions-common-scans@^0.2.0":
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/@zaproxy/actions-common-scans/-/actions-common-scans-0.2.0.tgz#d14500af746005fbf1821d755d8de0546be30799"

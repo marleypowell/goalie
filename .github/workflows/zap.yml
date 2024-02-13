@@ -21,6 +21,9 @@ jobs:
       - run: yarn install --frozen-lockfile
         working-directory: tools/zap
 
-      - uses: ./tools/zap/
+      - run: yarn package
+        working-directory: tools/zap
+
+      - uses: ./tools/zap/dist/
         with:
           automation_file: tools/zap/plan.yml
