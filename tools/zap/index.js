@@ -21,7 +21,7 @@ async function run() {
     const automationFile = core.getInput('automation_file', { required: true });
 
     console.log('starting the program');
-    console.log('github run id :' + currentRunnerID);
+    console.log(`github run id: ${currentRunnerID}`);
 
     await exec.exec(`docker pull ${dockerName} -q`);
 
