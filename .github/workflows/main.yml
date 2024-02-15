@@ -123,6 +123,7 @@ jobs:
           oauth_agent_client_secret = "${{ secrets.OAUTH_AGENT_CLIENT_SECRET }}"
           accounts_client_secret    = "${{ secrets.ACCOUNTS_CLIENT_SECRET }}"
           EOF
+        working-directory: deploy/terraform-config
 
       - name: Terraform Format
         run: terraform -chdir=deploy/terraform-config fmt -check
