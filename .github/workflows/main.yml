@@ -14,98 +14,98 @@ permissions:
   contents: write
 
 jobs:
-  # build:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Checkout repository
-  #       uses: actions/checkout@v3
-  #       with:
-  #         submodules: true
-
-  #     - uses: actions/setup-node@v3
-  #       with:
-  #         node-version: 18
-  #         cache: yarn
-
-  #     - run: yarn install --frozen-lockfile
-
-  #     - run: yarn nx-cloud record -- yarn nx format:check
-
-  #     - run: yarn nx run-many --target=lint --all --parallel=3 --configuration=production
-  #     - run: yarn nx run-many --target=test --all --parallel=3 --ci --code-coverage
-  #     - run: yarn nx run-many --target=build --all --parallel=3 --configuration=production --verbose
-
-  #     # Login against a Docker registry except on PR
-  #     - name: Azure Container Registry Login
-  #       if: github.event_name != 'pull_request'
-  #       uses: Azure/docker-login@v1
-  #       with:
-  #         login-server: ${{ env.REGISTRY }}
-  #         username: ${{ secrets.ACR_USERNAME }}
-  #         password: ${{ secrets.ACR_PASSWORD }}
-
-  #     - name: Build and Push (api-gateway)
-  #       run: |
-  #         docker build -f apps/api-gateway/Dockerfile . -t ${{ env.REGISTRY }}/api-gateway:latest
-  #         docker push ${{ env.REGISTRY }}/api-gateway:latest
-
-  #     - name: Build and Push (oauth-agent-service)
-  #       run: |
-  #         docker build -f apps/services/oauth-agent-service/Dockerfile . -t ${{ env.REGISTRY }}/oauth-agent-service:latest
-  #         docker push ${{ env.REGISTRY }}/oauth-agent-service:latest
-
-  #     - name: Build and Push (goals-service)
-  #       run: |
-  #         docker build -f apps/services/goals-service/Dockerfile . -t ${{ env.REGISTRY }}/goals-service:latest
-  #         docker push ${{ env.REGISTRY }}/goals-service:latest
-
-  #     - name: Build and Push (users-service)
-  #       run: |
-  #         docker build -f apps/services/users-service/Dockerfile . -t ${{ env.REGISTRY }}/users-service:latest
-  #         docker push ${{ env.REGISTRY }}/users-service:latest
-
-  #     - name: Publish Docs
-  #       uses: peaceiris/actions-gh-pages@v3
-  #       with:
-  #         github_token: ${{ secrets.GITHUB_TOKEN }}
-  #         # Build output to publish to the `gh-pages` branch:
-  #         publish_dir: ./apps/website/build
-  #         # The following lines assign commit authorship to the official
-  #         # GH-Actions bot for deploys to `gh-pages` branch:
-  #         # https://github.com/actions/checkout/issues/13#issuecomment-724415212
-  #         # The GH actions bot is used by default if you didn't specify the two fields.
-  #         # You can swap them out with your own user credentials.
-  #         user_name: github-actions[bot]
-  #         user_email: 41898282+github-actions[bot]@users.noreply.github.com
-
-  # test:
-  #   runs-on: ubuntu-latest
-  #   needs: [build]
-  #   steps:
-  #     - name: Checkout repository
-  #       uses: actions/checkout@v3
-
-  deploy:
+  build:
     runs-on: ubuntu-latest
-    # needs: [test]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          submodules: true
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: yarn
+
+      - run: yarn install --frozen-lockfile
+
+      - run: yarn nx-cloud record -- yarn nx format:check
+
+      - run: yarn nx run-many --target=lint --all --parallel=3 --configuration=production
+      - run: yarn nx run-many --target=test --all --parallel=3 --ci --code-coverage
+      - run: yarn nx run-many --target=build --all --parallel=3 --configuration=production --verbose
+
+      # Login against a Docker registry except on PR
+      - name: Azure Container Registry Login
+        if: github.event_name != 'pull_request'
+        uses: Azure/docker-login@v1
+        with:
+          login-server: ${{ env.REGISTRY }}
+          username: ${{ secrets.ACR_USERNAME }}
+          password: ${{ secrets.ACR_PASSWORD }}
+
+      - name: Build and Push (api-gateway)
+        run: |
+          docker build -f apps/api-gateway/Dockerfile . -t ${{ env.REGISTRY }}/api-gateway:latest
+          docker push ${{ env.REGISTRY }}/api-gateway:latest
+
+      - name: Build and Push (oauth-agent-service)
+        run: |
+          docker build -f apps/services/oauth-agent-service/Dockerfile . -t ${{ env.REGISTRY }}/oauth-agent-service:latest
+          docker push ${{ env.REGISTRY }}/oauth-agent-service:latest
+
+      - name: Build and Push (goals-service)
+        run: |
+          docker build -f apps/services/goals-service/Dockerfile . -t ${{ env.REGISTRY }}/goals-service:latest
+          docker push ${{ env.REGISTRY }}/goals-service:latest
+
+      - name: Build and Push (users-service)
+        run: |
+          docker build -f apps/services/users-service/Dockerfile . -t ${{ env.REGISTRY }}/users-service:latest
+          docker push ${{ env.REGISTRY }}/users-service:latest
+
+      - name: Publish Docs
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          # Build output to publish to the `gh-pages` branch:
+          publish_dir: ./apps/website/build
+          # The following lines assign commit authorship to the official
+          # GH-Actions bot for deploys to `gh-pages` branch:
+          # https://github.com/actions/checkout/issues/13#issuecomment-724415212
+          # The GH actions bot is used by default if you didn't specify the two fields.
+          # You can swap them out with your own user credentials.
+          user_name: github-actions[bot]
+          user_email: 41898282+github-actions[bot]@users.noreply.github.com
+
+  test:
+    runs-on: ubuntu-latest
+    needs: [build]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # - name: Deploy Frontend
-      #   id: deploy-frontend
-      #   uses: Azure/static-web-apps-deploy@v1
-      #   with:
-      #     azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_DELIGHTFUL_MEADOW_06EA42503 }}
-      #     repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (i.e. PR comments)
-      #     action: 'upload'
-      #     ###### Repository/Build Configurations - These values can be configured to match your app requirements. ######
-      #     # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
-      #     app_location: '/' # App source code path
-      #     api_location: '' # Api source code path - optional
-      #     output_location: 'dist/apps/frontend' # Built app content directory - optional
-      #     app_build_command: 'yarn build:frontend'
-      #     ###### End of Repository/Build Configurations ######
+  deploy:
+    runs-on: ubuntu-latest
+    needs: [test]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Deploy Frontend
+        id: deploy-frontend
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_DELIGHTFUL_MEADOW_06EA42503 }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (i.e. PR comments)
+          action: 'upload'
+          ###### Repository/Build Configurations - These values can be configured to match your app requirements. ######
+          # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
+          app_location: '/' # App source code path
+          api_location: '' # Api source code path - optional
+          output_location: 'dist/apps/frontend' # Built app content directory - optional
+          app_build_command: 'yarn build:frontend'
+          ###### End of Repository/Build Configurations ######
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
