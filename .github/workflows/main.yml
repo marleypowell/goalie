@@ -114,7 +114,6 @@ jobs:
 
       - name: Terraform Init
         run: terraform -chdir=deploy/terraform-config init -backend-config="storage_account_name=goalieterraform" -backend-config="container_name=terraform" -backend-config="key=terraform.tfstate" -backend-config="access_key=${{ secrets.TERRAFORM_STORAGE_ACCOUNT_KEY }}" -upgrade
-        # working-directory: deploy/terraform-config
 
       - name: Set Terraform variables
         run: |
@@ -124,15 +123,12 @@ jobs:
           oauth_agent_client_secret = "${{ secrets.OAUTH_AGENT_CLIENT_SECRET }}"
           accounts_client_secret    = "${{ secrets.ACCOUNTS_CLIENT_SECRET }}"
           EOF
-        working-directory: deploy/terraform-config
 
       - name: Terraform Format
-        run: terraform fmt -check
-        working-directory: deploy/terraform-config
+        run: terraform -chdir=deploy/terraform-config fmt -check
 
       - name: Terraform Plan
-        run: terraform plan -out tfplan
-        working-directory: deploy/terraform-config
+        run: terraform -chdir=deploy/terraform-config plan -out tfplan
         env:
           ARM_CLIENT_ID: ${{ vars.ARM_CLIENT_ID }}
           ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
@@ -141,8 +137,7 @@ jobs:
 
       - name: Terraform Validate and Apply
         if: github.ref == 'refs/heads/"main"' && github.event_name == 'push'
-        run: terraform apply tfplan
-        working-directory: deploy/terraform-config
+        run: terraform -chdir=deploy/terraform-config apply tfplan
         env:
           ARM_CLIENT_ID: ${{ vars.ARM_CLIENT_ID }}
           ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
@@ -152,7 +147,7 @@ jobs:
       - name: Retrieve Terraform outputs
         if: github.ref == 'refs/heads/"main"' && github.event_name == 'push'
         run: |
-          $outputs = terraform output -json | ConvertFrom-Json -AsHashTable
+          $outputs = terraform -chdir=deploy/terraform-config output -json | ConvertFrom-Json -AsHashTable
           $outputs.Keys | ForEach-Object {
               $key = $_
               $output = $outputs[$key]
@@ -166,4 +161,3 @@ jobs:
               "$key=$value" >> $env:GITHUB_ENV
           }
         shell: pwsh
-        working-directory: deploy/terraform-config
