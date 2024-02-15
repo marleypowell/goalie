@@ -123,7 +123,6 @@ jobs:
           ARM_SUBSCRIPTION_ID: ${{ vars.ARM_SUBSCRIPTION_ID }}
 
       - name: Terraform Validate and Apply
-        if: github.ref == 'refs/heads/"main"' && github.event_name == 'push'
         run: terraform -chdir=deploy/terraform-config apply tfplan
         env:
           ARM_CLIENT_ID: ${{ vars.ARM_CLIENT_ID }}
@@ -132,7 +131,6 @@ jobs:
           ARM_SUBSCRIPTION_ID: ${{ vars.ARM_SUBSCRIPTION_ID }}
 
       - name: Retrieve Terraform outputs
-        if: github.ref == 'refs/heads/"main"' && github.event_name == 'push'
         run: |
           $outputs = terraform -chdir=deploy/terraform-config output -json | ConvertFrom-Json -AsHashTable
           $outputs.Keys | ForEach-Object {
