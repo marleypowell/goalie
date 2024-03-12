@@ -1,0 +1,20 @@
+name: Stop AKS Cluster
+
+on:
+  schedule:
+    - cron: '0 22 * * *'
+
+jobs:
+  stop-cluster:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: azure/login@v2
+        with:
+          creds: '{"clientId":"${{ secrets.ARM_CLIENT_ID }}","clientSecret":"${{ secrets.ARM_CLIENT_SECRET }}","subscriptionId":"${{ secrets.ARM_SUBSCRIPTION_ID }}","tenantId":"${{ secrets.ARM_TENANT_ID }}"}'
+
+      - name: Azure CLI script
+        uses: azure/CLI@v1
+        with:
+          azcliversion: latest
+          inlineScript: |
+            az aks stop --name goalie --resource-group goalie
