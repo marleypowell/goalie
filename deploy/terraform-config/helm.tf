@@ -34,6 +34,11 @@ resource "helm_release" "api_gateway_service" {
   ]
 
   set {
+    name  = "image.digest"
+    value = var.api_gateway_image_digest
+  }
+
+  set {
     name  = "oauthProxy.encryptionKey"
     value = var.cookie_encryption_key
   }
@@ -54,6 +59,11 @@ resource "helm_release" "goals_service" {
   values = [
     file("${path.cwd}/deploy/goals-service-config/values.yaml")
   ]
+
+  set {
+    name  = "image.digest"
+    value = var.goals_service_image_digest
+  }
 }
 
 # Users Service
@@ -66,6 +76,11 @@ resource "helm_release" "users_service" {
   values = [
     file("${path.cwd}/deploy/users-service-config/values.yaml")
   ]
+
+  set {
+    name  = "image.digest"
+    value = var.users_service_image_digest
+  }
 
   set {
     name  = "accountsClientSecret"
@@ -83,6 +98,11 @@ resource "helm_release" "oauth_agent_service" {
   values = [
     file("${path.cwd}/deploy/oauth-agent-service-config/values.yaml")
   ]
+
+  set {
+    name  = "image.digest"
+    value = var.oauth_agent_image_digest
+  }
 
   set {
     name  = "clientSecret"

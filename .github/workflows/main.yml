@@ -35,9 +35,7 @@ jobs:
       - run: yarn nx run-many --target=test --all --parallel=3 --ci --code-coverage
       - run: yarn nx run-many --target=build --all --parallel=3 --configuration=production --verbose
 
-      # Login against a Docker registry except on PR
       - name: Azure Container Registry Login
-        if: github.event_name != 'pull_request'
         uses: Azure/docker-login@v1
         with:
           login-server: ${{ env.REGISTRY }}
@@ -48,21 +46,25 @@ jobs:
         run: |
           docker build -f apps/api-gateway/Dockerfile . -t ${{ env.REGISTRY }}/api-gateway:latest
           docker push ${{ env.REGISTRY }}/api-gateway:latest
+          echo "api_gateway_image_digest=$(docker images --no-trunc --quiet goalie.azurecr.io/api-gateway:latest)" >> "$GITHUB_ENV"
 
       - name: Build and Push (oauth-agent-service)
         run: |
           docker build -f apps/services/oauth-agent-service/Dockerfile . -t ${{ env.REGISTRY }}/oauth-agent-service:latest
           docker push ${{ env.REGISTRY }}/oauth-agent-service:latest
+          echo "oauth_agent_service_image_digest=$(docker images --no-trunc --quiet goalie.azurecr.io/oauth-agent-service:latest)" >> "$GITHUB_ENV"
 
       - name: Build and Push (goals-service)
         run: |
           docker build -f apps/services/goals-service/Dockerfile . -t ${{ env.REGISTRY }}/goals-service:latest
           docker push ${{ env.REGISTRY }}/goals-service:latest
+          echo "goals_service_image_digest=$(docker images --no-trunc --quiet goalie.azurecr.io/goals-service:latest)" >> "$GITHUB_ENV"
 
       - name: Build and Push (users-service)
         run: |
           docker build -f apps/services/users-service/Dockerfile . -t ${{ env.REGISTRY }}/users-service:latest
           docker push ${{ env.REGISTRY }}/users-service:latest
+          echo "users_service_image_digest=$(docker images --no-trunc --quiet goalie.azurecr.io/users-service:latest)" >> "$GITHUB_ENV"
 
       - name: Publish Docs
         uses: peaceiris/actions-gh-pages@v3
@@ -103,10 +105,14 @@ jobs:
       - name: Set Terraform variables
         run: |
           tee terraform.tfvars <<EOF
-          cookie_encryption_key     = "${{ secrets.COOKIE_ENCRYPTION_KEY }}"
-          oauth_proxy_client_secret = "${{ secrets.OAUTH_PROXY_CLIENT_SECRET }}"
-          oauth_agent_client_secret = "${{ secrets.OAUTH_AGENT_CLIENT_SECRET }}"
-          accounts_client_secret    = "${{ secrets.ACCOUNTS_CLIENT_SECRET }}"
+          cookie_encryption_key      = "${{ secrets.COOKIE_ENCRYPTION_KEY }}"
+          oauth_proxy_client_secret  = "${{ secrets.OAUTH_PROXY_CLIENT_SECRET }}"
+          oauth_agent_client_secret  = "${{ secrets.OAUTH_AGENT_CLIENT_SECRET }}"
+          accounts_client_secret     = "${{ secrets.ACCOUNTS_CLIENT_SECRET }}"
+          api_gateway_image_digest   = "${{ env.api_gateway_image_digest }}"
+          oauth_agent_image_digest   = "${{ env.oauth_agent_image_digest }}"
+          goals_service_image_digest = "${{ env.goals_service_image_digest }}"
+          users_service_image_digest = "${{ env.users_service_image_digest }}"
           EOF
         working-directory: deploy/terraform-config
 
