@@ -14,18 +14,18 @@ variable "accounts_client_secret" {
   type = string
 }
 
-variable "api_gateway_image_digest" {
+variable "api_gateway_image_full" {
   type = string
 }
 
-variable "oauth_agent_image_digest" {
+variable "oauth_agent_image_full" {
   type = string
 }
 
-variable "goals_service_image_digest" {
+variable "goals_service_image_full" {
   type = string
 }
 
-variable "users_service_image_digest" {
+variable "users_service_image_full" {
   type = string
 }

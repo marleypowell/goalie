@@ -34,8 +34,8 @@ resource "helm_release" "api_gateway_service" {
   ]
 
   set {
-    name  = "image.digest"
-    value = var.api_gateway_image_digest
+    name  = "image.full"
+    value = var.api_gateway_image_full
   }
 
   set {
@@ -61,8 +61,8 @@ resource "helm_release" "goals_service" {
   ]
 
   set {
-    name  = "image.digest"
-    value = var.goals_service_image_digest
+    name  = "image.full"
+    value = var.goals_service_image_full
   }
 }
 
@@ -78,8 +78,8 @@ resource "helm_release" "users_service" {
   ]
 
   set {
-    name  = "image.digest"
-    value = var.users_service_image_digest
+    name  = "image.full"
+    value = var.users_service_image_full
   }
 
   set {
@@ -100,8 +100,8 @@ resource "helm_release" "oauth_agent_service" {
   ]
 
   set {
-    name  = "image.digest"
-    value = var.oauth_agent_image_digest
+    name  = "image.full"
+    value = var.oauth_agent_image_full
   }
 
   set {

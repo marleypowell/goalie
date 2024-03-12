@@ -13,7 +13,11 @@ spec:
     spec:
       containers:
         - name: oauth-agent-service
-          image: goalie.azurecr.io/oauth-agent-service:{{ .Values.image.tag }}@{{ .Values.image.digest }}
+          {{- if .Values.image.full }}
+          image: {{ .Values.image.full }}
+          {{- else }}
+          image: goalie.azurecr.io/oauth-agent-service:{{ .Values.image.tag }}
+          {{- end }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
             - name: CLIENT_ID
