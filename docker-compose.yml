@@ -46,7 +46,7 @@ services:
 
   otel-collector:
     image: otel/opentelemetry-collector:latest
-    container_name: otel-collector
+    container_name: goalie-otel-collector
     command: [--config=/etc/otel-collector-config.yaml]
     volumes:
       - ./otel-collector-config.yaml:/etc/otel-collector-config.yaml
@@ -63,7 +63,7 @@ services:
 
   jaeger:
     image: jaegertracing/all-in-one:latest
-    container_name: jaeger
+    container_name: goalie-jaeger
     ports:
       - 16686:16686 # Jaeger UI
       - '4317' # OTLP gRPC receiver

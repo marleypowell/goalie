@@ -10,7 +10,7 @@ receivers:
 
 exporters:
   otlp:
-    endpoint: 'jaeger:4317'
+    endpoint: 'goalie-jaeger:4317'
     tls:
       insecure: true
   logging:

@@ -5,6 +5,7 @@ import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { firstValueFrom, map } from 'rxjs';
 import { Config } from '../config/config.interface';
+import { UserManagementService } from './user-management.service';
 
 /**
  * The apollo client service.
@@ -13,7 +14,11 @@ import { Config } from '../config/config.interface';
  */
 @Injectable()
 export class ApolloClientService {
-  public constructor(private readonly config: ConfigService<Config>, private readonly http: HttpService) {}
+  public constructor(
+    private readonly config: ConfigService<Config>,
+    private readonly http: HttpService,
+    private readonly userManagementService: UserManagementService
+  ) {}
 
   /**
    * Create an apollo client. The apollo client is used to communicate with the user management service.
@@ -21,7 +26,7 @@ export class ApolloClientService {
    */
   public createApolloClient(): ApolloClient<NormalizedCacheObject> {
     const asyncAuthLink = setContext(async () => {
-      const accessToken = await this.getAccessToken();
+      const accessToken = await this.userManagementService.getAccessToken();
       return {
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -60,26 +65,5 @@ export class ApolloClientService {
       link: asyncAuthLink.concat(httpLink),
       cache: new InMemoryCache(),
     });
-  }
-
-  /**
-   * Get an access token. The access token is used to communicate with the user management service.
-   * @returns the access token
-   */
-  private getAccessToken(): Promise<string> {
-    const { clientId, clientSecret } = this.config.get('accountsClientOptions', { infer: true });
-    return firstValueFrom(
-      this.http
-        .post(
-          'https://login.mp.exclaimertest.net/oauth/v2/oauth-token',
-          `grant_type=client_credentials&scope=accounts&client_id=${clientId}&client_secret=${clientSecret}`,
-          {
-            headers: {
-              'Content-Type': 'application/x-www-form-urlencoded',
-            },
-          }
-        )
-        .pipe(map((res) => String(res.data['access_token'])))
-    );
   }
 }

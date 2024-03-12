@@ -23,7 +23,7 @@ spec:
             - name: TRACING_CONSOLE_EXPORTER
               value: 'false'
             - name: USER_MANAGEMENT_ENDPOINT
-              value: 'https://login.mp.exclaimertest.net/user-management/graphql/admin'
+              value: 'https://login.mp.exclaimertest.net/user-management/admin'
             - name: ACCOUNTS_CLIENT_ID
               value: 'accounts-client'
             - name: ACCOUNTS_CLIENT_SECRET

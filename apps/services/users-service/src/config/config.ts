@@ -16,7 +16,8 @@ export default (): Config => ({
     clientSecret: process.env.ACCOUNTS_CLIENT_SECRET || '',
   },
   userManagementEndpoint:
-    process.env.USER_MANAGEMENT_ENDPOINT || 'https://login.mp.exclaimertest.net/user-management/graphql/admin',
+    process.env.USER_MANAGEMENT_ENDPOINT || 'https://login.mp.exclaimertest.net/user-management/admin',
+  userManagementUseGraphQL: false,
   natsOptions: {
     servers: process.env.NATS_URL || 'nats://localhost:4222',
   },

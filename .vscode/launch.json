@@ -1,0 +1,70 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Launch api-gateway",
+      "request": "launch",
+      "type": "node",
+      "runtimeExecutable": "yarn",
+      "runtimeArgs": ["nx", "serve", "api-gateway"],
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}/apps/api-gateway"
+    },
+    {
+      "name": "Launch api-gateway with Kubernetes",
+      "request": "launch",
+      "type": "node",
+      "runtimeExecutable": "yarn",
+      "runtimeArgs": ["nx", "serve", "api-gateway"],
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}/apps/api-gateway",
+      "preLaunchTask": "bridge-to-kubernetes.resource-api-gateway",
+      "env": {
+        "GRPC_DNS_RESOLVER": "native"
+      }
+    },
+    {
+      "name": "Launch goals-service",
+      "request": "launch",
+      "type": "node",
+      "runtimeExecutable": "yarn",
+      "runtimeArgs": ["nx", "serve", "goals-service"],
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}/apps/services/goals-service"
+    },
+    {
+      "name": "Launch oauth-agent-service",
+      "request": "launch",
+      "type": "node",
+      "runtimeExecutable": "yarn",
+      "runtimeArgs": ["nx", "serve", "oauth-agent-service"],
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}/apps/services/oauth-agent-service"
+    },
+    {
+      "name": "Launch users-service",
+      "request": "launch",
+      "type": "node",
+      "runtimeExecutable": "yarn",
+      "runtimeArgs": ["nx", "serve", "users-service"],
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}/apps/services/users-service"
+    },
+    {
+      "name": "Launch users-service with Kubernetes",
+      "request": "launch",
+      "type": "node",
+      "runtimeExecutable": "yarn",
+      "runtimeArgs": ["nx", "serve", "users-service"],
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}/apps/services/users-service",
+      "preLaunchTask": "bridge-to-kubernetes.resource-users-service",
+      "env": {
+        "GRPC_DNS_RESOLVER": "native"
+      }
+    }
+  ]
+}

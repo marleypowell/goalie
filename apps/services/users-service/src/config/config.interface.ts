@@ -17,5 +17,6 @@ export interface Config {
   tracingOptions: TracingOptions;
   accountsClientOptions: AuthOptions;
   userManagementEndpoint: string;
+  userManagementUseGraphQL: boolean;
   natsOptions: NatsOptions['options'];
 }

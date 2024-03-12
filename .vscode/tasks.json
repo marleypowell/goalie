@@ -2,16 +2,6 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "bridge-to-kubernetes.resource",
-      "type": "bridge-to-kubernetes.resource",
-      "resource": "api-gateway-service",
-      "resourceType": "service",
-      "ports": [3333],
-      "targetCluster": "goalie",
-      "targetNamespace": "api",
-      "useKubernetesServiceEnvironmentVariables": false
-    },
-    {
       "type": "shell",
       "command": "docker compose up -d",
       "group": "build",
@@ -94,6 +84,28 @@
       ],
       "dependsOrder": "parallel",
       "problemMatcher": ["$webpack-builder"]
+    },
+    {
+      "label": "bridge-to-kubernetes.resource-api-gateway",
+      "type": "bridge-to-kubernetes.resource",
+      "resource": "api-gateway-service",
+      "resourceType": "service",
+      "ports": [3333],
+      "targetCluster": "goalie",
+      "targetNamespace": "api-gateway",
+      "useKubernetesServiceEnvironmentVariables": false,
+      "targetContainer": "api-gateway"
+    },
+    {
+      "label": "bridge-to-kubernetes.resource-users-service",
+      "type": "bridge-to-kubernetes.resource",
+      "resource": "users-service-service",
+      "resourceType": "service",
+      "ports": [3336],
+      "targetCluster": "goalie",
+      "targetNamespace": "users",
+      "useKubernetesServiceEnvironmentVariables": false,
+      "targetContainer": "users-service"
     }
   ]
 }
