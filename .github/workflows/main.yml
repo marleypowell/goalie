@@ -46,25 +46,25 @@ jobs:
         run: |
           docker build -f apps/api-gateway/Dockerfile . -t ${{ env.REGISTRY }}/api-gateway:latest
           docker push ${{ env.REGISTRY }}/api-gateway:latest
-          echo "api_gateway_image_digest=$(docker images --no-trunc --quiet goalie.azurecr.io/api-gateway:latest)" >> "$GITHUB_ENV"
+          echo "api_gateway_image_digest=$(docker images --no-trunc --quiet goalie.azurecr.io/api-gateway:latest)" >> "$GITHUB_OUTPUT"
 
       - name: Build and Push (oauth-agent-service)
         run: |
           docker build -f apps/services/oauth-agent-service/Dockerfile . -t ${{ env.REGISTRY }}/oauth-agent-service:latest
           docker push ${{ env.REGISTRY }}/oauth-agent-service:latest
-          echo "oauth_agent_service_image_digest=$(docker images --no-trunc --quiet goalie.azurecr.io/oauth-agent-service:latest)" >> "$GITHUB_ENV"
+          echo "oauth_agent_service_image_digest=$(docker images --no-trunc --quiet goalie.azurecr.io/oauth-agent-service:latest)" >> "$GITHUB_OUTPUT"
 
       - name: Build and Push (goals-service)
         run: |
           docker build -f apps/services/goals-service/Dockerfile . -t ${{ env.REGISTRY }}/goals-service:latest
           docker push ${{ env.REGISTRY }}/goals-service:latest
-          echo "goals_service_image_digest=$(docker images --no-trunc --quiet goalie.azurecr.io/goals-service:latest)" >> "$GITHUB_ENV"
+          echo "goals_service_image_digest=$(docker images --no-trunc --quiet goalie.azurecr.io/goals-service:latest)" >> "$GITHUB_OUTPUT"
 
       - name: Build and Push (users-service)
         run: |
           docker build -f apps/services/users-service/Dockerfile . -t ${{ env.REGISTRY }}/users-service:latest
           docker push ${{ env.REGISTRY }}/users-service:latest
-          echo "users_service_image_digest=$(docker images --no-trunc --quiet goalie.azurecr.io/users-service:latest)" >> "$GITHUB_ENV"
+          echo "users_service_image_digest=$(docker images --no-trunc --quiet goalie.azurecr.io/users-service:latest)" >> "$GITHUB_OUTPUT"
 
       - name: Publish Docs
         uses: peaceiris/actions-gh-pages@v3
@@ -109,10 +109,10 @@ jobs:
           oauth_proxy_client_secret  = "${{ secrets.OAUTH_PROXY_CLIENT_SECRET }}"
           oauth_agent_client_secret  = "${{ secrets.OAUTH_AGENT_CLIENT_SECRET }}"
           accounts_client_secret     = "${{ secrets.ACCOUNTS_CLIENT_SECRET }}"
-          api_gateway_image_digest   = "${{ env.api_gateway_image_digest }}"
-          oauth_agent_image_digest   = "${{ env.oauth_agent_image_digest }}"
-          goals_service_image_digest = "${{ env.goals_service_image_digest }}"
-          users_service_image_digest = "${{ env.users_service_image_digest }}"
+          api_gateway_image_digest   = "${{ steps.build.outputs.api_gateway_image_digest }}"
+          oauth_agent_image_digest   = "${{ steps.build.outputs.oauth_agent_image_digest }}"
+          goals_service_image_digest = "${{ steps.build.outputs.goals_service_image_digest }}"
+          users_service_image_digest = "${{ steps.build.outputs.users_service_image_digest }}"
           EOF
         working-directory: deploy/terraform-config
 
