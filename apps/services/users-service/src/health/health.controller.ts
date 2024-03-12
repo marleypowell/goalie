@@ -1,4 +1,4 @@
-import { Controller, Get, HttpStatus } from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { Transport } from '@nestjs/microservices';
 import { ApiTags } from '@nestjs/swagger';
@@ -45,7 +45,7 @@ export class HealthController {
         ? [
             () =>
               this.http.pingCheck('userManagement', userManagementEndpoint, {
-                validateStatus: (status) => status === HttpStatus.BAD_REQUEST,
+                validateStatus: (status) => status < 500,
               }),
           ]
         : []),
