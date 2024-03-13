@@ -52,7 +52,7 @@ jobs:
         run: |
           docker build -f apps/api-gateway/Dockerfile . -t ${{ env.REGISTRY }}/api-gateway:latest
           docker push ${{ env.REGISTRY }}/api-gateway:latest
-          digest=$(docker inspect --format='{{index .RepoDigests 0}}' goalie.azurecr.io/api-gateway:latest)
+          digest=$(docker buildx imagetools inspect goalie.azurecr.io/api-gateway:latest | jq -r .digest)
           echo $digest
           echo "api_gateway_image_digest=$digest" >> "$GITHUB_OUTPUT"
 
@@ -61,7 +61,7 @@ jobs:
         run: |
           docker build -f apps/services/oauth-agent-service/Dockerfile . -t ${{ env.REGISTRY }}/oauth-agent-service:latest
           docker push ${{ env.REGISTRY }}/oauth-agent-service:latest
-          digest=$(docker inspect --format='{{index .RepoDigests 0}}' goalie.azurecr.io/oauth-agent-service:latest)
+          digest=$(docker buildx imagetools inspect goalie.azurecr.io/oauth-agent-service:latest | jq -r .digest)
           echo $digest
           echo "oauth_agent_image_digest=$digest" >> "$GITHUB_OUTPUT"
 
@@ -70,7 +70,7 @@ jobs:
         run: |
           docker build -f apps/services/goals-service/Dockerfile . -t ${{ env.REGISTRY }}/goals-service:latest
           docker push ${{ env.REGISTRY }}/goals-service:latest
-          digest=$(docker inspect --format='{{index .RepoDigests 0}}' goalie.azurecr.io/goals-service:latest)
+          digest=$(docker buildx imagetools inspect goalie.azurecr.io/goals-service:latest | jq -r .digest)
           echo $digest
           echo "goals_service_image_digest=$digest" >> "$GITHUB_OUTPUT"
 
@@ -79,7 +79,7 @@ jobs:
         run: |
           docker build -f apps/services/users-service/Dockerfile . -t ${{ env.REGISTRY }}/users-service:latest
           docker push ${{ env.REGISTRY }}/users-service:latest
-          digest=$(docker inspect --format='{{index .RepoDigests 0}}' goalie.azurecr.io/users-service:latest)
+          digest=$(docker buildx imagetools inspect goalie.azurecr.io/users-service:latest | jq -r .digest)
           echo $digest
           echo "users_service_image_digest=$digest" >> "$GITHUB_OUTPUT"
 
