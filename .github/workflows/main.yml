@@ -52,28 +52,28 @@ jobs:
         run: |
           docker build -f apps/api-gateway/Dockerfile . -t ${{ env.REGISTRY }}/api-gateway:latest
           docker push ${{ env.REGISTRY }}/api-gateway:latest
-          echo "api_gateway_image_digest=$(docker images --no-trunc --quiet goalie.azurecr.io/api-gateway:latest)" >> "$GITHUB_OUTPUT"
+          echo "api_gateway_image_digest=$(docker inspect --format='{{index .RepoDigests 0}}' goalie.azurecr.io/api-gateway:latest)" >> "$GITHUB_OUTPUT"
 
       - name: Build and Push (oauth-agent-service)
         id: build-oauth-agent-service
         run: |
           docker build -f apps/services/oauth-agent-service/Dockerfile . -t ${{ env.REGISTRY }}/oauth-agent-service:latest
           docker push ${{ env.REGISTRY }}/oauth-agent-service:latest
-          echo "oauth_agent_image_digest=$(docker images --no-trunc --quiet goalie.azurecr.io/oauth-agent-service:latest)" >> "$GITHUB_OUTPUT"
+          echo "oauth_agent_image_digest=$(docker inspect --format='{{index .RepoDigests 0}}' goalie.azurecr.io/oauth-agent-service:latest)" >> "$GITHUB_OUTPUT"
 
       - name: Build and Push (goals-service)
         id: build-goals-service
         run: |
           docker build -f apps/services/goals-service/Dockerfile . -t ${{ env.REGISTRY }}/goals-service:latest
           docker push ${{ env.REGISTRY }}/goals-service:latest
-          echo "goals_service_image_digest=$(docker images --no-trunc --quiet goalie.azurecr.io/goals-service:latest)" >> "$GITHUB_OUTPUT"
+          echo "goals_service_image_digest=$(docker inspect --format='{{index .RepoDigests 0}}' goalie.azurecr.io/goals-service:latest)" >> "$GITHUB_OUTPUT"
 
       - name: Build and Push (users-service)
         id: build-users-service
         run: |
           docker build -f apps/services/users-service/Dockerfile . -t ${{ env.REGISTRY }}/users-service:latest
           docker push ${{ env.REGISTRY }}/users-service:latest
-          echo "users_service_image_digest=$(docker images --no-trunc --quiet goalie.azurecr.io/users-service:latest)" >> "$GITHUB_OUTPUT"
+          echo "users_service_image_digest=$(docker inspect --format='{{index .RepoDigests 0}}' goalie.azurecr.io/users-service:latest)" >> "$GITHUB_OUTPUT"
 
       - name: Publish Docs
         uses: peaceiris/actions-gh-pages@v3
