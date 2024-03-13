@@ -1,6 +1,7 @@
 name: Stop AKS Cluster
 
 on:
+  workflow_dispatch:
   schedule:
     - cron: '0 22 * * *'
 
@@ -10,7 +11,7 @@ jobs:
     steps:
       - uses: azure/login@v2
         with:
-          creds: '{"clientId":"${{ secrets.ARM_CLIENT_ID }}","clientSecret":"${{ secrets.ARM_CLIENT_SECRET }}","subscriptionId":"${{ secrets.ARM_SUBSCRIPTION_ID }}","tenantId":"${{ secrets.ARM_TENANT_ID }}"}'
+          creds: '{"clientId":"${{ vars.ARM_CLIENT_ID }}","clientSecret":"${{ secrets.ARM_CLIENT_SECRET }}","subscriptionId":"${{ vars.ARM_SUBSCRIPTION_ID }}","tenantId":"${{ vars.ARM_TENANT_ID }}"}'
 
       - name: Azure CLI script
         uses: azure/CLI@v1
