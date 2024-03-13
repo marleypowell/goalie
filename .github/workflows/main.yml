@@ -14,22 +14,6 @@ permissions:
   contents: write
 
 jobs:
-  temp:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Azure Container Registry Login
-        uses: Azure/docker-login@v1
-        with:
-          login-server: ${{ env.REGISTRY }}
-          username: ${{ secrets.ACR_USERNAME }}
-          password: ${{ secrets.ACR_PASSWORD }}
-
-      - name: Build and Push (api-gateway)
-        id: build-api-gateway
-        run: |
-          echo $(docker buildx imagetools inspect goalie.azurecr.io/api-gateway:latest)
-          digest=$(docker buildx imagetools inspect goalie.azurecr.io/api-gateway:latest --format "{{json .Manifest}}" | jq -r .digest)
-          echo $digest
   build:
     runs-on: ubuntu-latest
     outputs:
