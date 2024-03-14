@@ -106,6 +106,17 @@
       "targetNamespace": "users",
       "useKubernetesServiceEnvironmentVariables": false,
       "targetContainer": "users-service"
+    },
+    {
+      "label": "bridge-to-kubernetes.resource-oauth-agent-service",
+      "type": "bridge-to-kubernetes.resource",
+      "resource": "oauth-agent-service-service",
+      "resourceType": "service",
+      "ports": [3334],
+      "targetCluster": "goalie",
+      "targetNamespace": "oauth-agent",
+      "useKubernetesServiceEnvironmentVariables": false,
+      "targetContainer": "oauth-agent-service"
     }
   ]
 }

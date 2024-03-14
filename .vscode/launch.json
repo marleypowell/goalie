@@ -45,6 +45,19 @@
       "cwd": "${workspaceFolder}/apps/services/oauth-agent-service"
     },
     {
+      "name": "Launch oauth-agent-service with Kubernetes",
+      "request": "launch",
+      "type": "node",
+      "runtimeExecutable": "yarn",
+      "runtimeArgs": ["nx", "serve", "oauth-agent-service"],
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}/apps/oauth-agent-service",
+      "preLaunchTask": "bridge-to-kubernetes.resource-oauth-agent-service",
+      "env": {
+        "GRPC_DNS_RESOLVER": "native"
+      }
+    },
+    {
       "name": "Launch users-service",
       "request": "launch",
       "type": "node",
