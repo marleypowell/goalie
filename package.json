@@ -132,7 +132,7 @@
     "jest-preset-angular": "12.2.3",
     "ng-packagr": "15.2.2",
     "nx": "15.7.2",
-    "postcss": "8.4.5",
+    "postcss": "8.4.36",
     "postcss-import": "14.1.0",
     "postcss-preset-env": "8.0.1",
     "postcss-url": "10.1.3",
