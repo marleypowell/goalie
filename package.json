@@ -94,7 +94,7 @@
     "@nrwl/angular": "15.7.2",
     "@nrwl/cypress": "15.7.2",
     "@nrwl/eslint-plugin-nx": "15.7.2",
-    "@nrwl/jest": "15.7.2",
+    "@nrwl/jest": "18.1.2",
     "@nrwl/js": "15.7.2",
     "@nrwl/linter": "15.7.2",
     "@nrwl/nest": "15.7.2",
